@@ -1,0 +1,159 @@
+%!TEX root = ../Masterarbeit.tex
+\chapter{Zitate und Referenzen}
+\label{cha:ZitateReferenzen}
+
+Die \NeuerBegriff{Service-orientierte Architektur} (SOA) ist seit einiger Zeit \textit{das} Schlagwort im Bereich der Informationstechnologie. So haben \zB Deutschlands größte Softwarehersteller SAP und die Software AG ihre Unternehmensstrategie komplett auf die SOA ausgerichtet. \Autor{SAP2007} bietet mit \Fachbegriff{Netweaver} seine marktführende ERP-Software auf Basis von SOA an,\footnote{\Vgl\Zitat[S.~127]{SAP2007}} und die \Autor{Software2007b}, die sich selbst als "`The XML Company"' bezeichnet, erweiterte kürzlich noch einmal ihr bereits durchgängig an der SOA orientiertes Produktportfolio durch den Kauf des amerikanischen Unternehmens webMethods um Lösungen zur Unterstützung von Geschäftsprozessen.\footnote{\Vgl\Zitat{Software2007b}} In einem Atemzug mit der SOA werden häufig Webservices genannt, da sie durch ihre hohe Plattformunabhängigkeit und den Einsatz von Internettechnologie oftmals als Referenzimplementierung für die Services in einer SOA angeführt werden. Doch welche Vorteile bietet der Einsatz von Webservices in Unternehmen? Können mit ihnen tatsächlich flexiblere Softwaresysteme entwickelt werden? Und wie einfach ist die Implementierung von Webservices auf unterschiedlichen Plattformen? Diesen Fragen wird sich der Autor in der vorliegenden Arbeit widmen.
+
+\begin{wrapfigure}{l}{0.5\textwidth}
+  \begin{center}
+    \includegraphics[width=0.48\textwidth]{screens/09_home.jpg}
+  \end{center}
+  \caption{Home-Screen von dem der Spieler in alle Menu-Punkte navigieren kann.}
+\end{wrapfigure}
+
+Wie bereits in Kapitel \ref{cha:Einleitung} auf Seite \pageref{cha:Einleitung} erwähnt, ist zur Unterstützung von Geschäftsprozessen der Einsatz von Informationstechnologie notwendig. Der Autor verfolgt mit dieser Arbeit das Ziel, einen Geschäftsprozess \todo{Was ist ein Geschäftsprozess?} mit Hilfe von Webservices zu optimieren. Hierzu wird er in diesem Kapitel eine Einführung in das Thema Webservices und die damit in Zusammenhang stehenden Technologien geben, und auch auf mögliche Einsatzbereiche von Webservices im Rahmen der Geschäftsprozessoptimierung eingehen. Tabelle \ref{tab:ElementeDerEreignisgesteuertenProzesskette} auf Seite \pageref{tab:ElementeDerEreignisgesteuertenProzesskette} zeigt ganz tolle Sachen.
+
+Ich empfehle allen Softwareentwicklern die Lektüre von \Zitat{Goodliffe2007}.
+
+\section{Definitionen}
+Die Service-orientierte Architektur ist ein Ansatz der Softwareentwicklung, der sich stark am Konzept der Geschäftsprozesse orientiert und mit Hilfe von Webservices implementiert werden kann. In den beiden folgenden Kapiteln werden beide Begriffe eingehend erläutert, worauf in Kapitel \ref{cha:Fazit} die für die Umsetzung von Webservices benötigten Technologien vorgestellt werden.
+
+\section{Service-orientierte Architektur}
+\Autor{OASIS2007}\footnote{Die \NeuerBegriff{Organization for the Advancement of Structured Information Standards} ist nach \Zitat{OASIS2007} ein internationales Konsortium aus über 600 Organisationen, das sich der Entwicklung von E-Business-Standards verschrieben hat. Mitglieder sind \zB IBM, SAP und Sun.} definiert den Begriff \NeuerBegriff{Service-orientierte Architektur} (SOA) wie folgt:
+\begin{quote}
+"`\textbf{Service Oriented Architecture} [\ldots] is a paradigm for organizing and utilizing distributed \textbf{capabilities} that may be under the control of different ownership domains."'\footnote{\Zitat[S.~8]{OASIS2006a}}
+\end{quote}
+Diese bewusst allgemein gehaltene Definition stammt aus dem Referenzmodell der SOA aus dem Jahr 2006. Dieses Modell wurde mit dem Ziel entwickelt, ein einheitliches Verständnis des Begriffs SOA und des verwendeten Vokabulars zu schaffen, und sollte die zahlreichen bis dato vorhandenen, teils widersprüchlichen Definitionen ablösen.\footnote{\Vgl\Zitat[S.~4]{OASIS2006a}} Dabei wird zunächst noch kein Bezug zur Informationstechnologie hergestellt, sondern allgemein von Fähigkeiten gesprochen, die Personen, Unternehmen, aber eben auch Computer besitzen und evtl. Anderen anbieten, um Probleme zu lösen. Als Beispiel wird ein Energieversorger angeführt, der Haushalten seine Fähigkeit Strom zu erzeugen anbietet.\footnote{\Vgl\Zitat[S.~8f.]{OASIS2006a}}
+
+
+
+\chapter{Bilder und Listings}
+
+In den folgenden drei Kapiteln wird der Autor eine einfache Webservice-Umgebung aufbauen, um zu zeigen, wie Webservices in der Praxis angeboten, konsumiert und orchestriert werden können. Hierzu verwendet er ausschließlich Open-Source-Software, im Speziellen \NeuerBegriff{Apache Tomcat}\footnote{Website: \url{http://tomcat.apache.org/}} als Servlet-Engine, \NeuerBegriff{Apache Axis2}\footnote{Website: \url{http://ws.apache.org/axis2/}} als SOAP-Engine und \NeuerBegriff{ActiveBPEL}\footnote{Website: \url{http://www.activebpel.org/}} als Workflow-System. Die Installation und Konfiguration der benötigten Anwendungen wird in Kapitel \ref{sec:Werkzeuge} beschrieben. Die komplette Umgebung inkl. der vom Autor erstellten Webservices befindet sich als virtuelle Maschine auf der dieser Arbeit beigelegten DVD. Im Folgenden wird der DNS-Name \Code{linux-ws} als Bezeichnung für den Webservice-Server verwendet.
+
+\section{Anbieten eines Webservice}
+\label{sec:AnbietenEinesWebservices}
+Mit Hilfe von Apache Axis2 können Webservices sehr einfach auf Basis von normalen Java-Klassen angeboten werden. Es ist lediglich eine zusätzliche XML-Datei namens \Datei{META-INF/services.xml} nötig, in der die zu veröffentlichenden Klassen und Methoden beschrieben werden. \abbildung{HelloWorldStruktur} zeigt die Struktur eines einfachen \Webservice{HelloWorld}-Webservice.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.3\textwidth]{HelloWorldStruktur.jpg}
+\caption{\Webservice{HelloWorld}-Webservice: Dateistruktur}
+\label{fig:HelloWorldStruktur}
+\end{figure}
+
+Die Klasse \Code{HelloWorld} besitzt nur die Methode \Code{SayHello}, die den \Datentyp{String} \Code{Hello World!} zurückgibt. Sie wird in Listing \ref{lst:HelloWorldJava} gezeigt. 
+
+\newpage
+\lstset{language=Java, basicstyle=\footnotesize, showstringspaces=false, tabsize=2}
+\lstinputlisting[label=lst:HelloWorldJava,caption=\Webservice{HelloWorld}-Webservice: Java-Klasse \Code{HelloWorld}]{DVD/Listings/HelloWorld/HelloWorld.java}
+
+\section{Netzwerkverkehr beim Aufruf von \Webservice{PersonFactory}}
+
+\subsection{SOAP-Request}
+Listing \ref{lst:SOAPRequest} zeigt die mitgeschnittene SOAP-Anfrage per HTTP an den Webservice \Webservice{PersonFactory}. Wie am Ende von Kapitel \ref{cha:Einleitung} beschrieben, wird die eigentliche SOAP-Nachricht mittels des HTTP-\Eingabe{POST}-Befehls (Zeile 1) an den Webservice unter der angegebenen URL (Zeile 1) auf dem Server (Zeile 5) geschickt. In Zeile 3 wird über den Befehl \Eingabe{SOAPAction} übermittelt, welche Funktion des Webservice (in diesem Fall \Code{CreatePerson}) aufgerufen werden soll. Die XML-Nutzlast (Zeilen 8--18) besteht dann aus einer einfachen SOAP-Nachricht aus \XMLElement{Envelope}, \XMLElement{Header} und \XMLElement{Body}, die einen RPC durchführt. Die aufzurufenden Funktion wird noch einmal im SOAP-\XMLElement{Body} in Zeile 15 definiert.
+
+
+\lstset{language=XML, basicstyle=\footnotesize, showstringspaces=false, tabsize=2}
+\lstinputlisting[label=lst:SOAPRequest,caption=SOAP-Request an \Webservice{PersonFactory} per HTTP]{DVD/Listings/PersonFactorySOAPRequest.txt}
+
+\subsection{SOAP-Response}
+Die Antwort des \Webservice{PersonFactory}-Webservice zeigt Listing \ref{lst:SOAPResponse}. Sie beginnt in Zeile 1 mit dem HTTP-Statuscode 200, der die Anfrage als erfolgreich kennzeichnet. Die eigentliche Nutzlast in Form von XML-Daten (Zeile 3) folgt dann ab Zeile 7. Sie besteht aus dem Element \XMLElement{Person} und seinen Unterelementen, umschlossen vom Element \XMLElement{CreatePersonRepsonse}, das die Antwort-Nachricht aus der WSDL repräsentiert.
+
+\lstset{language=XML, basicstyle=\footnotesize, showstringspaces=false, tabsize=2}
+\lstinputlisting[label=lst:SOAPResponse,caption=SOAP-Response von \Webservice{PersonFactory} per HTTP]{DVD/Listings/PersonFactorySOAPResponse.txt}
+
+
+
+
+
+\chapter{Aufzählungen und Tabellen}
+
+
+Eine normale Punktliste:
+\begin{itemize}
+\item Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nulla ac ipsum a metus viverra tempor. 
+\item Nunc sem. Nulla nec urna eu nibh vehicula convallis. Integer ac turpis. Donec mauris enim, dignissim quis, scelerisque ac, rhoncus id, sapien. 
+\item Donec turpis felis, cursus in, varius vitae, mollis ac, lorem. Integer a dui sit amet eros nonummy aliquet. Donec egestas adipiscing tellus. Nulla iaculis. 
+\item Aliquam erat volutpat. Curabitur posuere, eros vitae accumsan semper, risus erat viverra erat, eu vehicula mi leo at elit. Fusce luctus. Fusce vehicula pretium diam. Nunc sed arcu ut erat suscipit fermentum.
+\end{itemize}
+
+Eine nummerierte Liste:
+\begin{enumerate}
+\item Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nulla ac ipsum a metus viverra tempor. 
+\item Nunc sem. Nulla nec urna eu nibh vehicula convallis. Integer ac turpis. Donec mauris enim, dignissim quis, scelerisque ac, rhoncus id, sapien. 
+\item Donec turpis felis, cursus in, varius vitae, mollis ac, lorem. Integer a dui sit amet eros nonummy aliquet. Donec egestas adipiscing tellus. Nulla iaculis. 
+\item Aliquam erat volutpat. Curabitur posuere, eros vitae accumsan semper, risus erat viverra erat, eu vehicula mi leo at elit. Fusce luctus. Fusce vehicula pretium diam. Nunc sed arcu ut erat suscipit fermentum.
+\end{enumerate}
+
+\begin{enumerate}[a)]
+\item Diese Liste...
+\item ...hat anstatt der normalen schwarzen Punkte...
+\item ...Buchstaben als Marker.
+\end{enumerate}
+
+
+\section{Vom Autor verwendete Software}
+\label{sec:Werkzeuge}
+Im Folgenden werden die Programme vorgestellt, die der Autor zum Erstellen dieser Arbeit und vor allem zur Entwicklung der Webservices verwendet hat. Soweit es möglich war, wurden Open-Source-Programme eingesetzt.
+
+\begin{itemize}
+\itemd{Microsoft Visio}{Die EPKs der BAP wurden mit Microsoft Visio erstellt. Der Autor hat zwar verschiedene Open-Source-Programme\footnote{Dia, OpenOffice Draw und die EPC Tools.} ausprobiert, mit denen EPKs erstellt werden könnten, die grafischen Ergebnisse waren aber nicht zufriedenstellend. Die Symbole von Visio sehen den "`originalen"' ARIS-Symbolen am ähnlichsten und können darüber hinaus mit zusätzlichen Informationen wie Dauer und Kosten versehen werden.}
+\itemd{PSPad}{Für die Bearbeitung von verschiedenen (Text-)Dateien wurde der Texteditor PSPad verwendet. Mit diesem konnten \zB auch die regulären Ausdrücke für die XML-Schemas entwickelt werden. Website: \url{http://www.pspad.com/}}
+\itemd{Eclipse}{Sowohl der ActiveBPEL Designer als auch die EntireX Workbench sind Plugins für die IDE Eclipse. Auch zur Java- und PHP-Entwicklung wurde dieses Werkzeug verwendet. Website: \url{http://www.eclipse.org/}}
+\itemd{XML Copy Editor}{Für die Entwicklung der XML-Schemas und die Bearbeitung von XML-Dateien wurde der XML Copy Editor eingesetzt. Mit diesem können \ua XML-Dateien auf Wohlgeformtheit geprüft und gegen ihr Schema validiert werden. Website: \url{http://xml-copy-editor.sourceforge.net/}}
+\itemd{soapUI}{
+Mit soapUI können Webservices getestet werden, ohne einen Client zu programmieren. Die SOAP-Anfragen werden automatisch anhand der WSDL generiert und die Antworten können gegen die WSDL-Datei validiert werden. Website: \url{http://www.soapui.org/}}
+\itemd{Ethereal}{
+Die Netzwerkkommunikation beim Aufrufen der Webservices wurde mit Ethereal, einem umfangreichen Werkzeug zur Analyse des Netzwerkverkehrs, mitgeschnitten. Website: \url{http://www.ethereal.com/}}
+\itemd{\LaTeX}{
+Diese Arbeit wurde mit {\LaTeX} geschrieben. Als Distribution wurde MiKTeX verwendet und als Editor der LaTeX Editor. Websites: \url{http://miktex.org/}, \url{http://www.latexeditor.org/}}
+\end{itemize}
+
+\section{Elemente der Ereignisgesteuerten Prozesskette}
+
+\begin{longtable}{|m{10cm}|m{3cm}|}
+\caption{Elemente der Ereignisgesteuerten Prozesskette} \\
+\hline
+\label{tab:ElementeDerEreignisgesteuertenProzesskette}
+\textbf{Element} & \textbf{Symbol}\\
+\hline
+\textbf{Funktion} 
+
+Funktionen beschreiben Tätigkeiten, die im Verlauf des Geschäftsprozesses anfallen. Sie können von Mitarbeitern oder einem Informationssystem durchgeführt werden und benötigen evtl. Ressourcen, die ihnen zugewiesen werden. 
+
+Beispiele: \textit{Auftrag anlegen}, \textit{Rechnung schreiben}, \textit{Konto abschließen} & 
+\includegraphics[width=3cm]{EPK-Funktion.jpg} \\
+\hline
+\textbf{Ereignis} 
+
+Ereignisse sind betriebswirtschaftlich relevante Ereignisse, die den Geschäftsprozess in irgendeiner Weise steuern oder beeinflussen. Ereignisse sind immer Auslöser oder Ergebnisse von Funktionen. Ein Geschäftsprozess beginnt und endet stets mit einem Ereignis. 
+
+Beispiele: \textit{Auftrag eingetroffen}, \textit{Überweisung getätigt}, \textit{Rechnung erstellt} & 
+\includegraphics[width=3cm]{EPK-Ereignis.jpg} \\
+\hline
+\textbf{Operatoren} 
+
+Operatoren steuern den Kontrollfluss eines Geschäftsprozesses. Sie machen \zB deutlich, dass eine Funktion mehrere Ereignisse auslöst, oder zeigen alternative Vorgehensweisen an. Es gibt drei Operatoren (v.\,l.\,n.\,r.\,): UND, ODER und XODER (exklusives ODER). & 
+\includegraphics[width=3cm]{EPK-Operatoren.jpg} \\
+\hline
+\textbf{Organisationseinheit} 
+
+Organisationseinheiten werden Funktionen zugeordnet und beschreiben, wo die Funktionen ausgeführt werden bzw. wer sie ausführt. Die Bezeichnung der Symbole enthält zusätzlich zur Abteilung noch die Namen der Mitarbeiter.
+
+Beispiele: \textit{Vertrieb}, \textit{Personal}, \textit{Produktion} & 
+\includegraphics[width=3cm]{EPK-Organisationseinheit.jpg} \\
+\hline
+\textbf{Informationsobjekt} 
+
+Auch Informationsobjekte werden Funktionen zugewiesen und beschreiben die von diesen benötigten oder erstellten Informationen. Dabei sind sämtliche Formen von Informationen auf verschiedenen Datenträgern möglich und nicht etwa nur digitale Daten. Die Bezeichnung der Symbole enthält zusätzlich das Informationssystem, aus dem die Informationen stammen.
+
+Beispiele: \textit{Kundendatenbank}, \textit{Versicherungsantrag}, \textit{Rechnung} & 
+\includegraphics[width=3cm]{EPK-Informationen.jpg} \\
+\hline
+\textbf{Prozesswegweiser}
+
+Mit Prozesswegweisern werden Prozesse, die in anderen EPKs beschrieben sind, referenziert. So können \zB unübersichtliche Prozesse in Teilprozesse gegliedert und häufig verwendete Prozesse an zentraler Stelle modelliert werden. Prozesswegweiser stehen in einer EPK immer anstelle von Funktionen. & 
+\includegraphics[width=3cm]{EPK-Prozesspfad.jpg} \\
+\hline
+\end{longtable}
