@@ -1,19 +1,29 @@
 Entwicklung einer Web-Applikation zur Aggregation spezifischer Kulturgüter eines wählbaren Zeitpunktes
 
-EINLEITUNG
+PRÄAMBEL
 Zusammenfassung
 Abstract
 
-Motivation
+EINLEITUNG
+Motivation (1-3)
 Ziel und Abgrenzung dieser Arbeit
 Aufbau und Vorgehensweise
 
-HAUPTEIL
+
+GRUNDLAGEN (15-20)
+
+
+ANALYSE/KONZEPTION (15-30)
 Vorfeldrecherche
 	Feldanalyse
 	Anforderungsanalyse
 	Feature-Liste
+Konzeption
+	"Fernkonzept"
+	Mockup
+	Eingrenzung
 
+IMPLEMENTIERUNG REALISIERUNG / UMSETZUNG, TEST (20-30)
 Technikteil
 	erforderliche/benötigte Quellen
 	mögliche APIs und andere Quellen
@@ -22,5 +32,25 @@ Technikteil
 	Feinkonzept
 	Arbeitsweise
 
-SCHLUSS
+ERGEBNIS (3-10)
+
+ZUSAMMENFASSUNG UND AUSBLICK (3-5)
+Ausblick
 Fazit
+
+
+Einleitung 1 - 3
+Grundlagen 15 - 20
+Analyse / Konzeption 15 - 30
+Implementierung Realisierung / Umsetzung, Test: 20 - 30
+Ergebnis 3 - 10
+Zusammenfassung und Ausblick 3 - 5
+Anhang 10 – 30
+
+
+Seitenumfang
+
+FRAGEN:
+Zielgruppe, Benchmark-Analyse und sowas?
+
+
