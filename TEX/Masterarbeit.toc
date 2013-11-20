@@ -1,22 +1,28 @@
 \select@language {ngerman}
-\contentsline {chapter}{Abbildungsverzeichnis}{II}{chapter*.6}
+\contentsline {chapter}{Abbildungsverzeichnis}{III}{chapter*.6}
 \contentsline {chapter}{\numberline {1}Einleitung}{1}{chapter.7}
 \contentsline {section}{\numberline {1.1}Motivation}{1}{section.8}
 \contentsline {section}{\numberline {1.2}Ziel und Abgrenzung dieser Arbeit}{1}{section.10}
 \contentsline {section}{\numberline {1.3}Aufbau und Vorgehensweise}{2}{section.11}
-\contentsline {chapter}{\numberline {2}Feldanalyse}{3}{chapter.12}
-\contentsline {section}{\numberline {2.1}Definition}{3}{section.13}
-\contentsline {section}{\numberline {2.2}Beispiele}{3}{section.14}
-\contentsline {section}{\numberline {2.3}\"Ubertragbarkeit der Beispiele}{3}{section.15}
-\contentsline {chapter}{\numberline {3}Die Welt der Pok\'emon}{4}{chapter.16}
-\contentsline {chapter}{\numberline {4}\"Ubertragung in Location-based Pok\'emon}{5}{chapter.17}
-\contentsline {section}{\numberline {4.1}Spielziele}{5}{section.18}
-\contentsline {chapter}{\numberline {5}Bedienung und Anwendung}{6}{chapter.19}
-\contentsline {chapter}{\numberline {6}Fazit und kritische Bewertung}{7}{chapter.20}
-\contentsline {section}{\numberline {6.1}Problematik und Weiterentwicklung}{7}{section.21}
-\contentsline {subsection}{\numberline {6.1.1}Einschr\"ankungen des Gameplay durch die Location und deren L\"osung}{7}{subsection.22}
-\contentsline {subsection}{\numberline {6.1.2}M\"ogliche Probleme}{7}{subsection.23}
-\contentsline {subsection}{\numberline {6.1.3}Weiterentwicklung}{7}{subsection.24}
-\contentsline {section}{\numberline {6.2}Fazit}{7}{section.25}
-\contentsline {chapter}{Literaturverzeichnis}{8}{chapter*.26}
-\contentsline {chapter}{Eidesstattliche Erkl\"arung}{9}{chapter*.27}
+\contentsline {chapter}{\numberline {2}Grundlagen}{3}{chapter.12}
+\contentsline {section}{\numberline {2.1}Vorfeldrecherche}{3}{section.13}
+\contentsline {subsection}{\numberline {2.1.1}Feldanalyse}{3}{subsection.14}
+\contentsline {section}{\numberline {2.2}Analyse}{3}{section.15}
+\contentsline {subsection}{\numberline {2.2.1}Anforderungsanalyse}{3}{subsection.16}
+\contentsline {subsection}{\numberline {2.2.2}Feature-Liste}{3}{subsection.17}
+\contentsline {chapter}{\numberline {3}Konzeption}{4}{chapter.18}
+\contentsline {section}{\numberline {3.1}Fernkonzept}{4}{section.19}
+\contentsline {section}{\numberline {3.2}Mockup}{4}{section.20}
+\contentsline {section}{\numberline {3.3}Eingrenzung}{4}{section.21}
+\contentsline {chapter}{\numberline {4}Implementierung}{5}{chapter.22}
+\contentsline {section}{\numberline {4.1}Quellen}{5}{section.23}
+\contentsline {section}{\numberline {4.2}Frameworks f\"ur die Web-Applikation}{5}{section.24}
+\contentsline {section}{\numberline {4.3}Grobkonzept}{5}{section.25}
+\contentsline {section}{\numberline {4.4}Feinkonzept}{5}{section.26}
+\contentsline {section}{\numberline {4.5}Arbeitsweise}{5}{section.27}
+\contentsline {chapter}{\numberline {5}Ergebnis}{6}{chapter.28}
+\contentsline {chapter}{\numberline {6}Ausblick}{7}{chapter.29}
+\contentsline {section}{\numberline {6.1}Problematik und Weiterentwicklung}{7}{section.30}
+\contentsline {section}{\numberline {6.2}Fazit und kritische Bewertung}{7}{section.31}
+\contentsline {chapter}{Literaturverzeichnis}{8}{chapter*.32}
+\contentsline {chapter}{Eidesstattliche Erkl\"arung}{9}{chapter*.33}

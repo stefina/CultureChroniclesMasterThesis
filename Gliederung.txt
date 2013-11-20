@@ -11,13 +11,13 @@ Aufbau und Vorgehensweise
 
 
 GRUNDLAGEN (15-20)
-
-
-ANALYSE/KONZEPTION (15-30)
 Vorfeldrecherche
 	Feldanalyse
+Analyse
 	Anforderungsanalyse
 	Feature-Liste
+
+ANALYSE/KONZEPTION (15-30)
 Konzeption
 	"Fernkonzept"
 	Mockup

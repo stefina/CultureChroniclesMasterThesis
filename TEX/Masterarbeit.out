@@ -3,19 +3,25 @@
 \BOOKMARK [1][]{section.8}{Motivation}{chapter.7}% 3
 \BOOKMARK [1][]{section.10}{Ziel und Abgrenzung dieser Arbeit}{chapter.7}% 4
 \BOOKMARK [1][]{section.11}{Aufbau und Vorgehensweise}{chapter.7}% 5
-\BOOKMARK [0][]{chapter.12}{Feldanalyse}{}% 6
-\BOOKMARK [1][]{section.13}{Definition}{chapter.12}% 7
-\BOOKMARK [1][]{section.14}{Beispiele}{chapter.12}% 8
-\BOOKMARK [1][]{section.15}{\334bertragbarkeit der Beispiele}{chapter.12}% 9
-\BOOKMARK [0][]{chapter.16}{Die Welt der Pok\351mon}{}% 10
-\BOOKMARK [0][]{chapter.17}{\334bertragung in Location-based Pok\351mon}{}% 11
-\BOOKMARK [1][]{section.18}{Spielziele}{chapter.17}% 12
-\BOOKMARK [0][]{chapter.19}{Bedienung und Anwendung}{}% 13
-\BOOKMARK [0][]{chapter.20}{Fazit und kritische Bewertung}{}% 14
-\BOOKMARK [1][]{section.21}{Problematik und Weiterentwicklung}{chapter.20}% 15
-\BOOKMARK [2][]{subsection.22}{Einschr\344nkungen des Gameplay durch die Location und deren L\366sung}{section.21}% 16
-\BOOKMARK [2][]{subsection.23}{M\366gliche Probleme}{section.21}% 17
-\BOOKMARK [2][]{subsection.24}{Weiterentwicklung}{section.21}% 18
-\BOOKMARK [1][]{section.25}{Fazit}{chapter.20}% 19
-\BOOKMARK [0][]{chapter*.26}{Literaturverzeichnis}{}% 20
-\BOOKMARK [0][]{chapter*.27}{Eidesstattliche Erkl\344rung}{}% 21
+\BOOKMARK [0][]{chapter.12}{Grundlagen}{}% 6
+\BOOKMARK [1][]{section.13}{Vorfeldrecherche}{chapter.12}% 7
+\BOOKMARK [2][]{subsection.14}{Feldanalyse}{section.13}% 8
+\BOOKMARK [1][]{section.15}{Analyse}{chapter.12}% 9
+\BOOKMARK [2][]{subsection.16}{Anforderungsanalyse}{section.15}% 10
+\BOOKMARK [2][]{subsection.17}{Feature-Liste}{section.15}% 11
+\BOOKMARK [0][]{chapter.18}{Konzeption}{}% 12
+\BOOKMARK [1][]{section.19}{Fernkonzept}{chapter.18}% 13
+\BOOKMARK [1][]{section.20}{Mockup}{chapter.18}% 14
+\BOOKMARK [1][]{section.21}{Eingrenzung}{chapter.18}% 15
+\BOOKMARK [0][]{chapter.22}{Implementierung}{}% 16
+\BOOKMARK [1][]{section.23}{Quellen}{chapter.22}% 17
+\BOOKMARK [1][]{section.24}{Frameworks f\374r die Web-Applikation}{chapter.22}% 18
+\BOOKMARK [1][]{section.25}{Grobkonzept}{chapter.22}% 19
+\BOOKMARK [1][]{section.26}{Feinkonzept}{chapter.22}% 20
+\BOOKMARK [1][]{section.27}{Arbeitsweise}{chapter.22}% 21
+\BOOKMARK [0][]{chapter.28}{Ergebnis}{}% 22
+\BOOKMARK [0][]{chapter.29}{Ausblick}{}% 23
+\BOOKMARK [1][]{section.30}{Problematik und Weiterentwicklung}{chapter.29}% 24
+\BOOKMARK [1][]{section.31}{Fazit und kritische Bewertung}{chapter.29}% 25
+\BOOKMARK [0][]{chapter*.32}{Literaturverzeichnis}{}% 26
+\BOOKMARK [0][]{chapter*.33}{Eidesstattliche Erkl\344rung}{}% 27

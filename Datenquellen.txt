@@ -12,3 +12,6 @@ Movies:
 http://www.imdb.com/
 
 Music:
+ID3 Tags (http://javamusictag.sourceforge.net/ ... veraltet)
+http://id3.org/Implementations
+https://github.com/mpatric/mp3agic !!!
