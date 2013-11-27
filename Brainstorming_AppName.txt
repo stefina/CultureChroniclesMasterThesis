@@ -1,1 +1,7 @@
 Epoche, Timetravel, Time, Warp, Jump,
+CultureChronicles
+MediaChronicles
+TempusTravel
+Virtual
+Web
+Journey

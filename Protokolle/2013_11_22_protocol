@@ -1,0 +1,15 @@
+install homebrew
+
+install mongodb (manually, homebrew froze)
+
+include mongodb with morphia into play-project (https://github.com/czihong/playMongoDemo)
+modify build.sbt, plugins.sbt, and add JARs
+(http://www.playframework.com/documentation/2.2.x/SBTDependencies)
+
+morphia-doc https://github.com/mongodb/morphia
+
+Morphia vs JACKSON vs Jongo (morphia seems to be most common and most recently updated)
+
+http://www.nodeclipse.org/
+
+http://updates.html5rocks.com/2013/11/The-Landscape-Of-Front-end-Development-Automation-Slides

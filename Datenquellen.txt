@@ -7,11 +7,74 @@ http://en.wikipedia.org/wiki/List_of_decades [gibt so gut wie alles nennenswerte
 http://en.wikipedia.org/wiki/Timeline_of_modern_history [weniger Ereignisse, dafür (hoffentlich) markanter]
 
 TV-Serien:
+http://www.imdb.com/search/title?sort=moviemeter&title_type=tv_series&year=1980,1980
+[ - Beispiel für die 1980
+  - nach Release-Datum]
+http://www.tv.com/shows/decade/1980s/
+[ - TV-Show-Ranking per Jahrzent]
 
 Movies:
-http://www.imdb.com/
+http://www.imdb.com/year/
+[ - Movie-Chroniken für jedes Jahr
+  - seit 1980]
+http://boxofficemojo.com/yearly/
+[ - seit 1980
+  - Ergebnisse nach Verkaufscharts
+  - Suche erweiterbar (Verkaufscharts zu einem bestimmten Datum)]
+
+Movies & TV:
+http://www.filebot.net/
 
 Music:
+http://de.wikipedia.org/wiki/Musik-Charts [Liste von Listen]
+http://de.wikipedia.org/wiki/Liste_der_Nummer-eins-Hits_in_Deutschland
+[ - Media-Control
+  - unpraktisch formatiert
+  - manchmal ein Lied, später mehr
+  - seit 1953]
+  http://de.wikipedia.org/wiki/Bravo-Jahrescharts
+[ - Bravo-Charts]
+http://www.wolfgangroehl.de/chartuebersicht.htm
+[ - Charts bis in die 30er
+  - private Chartseite
+  - nicht aktuell]
+http://rateyourmusic.com/customchart?page=1&chart_type=top&type=album&year=1972&genre_include=1&include_child_genres=1&genres=&include_child_genres_chk=1&include=both&origin_countries=&limit=none&countries=
+
+
+http://en.wikipedia.org/wiki/List_of_number-one_hits_(United_States)
+[ - Daten sehr unterschiedlich aufbereitet
+  - US-Charts 
+  - Daten ab 1940]
+http://en.wikipedia.org/wiki/List_of_number-one_Hot_100_Airplay_hits
+[ - most played on US-Radiostations
+  - Daten sehr unterschiedlich aufbereitet
+  - US-Charts 
+  - Daten ab 1984]
+
 ID3 Tags (http://javamusictag.sourceforge.net/ ... veraltet)
 http://id3.org/Implementations
 https://github.com/mpatric/mp3agic !!!
+
+Kunst:
+
+
+Bilder:
+
+
+Computer-Spiele/Konsolen
+
+
+Allgemeines:
+
+
+allgemeiner Wert: 
+META-Critic
+
+
+Einwohnerzahlen:
+Statistiken
+Regierung
+Parlamentszusammensetzung
+Klima
+
+http://xregexp.com/
