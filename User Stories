@@ -1,0 +1,13 @@
+User Stories
+
+1. Der Nutzer kann sich mit der Auswahl eines bestimmten Datums, relevante Daten verschiedenen Medientyps anzeigen lassen.
+
+2. Der Nutzer kann sich anhand eines Musikstückes einen Radiosender des Erscheinungsdatums generieren lassen, der Musiktitel aus der gleichen Zeit enthält.
+
+3. Der Nutzer kann anhand eines datierten Newsartikels Bilder, Videos und Musik anzeigen lassen.
+
+4. Der Nutzer kann bei Angabe eines Standortes das Ergebnis seiner Sucje auf ein gewähltes Land oder einen Ort verfeinern.
+
+5. Der Nutzer hat die Möglichkeit Ergebnisse zu filtern, indem er Medientypen ausschließt, einen Ort angibt, (Ausschlussbegriffe angibt), Musikstil (ID3) vorgibt, den Zeitraum verkleinert, bzw. vergrößert.
+
+6. Der Nutzer kann durch scrollen weitere Inhalte entdecken, soweit es welche gibt.
