@@ -1,0 +1,39 @@
+Beispiel
+
+Beispiel-Eingabe: Sweet Child O' Mine by Guns N' Roses (Released: 1988)
+
+- Nummer 1 am 3.-16. September (2 Wochen)
+
+
+Ergebnisse:
+Musik:
+http://de.wikipedia.org/wiki/Liste_der_Nummer-eins-Hits_in_Deutschland_(1988)
+Titel der Jahrescharts
+France Gall – Ella, elle l’a
+Milli Vanilli – Girl You Know It’s True
+Pet Shop Boys – Always on My Mind
+
+TV-Serien:
+http://www.imdb.com/search/title?sort=moviemeter&title_type=tv_series&year=1988,1988
+Roseanne
+Home and Away
+Wunderbare Jahre
+
+Movies:
+http://www.imdb.com/year/1888
+Roundhay Garden Scene (1888 Documentary)
+Traffic Crossing Leeds Bridge (1888 Documentary)
+Accordion Player (1888 Short Film)
+
+History:
+10. September: Die Tennisspielerin Steffi Graf gewinnt mit ihrem Sieg bei den US Open gegen die Argentinierin Gabriela Sabatini als erste Deutsche und dritte Spielerin überhaupt alle Grand-Slam-Turniere.
+
+3. September: Nicole Banecki, deutsche Fußballspielerin
+
+26. August: Vor der Shwedagon-Pagode in Rangun setzt sich in ihrer ersten Rede Aung San Suu Kyi für eine demokratische Entwicklung Birmas ein, das die von Studenten ausgehende Rebellion 8888 Uprising erlebt.
+
+28. August: Beim Flugtagunglück von Ramstein kollidieren drei der beteiligten Flugzeuge. Eines von ihnen stürzt in die Zuschauermenge. Das Unglück fordert 70 Todesopfer.
+
+
+
+News sollen vom Erscheinungsdatum an gesucht werden und dann rückwärtig angezeigt (aktuell und dann zurück)

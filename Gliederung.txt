@@ -6,31 +6,31 @@ Abstract
 
 EINLEITUNG
 Motivation (1-3)
-Ziel und Abgrenzung dieser Arbeit
-Aufbau und Vorgehensweise
+Ziel und Abgrenzung dieser Arbeit 	(1)
+Aufbau und Vorgehensweise			(2)
 
 
 GRUNDLAGEN (15-20)
 Vorfeldrecherche
-	Feldanalyse
+	Feldanalyse				(3)
 Analyse
-	Anforderungsanalyse
-	Feature-Liste
+	Anforderungsanalyse		(8)
+	Feature-Liste			(5)
 
 ANALYSE/KONZEPTION (15-30)
 Konzeption
-	"Fernkonzept"
-	Mockup
-	Eingrenzung
+	"Fernkonzept"	(5)
+	Mockup			(12)
+	Eingrenzung		(5)
 
 IMPLEMENTIERUNG REALISIERUNG / UMSETZUNG, TEST (20-30)
 Technikteil
-	erforderliche/benötigte Quellen
-	mögliche APIs und andere Quellen
-	mögliche Frameworks für die Web-Applikation
-	Grobkonzept
-	Feinkonzept
-	Arbeitsweise
+	erforderliche/benötigte Quellen					(2)
+	mögliche APIs und andere Quellen				(5)
+	mögliche Frameworks für die Web-Applikation		(2)
+	Grobkonzept										(5)
+	Feinkonzept										(8)
+	Arbeitsweise									(5)
 
 ERGEBNIS (3-10)
 
