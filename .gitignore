@@ -1,0 +1,15 @@
+*.aux
+
+*.bbl
+
+*.blg
+
+*.log
+
+*.out
+
+*.pdf
+
+Masterarbeit.synctex.gz
+
+Masterarbeit.toc
