@@ -1,0 +1,268 @@
+<mockup version="1.0" skin="wireframe" fontFace="Balsamiq Sans" measuredW="804" measuredH="600" mockupW="802" mockupH="600">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="2" y="0" w="800" h="600" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Culture%20Chronicles</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::MediaControls" x="498" y="85" w="-1" h="-1" measuredW="110" measuredH="36" zOrder="19" locked="false" isInGroup="-1"/>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::Label" x="616" y="93" w="-1" h="-1" measuredW="160" measuredH="21" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>David%20Bowie%20-%20Changes%20-%20....</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::HRule" x="2" y="127" w="800" h="-1" measuredW="100" measuredH="10" zOrder="21" locked="false" isInGroup="-1"/>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::VRule" x="489" y="70" w="-1" h="530" measuredW="10" measuredH="100" zOrder="22" locked="false" isInGroup="-1"/>
+    <control controlID="23" controlTypeID="com.balsamiq.mockups::RoundButton" x="100" y="137" w="98" h="98" measuredW="32" measuredH="32" zOrder="23" locked="false" isInGroup="-1">
+      <controlProperties>
+        <shape>rectangle</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="24" controlTypeID="com.balsamiq.mockups::RoundButton" x="198" y="137" w="98" h="98" measuredW="32" measuredH="32" zOrder="24" locked="false" isInGroup="-1">
+      <controlProperties>
+        <shape>rectangle</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="25" controlTypeID="com.balsamiq.mockups::RoundButton" x="296" y="137" w="98" h="98" measuredW="32" measuredH="32" zOrder="25" locked="false" isInGroup="-1">
+      <controlProperties>
+        <shape>rectangle</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="26" controlTypeID="com.balsamiq.mockups::RoundButton" x="394" y="137" w="98" h="98" measuredW="32" measuredH="32" zOrder="26" locked="false" isInGroup="-1">
+      <controlProperties>
+        <shape>rectangle</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="57" controlTypeID="com.balsamiq.mockups::HRule" x="495" y="548" w="309" h="-1" measuredW="100" measuredH="10" zOrder="27" locked="false" isInGroup="-1"/>
+    <control controlID="58" controlTypeID="com.balsamiq.mockups::Icon" x="453" y="87" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="28" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>SearchIcon%7Cmedium</icon>
+      </controlProperties>
+    </control>
+    <control controlID="61" controlTypeID="com.balsamiq.mockups::TextArea" x="145" y="84" w="308" h="39" measuredW="200" measuredH="140" zOrder="29" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>16777215</borderColor>
+        <text>David%20Bowie%20-%20Changes%20%287.1.1972%29%0A%239%20in%201972</text>
+      </controlProperties>
+    </control>
+    <control controlID="62" controlTypeID="com.balsamiq.mockups::Icon" x="100" y="87" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="30" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>BulletsIcon%7Cmedium</icon>
+      </controlProperties>
+    </control>
+    <control controlID="64" controlTypeID="com.balsamiq.mockups::RoundButton" x="31" y="132" w="460" h="147" measuredW="32" measuredH="32" zOrder="31" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>15658734</color>
+        <shape>rectangle</shape>
+      </controlProperties>
+    </control>
+    <control controlID="66" controlTypeID="com.balsamiq.mockups::Icon" x="39" y="137" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="32" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>GtIcon%7Csmall</icon>
+        <rotation>270</rotation>
+      </controlProperties>
+    </control>
+    <control controlID="67" controlTypeID="com.balsamiq.mockups::Label" x="73" y="135" w="-1" h="-1" measuredW="54" measuredH="24" zOrder="33" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <size>16</size>
+        <text>Details</text>
+      </controlProperties>
+    </control>
+    <control controlID="68" controlTypeID="com.balsamiq.mockups::RoundButton" x="31" y="278" w="460" h="33" measuredW="32" measuredH="32" zOrder="35" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>15658734</color>
+        <shape>rectangle</shape>
+      </controlProperties>
+    </control>
+    <control controlID="69" controlTypeID="com.balsamiq.mockups::Icon" x="39" y="282" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="37" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>search_menu_filter%26bm%3Bsearch_menu_filter.bmml%26bm%3Bsearch_menu_filter.bmml%26bm%3Bsearch_menu_filter.bmml</href>
+        <icon>GtIcon%7Csmall</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2237%2C282%2C61%2C306%22%20href%3D%22search_menu_filter.bmml%22%20alt%3D%22search_menu_filter%22%20id%3D%2269%22/%3E</map>
+      </controlProperties>
+    </control>
+    <control controlID="70" controlTypeID="com.balsamiq.mockups::Label" x="71" y="282" w="-1" h="-1" measuredW="95" measuredH="24" zOrder="38" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <size>16</size>
+        <text>Filter%20Result</text>
+      </controlProperties>
+    </control>
+    <control controlID="71" controlTypeID="com.balsamiq.mockups::TextArea" x="198" y="161" w="276" h="87" measuredW="200" measuredH="140" zOrder="34" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>15658734</borderColor>
+        <color>15658734</color>
+        <text>Changes%20%28Single%29%0ADavid%20Bowie%0A7.1.1972%0AArt%20Pop%2C%20Pop%2C%20Rock%2C%20Baroque%20Pop%0A%239%20in%201972</text>
+      </controlProperties>
+    </control>
+    <control controlID="72" controlTypeID="com.balsamiq.mockups::Image" x="73" y="161" w="110" h="110" measuredW="77" measuredH="79" zOrder="36" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>square</borderStyle>
+        <src>./assets/5019239.png</src>
+      </controlProperties>
+    </control>
+    <control controlID="73" controlTypeID="com.balsamiq.mockups::Icon" x="17" y="79" w="-1" h="-1" measuredW="48" measuredH="48" zOrder="39" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>40463</color>
+        <href>search_result%26bm%3Bsearch_result.bmml%26bm%3Bsearch_result.bmml%26bm%3Bsearch_result.bmml</href>
+        <icon>SmallClockIcon%7Clarge</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2215%2C79%2C63%2C127%22%20href%3D%22search_result.bmml%22%20alt%3D%22search_result%22%20id%3D%2273%22/%3E</map>
+      </controlProperties>
+    </control>
+    <control controlID="74" controlTypeID="com.balsamiq.mockups::Icon" x="100" y="87" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="40" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>search_result%26bm%3Bsearch_result.bmml%26bm%3Bsearch_result.bmml%26bm%3Bsearch_result.bmml</href>
+        <icon>BulletsIcon%7Cmedium</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2298%2C87%2C130%2C119%22%20href%3D%22search_result.bmml%22%20alt%3D%22search_result%22%20id%3D%2274%22/%3E</map>
+      </controlProperties>
+    </control>
+    <control controlID="80" controlTypeID="com.balsamiq.mockups::Image" x="248" y="132" w="122" h="128" measuredW="77" measuredH="79" zOrder="16" locked="false" isInGroup="-1"/>
+    <control controlID="81" controlTypeID="com.balsamiq.mockups::Image" x="128" y="132" w="122" h="128" measuredW="77" measuredH="79" zOrder="17" locked="false" isInGroup="-1"/>
+    <control controlID="82" controlTypeID="com.balsamiq.mockups::Image" x="368" y="132" w="122" h="128" measuredW="77" measuredH="79" zOrder="18" locked="false" isInGroup="-1"/>
+    <control controlID="87" controlTypeID="com.balsamiq.mockups::Image" x="7" y="386" w="122" h="128" measuredW="77" measuredH="79" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties/>
+    </control>
+    <control controlID="88" controlTypeID="com.balsamiq.mockups::Image" x="247" y="386" w="122" h="128" measuredW="77" measuredH="79" zOrder="2" locked="false" isInGroup="-1"/>
+    <control controlID="89" controlTypeID="com.balsamiq.mockups::Image" x="127" y="386" w="122" h="128" measuredW="298" measuredH="300" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/neil_young__old_man___the_needle_and_the_damage_done.jpg</src>
+      </controlProperties>
+    </control>
+    <control controlID="90" controlTypeID="com.balsamiq.mockups::Image" x="367" y="386" w="122" h="128" measuredW="300" measuredH="297" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/deep_purple__child_in_time__part_1____child_in_time__part_2_.jpeg</src>
+      </controlProperties>
+    </control>
+    <control controlID="91" controlTypeID="com.balsamiq.mockups::Image" x="6" y="132" w="122" h="128" measuredW="300" measuredH="300" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/DavidBowie_Starman.jpg</src>
+      </controlProperties>
+    </control>
+    <control controlID="92" controlTypeID="com.balsamiq.mockups::Image" x="126" y="132" w="122" h="128" measuredW="300" measuredH="300" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/LouReed_WalkOnTheWildSide.jpg</src>
+      </controlProperties>
+    </control>
+    <control controlID="93" controlTypeID="com.balsamiq.mockups::Image" x="366" y="132" w="122" h="128" measuredW="299" measuredH="300" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/papa_was_a_rollin_stone___papa_was_a_rollin_stone__instrumental_.jpg</src>
+      </controlProperties>
+    </control>
+    <control controlID="94" controlTypeID="com.balsamiq.mockups::Image" x="6" y="260" w="122" h="128" measuredW="333" measuredH="500" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/godfather.jpg</src>
+      </controlProperties>
+    </control>
+    <control controlID="95" controlTypeID="com.balsamiq.mockups::Image" x="246" y="260" w="122" h="128" measuredW="255" measuredH="198" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/pong.jpg</src>
+      </controlProperties>
+    </control>
+    <control controlID="96" controlTypeID="com.balsamiq.mockups::Image" x="126" y="260" w="122" h="128" measuredW="300" measuredH="298" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/neil_young__heart_of_gold___sugar_mountain.jpg</src>
+      </controlProperties>
+    </control>
+    <control controlID="97" controlTypeID="com.balsamiq.mockups::Image" x="366" y="260" w="122" h="128" measuredW="77" measuredH="79" zOrder="11" locked="false" isInGroup="-1"/>
+    <control controlID="98" controlTypeID="com.balsamiq.mockups::Image" x="246" y="133" w="122" h="128" measuredW="366" measuredH="353" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <crop>153%2C0%2C570%2C1000</crop>
+        <src>./assets/Bildschirmfoto%25202014-01-04%2520um%252022.01.25.png</src>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="99" controlTypeID="com.balsamiq.mockups::Paragraph" x="255" y="396" w="108" h="106" measuredW="200" measuredH="80" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>LA%20Lakers%2033%20straight%20win%20streak%20snapped%2C%20losing%20to%20Bucks%20120-104</text>
+      </controlProperties>
+    </control>
+    <control controlID="100" controlTypeID="com.balsamiq.mockups::Paragraph" x="374" y="268" w="103" h="111" measuredW="200" measuredH="80" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Iberian%20Airlines%20crashes%20into%20800%27%20peak%20on%20island%20of%20Ibiza%2C%20104%20die</text>
+      </controlProperties>
+    </control>
+    <control controlID="101" controlTypeID="com.balsamiq.mockups::Paragraph" x="13" y="394" w="104" h="110" measuredW="200" measuredH="80" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>The%20first%20video%20game%20console%2C%20used%20primarily%20for%20playing%20video%20games%20on%20a%20TV%2C%20is%20the%20Magnavox%20Odyssey</text>
+      </controlProperties>
+    </control>
+    <control controlID="102" controlTypeID="com.balsamiq.mockups::VideoPlayer" x="500" y="225" w="295" h="192" measuredW="300" measuredH="200" zOrder="41" locked="false" isInGroup="-1"/>
+    <control controlID="103" controlTypeID="com.balsamiq.mockups::Icon" x="498" y="137" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="42" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>RightTriangleIcon%7Cmedium</icon>
+      </controlProperties>
+    </control>
+    <control controlID="104" controlTypeID="com.balsamiq.mockups::HRule" x="493" y="171" w="309" h="-1" measuredW="100" measuredH="10" zOrder="43" locked="false" isInGroup="-1"/>
+    <control controlID="105" controlTypeID="com.balsamiq.mockups::Icon" x="499" y="181" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="44" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>RightTriangleIcon%7Cmedium</icon>
+      </controlProperties>
+    </control>
+    <control controlID="106" controlTypeID="com.balsamiq.mockups::HRule" x="494" y="215" w="309" h="-1" measuredW="100" measuredH="10" zOrder="45" locked="false" isInGroup="-1"/>
+    <control controlID="107" controlTypeID="com.balsamiq.mockups::HRule" x="493" y="422" w="309" h="-1" measuredW="100" measuredH="10" zOrder="46" locked="false" isInGroup="-1"/>
+    <control controlID="108" controlTypeID="com.balsamiq.mockups::Icon" x="498" y="430" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="47" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>RightTriangleIcon%7Cmedium</icon>
+      </controlProperties>
+    </control>
+    <control controlID="109" controlTypeID="com.balsamiq.mockups::HRule" x="493" y="464" w="309" h="-1" measuredW="100" measuredH="10" zOrder="48" locked="false" isInGroup="-1"/>
+    <control controlID="110" controlTypeID="com.balsamiq.mockups::Icon" x="499" y="472" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="49" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>RightTriangleIcon%7Cmedium</icon>
+      </controlProperties>
+    </control>
+    <control controlID="111" controlTypeID="com.balsamiq.mockups::HRule" x="494" y="506" w="309" h="-1" measuredW="100" measuredH="10" zOrder="50" locked="false" isInGroup="-1"/>
+    <control controlID="112" controlTypeID="com.balsamiq.mockups::Icon" x="500" y="514" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="51" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>RightTriangleIcon%7Cmedium</icon>
+      </controlProperties>
+    </control>
+    <control controlID="113" controlTypeID="com.balsamiq.mockups::HRule" x="495" y="548" w="309" h="-1" measuredW="100" measuredH="10" zOrder="52" locked="false" isInGroup="-1"/>
+    <control controlID="114" controlTypeID="com.balsamiq.mockups::Label" x="537" y="142" w="135" h="-1" measuredW="135" measuredH="21" zOrder="53" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>David%20Bowie%20-%20Starman</text>
+      </controlProperties>
+    </control>
+    <control controlID="115" controlTypeID="com.balsamiq.mockups::Label" x="537" y="186" w="204" h="-1" measuredW="204" measuredH="21" zOrder="54" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Lou%20Reed%20-%20Walk%20On%20The%20Wild%20Side</text>
+      </controlProperties>
+    </control>
+    <control controlID="116" controlTypeID="com.balsamiq.mockups::Label" x="537" y="436" w="262" h="-1" measuredW="262" measuredH="21" zOrder="55" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>...%20Was%20A%20Rolling%20Stone%20-%20Papa%20Was%20A%20Rollin%20...</text>
+      </controlProperties>
+    </control>
+    <control controlID="117" controlTypeID="com.balsamiq.mockups::Image" x="498" y="225" w="297" h="154" measuredW="642" measuredH="353" zOrder="56" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/Bildschirmfoto%25202014-01-04%2520um%252022.01.25.png</src>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="118" controlTypeID="com.balsamiq.mockups::Label" x="537" y="478" w="158" h="-1" measuredW="158" measuredH="21" zOrder="57" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Neil%20Young%20-%20Heart%20Of%20Gold</text>
+      </controlProperties>
+    </control>
+    <control controlID="119" controlTypeID="com.balsamiq.mockups::Label" x="537" y="520" w="125" h="-1" measuredW="125" measuredH="21" zOrder="58" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Neil%20Young%20-%20Old%20Man</text>
+      </controlProperties>
+    </control>
+    <control controlID="120" controlTypeID="com.balsamiq.mockups::Icon" x="500" y="562" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="59" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>RightTriangleIcon%7Cmedium</icon>
+      </controlProperties>
+    </control>
+    <control controlID="121" controlTypeID="com.balsamiq.mockups::Label" x="537" y="568" w="163" h="-1" measuredW="163" measuredH="21" zOrder="60" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Deep%20Purple%20-%20Child%20In%20Time</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
