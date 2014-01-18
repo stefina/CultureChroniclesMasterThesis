@@ -90,7 +90,20 @@
 \usepackage{url}
 
 % wichtig für korrekte Zitierweise ---------------------------------------------
-\usepackage[square]{natbib}
+%\usepackage[square]{natbib}
+\usepackage{jurabib}
+
+\jurabibsetup{
+	commabeforerest,
+	ibidem=strict,
+	citefull=first,
+	see,
+	titleformat={colonsep,all},
+}
+
+\renewcommand*{\jbauthorfont}{\textsc}
+\renewcommand*{\biblnfont}{\scshape\textbf}
+\renewcommand*{\bibfnfont}{\normalfont\textbf}
 
 % PDF-Optionen -----------------------------------------------------------------
 \usepackage[
