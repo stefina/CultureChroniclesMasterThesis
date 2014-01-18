@@ -1,0 +1,31 @@
+Welche Ergebnisse soll CC liefern?
+Beispiel-Ergebnis-Sets (draw.io-Schemata)
+
+Konkreter Songtitel
+
+Disambiguation-Problem
+
+Wie kommt man zu den Ergebnissen, die Culture Chronicles liefern sollen?
+
+Google:
+Suchanfragen Matrix
+Z.B. David Bowie - Changes
+1. Erscheinungsdatum herausfinden
+2. Nach einer Chart-, Hit-liste aus der Zeit suchen, Titel heraussuchen
+3. imdb nach Erscheinungsdaten durchsuchen (bietet zwar alle Informationen über sämtliche möglichen relevanten Daten, aber keine "populäre" Suche über das Frontend )
+4. Newsdatenbanken nach Datum durchsuchen (gibt es meist nicht, eher die Form einer Auswahl)
+
+Fazit: Google bietet hauptsächlich eine Themen-orientierte Suche. Man kann auch nach einem Datum suchen, aber dafür muss man den Rest der Google-Suchanfrage sehr genau formulieren, um an ein ähnliches Ergebnis zu kommen, welches darüber hinaus auch möglichst nur relevante Ergebnisse anzeigt.
+
+
+- Fächern
+Welche Begriffe müssen auf Google eingegeben werden um ähnliche Ergebnisse angezeigt zu bekommen?
+
+
+
+Matrix
+
+Eingabe :                    Musiktitel, Film, Ereignis, Datum, Zeitraum
+Musik-Ergebnis:                     - jeweilige Suchanfragen -
+Film-Ergebnis:                         - jeweilige Suchanfragen -
+News-Ergebnis:                       - jeweilige Suchanfragen -
