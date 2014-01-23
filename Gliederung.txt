@@ -12,7 +12,9 @@ Aufbau und Vorgehensweise			(2)
 
 GRUNDLAGEN (15-20)
 Vorfeldrecherche
-	Feldanalyse				(3)
+	Feldanalyse				(6)
+	Status Quo
+		- Evaluierung von Suchen
 Analyse
 	Anforderungsanalyse		(8)
 	Feature-Liste			(5)
