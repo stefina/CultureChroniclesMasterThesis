@@ -1,0 +1,5 @@
+Glossary-Einträge überprüfen
+Bibliographie: besuchte Seiten usw.
+
+für den Druck:
+im packages.tex unter PDF-Optionen schwarze Schrift für Links einstellen
