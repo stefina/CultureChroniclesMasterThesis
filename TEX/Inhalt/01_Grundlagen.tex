@@ -2,18 +2,28 @@
 \chapter{Grundlagen}
 \label{cha:grundlagen}
 Zunächst soll die Ausgangssituation beschrieben werden. (Auf dieser Grundlage werden für diese Arbeit wichtige grundlegende Begriffe geklärt.) Darauf aufbauend kann der Anforderungsumfang geklärt werden.
-\todo{Einleitung ggf. löschen oder umschreiben}
+\todo{Einleitung ggf. löschen oder umschreiben: Das ganze Kapitel einleiten}
 
+%===================%
+%===== SECTION =====%
+%===================%
 \section{State of the Art}
-Der Gedanke sowohl der zeitspezifischen Recherche, als auch des Stöberns in der Vergangenheit, ist bereits in unterschiedlichste Formen umgesetzt. Dies sind zum einen analoge Ansätze wie \zB der im Wartbergverlag erschienen Jahrgangsbücher.\footcite{jahrgangsbuecher} Diese betrachten jeweils die aus einem bestimmten Jahrgang stammende Generation und deren kulturellen und geschichtlichen Einflüsse im Laufe ihrer Lebenszeit. Im Konkreten wird ein Zeitraum abhängig vom Geburtsjahr anhand von Bild und Text näher beleuchtet.
+Der Gedanke sowohl der zeitspezifischen Recherche, als auch des Stöberns in der Vergangenheit, ist bereits in unterschiedlichsten Formen umgesetzt. Dies sind zum einen analoge Ansätze wie \zB der im Wartbergverlag erschienen Jahrgangsbücher.\footcite{jahrgangsbuecher} Diese betrachten jeweils die aus einem bestimmten Jahrgang stammende Generation und deren kulturellen und geschichtlichen Einflüsse im Laufe ihrer Lebenszeit. Im Konkreten wird ein Zeitraum abhängig vom Geburtsjahr anhand von Bild und Text näher beleuchtet. Darüber hinaus gibt es auch spezifischere und interaktive Ansätze, die im Folgenden kurz vorgestellt werden.
+
+\subsection{einestages von Spiegel Online}
+Das Projekt \glqq einestages\grqq \ ist ein 2007 von Spiegel Online gestartetes \glqq Zeitgeschichte(n)-Portal\grqq \footcite[Vgl.][]{einestagesAbout}. In diesem Portal können Leser beim \glqq Aufbau eines kollektiven Gedächtnisses unserer Geschichte\grqq \ mitwirken, indem sie Fotos, Videos und Berichte beisteuern. Das sogenannte \glqq einestages-Fundbüro\grqq \ soll dazu dienen in der Vegangenheit zu stöbern und Erinnerungslücken zu schließen, indem es eine kollektive Sammlung an Berichten und dazugehörigem Material bietet.
 
 \subsection{Google Music Timeline}
-Darüber hinaus gibt es auch spezifischere und interaktive Ansätze. Zu nennen ist hier die Google Music Timeline, \footcite{googleMusicTimeline} die \glqq die Entwicklung der Musik-Genres seit 1950\grqq visualisiert.\footcite{googleMusicTimelineHeise} Wählt man eines der am Zeitstrahl visualisierten Musik-Genres, sieht man die Verteilung der jeweiligen Sub-Genres. Mit Klick auf eines der Sub-Genres, wird die Verteilung der Sub-Genre zugehörigen Interpreten angezeigt. Diese Verteilung wird aus den Statistiken von Google Play Music aggregiert und zeigt an, welche Interpreten und Alben die User in ihrer Musik-Bibliothek haben.\footcite[Vgl.][]{googleMusicTimelineAbout}
+Zu nennen ist die Google Music Timeline, \footcite{googleMusicTimeline} die \glqq die Entwicklung der Musik-Genres seit 1950\grqq visualisiert.\footcite{googleMusicTimelineHeise} Wählt man eines der am Zeitstrahl visualisierten Musik-Genres, sieht man die Verteilung der jeweiligen Sub-Genres. Mit Klick auf eines der Sub-Genres, wird die Verteilung der Sub-Genre zugehörigen Interpreten angezeigt. Diese Verteilung wird aus den Statistiken von Google Play Music aggregiert und zeigt an, welche Interpreten und Alben die User in ihrer Musik-Bibliothek haben.\footcite[Vgl.][]{googleMusicTimelineAbout}
 
 \subsection{Internet Archive - Wayback Machine}
-Einen weiteren Ansatz bietet das \citep{wayback}. Auf der Startseite heißt es, dass 386 Billion Websites im Laufe der Zeit gesichert wurden.\footcite[Vgl.][]{wayback} \ Somit können alte Versionen der in der Suche registrierten Wesites besucht werden. Dafür wird entweder eine Website aus dem Repertoire ausgesucht oder es wird nach der gewünschten Website gesucht. Anhand eines Zeitstrahles kann dann in der Geschichte der Website gestöbert werden.
+Einen weiteren Ansatz bietet das Internet Archive.\footcite{wayback} Auf der Startseite heißt es, dass 386 Billion Websites im Laufe der Zeit gesichert wurden.\footcite[Vgl.][]{wayback} \ Somit können alte Versionen der in der Suche registrierten Wesites besucht werden. Dafür wird entweder eine Website aus dem Repertoire ausgesucht oder es wird nach der gewünschten Website gesucht. Anhand eines Zeitstrahles kann dann in der Geschichte der Website gestöbert werden und die einzelnen Versionen der Website besucht werden.
 
+%===================%
+%===== SECTION =====%
+%===================%
 \section{Feldanalyse}
+Das Ziel der Web-Applikation ist es, zeitabhängige Daten zu liefern. Das bedeutet, dass je nach Vorgabe eines Zeitraumes, \bzw eines Zeitpunktes, Medien-Inhalte aus dem Internet, die dem vorgegebenen Zeitraum zuzuordnen sind, angezeigt werden sollen. Im Folgenden wird analysiert, welche Daten auf welche Art und Weise im Internet zu finden sind.
 
 \subsection{Feldanalyse im Bereich Musik}
 Zur dynamischen Zusammenstellung von Musik, insbesondere einer gewünschten Zeit, gibt es derzeit eine Vielzahl von Möglichkeiten. Gute Ergebnisse bieten manuell erstellte Playlisten, Musik-Sampler oder CD-Sammlungen. Jedoch sind diese Inhalte entweder nicht dynamisch oder leiden an der Möglichkeit der Spezifizierung.
@@ -35,23 +45,36 @@ Der Online-Versandhandel Amazon.com bietet \ua eine große Auswahl an Filmen im S
 Die Internet Movie Database IMDb.com ist die bekannteste und autoritärste Quelle für Film, TV und Prominente der Filmbranche.\footcite[Vgl.][]{imdbPress} IMDb.com umfasst neben detaillierten Informationen über einzelne Kino-, Video- und Fernseh-Produktionen auch Informationen über Videospiele.\footcite{imdbStats} 
 
 
-\subsection{Feldanalyse im Bereich News/Geschichte}
-Eine zeitspezifische Suche nach News-Artikeln \bzw geschichtlichen Ereignissen gestaltet sich weitaus schwieriger. 
+\subsection{Feldanalyse im Bereich geschichtlicher Ereignisse}
+Eine zeitspezifische Suche nach geschichtlichen Ereignissen \bzw News-Artikeln gestaltet sich weitaus schwieriger. Zwar gibt es im Internet zahlreiche Quellen an Informationen, jedoch sind diese oft nur hinlänglich zeitabhängig auffindbar.
+
+\paragraph{Geschichtliche Ereignisse}
+Eine Suche nach geschichtlichen Ereignissen wird derzeit am besten von Wikipedia bedient. Zwar gibt es auch Geschichts-Datenbanken, jedoch sind diese bei weitem nicht so umfangreich und ausführlich wie das Online-Lexikon Wikipedia. Ein Nachteil ist hier wiederrum, dass die Artikel auf Wikipedia nicht allein auf geschichtliche Ereignisse begrenzt sind. Weiterhin ist die Wikipedia-Suche nicht darauf ausgelegt, Ereignisse nach Datum zu finden. Zwar gibt es für zahlreiche Daten, wie \bspw den 11. November oder den 9. Januar, jeweils einzelne Artikelseiten mit einer Auflistung prägnanter Ereignisse dieses Datums, jedoch lässt sich nicht nach einem Datum mit Jahr suchen. Ausnahme sind hier lediglich Daten mit eigenem Artikel, so leitet \zB die Suchanfrage \glqq 11. September 2001\grqq \ zum Artikel der \glqq Terroranschläge am 11. September 2001\grqq .\footcite{wikiTerror}
 
 \paragraph{News}
-Zeitungsartikel sind hauptsächlich
-
-Problem: Relationale Suche. Suchen nach Inhalten, die lediglich zeitlich mit dem gesuchten Begriff zu tun haben, ist deutlich schwieriger, seltener vorhanden im Internet. Es fehlt die Übersetzung von \glqq irgendein zeitlich einzuordnender Begriff\grqq \ zu Zeitpunkt.
-
-\paragraph{Geschichte}
-Eine Suche nach geschichtlichen Ereignissen wird derzeit am besten von Wikipedia bedient. Zwar gibt es auch Geschichts-Datenbanken, jedoch sind diese bei weitem nicht so vollständig und ausführlich wie das Online-Lexikon Wikipedia. Ein Nachteil ist hier wiederrum, dass die Artikel auf Wikipedia nicht allein auf geschichtliche Ereignisse begrenzt sind.
+Zeitungsartikel weisen eine weitere Schwierigkeit auf. Die ersten Internetauftritte gab es in den 90er Jahren, dementsprechend gibt es bei Zeitungsartikel aus weiter vorangegangener Zeit eine weitaus geringere Dichte, wenn überhaupt. So gibt es mittlerweile viele Internet-Zeitungen und -Magazine, die ihre Archive online zur Verfügung stellen, teiweise auch kostenlos. Dazu gehören im deutschsprachigen Raum \ua ZEIT ONLINE,\footcite{zeitArchiv} die Süddeutsche Zeitung,\footcite{szArchiv} die Frankfurter Allgemeine Zeitung\footcite{fazArchiv} und der Spiegel.\footcite{spiegelArchiv}
 
 \subsection{Feldanalyse im Bereich Bild/Kunst}
 Zwar gibt es im Internet unzählige Verweise
 
 
+
+%===================%
+%===== SECTION =====%
+%===================%
 \section{Untersuchung der vorhandenen Suchdienste}
-Um einen besseren Vergleich der vorhandenen Suchdienste zu bekommen, werden diese anhand ähnlicher Suchbegriffe mit einander verglichen. Es werden die Themen Musik, Film und News untersucht. Im Bereich Musik werden folgende Dienste verglichen: 
+
+Um einen besseren Vergleich der vorhandenen Suchdienste zu bekommen, werden diese anhand ähnlicher Suchbegriffe miteinander verglichen. Das wichigste Kriterium der Auswahl der Suchdienste ist, ob der gewünschte \bzw erwartete Kontent auf der Website vorhanden ist \bzw den Kontent liefern können. \ZB werden Musikinhalte nicht in Filmdatenbanken gesucht, gleichzeitig wird google mit einbezogen, da es passende Ergebnisse liefern kann. Außerdem muss bei speziellen Medienplattformen die Möglichkeit bestehen, die Website nach Inhalten zu durchsuchen. Auch spielt die Popularität der Suchmachine \bzw Website eine Rolle.
+
+Um für die Suche möglichst einfache Parameter zu wählen, wird die Suche außerdem in englisch durchgeführt und möglichst einfache Rahmenbedingungen geschaffen. Die Funktion der erweiterten Suche wird \ggf seperat betrachtet.\todo{Dumme Suche formulieren?}
+
+Es wurde nach den Begriffen \textbf{Achtziger}, \textbf{Neunziger} und \textbf{Vietnamkrieg} gesucht, während jeder dieser Begriffe einen Zeitraum repräsentiert. Die Wahl von zwei Jahrzehnten dient dazu, einen besseren Vergleich ziehen zu können, ob ähnliche Suchanforderungen auch ebenso ähnliche Suchergebnisse liefern, \zB ob der erste Suchbegriff bei google immer ein Ergebnis von lastfm.de liefert. 
+
+Im Bereich Musik wird zusätzlich nach \textbf{David Bowie - Changes} gesucht, da dies ein möglicher Begriff ist, den die entwickelte Web-Applikation bedienen soll. Die Suchbegriffe wurden ggf. an den Suchdienst angepasst, \zB in der Amazon-Suche zu sehen, wo jeweils die passenden Filter (Music, Movies \& TV) gewählt wurden und die Begriffe \glqq music\grqq \ und \glqq video\grqq \ dafür ausgelassen wurden. Bilder- und Video-Ergebnisse bei google werden ausgelassen.
+
+Das Ergebnis der Evaluierung wird anhand einer Matrix dargestellt, in denen die Bereiche Musik, Film, Kunst und Ereignisse betrachtet werden. In jeder Matrix sind die Ergebnisse nach Suchdiensten sortiert. Es werden jeweils die ersten drei Suchergebnisse aufgelistet, zusammen mit dem Titel des Beitrages (Überschrift auf der Seite, Titel des thematisierten Items, etc.). Darauf folgt eine kurze Beschreibung des Inhalts, der schnellen Aufschluss über die Relevanz der gefundenen Ergebnisse liefert.
+
+Im Bereich Musik werden folgende Dienste verglichen: 
 \begin{itemize}
 	\item google.de
 	\item en.wikipedia.org
@@ -59,7 +82,7 @@ Um einen besseren Vergleich der vorhandenen Suchdienste zu bekommen, werden dies
 	\item lastfm.de
 	\item Spotify App
 \end{itemize}
-Es werden alle relavanten und bekannten Suchdienste verglichen, die der durchschnittliche Nutzer für solch eine Anfrage am wahrscheinlichsten heranziehen würde und welche den gewünschten/erwarteten Kontent im Grunde auch verfügen. \Dahe dass lediglich die Komfortabilität der Suche untersucht wird. Im Bereich Film analysierte Dienste sind:
+Im Bereich Film analysierte Dienste sind:
 \begin{itemize}
 	\item google.de
 	\item en.wikipedia.org
@@ -67,12 +90,11 @@ Es werden alle relavanten und bekannten Suchdienste verglichen, die der durchsch
 	\item imdb.com
 \end{itemize}
 
-In der Matrix sind die Ergebnisse nach Suchdiensten sortiert. Es wurden nach den Begriffen \textbf{Achtziger}, \textbf{Neunziger}, \textbf{Vietnamkrieg} und im Bereich Musik zusätzlich \textbf{David Bowie - Changes} gesucht, da dies mögliche Befriffe sind, die die entwickelte Web-Applikation bedienen soll. Es wurden bewusst zwei Jahrzehnte in die Reihe aufgenommen, um einen besseren Vergleich ziehen zu können, ob ähnliche Suchanforderungen auch ebenso ähnliche Suchergebnisse liefern, \zB ob der erste Suchbegriff bei google.de immer ein Ergebnis von lastfm.de liefert. Außerdem werden Bilder- und Video-Ergebnisse bei google.de ausgelassen. Die Suchbegriffe wurden ggf. an den Suchdienst angepasst, \zB in der Amazon-Suche zu sehen, wo jeweils der passende Filter (Music, Movies \& TV) gewählt wurden. Es werden jeweils die ersten drei Suchergebnisse aufgelistet, zusammen mit dem Titel des Beitrages (Überschrift auf der Seite, Titel des thematisierten Items, etc.). Darauf folgt eine kurze Beschreibung des Inhalts, der schnellen Aufschluss über die Relevanz der gefundenen Ergebnisse liefert.
-
 \subsection{Bewertung der Suchergebnisse}
-Zur Bewertung des Suchergebnisses werden verschiedene Aspekte betrachtet: thematische Relevanz, Qualität des Suchergebnisses, gemessen an der Herkunft, Glaubwürdigkeit und Objektivität der Daten.
+Zur Bewertung des Suchergebnisses werden verschiedene Aspekte betrachtet: thematische Relevanz, Qualität des Suchergebnisses, gemessen an der Herkunft, Glaubwürdigkeit und Objektivität der Daten. Das bedeutet, dass lediglich die Komfortabilität der Suche untersucht wird.
+
 \paragraph{Musik}
-Im Bereich Musik hat die Suche insgesamt die am besten passenden Ergebnisse geliefert. \Dahe , dass sich die gefundenen Ergebnisse größtenteils auf Musik beziehen und thematisch auch das Gesuchte wiederspiegeln. Dabei hat google meist auf Ergebnisse der anderen analysierten Suchdienste verwiesen, \zB auf lastfm.de mit \glqq 80s\grqq \ getaggte Musik. Auffällig ist hier, dass die von google gefundenen Ergebnisse, die auf andere untersuchte Suchdienste verweisen, in einigen Fällen passendere Ergebnisse liefern, als das Suchen auf der spezialisierten Seite selbst. Als Beispiel sei zum einen die Suche in der Kategorie Musik mit dem Suchbegriff \glqq music vietnam war\grqq \ genannt. Hier liefert google als erstes Suchergebnis den Wikipedia-Artikel \glqq List of songs about the Vietnam War\grqq \ \citep{wikiListSongsVietnamWar}, während dieser Artikel in der Wikipedia-Suche mit dem selben Suchbegriff gar nicht auftaucht, gleichzeitig aber auch keine besseren Ergebnisse liefert. Jedoch befinden sich in den Suchergebnissen auch subjektive Musik-Charts, die Privatpersonen nach eigenen Kriterien erstellt und online gestellt haben.
+Im Bereich Musik hat die Suche insgesamt die am besten passenden Ergebnisse geliefert. Das bedeutet, dass sich die gefundenen Ergebnisse größtenteils auf Musik beziehen und thematisch auch das Gesuchte wiederspiegeln. Dabei hat google meist auf Ergebnisse der anderen analysierten Suchdienste verwiesen, \zB auf lastfm.de mit \glqq 80s\grqq \ getaggte Musik. Auffällig ist hier, dass die von google gefundenen Ergebnisse, die auf andere untersuchte Suchdienste verweisen, in einigen Fällen passendere Ergebnisse liefern, als das Suchen auf der spezialisierten Seite selbst. Als Beispiel sei zum einen die Suche in der Kategorie Musik mit dem Suchbegriff \glqq music vietnam war\grqq \ genannt. Hier liefert google als erstes Suchergebnis den Wikipedia-Artikel \glqq List of songs about the Vietnam War\grqq \ \citep{wikiListSongsVietnamWar}, während dieser Artikel in der Wikipedia-Suche mit dem selben Suchbegriff gar nicht auftaucht, gleichzeitig aber auch keine besseren Ergebnisse liefert. Jedoch befinden sich in den Suchergebnissen auch subjektive Musik-Charts, die Privatpersonen nach eigenen Kriterien erstellt und online gestellt haben.
 Verhältnismäßig gute Ergebnisse liefert auch amazon.de mit Kompilationen und CD-Sammlungen aus den Jahrzehnten und der Zeit des Vietnam-Krieges. Zwar befindet sich in den aufgeführten Suchergebnissen ausschließlich Musik, die direkten Bezug zum Vietnam-Krieg hat, jedoch ist die amazon-Suche nicht darauf ausgelegt, semantisch passend zum Begriff zu suchen.
 
 
@@ -83,13 +105,21 @@ Verhältnismäßig gute Ergebnisse liefert auch amazon.de mit Kompilationen und CD-
 \paragraph{Allgemein}
 Ein Problem in nahezu jeder Kategorie ist die Suche nach Songs anhand des Suchbegriffs \glqq david bowie changes\grqq \ mit dem Filter \glqq Music\grqq . 
 
+\subsection{Auswertung}
+Allgemeines Problem insbesondere bei News-Artikeln ist die relationale Suche. Internetsuchmaschinen wie Google suchen primär relational, \dahe , dass
+Suchen nach Inhalten, die lediglich zeitlich mit dem gesuchten Begriff zu tun haben, ist deutlich schwieriger, seltener vorhanden im Internet. Es fehlt die Übersetzung von \glqq irgendein zeitlich einzuordnender Begriff\grqq \ zu Zeitpunkt.
 
+
+%===================%
+%===== SECTION =====%
+%===================%
 \section{Allgemeine Probleme bei zeitabhängigen Medien}
 \paragraph{Schwelle zwischen zwei Jahrzehnten}
 Sich einen 80er-Radiosender anzuhören, ist nicht zwingend die beste Lösung, sollte \zB Musik aus dem Jahr 1991 gewünscht sein, sind Musiktitel aus dem Jahre 1989 aufgrund der zeitlichen Nähe meist relevanter als Musiktitel aus dem Jahre 1999.
 
-
-
+%===================%
+%===== SECTION =====%
+%===================%
 \section{Analyse}
 \subsection{Anforderungsanalyse}
 \paragraph{Suche und Filtern}
