@@ -1,0 +1,75 @@
+Entwicklung einer Web-Applikation zur Aggregation spezifischer Kulturgüter eines wählbaren Zeitpunktes
+
+PRÄAMBEL
+Zusammenfassung
+Abstract
+
+EINLEITUNG
+Motivation (1-3)
+Ziel und Abgrenzung dieser Arbeit 	(1)
+Aufbau und Vorgehensweise			(2)
+
+
+GRUNDLAGEN (15-20)
+Vorfeldrecherche
+	Status Quo				(1-2)
+	- was gibt es denn gerade so, um "sowas" im entferntesten zu machen? so zu suchen, etc.
+	- projekte, die ihre eigenen ansätze von stöbern in der vergangenheit haben, werden kurz vorgestellt und sollen einerseitz den bedarf an solch einer app verdeutlichen und natürlich andererseits zeigen, wie sehr so ne app benötigt wird
+	Feldanalyse				(3)
+	- feldanalysen für die bereiche musik, film, geschichtliche Ereignisse und Bild/Kunst.
+	- wenn ich "solche" daten haben will, welche möglichkeiten bieten sich mir, welche probleme treten auf (zb. wie bekomme ich musik aus den 90ern, heute wahrscheinlich durch sampler oder playlisten, die sind aber finit und selten bis gar nicht dynamisch)
+	- soll zeigen: Ja, ich komme schon irgendwie an die Daten ran, aber besonders schick oder komfortabel ist das nicht
+	Untersuchung vorhandener Suchdienste (3)
+	- Was spucken die gängigen Suchmaschinen denn so aus, wenn ich gezielt suche? wie brauchbar ist das? wie verlässlich? wie konsistent?
+Analyse
+	Anforderungsanalyse		(8)
+	- was will ich jetzt eigentlich? was soll die app können? was soll man machen können? also noch eher grob gehalten á la "nutzer soll suchergebnisse sehen und gleichzeitig musik und video konsumieren können" und "inhalte musik, film, news, wetter sind denkbar", und eingabemöglichkeiten, schön auf die spitze getrieben und so
+	Feature-Liste			(5)
+
+- tendiere dazu, den Part Analyse in den nächsten Teil zu verschieben, dann wird dadurch nur das erste Kapitel wieder etwas dünn. aber da die thesis eh auch einen großen schwerpunkt auf konzeption hat, würde es wieder passen. mal sehen.
+	
+
+ANALYSE/KONZEPTION (15-30)
+Konzeption
+	"Fernkonzept"	(5)
+	- Architektur, Diagramme, wie funktioniert jetzt Filtern?
+	Mockup			(12)
+	- Mockup wird gezeigt und erläutert mit bildern
+	Eingrenzung		(5)
+	- das "Fernkonzept" auf ein genaueres Feinkonzept heruntergebrochen, dafür detaillierter
+
+IMPLEMENTIERUNG REALISIERUNG / UMSETZUNG, TEST (20-30)
+Technikteil
+	erforderliche/benötigte Quellen					(2)
+	- hier schreibe ich erstmal runter, was ich alles brauche. eine api, die mir musikdaten liefert, ein dienst der umfangreiche film-daten liefert und dann brauche ich noch charts
+	mögliche APIs und andere Quellen				(5)
+	- hier schreibe ich, was sich eignet und was ich konkret anzapfen will, musicbrainz, rateyourmusic und imdb
+	mögliche Frameworks für die Web-Applikation		(2)
+	- hier beschreibe ich das setup der web-applikation, verwendete techniken (warum node, warum js, yeoman, grunt und mongodb)
+	- verwendete tools und module (async, nodebrainz, node-imdb-api, cheerio, node-rest-client)
+	Grobkonzept										(5)
+	Feinkonzept										(8)
+	Arbeitsweise									(5)
+
+ERGEBNIS (3-10)
+
+ZUSAMMENFASSUNG UND AUSBLICK (3-5)
+Ausblick
+Fazit
+
+
+Einleitung 1 - 3
+Grundlagen 15 - 20
+Analyse / Konzeption 15 - 30
+Implementierung Realisierung / Umsetzung, Test: 20 - 30
+Ergebnis 3 - 10
+Zusammenfassung und Ausblick 3 - 5
+Anhang 10 – 30
+
+
+Seitenumfang
+
+FRAGEN:
+Zielgruppe, Benchmark-Analyse und sowas?
+
+

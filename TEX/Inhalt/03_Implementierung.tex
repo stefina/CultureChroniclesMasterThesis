@@ -31,6 +31,11 @@ Das Web-Application-Framework \textbf{Express.js}\footcite{expressjs} wird verwe
 \subsection{MongoDB und NoSQL}
 MongoDB\footcite{mongodb} ist eine dokumentenorientierte Datenbank. Im Gegensatz zu relationalen Datenbanken lässt sich mit der NoSQL-Strategie eine flexible Datenstruktur erstellen. Das macht im Falle von \arbeitstitel \ besonders Sinn, da sich die Art und der Umfang der Daten, die verarbeitet werden, sehr schnell ändern können. Außerdem vereinfacht dies auch die Erweiterbarkeit der Web-Applikation.
 
+\subsection{Frontend mit Jade und Stylus}
+Im Frontend werden die Werkzeuge Jade und Stylus verwendet. Jade\footcite{jade} ist eine Node Template Engine und vereinfacht das Schreiben von HTML-Code, indem es eine eigene Syntax implementiert. Über die vereinfachte Schreibweise hinaus implementiert sie auch Iterationen, Bedingungen und Filter. Außerdem können sogenannte Mixins implementiert und somit dessen Funktionalität wiederverwendet werden.
+
+Stylus\footcite{stylus} ist eine für Node entwickelte Sprache, deren Kompilat CSS ist. Die Syntax ist im Gegensatz zu CSS stark vereinfacht. Weiterhin bietet sie Funktionen wie die Deklaration von Variablen, Funktionen und Mixins.
+
 \subsection{Code-Generierung mit Yeoman}
 Das Gerüst der Web-Applikation wurde mittels \textbf{Yeoman},\footcite{yeoman} einem Scaffolding-Tool für Webapps, generiert. Der Workflow von Yeoman basiert auf den drei Tools \textbf{Yo}, \textbf{Grunt}\footcite{grunt} und \textbf{Bower}.\footcite{bower} Bower ist ein Package Manager für das Frontend, Grunt ein Task Runner, mit Hilfe dessen Automatisierungsprozesse und Build-Skripte ausgeführt werden können. Yo kann mittles verschiedener Generatoren und Konfigurationen den Boilerplate-Code einer Web-Applikation und ein passendes Grunt Skript generieren.
 
@@ -45,15 +50,17 @@ Im Falle von \arbeitstitel \ wurde der Yeoman-Generator \textbf{generator-expres
 \end{itemize}
 
 \section{Tools}
-\begin{itemize}
-  \item nodebrainz
-  \item async
-  \item coverart
-  \item cheerio
-  \item node-rest-client
-  \item node-imdb-api
-\end{itemize}
+Im Folgenden werden verwendete Libraries und deren Nutzern erläutert.
+\subsection{async}
+Das async-Modul erlaubt eine bessere Kontrolle über asynchron ausgeführte Funktionalität. Da \arbeitstitel \ an vielen Stellen mit mehreren APIs kommunizieren muss, ist die Asynchronität zwar generell ein Vorteil, jedoch werden auch Anfragen benötigt, die von mehreren asynchronen Requests abhängig sind. \Dahe , dass einige Requests von teilweise mehreren Requests, die vorher durchgeführt werden müssen, abhängig sind. Mit async lassen sich Callbacks in vordefinierter Reihenfolge durchführen. Auch eine Serie von ein und dem selben Callbacks auf Werten aus einer Liste, ist möglich, genauso lassen sich mehrere Requests gleichzeitig abarbeiten bis dann der finale Callback ausgeführt werden kann, wenn alle Vorbedingungen erfüllt worden sind.  
 
+\subsection{node-rest-client}
+
+
+\subsection{cheerio}
+\subsection{nodebrainz und coverart}
+
+\subsection{node-imdb-api}
 
 
 \section{Grobkonzept}
