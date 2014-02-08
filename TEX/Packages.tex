@@ -59,6 +59,7 @@
 
 
 % zum Einbinden von Programmcode -----------------------------------------------
+\usepackage{scrhack}
 \usepackage{listings}
 \usepackage{xcolor} 
 \definecolor{hellgelb}{rgb}{1,1,0.9}
@@ -205,3 +206,6 @@
    captionpos=b
 }
 
+% Taken from http://tex.stackexchange.com/questions/22240/choosing-font-for-bold-small-caps-or-any-other-particular-familyseriesshape-c
+\usepackage{lmodern} \normalfont %to load T1lmr.fd 
+\DeclareFontShape{T1}{lmr}{bx}{sc} { <-> ssub * cmr/bx/sc }{}
