@@ -107,6 +107,7 @@ Im Bereich Musik sind folgende Dienste verglichen worden:
 
 Dabei hat google meist auf Ergebnisse der anderen analysierten Suchdienste verwiesen, \zB auf lastfm.de mit \glqq 80s\grqq \ getaggte Musik. Auffällig ist hier, dass die von google gefundenen Ergebnisse, die auf andere untersuchte Suchdienste verweisen, in einigen Fällen passendere Ergebnisse liefern, als das Suchen auf der spezialisierten Seite selbst. Als Beispiel sei zum einen die Suche in der Kategorie Musik mit dem Suchbegriff \glqq music vietnam war\grqq \ genannt. Hier liefert google als erstes Suchergebnis den Wikipedia-Artikel \glqq List of songs about the Vietnam War\grqq \ \citep{wikiListSongsVietnamWar}, während dieser Artikel in der Wikipedia-Suche mit dem selben Suchbegriff gar nicht auftaucht, gleichzeitig aber auch keine besseren Ergebnisse liefert. Jedoch befinden sich in den Suchergebnissen auch subjektive Musik-Charts, die Privatpersonen nach eigenen Kriterien erstellt und online gestellt haben.
 Verhältnismäßig gute Ergebnisse liefert auch amazon.de mit Kompilationen und CD-Sammlungen aus den Jahrzehnten und der Zeit des Vietnamkrieges. Zwar befindet sich in den aufgeführten Suchergebnissen ausschließlich Musik, die direkten Bezug zum Vietnamkrieg hat, jedoch ist die amazon-Suche nicht darauf ausgelegt, semantisch passend zum Begriff zu suchen.
+\todo{david bowie ergebnis}
 
 \paragraph{Film}
 Auch im Bereich Film variiert die Qualität und Relevanz der Suchergebnisse stark zwischen den unterschiedlichen Suchdiensten. Folgende Dienste sind analysiert worden:
@@ -122,9 +123,6 @@ Amazon.com liefert mit Zuhilfenahme des Filters \glqq Movies \& TV\grqq \ haupts
 
 Eine Standardsuche nach den entsprechenden Suchbegriffen auf IMDb.com verdeutlicht, dass es sich um eine Titelsuche handelt. Erst eine erweiterte Suche mit den eingestellten Parametern des jeweiligen Zeitraumes resultiert in eine Liste von ausschließlich zeitlich passenden Einträgen. Dabei gilt, dass der Zeitraum des Vietnamkrieges anhand von Daten eingegeben werden muss und nicht nach dem Begriff selbst gesucht werden kann. 
 
-\paragraph{Allgemein}
-Ein Problem in nahezu jeder Kategorie ist die Suche nach Songs anhand des Suchbegriffs \glqq david bowie changes\grqq \ mit dem Filter \glqq Music\grqq . 
-
 \subsection{Auswertung}
 Allgemeines Problem insbesondere bei News-Artikeln ist die relationale Suche. Internetsuchmaschinen wie Google suchen primär relational, \dahe , dass
 Suchen nach Inhalten, die lediglich zeitlich mit dem gesuchten Begriff zu tun haben, ist deutlich schwieriger, seltener vorhanden im Internet. Es fehlt die Übersetzung von \glqq irgendein zeitlich einzuordnender Begriff\grqq \ zu Zeitpunkt.
@@ -133,25 +131,28 @@ Suchen nach Inhalten, die lediglich zeitlich mit dem gesuchten Begriff zu tun ha
 %===================%
 %===== SECTION =====%
 %===================%
-\section{Allgemeine Probleme bei zeitabhängigen Medien}
-\paragraph{Schwelle zwischen zwei Jahrzehnten}
+\section{Probleme}
+\subsection{Relationale Vs. semantische Suche}
+Ein Problem bei der Art der erforderlichen Suche, ist dass der Kontent zeitspezifisch benötigt wird. Bei Musik funktioniert dies sehr gut, da es meist umfangreiche Informationen zu jedem Musikstück gibt. Außerdem ist dank dem ID3-Standard die Pflege und Auswertung der Daten sehr einfach. Trotzdem bedarf es zunächst einer Übersetzung von einem Wort zu einem auswertbaren Zeitspanne. \Dahe, dass eine Suche nach bestimmten Content in der selben Zeit eines bestimmten Musikstückes zu suchen, anstatt das Musikstück selbst angezeigt zu bekommen. \todo{besser formulieren}
+
+\subsection{Schwelle zwischen zwei Jahrzehnten}
 Sich einen 80er-Radiosender anzuhören, ist nicht zwingend die beste Lösung, sollte \zB Musik aus dem Jahr 1991 gewünscht sein, sind Musiktitel aus dem Jahre 1989 aufgrund der zeitlichen Nähe meist relevanter als Musiktitel aus dem Jahre 1999.
 
 %===================%
-%===== SECTION =====%
+%===== CHAPTER =====%
 %===================%
-\section{Analyse}
+\chapter{Analyse}
 Aus der vorangegangenen Analyse der vorhandenen Suchdienste geht hervor, dass es eine umfassende Suche nach zeitspezifischen Inhalten bisher nicht sehr komfortabel ist, \bzw nicht immer relevante Suchergebnisse liefert. Diese Möglichkeit soll die Web-Applikation, die im Rahmen dieser Arbeit entwickelt wird, bieten. Über welche Funktionalität sie im Konkreten verfügen soll, wird im Folgenden analysiert und anschließend in einer Feature-Liste aufgeschlüsselt.
 
-\subsection{Anforderungsanalyse}
+\section{Anforderungsanalyse}
 
-\subsubsection{Eingabeformen}
+\subsection{Eingabeformen}
 Ausgangspunkt für die Suche ist ihre Eingabeform. Der Nutzer soll hinsichtlich der Art seiner Eingabe möglichst frei sein können. Über die Text-Suche, wie sie in der vorangegangenen Analyse (siehe \ref{sec:suchdienste}) durchgeführt wurde, gibt es noch weitere denkbare Möglichkeiten.
 
 \paragraph{Datum}
 Die Eingabe eines Datums ist die naheliegendste Suchform um Kontent, der sich auf einen Zeitpunkt \bzw dessen umschließenden Zeitraum bezieht.
 
-\paragraph{Zeitraum oder Epoche}
+\paragraph{Ereignis, Zeitraum oder Epoche}
 Primär sind Begriffe wie \zB \glqq 1937\grqq \ oder \glqq 12.04.1922\grqq \ denkbar. Darüber hinaus lassen sich viele Begriffe auch in Zeiträume oder Zeitpunkte aufschlüsseln, wie \zB die Begriffe \glqq Neunziger\grqq , \glqq Vietnamkrieg \grqq oder \glqq Deutscher Mauerfall\grqq . 
 
 \paragraph{Musik oder Film}
@@ -163,17 +164,34 @@ Im Falle von Bild oder Kunstwerken ist die Zuhilfenahme der Aufnahmedatums oder 
 \paragraph{Personen}
 Auch anhand einer Person kann ein Zeitraum ermittelt werden. Dies kann je nach Interesse der gesamte Lebenszeitraum sein oder auch ein Zeitraum, in dem diese Person von größerer Wichtigkeit war (Amtsperiode, Aktivitätszeitraum eines Musikers).
 
-\paragraph{Sonstige}
-Im Grunde ist jede Eingabeform denkbar, aus welcher ein Datum extrahiert werden kann.
-
-\subsubsection{Funktionen}
+\subsection{Funktionen}
 Die Kernfunktionalität der Web-Applikation ist die Suche nach Inhalten, die aus einem spezifischen Zeitraum stammen, \bzw sich mit diesem Zeitraum befassen. Darüber hinaus soll der Inhalt auf unterschiedliche Weise präsentiert werden und konsumiert werden können. Hauptsächlich soll eine visuell ansprechende Form der Inhalte präsentiert werden, gleichzeitig soll es dem Nutzer ermöglicht werden, direkt in der Web-Anwendung Audio-Inhalte zu hören, während er sich weitere Ergebnisse seiner Suche ansieht. Ebenso soll es möglich sein, während des Durchstöberns der Suchergebnisse Video-Inhalte betrachten zu können.
 
-\subsubsection{Kontent-Typen}
-Anhand eines Zeitpunktes oder -raumes lassen sich eine Vielzahl unterschiedlicher Inhaltstypen anzeigen.
+\subsection{Kontent-Typen}
+Anhand eines Zeitpunktes oder -raumes lassen sich eine Vielzahl unterschiedlicher Inhaltstypen anzeigen. Da es das Ziel der Web-Applikation ist, ein möglichst umfassendes Bild eines Zeitraumes anhand verschiedener Medien zu präsentieren, werden im Folgenden denkbare Inhalts-Typen erläutert.
 
+\paragraph{Politische und geschichtliche Ereignisse}
+Ein wichtiger Aspekt, der einen Zeitraum prägt, sind die darin auftretenden Ereignisse. Zum einen sind da politische Ereignisse wie \zB der Independence Day der USA, der Mauerfall, die Terroranschläge aber auch zeitprägende Begriffe wie die Goldenen Zwanziger, die Industrialisierung oder die Weltwirtschaftskrise. Ebenso gehören Natur-Ereignisse, als auch Medien-Ereignisse dazu. Hier kann als Beispiel die erste Landung eines Menschen auf dem Mond genannt werden.
 
-\subsubsection{Darstellung}
+\paragraph{Demografische Daten}
+Demografische Daten geben ebenfalls Aufschluss über einen Zeitraum. Die Zusammensetzung der Bevölkerung, ihre Dichte oder \zB das durchschnittliche Alter der Menschen sind Aspekte, die einen Zeitraum mit ausmachen. Genauso können Arbeitslosenquoten die Zufriedenheit der Bürger wiederspiegeln.
+Darüber hinaus können Informationen über das vorherrschende Weter von Interesse sein oder Informationen über die Länge des Tages.
+
+\paragraph{Erfindungen und technische Errungenschaften}
+Erfindungen haben bereits in der Vergangenheit großen Einfluss auf die Veränderung der Gesellschaft ausgeübt. Nicht nur die Erfindung des Buchdrucks, des Computers oder des Internets haben zu ihrer Zeit und darüber hinaus das Leben der Menschen verändert. Ebenso interessant können zeitnahe Reaktionen und Annahmen zu solchen Erfindungen sein, geben sie \uU Aufschluss über die Haltung der Menschen gegenüber der Fortschritte. So \zB die frühe Annahme, dass Geschwindigkeiten von über 30 km/h dem menschlichen Körper tödlich schadeten.
+
+\paragraph{Musik}
+Musik repräsentiert einen großen Teil des kulturellen Aspekts eines Zeitraums. Musik aus einem bestimmten Zeitraum spiegelt nicht nur den Geschmack, sondern auch politische Neigungen oder beschäftigt sich mit aktuellen Themen, denkt man an den Song \textbf{Only Time}, der im Zuge der Terroranschläge vom 11. September an großer Popularität gewann. Dazu macht sie einen Teil des vorherrschenden Stils aus.
+
+\paragraph{Kunst}
+Verschiedenste Arten von Kunst haben schon die frühesten Epochen der Menschheit geprägt. Ähnlich wie die Musik spiegeln Kunstwerke ihrer Zeit nicht nur den Stil, sondern auch die aktuelle Situation, Wünsche, Träume und Bedürfnisse der Künstler und ihrer Zeitgenossen.
+
+\paragraph{Film}
+Film ist zwar im Gegensatz zu Kunst ein eher neues Medium, doch auch die Unterhaltungskunst des Films repräsentieren den Geschmack und Zeitgeist der Gesellschaft. Hinzu kann ein Film, der sich mit der Thematik aus der Vergangenheit beschäftigt im Nachhinein interessant oder gar wichtig sein. Darüber hinaus geben besonders neue Filmproduktionen ein Bild der Generationen wieder. So kann \zB der Film \textbf{Breakfast Club (1985)} einen Querschnitt derzeitiger Schüler geben und der Film \textbf{Back to the Future (1985)} eine, wenn auch nicht ganz ernstgemeinte, Annahme der Zukunft wiederspiegeln. \todo{raus?}
+
+Hinzu kommen Video-Reportagen und -Berichte, die einen Zeitraum näher betrachten und selbst ein Bild eines Zeitraumes oder Ereignisses darstellen.
+
+\subsection{Darstellung}
 
 
 
@@ -191,7 +209,7 @@ Anhand eines Zeitpunktes oder -raumes lassen sich eine Vielzahl unterschiedliche
 \paragraph{Suche und Filtern}
 
 
-\subsection{Feature-Liste}
+\section{Feature-Liste}
 \paragraph{Musik}
 \paragraph{Video}
 \paragraph{Bild}
