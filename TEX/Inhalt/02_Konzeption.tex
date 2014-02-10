@@ -5,6 +5,82 @@ Im Folgenden wird das Konzept der Web-Applikation erarbeitet und vorgestellt. Da
 Auf dieser Basis wird ein Mockup der im weiteren Verlauf bei ihrem Arbeitstitel \textbf{\arbeitstitel} benannten Web-Applikation entwickelt, welches die Anwendungsfälle und Darstellungsmöglichkeiten beinhaltet.
 Anschließend wird das Fernkonzept auf ein im Rahmen dieser Masterarbeit realisierbaren Umfang reduziert und entsprechend eingegrenzt. Am zuvor erstellten Mockup sollten diesbezüglich nur wenige Änderungen \bzw Einschränkungen vorgenommen werden müssen.
 
+\section{Anforderungsanalyse}
+Aus der vorangegangenen Analyse der vorhandenen Suchdienste geht hervor, dass es eine umfassende Suche nach zeitspezifischen Inhalten bisher nicht sehr komfortabel ist, \bzw nicht immer relevante Suchergebnisse liefert. Diese Möglichkeit soll die Web-Applikation, die im Rahmen dieser Arbeit entwickelt wird, bieten. Über welche Funktionalität sie im Konkreten verfügen soll, wird im Folgenden analysiert und anschließend in einer Feature-Liste aufgeschlüsselt.
+
+\subsection{Eingabeformen}
+Ausgangspunkt für die Suche ist ihre Eingabeform. Der Nutzer soll hinsichtlich der Art seiner Eingabe möglichst frei sein können. Über die Text-Suche, wie sie in der vorangegangenen Analyse (siehe \ref{sec:suchdienste}) durchgeführt wurde, gibt es noch weitere denkbare Möglichkeiten.
+
+\paragraph{Datum}
+Die Eingabe eines Datums ist die naheliegendste Suchform um Kontent, der sich auf einen Zeitpunkt \bzw dessen umschließenden Zeitraum bezieht.
+
+\paragraph{Ereignis, Zeitraum oder Epoche}
+Primär sind Begriffe wie \zB \glqq 1937\grqq \ oder \glqq 12.04.1922\grqq \ denkbar. Darüber hinaus lassen sich viele Begriffe auch in Zeiträume oder Zeitpunkte aufschlüsseln, wie \zB die Begriffe \glqq Neunziger\grqq , \glqq Vietnamkrieg \grqq oder \glqq Deutscher Mauerfall\grqq . 
+
+\paragraph{Musik oder Film}
+Aus einer Musik- oder Film-Veröffentlichung kann ebenfalls ein Datum entnommen werden. Hier bietet sich beispielsweise das Veröffentlichungsdatum oder das Produzierungsdatum an, während bei einer TV-Produktion die Erstausstrahlung und bei einem Kinofilm der Filmstart relevant ist.
+
+\paragraph{Bild oder Kunst}
+Im Falle von Bild oder Kunstwerken ist die Zuhilfenahme der Aufnahmedatums oder die Fertigstellung eines Kunstwerkes denkbar. Viele Kunstwerke \oae \ der frühen Vergangenheit lassen sich auf keinen genauen Zeitpunkt zurückdatieren, oftmals existiert in diesen Fällen ein möglicher Zeitraum, in welchen es fertig gestellt wurde.
+
+\paragraph{Personen}
+Auch anhand einer Person kann ein Zeitraum ermittelt werden. Dies kann je nach Interesse der gesamte Lebenszeitraum sein oder auch ein Zeitraum, in dem diese Person von größerer Wichtigkeit war (Amtsperiode, Aktivitätszeitraum eines Musikers).
+
+\subsection{Funktionen}
+Die Kernfunktionalität der Web-Applikation ist die Suche nach Inhalten, die aus einem spezifischen Zeitraum stammen, \bzw sich mit diesem Zeitraum befassen. Darüber hinaus soll der Inhalt auf unterschiedliche Weise präsentiert werden und konsumiert werden können. Hauptsächlich soll eine visuell ansprechende Form der Inhalte präsentiert werden, gleichzeitig soll es dem Nutzer ermöglicht werden, direkt in der Web-Anwendung Audio-Inhalte zu hören, während er sich weitere Ergebnisse seiner Suche ansieht. Ebenso soll es möglich sein, während des Durchstöberns der Suchergebnisse Video-Inhalte betrachten zu können.
+
+\subsection{Kontent-Typen}
+Anhand eines Zeitpunktes oder -raumes lassen sich eine Vielzahl unterschiedlicher Inhaltstypen anzeigen. Da es das Ziel der Web-Applikation ist, ein möglichst umfassendes Bild eines Zeitraumes anhand verschiedener Medien zu präsentieren, werden im Folgenden denkbare Inhalts-Typen erläutert.
+
+\paragraph{Politische und geschichtliche Ereignisse}
+Ein wichtiger Aspekt, der einen Zeitraum prägt, sind die darin auftretenden Ereignisse. Zum einen sind da politische Ereignisse wie \zB der Independence Day der USA, der Mauerfall, die Terroranschläge aber auch zeitprägende Begriffe wie die Goldenen Zwanziger, die Industrialisierung oder die Weltwirtschaftskrise. Ebenso gehören Natur-Ereignisse, als auch Medien-Ereignisse dazu. Hier kann als Beispiel die erste Landung eines Menschen auf dem Mond genannt werden. Ebenso interessant sind Informationen wie die Regierungsform oder die Parlamentszusammensetzung.
+
+\paragraph{Demografische Daten}
+Demografische Daten geben ebenfalls Aufschluss über einen Zeitraum. Die Zusammensetzung der Bevölkerung, ihre Dichte oder \zB das durchschnittliche Alter der Menschen sind Aspekte, die einen Zeitraum mit ausmachen. Genauso können Arbeitslosenquoten die Zufriedenheit der Bürger wiederspiegeln.
+
+Darüber hinaus können Informationen über das vorherrschende Wetter von Interesse sein oder Informationen über die Länge des Tages.
+
+\paragraph{Musik}
+Musik repräsentiert einen großen Teil des kulturellen Aspekts eines Zeitraums. Musik aus einem bestimmten Zeitraum spiegelt nicht nur den Geschmack, sondern auch politische Neigungen oder beschäftigt sich mit aktuellen Themen, denkt man an den Song \textbf{Only Time}, der im Zuge der Terroranschläge vom 11. September an großer Popularität gewann. Dazu macht sie einen Teil des vorherrschenden Stils aus.
+
+\paragraph{Kunst}
+Verschiedenste Arten von Kunst haben schon die frühesten Epochen der Menschheit geprägt. Ähnlich wie die Musik spiegeln Kunstwerke ihrer Zeit nicht nur den Stil, sondern auch die aktuelle Situation, Wünsche, Träume und Bedürfnisse der Künstler und ihrer Zeitgenossen.
+
+\paragraph{Film}
+Film ist zwar im Gegensatz zu Kunst ein eher neues Medium, doch auch die Unterhaltungskunst des Films repräsentieren den Geschmack und Zeitgeist der Gesellschaft. Hinzu kann ein Film, der sich mit der Thematik aus der Vergangenheit beschäftigt im Nachhinein interessant oder gar wichtig sein. Darüber hinaus geben besonders neue Filmproduktionen ein Bild der Generationen wieder. So kann \zB der Film \textbf{Breakfast Club (1985)} einen Querschnitt derzeitiger Schüler geben und der Film \textbf{Back to the Future (1985)} eine, wenn auch nicht ganz ernstgemeinte, Annahme der Zukunft wiederspiegeln. \todo{raus?}
+
+Hinzu kommen Video-Reportagen und -Berichte, die einen Zeitraum näher betrachten und selbst ein Bild eines Zeitraumes oder Ereignisses darstellen. Sonstiges Video-Material, wie \zB Filmtrailer lassen sich auch in diese Kategorie zählen.
+
+\paragraph{Erfindungen und technische Errungenschaften}
+Erfindungen haben bereits in der Vergangenheit großen Einfluss auf die Veränderung der Gesellschaft ausgeübt. Nicht nur die Erfindung des Buchdrucks, des Computers oder des Internets haben zu ihrer Zeit und darüber hinaus das Leben der Menschen verändert. Ebenso interessant können zeitnahe Reaktionen und Annahmen zu solchen Erfindungen sein, geben sie \uU Aufschluss über die Haltung der Menschen gegenüber der Fortschritte. So \zB die frühe Annahme, dass Geschwindigkeiten von über 30 km/h dem menschlichen Körper tödlich schadeten.
+
+\paragraph{Video-Spiele}
+Im fortgeschrittenen Zeitalter ist auch eine Darstellung von Video-Spielen, die zu der Zeit erschienen sind. Sie geben ebenfalls Aufschluss über die derzeitigen technischen Möglichkeiten.
+
+\subsection{Darstellung}
+Bei einer Darstellung so vieler verschiedener Arten von Daten, muss das Layout sowohl variabel, als auch konsistent sein. Die Breite der Inhalte kann sich sehr oft verändern, wenn neue Quellen hinzugefügt werden und eine bestimmte Darstellungsform erfordern. Gleichzeitig darf das Layout durch die Masse an unterschiedlichem Inhalt nicht an Übersichtlichkeit und Konformität einbüßen.
+
+Inhaltstypen müssen für den Benutzer klar erkennbar sein, sodass Audio-Daten schnell von Text-Daten \oae unterschieden werden könnnen. Außerdem soll der Nutzer komfortabel und unkompliziert durch die Ergebnisse navigieren können.
+
+
+
+\section{Features}
+\subsection{Thematisches Suchen}
+Während die Suche nach einem bloßen Datum stringent alle auffindbaren Informationen, die in diesen Zeitraum fallen, anzeigt, muss es auch möglich sein, gezielt thematisch zu suchen. Zum Beispiel soll es die Möglichkeit geben ausschließlich Daten eines Zeitraumes, die sich auf das Thema Musik beziehen. Dabei sind keinesfalls lediglich Musikdateien gemeint, sondern auch \bspw Text- oder Videoquellen, die sich mit dem Thema Musik beschäftigen. Das Ergebnis wäre ein Bild der derzeitigen Musikgeschichte zu bekommen.
+
+\subsection{Inhaltseingrenzung}
+Um den Nutzen der Web-Applikation möglichst vielseitig zu halten, kann bei der Suche die Art des Inhalts eingegrenzt werden. So kann die Wahl getroffen werden, welche Medientypen angezeigt werden sollen (Audio, Video, Text \etc). Auch ist eine Filterung der in Betracht gezogenen Dienste denkbar, sodass der Nutzer \bspw bestimmte APIs deaktivieren kann.
+
+\subsection{Filtern}
+\subsection{Betrachten von Inhalten}
+
+%==============================================================================%
+%==============================================================================%
+%==============================================================================%
+%==============================================================================%
+%==============================================================================%
+%==============================================================================%
+
 %\section{Funktionen}
 
 \begin{figure}[htb]
