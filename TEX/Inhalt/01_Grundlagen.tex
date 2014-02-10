@@ -64,16 +64,10 @@ So enthält \bspw das Art Archive über eine Bilder-Bibliothek aus über 900 Quelle
 
 Darüber hinaus gibt es noch weitere Möglichkeiten nach Kunstwerken zu suchen, jedoch sind diese meist auf den Verkauf von Kunst ausgelegt, das bedeutet, dass auch nur die Kunstwerke in der Datenbank gefunden werden kann, die durch den Service auch verkauft werden kann. Ein Beispiel ist der Dienst The Art Online Gallery.\footcite{artOnlineGallery}
 
+Im Bereich Kunst ist die Abhängigkeit von der Art der Implementierung der Suche besonders groß. So hat man oft lediglich die Möglichkeit aus einer begrenzten Anzahl an vorgegebenen Epochen auszusuchen.
+
 Zusätzlich lassen sich Bilder im Gegensatz zu Musik schwieriger finden, da es hier an Standards wie ID3 fehlt. So ist man hier stark auf umfassende Kunstarchive angewiesen.
 
-
-Zwar gibt es im Internet eine Vielzahl an Informationen über bekannte Kunstwerke, Gemälde \etc
-- Daten über Gemälde, Kunstwerke, Kram, etc weitläufig vorhanden
-- wenige offene Suchmaschinen (Oxford Art Online restriktiert für Mitglieder bestimmter Bibliotheken)
-- Webseiten meist sehr veraltet (häääääßßlich!)
-- Sucharten sind unkomfortabel
-- meist keine zeitspezifische Suchen, wenn dann nur eine Auswahl an vorgegebenen Epochen möglich
-- manchmal gibt es nicht mal alle Epochen 
 
 %===================%
 %===== SECTION =====%
@@ -87,7 +81,7 @@ Um für die Suche möglichst einfache Parameter zu wählen, wird die Suche außerdem
 
 Es wurde nach den Begriffen \textbf{Achtziger}, \textbf{Neunziger} und \textbf{Vietnamkrieg} gesucht, während jeder dieser Begriffe einen Zeitraum repräsentiert. Die Wahl von zwei Jahrzehnten dient dazu, einen besseren Vergleich ziehen zu können, ob ähnliche Suchanforderungen auch ebenso ähnliche Suchergebnisse liefern, \zB ob der erste Suchbegriff bei google immer ein Ergebnis von lastfm.de liefert. 
 
-Im Bereich Musik wird zusätzlich nach \textbf{David Bowie - Changes} gesucht, da dies ein möglicher Begriff ist, den die entwickelte Web-Applikation bedienen soll. Die Suchbegriffe wurden ggf. an den Suchdienst angepasst, \zB in der Amazon-Suche zu sehen, wo jeweils die passenden Filter (Music, Movies \& TV) gewählt wurden und die Begriffe \glqq music\grqq \ und \glqq video\grqq \ dafür ausgelassen wurden. Bilder- und Video-Ergebnisse bei google werden ausgelassen.
+Im Bereich Musik wird zusätzlich nach \textbf{David Bowie - Changes} gesucht, da dies ein möglicher Begriff ist, den die entwickelte Web-Applikation bedienen soll. Die Suchbegriffe wurden ggf. an den Suchdienst angepasst, \zB in der Amazon-Suche zu sehen, wo jeweils die passenden Filter (Music, Movies \& TV) gewählt wurden und die Begriffe \glqq music\grqq \ und \glqq video\grqq \ dafür ausgelassen wurden. Bilder- und Video-Ergebnisse bei google werden ausgelassen, mit Ausnahme der Suche nach Kunst in einem bestimmten Zeitraum. Hier wird lediglich die Bildersuche in Betracht gezogen.
 
 Das Ergebnis der Evaluierung wird anhand einer Matrix dargestellt, in denen die Bereiche Musik, Film, Kunst und Ereignisse betrachtet werden. In jeder Matrix sind die Ergebnisse nach Suchdiensten sortiert. Es werden jeweils die ersten drei Suchergebnisse aufgelistet, zusammen mit dem Titel des Beitrages (Überschrift auf der Seite, Titel des thematisierten Items, etc.). Darauf folgt eine kurze Beschreibung des Inhalts, der schnellen Aufschluss über die Relevanz der gefundenen Ergebnisse liefert.
 
@@ -123,10 +117,18 @@ Amazon.com liefert mit Zuhilfenahme des Filters \glqq Movies \& TV\grqq \ haupts
 
 Eine Standardsuche nach den entsprechenden Suchbegriffen auf IMDb.com verdeutlicht, dass es sich um eine Titelsuche handelt. Erst eine erweiterte Suche mit den eingestellten Parametern des jeweiligen Zeitraumes resultiert in eine Liste von ausschließlich zeitlich passenden Einträgen. Dabei gilt, dass der Zeitraum des Vietnamkrieges anhand von Daten eingegeben werden muss und nicht nach dem Begriff selbst gesucht werden kann. 
 
-\paragraph{Kunst}
-
-
 \paragraph{Ereignisse}
+Die Suche nach Ereignissen 
+
+\begin{itemize}
+	\item google ok, aber subjektiv
+	\item vietnam war bringt die besten ergebnisse
+	\item wikipedia weiß zwar alles, aber suchtechnisch mal wieder müll
+	\item historyorb bringt teilweise ganz andere perioden ins spiel
+\end{itemize}
+
+\paragraph{Kunst}
+Zwar gibt es im Bereich Kunst einige Suchdienste, jedoch sind diese für die Evaluation mit den gewählten Vorgaben nicht geeignet. Das Art Archive gibt \bspw Suchergebnisse wieder, die die Suchbegriffe \glqq 80s\grqq \ und \glqq 90s\grqq \ im Dateinamen enthalten. Die Web Gallery Of Art lässt zwar das Filtern nach einer wählbaren Zeitspanne in ihrer Suche zu, jedoch sind die gewählten Zeiträume dieser Evaluierung nicht Teil der Datenbank. Die Suche der Art Online Gallery durchsucht lediglich gesetzte Tags und findet dementsprechend nur bei einer Suche nach \glqq vietnam war\grqq \ verschiedene Gemälde, die auf der Seite käuflich zu erwerben sind. Art Cyclopedia\footcite{artCyclopedia} findet bei keinem der Suchbegriffe ein Ergebnis.
 
 \subsection{Auswertung}
 Allgemeines Problem insbesondere bei News-Artikeln ist die relationale Suche. Internetsuchmaschinen wie Google suchen primär relational, \dahe , dass
