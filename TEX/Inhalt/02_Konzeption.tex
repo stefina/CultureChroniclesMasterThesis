@@ -5,6 +5,7 @@ Im Folgenden wird das Konzept der Web-Applikation erarbeitet und vorgestellt. Da
 Auf dieser Basis wird ein Mockup der im weiteren Verlauf bei ihrem Arbeitstitel \textbf{\arbeitstitel} benannten Web-Applikation entwickelt, welches die Anwendungsfälle und Darstellungsmöglichkeiten beinhaltet.
 Anschließend wird das Fernkonzept auf ein im Rahmen dieser Masterarbeit realisierbaren Umfang reduziert und entsprechend eingegrenzt. Am zuvor erstellten Mockup sollten diesbezüglich nur wenige Änderungen \bzw Einschränkungen vorgenommen werden müssen.
 
+%===== SECTION =====%
 \section{Anforderungsanalyse}
 Aus der vorangegangenen Analyse der vorhandenen Suchdienste geht hervor, dass es eine umfassende Suche nach zeitspezifischen Inhalten bisher nicht sehr komfortabel ist, \bzw nicht immer relevante Suchergebnisse liefert. Diese Möglichkeit soll die Web-Applikation, die im Rahmen dieser Arbeit entwickelt wird, bieten. Über welche Funktionalität sie im Konkreten verfügen soll, wird im Folgenden analysiert und anschließend in einer Feature-Liste aufgeschlüsselt.
 
@@ -26,9 +27,11 @@ Im Falle von Bild oder Kunstwerken ist die Zuhilfenahme der Aufnahmedatums oder 
 \paragraph{Personen}
 Auch anhand einer Person kann ein Zeitraum ermittelt werden. Dies kann je nach Interesse der gesamte Lebenszeitraum sein oder auch ein Zeitraum, in dem diese Person von größerer Wichtigkeit war (Amtsperiode, Aktivitätszeitraum eines Musikers).
 
+%----- SUBSECTION -----%
 \subsection{Funktionen}
 Die Kernfunktionalität der Web-Applikation ist die Suche nach Inhalten, die aus einem spezifischen Zeitraum stammen, \bzw sich mit diesem Zeitraum befassen. Darüber hinaus soll der Inhalt auf unterschiedliche Weise präsentiert werden und konsumiert werden können. Hauptsächlich soll eine visuell ansprechende Form der Inhalte präsentiert werden, gleichzeitig soll es dem Nutzer ermöglicht werden, direkt in der Web-Anwendung Audio-Inhalte zu hören, während er sich weitere Ergebnisse seiner Suche ansieht. Ebenso soll es möglich sein, während des Durchstöberns der Suchergebnisse Video-Inhalte betrachten zu können.
 
+%----- SUBSECTION -----%
 \subsection{Kontent-Typen}
 Anhand eines Zeitpunktes oder -raumes lassen sich eine Vielzahl unterschiedlicher Inhaltstypen anzeigen. Da es das Ziel der Web-Applikation ist, ein möglichst umfassendes Bild eines Zeitraumes anhand verschiedener Medien zu präsentieren, werden im Folgenden denkbare Inhalts-Typen erläutert.
 
@@ -57,14 +60,16 @@ Erfindungen haben bereits in der Vergangenheit großen Einfluss auf die Veränderu
 \paragraph{Video-Spiele}
 Im fortgeschrittenen Zeitalter ist auch eine Darstellung von Video-Spielen, die zu der Zeit erschienen sind. Sie geben ebenfalls Aufschluss über die derzeitigen technischen Möglichkeiten.
 
+%----- SUBSECTION -----%
 \subsection{Darstellung}
 Bei einer Darstellung so vieler verschiedener Arten von Daten, muss das Layout sowohl variabel, als auch konsistent sein. Die Breite der Inhalte kann sich sehr oft verändern, wenn neue Quellen hinzugefügt werden und eine bestimmte Darstellungsform erfordern. Gleichzeitig darf das Layout durch die Masse an unterschiedlichem Inhalt nicht an Übersichtlichkeit und Konformität einbüßen.
 
 Inhaltstypen müssen für den Benutzer klar erkennbar sein, sodass Audio-Daten schnell von Text-Daten \oae unterschieden werden könnnen. Außerdem soll der Nutzer komfortabel und unkompliziert durch die Ergebnisse navigieren können.
 
 
-
+%===== SECTION =====%
 \section{Features}
+%----- SUBSECTION -----%
 \subsection{Eingrenzen der Suche}
 \begin{itemize}
 	\item Medientypen (Audio, Video, Text, Tabellen, Diagramme)
@@ -76,13 +81,16 @@ Inhaltstypen müssen für den Benutzer klar erkennbar sein, sodass Audio-Daten sch
 	\item Kategorien (Stil, Genre)
 \end{itemize}
 
+%----- SUBSECTION -----%
 \subsection{Thematisches Suchen}
 Während die Suche nach einem bloßen Datum stringent alle auffindbaren Informationen, die in diesen Zeitraum fallen, anzeigt, muss es auch möglich sein, gezielt thematisch zu suchen. Zum Beispiel soll es die Möglichkeit geben ausschließlich Daten eines Zeitraumes, die sich auf das Thema Musik beziehen. Dabei sind keinesfalls lediglich Musikdateien gemeint, sondern auch \bspw Text- oder Videoquellen, die sich mit dem Thema Musik beschäftigen. Das Ergebnis wäre ein Bild der derzeitigen Musikgeschichte zu bekommen.
 
+%----- SUBSECTION -----%
 \subsection{Inhaltseingrenzung}
 Um den Nutzen der Web-Applikation möglichst vielseitig zu halten, kann bei der Suche die Art des Inhalts eingegrenzt werden. So kann die Wahl getroffen werden, welche Medientypen angezeigt werden sollen (Audio, Video, Text etc.). Auch ist eine Filterung der in Betracht gezogenen Dienste denkbar, sodass der Nutzer \bspw bestimmte APIs deaktivieren kann.
 
 %\subsection{Filtern}
+%----- SUBSECTION -----%
 \subsection{Betrachten von Inhalten}
 
 %==============================================================================%
@@ -108,9 +116,12 @@ Um den Nutzen der Web-Applikation möglichst vielseitig zu halten, kann bei der S
 
 %Diagramm_VietnamKrieg.png
 
+%===== SECTION =====%
 \section{Fernkonzept}
 
 Zunächst werden die Schlüsselaspekte, die in die Konzeption einfließen, erläutert.
+
+%----- SUBSECTION -----%
 \subsection{Inhalte}
 
 \begin{itemize}
@@ -119,6 +130,7 @@ Zunächst werden die Schlüsselaspekte, die in die Konzeption einfließen, erläuter
 	\item Suche Verfeinerung
 \end{itemize}
 
+%----- SUBSECTION -----%
 \subsection{Suchefilter}
 Mit der Grundeinstellung wird der Zeitpunkt als Zeitraum durchsucht. \Dahe dass vom Zeitpunkt ausgehend nach Medien in der nahen Vergangenheit als auch der Zukunft gesucht wird. Außerdem kann der Zeitraum, in dem gesucht wird, eingegrenzt werden. Zum einen kann vom Zeitpunkt ausgehend gesucht werden. Darüber hinaus kann die Suche so begrenzt werden, dass nur zu dem Zeitpunkt vorhandene Daten angezeigt werden.
 
@@ -133,8 +145,7 @@ Die Suche kann spezialisiert werden, indem die Suchanfrage verfeinert wird. Das 
 Insbesondere bei Audiodaten finden sich in den ID3-Tags Informationen über das Genre des Musikstückes. Konnten mehrere Genres ausgemacht
 
 
-\todo{weniger Nutzer kann dies, Nutzer kann das}
-
+%----- SUBSECTION -----%
 \subsection{Ergebnis-Filter --- Sortieren}
 Sortieren
 
@@ -145,6 +156,7 @@ Sortieren
 
 Darüber hinaus kann das Suchergebnis nach Medientypen gefiltert werden. Möchte sich der Nutzer beispielsweise nur einen Radiosender generieren lassen und wünscht keinen Video-Content, kann der Nutzer das Ergebnis eingrenzen.
 
+%----- SUBSECTION -----%
 \subsection{Suchmöglichkeiten}
 Der Nutzer soll in der Art, in der er suchen kann, möglichst frei agieren können. Jedoch muss es Restriktionen geben, die Suchbegriffe und das jeweilige Ergebnis der Suche verbessern.
 
@@ -153,10 +165,10 @@ Im Fokus der Applikation steht der Zeitpunkt, der dargestellt werden soll. Demen
 
 Zeitpunkt <--
 
-
+%===== SECTION =====%
 \section{Mockup}
 
-
+%----- SUBSECTION -----%
 \subsection{Funktionalität}
 Fokus der Applikation ist eine komfortable Suche, die dem Nutzer möglichst einfach zugänglich gemacht wird, \dahe vom Design, als auch von der Funktionalität. 
 Eine für diese Web-Applikation besondere Aufgabe ist es, die drei Kernfunktionen möglichst gleichzeitig gut erreichbar zu machen, ohne die Gesamterscheinung zu stören.
@@ -170,6 +182,7 @@ Unter den dargestellten Inhalten befinden sich auch abspielbare Inhalte. Diese s
 
 Fokus der Applikation ist eine komfortable Suche, anhand dessen der Nutzer keine falschen Vorstellungen über die gelieferten Ergebnisse bekommt. \todo{doofer Satz, aber vielleicht nur die falsche Stelle}
 
+%----- SUBSECTION -----%
 \subsection{Design und Layout}
 Da die Web-Applikation sehr viele unterschiedliche Medienarten und -inhalte darstellen soll, ist ein sauberes aufgeräumtes Design umso wichtiger, um es dem Nutzer zu ermöglichen, sich auf die Inhalte zu konzentrieren. Darum ist es wichtig, dass das Design möglichst wandelbar ist, unabhängig vom Inhalt. Folgende Aspekte sind beim Layout zu beachten:
 
@@ -180,4 +193,5 @@ Da die Web-Applikation sehr viele unterschiedliche Medienarten und -inhalte dars
 \paragraph{Video-Player}
 
 
+%===== SECTION =====%
 \section{Eingrenzung}

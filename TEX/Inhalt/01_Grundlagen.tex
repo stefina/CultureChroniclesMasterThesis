@@ -118,14 +118,11 @@ Amazon.com liefert mit Zuhilfenahme des Filters \glqq Movies \& TV\grqq \ haupts
 Eine Standardsuche nach den entsprechenden Suchbegriffen auf IMDb.com verdeutlicht, dass es sich um eine Titelsuche handelt. Erst eine erweiterte Suche mit den eingestellten Parametern des jeweiligen Zeitraumes resultiert in eine Liste von ausschließlich zeitlich passenden Einträgen. Dabei gilt, dass der Zeitraum des Vietnamkrieges anhand von Daten eingegeben werden muss und nicht nach dem Begriff selbst gesucht werden kann. 
 
 \paragraph{Ereignisse}
-Die Suche nach Ereignissen 
+Die Suche nach Ereignissen führt auf Google neben einem Wikipedia-Artikel der \glqq Zusammenfassung der wichtigsten Ereignisse der 80er\grqq auf einen Artikel des Bildungsdienst about.com, der eine Auswahl an wichtigen Ereignissen der 80er-Jahre aufführt, und auf eine eher verspielte Webseite einer Privatperson, die sich ebenfalls mit den 80er-Jahren beschäftigt. Die Suche nach \glqq vietnam war\grqq \ auf Google hat die zufriedenstellendsten Ergebnisse, \va im Aspekt der Glaubwürdigkeit der Webseiten. 
 
-\begin{itemize}
-	\item google ok, aber subjektiv
-	\item vietnam war bringt die besten ergebnisse
-	\item wikipedia weiß zwar alles, aber suchtechnisch mal wieder müll
-	\item historyorb bringt teilweise ganz andere perioden ins spiel
-\end{itemize}
+Wikipedias Ergebnisse zu Ereignissen der verschiedenen Zeiträume fällt im Falle des Vietnamkrieges am besten aus, während die anderen Epochen größtenteils auf Wikipedia-Artikel von Sportvereinen führen. 
+
+Hier liefert history.orb liefert größtenteils passende Ergebnisse, bietet \ua aber auch Ergebnisse anderer Zeitperioden. Wolfram Alpha scheint die Suchanfrage einer Epoche nicht interpretieren zu können und liefert stattdessen Wortbedeutungen, obwohl eine Suche nach einem bestimmten Ereignis alle nötigen Informationen enthält, die es benötigt, eine Auflistung passender Ereignisse nach Datum zu liefern.
 
 \paragraph{Kunst}
 Zwar gibt es im Bereich Kunst einige Suchdienste, jedoch sind diese für die Evaluation mit den gewählten Vorgaben nicht geeignet. Das Art Archive gibt \bspw Suchergebnisse wieder, die die Suchbegriffe \glqq 80s\grqq \ und \glqq 90s\grqq \ im Dateinamen enthalten. Die Web Gallery Of Art lässt zwar das Filtern nach einer wählbaren Zeitspanne in ihrer Suche zu, jedoch sind die gewählten Zeiträume dieser Evaluierung nicht Teil der Datenbank. Die Suche der Art Online Gallery durchsucht lediglich gesetzte Tags und findet dementsprechend nur bei einer Suche nach \glqq vietnam war\grqq \ verschiedene Gemälde, die auf der Seite käuflich zu erwerben sind. Art Cyclopedia\footcite{artCyclopedia} findet bei keinem der Suchbegriffe ein Ergebnis.
@@ -140,21 +137,57 @@ Suchen nach Inhalten, die lediglich zeitlich mit dem gesuchten Begriff zu tun ha
 %===================%
 \section{Herausforderungen}
 \begin{itemize}
-	\item Suche nach Begriff
-	\item relationale Suche
+	\item Auflösung einer Eingabe in ein Datum
+	\item Suchen von Inhalten einer bestimmten Zeit
+	\item Inhalte müssen verwertbar/konsistent sein
 \end{itemize}
 
-\subsection{Relationale Vs. semantische Suche}
-Ein Problem bei der Art der erforderlichen Suche, ist dass der Kontent zeitspezifisch benötigt wird. Bei Musik funktioniert dies sehr gut, da es meist umfangreiche Informationen zu jedem Musikstück gibt. Außerdem ist dank dem ID3-Standard die Pflege und Auswertung der Daten sehr einfach. Trotzdem bedarf es zunächst einer Übersetzung von einem Wort zu einem auswertbaren Zeitspanne. \Dahe, dass eine Suche nach bestimmten Content in der selben Zeit eines bestimmten Musikstückes zu suchen, anstatt das Musikstück selbst angezeigt zu bekommen. \todo{besser formulieren}
+\subsection{Auflösung einer Eingabe nach Datum oder Zeitraum}
+Die größte Herausforderung ist es, dass moderne Suchmaschinen wie Google eher darauf ausgelegt sind, möglichst aktuelle Daten zu finden. \Dahe , dass Datensätze vergangener Zeiträume durchaus auffindbar sind, jedoch ist die Suche meist nicht darauf ausgelegt, in der Vergangenheit zu suchen. Insbesondere Google ist darauf spezialisiert möglichst relevante Daten anzuzeigen, welche sich an Aspekten wie PageRank und Aktualität messen.
 
-\subsection{Schwelle zwischen zwei Jahrzehnten}
-Sich einen 80er-Radiosender anzuhören, ist nicht zwingend die beste Lösung, sollte \zB Musik aus dem Jahr 1991 gewünscht sein, sind Musiktitel aus dem Jahre 1989 aufgrund der zeitlichen Nähe meist relevanter als Musiktitel aus dem Jahre 1999.
+Darüber hinaus bieten gängige Suchdienste bisher nicht die Möglichkeit an, ein Item (Musikstück, Film, Ereignis etc.) in einen Zeitpunkt oder Zeitraum zu übersetzen und in diesem Zeitraum zu suchen. \ZB liefert eine Suche nach weiteren populären Songs während der Erscheinung von David Bowies \glqq Changes\grqq \ lediglich Informationen über das Lied oder den Künstler selbst. 
 
-%\subsection{Geeignete Quellen}
-\subsection{Art der Daten}
-Der Großteil der Daten, die in der Applikation angezeigt werden könnten, sind im Internet verfügbar und auf unterschiedlichste Art und Weise auffindbar. Jedoch ist es von größerer Schwierigkeit, diese Daten 
+Über den Umweg der AdvancedSearch von Google ist es möglich, manuell einen Zeitraum einzugeben und diesen Zeitraum nach Inhalten zu durchsuchen. Jedoch tritt hier wiederrum das Problem auf, dass hauptsächlich Webseiten als Ergebnisse gezeigt werden, dessen Datierungen in dem vorgegebenen Zeitraum liegen. Semantisch relevante Inhalte sind über diese Suche bislang nicht zu finden. Eine Anzeige von Musik- oder Video-Inhalten aus dieser Zeit ist über diese Funktionalität demnach nicht möglich. 
+
+Da die Google-Suche nicht auf das Liefern von Ergebnissen anhand eines Items ausgelegt ist, sind mindestens zwei manuelle Schritte nötig. Bei einer Suche nach Kontent im Zeitraum der Veröffentlichung eines Musikalbums, muss erst das Release-Datum gesucht werden. Im zweiten Schritt kann bei geeigneten Suchdiensten nach Inhalten in diesem Zeitraum gesucht werden. Es besteht also eine große Abhängigkeit verschiedenster Schnittstellen.
+
+%\subsection{Schwelle zwischen zwei Jahrzehnten}
+%Sich einen 80er-Radiosender anzuhören, ist nicht zwingend die beste Lösung, sollte \zB Musik aus dem Jahr 1991 gewünscht sein, sind Musiktitel aus dem Jahre 1989 aufgrund der zeitlichen Nähe meist relevanter als Musiktitel aus dem Jahre 1999.
+%Ein weiterer Aspekt ist, dass \bspw die Google-Suche nicht auf das Liefern von Ergebnissen ausgelegt ist, die im gleichen Zeitraum liegen wie die Eingabe.   und dann im zweiten Schritt nach Inhalten anhand diesem Datums zu suchen. Jedoch weist der zweite Schritt seine eigenen Hürden auf.
+
+\subsection{Konsistenz der Daten}
+Theoretisch ließen sich in der Web-Applikation nahezu alle Daten-Arten einbeziehen, die mit einem Datum verknüpft sind. Jedoch gehen damit eine Vielzahl von Herausforderungen einher. S
+
+\paragraph{Datenformat}
+Konsistenz, ID3, Film, auswertbares Datenformat - Musik (ID3), Film - gut, News-Artikel eher semi
+
+
 \begin{itemize}
+	\item auswertbares Datenformat - Musik (ID3), Film - gut, News-Artikel eher semi
+	\item messbare Relevanz (primär: Datum muss bekannt sein, sekundär: popularität, tertiär: relevanz(zb im nachhinein))
+
 	\item welche Daten liegen vor
 	\item welche Form haben diese Daten
 	\item welche Daten werden benötigt
 \end{itemize}
+
+Die Relevanz für die Suche in der Web-Applikation einzelner Suchergebnisse
+Zum messen der Relevanz von Suchergebnissen für die Web-Appliaktion, ist die Konsistenz der Daten von großer Wichtigkeit. Auch wenn Go
+
+
+Der Großteil der Daten, die in der Applikation angezeigt werden könnten, sind im Internet verfügbar und auf unterschiedlichste Art und Weise auffindbar. Jedoch ist es von größerer Schwierigkeit, diese Daten in konsistenter Form zu 
+
+Hinzu kommt, dass die Ergebnisse nicht konsistent und auswertbar sind. In der vorangegangenen Such-Analyse wird es als gut bewertet, wenn Google oder Wikipedia \zB eine Auflistung von Musikstücken aus den 90er-Jahren anzeigen, jedoch lässt sich dieses Ergebnis nicht automatisch auswerten. 
+
+%schluss-kapitel-wort?
+Diese Art im Web zu suchen, erfordert bislang eine manuelle, menschengesteuerte Suche.
+
+
+\subsection{Relationale Vs. semantische Suche}
+Ein Problem bei der Art der erforderlichen Suche, ist dass der Kontent zeitspezifisch benötigt wird. Bei Musik funktioniert dies sehr gut, da es meist umfangreiche Informationen zu jedem Musikstück gibt. Außerdem ist dank dem ID3-Standard die Pflege und Auswertung der Daten sehr einfach. Trotzdem bedarf es zunächst einer Übersetzung von einem Wort zu einem auswertbaren Zeitspanne. \Dahe, dass eine Suche nach bestimmten Content in der selben Zeit eines bestimmten Musikstückes zu suchen, anstatt das Musikstück selbst angezeigt zu bekommen. \todo{besser formulieren}
+
+%\subsection{Geeignete Quellen}
+
+
+
+
