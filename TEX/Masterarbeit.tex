@@ -53,6 +53,8 @@
 % eigene LaTeX-Befehle
 \include{Befehle}
 
+\loadglsentries{Inhalt/Glossaries}
+
 % Das eigentliche Dokument -----------------------------------------------------
 %   Der eigentliche Inhalt des Dokuments beginnt hier. Die einzelnen Seiten
 %   und Kapitel werden in eigene Dateien ausgelagert und hier nur inkludiert.
@@ -87,6 +89,10 @@
 %\listoftables % Tabellenverzeichnis
 \renewcommand{\lstlistlistingname}{Verzeichnis der Listings}
 \lstlistoflistings % Listings-Verzeichnis
+
+
+\makeglossaries
+\printglossary
 
 % arabische Seitenzahlen im Hauptteil ------------------------------------------
 \clearpage

@@ -13,7 +13,7 @@ Aus der vorangegangenen Analyse der vorhandenen Suchdienste geht hervor, dass es
 Ausgangspunkt für die Suche ist ihre Eingabeform. Der Nutzer soll hinsichtlich der Art seiner Eingabe möglichst frei sein können. Über die Text-Suche, wie sie in der vorangegangenen Analyse (siehe \ref{sec:suchdienste}) durchgeführt wurde, gibt es noch weitere denkbare Möglichkeiten.
 
 \paragraph{Datum}
-Die Eingabe eines Datums ist die naheliegendste Suchform um Kontent, der sich auf einen Zeitpunkt \bzw dessen umschließenden Zeitraum bezieht.
+Die Eingabe eines Datums ist die naheliegendste Suchform im Kontent, der sich auf einen Zeitpunkt \bzw dessen umschließenden Zeitraum bezieht.
 
 \paragraph{Ereignis, Zeitraum oder Epoche}
 Primär sind Begriffe wie \zB \glqq 1937\grqq \ oder \glqq 12.04.1922\grqq \ denkbar. Darüber hinaus lassen sich viele Begriffe auch in Zeiträume oder Zeitpunkte aufschlüsseln, wie \zB die Begriffe \glqq Neunziger\grqq , \glqq Vietnamkrieg \grqq oder \glqq Deutscher Mauerfall\grqq . 
@@ -26,10 +26,6 @@ Im Falle von Bild oder Kunstwerken ist die Zuhilfenahme der Aufnahmedatums oder 
 
 \paragraph{Personen}
 Auch anhand einer Person kann ein Zeitraum ermittelt werden. Dies kann je nach Interesse der gesamte Lebenszeitraum sein oder auch ein Zeitraum, in dem diese Person von größerer Wichtigkeit war (Amtsperiode, Aktivitätszeitraum eines Musikers).
-
-%----- SUBSECTION -----%
-\subsection{Funktionen}
-Die Kernfunktionalität der Web-Applikation ist die Suche nach Inhalten, die aus einem spezifischen Zeitraum stammen, \bzw sich mit diesem Zeitraum befassen. Darüber hinaus soll der Inhalt auf unterschiedliche Weise präsentiert werden und konsumiert werden können. Hauptsächlich soll eine visuell ansprechende Form der Inhalte präsentiert werden, gleichzeitig soll es dem Nutzer ermöglicht werden, direkt in der Web-Anwendung Audio-Inhalte zu hören, während er sich weitere Ergebnisse seiner Suche ansieht. Ebenso soll es möglich sein, während des Durchstöberns der Suchergebnisse Video-Inhalte betrachten zu können.
 
 %----- SUBSECTION -----%
 \subsection{Kontent-Typen}
@@ -60,15 +56,20 @@ Erfindungen haben bereits in der Vergangenheit großen Einfluss auf die Veränderu
 \paragraph{Video-Spiele}
 Im fortgeschrittenen Zeitalter ist auch eine Darstellung von Video-Spielen, die zu der Zeit erschienen sind. Sie geben ebenfalls Aufschluss über die derzeitigen technischen Möglichkeiten.
 
-%----- SUBSECTION -----%
-\subsection{Darstellung}
-Bei einer Darstellung so vieler verschiedener Arten von Daten, muss das Layout sowohl variabel, als auch konsistent sein. Die Breite der Inhalte kann sich sehr oft verändern, wenn neue Quellen hinzugefügt werden und eine bestimmte Darstellungsform erfordern. Gleichzeitig darf das Layout durch die Masse an unterschiedlichem Inhalt nicht an Übersichtlichkeit und Konformität einbüßen.
-
-Inhaltstypen müssen für den Benutzer klar erkennbar sein, sodass Audio-Daten schnell von Text-Daten \oae unterschieden werden könnnen. Außerdem soll der Nutzer komfortabel und unkompliziert durch die Ergebnisse navigieren können.
-
 
 %===== SECTION =====%
 \section{Features}
+Die Kernfunktionalität der Web-Applikation ist die Suche nach Inhalten, die aus einem spezifischen Zeitraum stammen, \bzw sich mit diesem Zeitraum befassen. Darüber hinaus soll der Inhalt auf unterschiedliche Weise präsentiert werden und konsumiert werden können. Hauptsächlich soll eine visuell ansprechende Form der Inhalte präsentiert werden, gleichzeitig soll es dem Nutzer ermöglicht werden, direkt in der Web-Anwendung Audio-Inhalte zu hören, während er sich weitere Ergebnisse seiner Suche ansieht. Ebenso soll es möglich sein, während des Durchstöberns der Suchergebnisse Video-Inhalte betrachten zu können.
+
+%----- SUBSECTION -----%
+\subsection{Normales Suchen}
+
+
+%----- SUBSECTION -----%
+\subsection{Thematisches Suchen}
+Während die Suche nach einem bloßen Datum stringent alle auffindbaren Informationen, die in diesen Zeitraum fallen, anzeigt, muss es auch möglich sein, gezielt thematisch zu suchen. Zum Beispiel soll es die Möglichkeit geben ausschließlich Daten eines Zeitraumes, die sich auf das Thema Musik beziehen. Dabei sind keinesfalls lediglich Musikdateien gemeint, sondern auch \bspw Text- oder Videoquellen, die sich mit dem Thema Musik beschäftigen. Das Ergebnis wäre ein Bild der derzeitigen Musikgeschichte zu bekommen.
+
+
 %----- SUBSECTION -----%
 \subsection{Eingrenzen der Suche}
 \begin{itemize}
@@ -82,16 +83,12 @@ Inhaltstypen müssen für den Benutzer klar erkennbar sein, sodass Audio-Daten sch
 \end{itemize}
 
 %----- SUBSECTION -----%
-\subsection{Thematisches Suchen}
-Während die Suche nach einem bloßen Datum stringent alle auffindbaren Informationen, die in diesen Zeitraum fallen, anzeigt, muss es auch möglich sein, gezielt thematisch zu suchen. Zum Beispiel soll es die Möglichkeit geben ausschließlich Daten eines Zeitraumes, die sich auf das Thema Musik beziehen. Dabei sind keinesfalls lediglich Musikdateien gemeint, sondern auch \bspw Text- oder Videoquellen, die sich mit dem Thema Musik beschäftigen. Das Ergebnis wäre ein Bild der derzeitigen Musikgeschichte zu bekommen.
-
-%----- SUBSECTION -----%
 \subsection{Inhaltseingrenzung}
 Um den Nutzen der Web-Applikation möglichst vielseitig zu halten, kann bei der Suche die Art des Inhalts eingegrenzt werden. So kann die Wahl getroffen werden, welche Medientypen angezeigt werden sollen (Audio, Video, Text etc.). Auch ist eine Filterung der in Betracht gezogenen Dienste denkbar, sodass der Nutzer \bspw bestimmte APIs deaktivieren kann.
 
 %\subsection{Filtern}
 %----- SUBSECTION -----%
-\subsection{Betrachten von Inhalten}
+\subsection{Betrachten von Inhalten} % vielleicht raus? kommt dann ja in design und mockup
 
 %==============================================================================%
 %==============================================================================%
@@ -100,8 +97,11 @@ Um den Nutzen der Web-Applikation möglichst vielseitig zu halten, kann bei der S
 %==============================================================================%
 %==============================================================================%
 
-%\section{Funktionen}
 
+%===== SECTION =====%
+\section{Fernkonzept}
+
+Zunächst werden die Schlüsselaspekte, die in die Konzeption einfließen, erläutert.
 \begin{figure}[htb]
 	\includegraphics[width=1.0\textwidth]{Diagramm_Allgemein.png}
 	\caption{Allgemeines Diagramm}
@@ -113,13 +113,6 @@ Um den Nutzen der Web-Applikation möglichst vielseitig zu halten, kann bei der S
 	\caption{Vietnam Diagramm}
 	\label{fig:diagrammVietnam}
 \end{figure}
-
-%Diagramm_VietnamKrieg.png
-
-%===== SECTION =====%
-\section{Fernkonzept}
-
-Zunächst werden die Schlüsselaspekte, die in die Konzeption einfließen, erläutert.
 
 %----- SUBSECTION -----%
 \subsection{Inhalte}
@@ -157,7 +150,7 @@ Sortieren
 Darüber hinaus kann das Suchergebnis nach Medientypen gefiltert werden. Möchte sich der Nutzer beispielsweise nur einen Radiosender generieren lassen und wünscht keinen Video-Content, kann der Nutzer das Ergebnis eingrenzen.
 
 %----- SUBSECTION -----%
-\subsection{Suchmöglichkeiten}
+\subsection{Suchemöglichkeiten}
 Der Nutzer soll in der Art, in der er suchen kann, möglichst frei agieren können. Jedoch muss es Restriktionen geben, die Suchbegriffe und das jeweilige Ergebnis der Suche verbessern.
 
 Im Fokus der Applikation steht der Zeitpunkt, der dargestellt werden soll. Dementsprechend soll es dem Nutzer möglichst offen stehen, wie er seine Suche formuliert, solange der Suchbegriff sich in einen Zeitpunkt auflösen lässt.
@@ -167,6 +160,13 @@ Zeitpunkt <--
 
 %===== SECTION =====%
 \section{Mockup}
+
+%----- SUBSECTION -----%
+\subsection{Darstellung}
+Bei einer Darstellung so vieler verschiedener Arten von Daten, muss das Layout sowohl variabel, als auch konsistent sein. Die Breite der Inhalte kann sich sehr oft verändern, wenn neue Quellen hinzugefügt werden und eine bestimmte Darstellungsform erfordern. Gleichzeitig darf das Layout durch die Masse an unterschiedlichem Inhalt nicht an Übersichtlichkeit und Konformität einbüßen.
+
+Inhaltstypen müssen für den Benutzer klar erkennbar sein, sodass Audio-Daten schnell von Text-Daten \oae unterschieden werden könnnen. Außerdem soll der Nutzer komfortabel und unkompliziert durch die Ergebnisse navigieren können.
+
 
 %----- SUBSECTION -----%
 \subsection{Funktionalität}
