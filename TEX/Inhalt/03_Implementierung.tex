@@ -6,8 +6,25 @@
 \section{Quellen}
 %Erforderliche und benötigte Quellen und APIs
 \subsection{MusicBrainz}
-MusicBrainz ist eine offene Musik-Enzyklopädie, die für Mensch und Maschine lesbare Informationen über Musik öffentlich zugänglich macht.\footcite[Vgl.][]{musicbrainz} Sie enthält umfangreiche Daten über Künstler und deren veröffentlichte Musik, insbesondere auch Informationen über einzelne Erscheinungen. Darüber hinaus kann verfügt MusicBrainz auf den Künstler-Profilen sämtliche Verlinkungen zu weiteren Referenzen im Internet wie Wikipedia-Artikel, Youtube-Channel, Facebook-Seite, Wikidata-Eintrag \uvm
+MusicBrainz ist eine offene Musik-Enzyklopädie, die für Mensch und Maschine lesbare Informationen über Musik öffentlich zugänglich macht.\footcite[Vgl.][]{musicbrainz} Sie enthält umfangreiche Daten über Künstler und deren veröffentlichte Musik, insbesondere auch Informationen über einzelne Erscheinungen. Darüber hinaus verfügt MusicBrainz auf den Künstler-Profilen sämtliche Verweise zu weiteren Referenzen im Internet wie Wikipedia-Artikel, Youtube-Channel, Facebook-Seite, Wikidata-Eintrag \uvm MusicBrainz verfügt über eine offene API, die für unkommerzielle Zwecke umsonst genutzt werden darf. Seperat bietet MusicBrainz den Service Cover Art Archive an, über den man anhand von MusicBrainz-IDs an Album Art der Releases abfragen kann.
 
+\subsection{RateYourMusic}
+RateYourMusic ist wie MusicBrainz ebenso eine durch Nutzer gepflegte offene Datenbank, die über Musikdaten hinaus auch Daten über Film bietet.\footcite[Vgl.][]{rym} Ein für \textbf{\arbeitstitel} interessantes Feature ist die Möglichkeit sich Charts anzeigen zu lassen, und diese nach diversen Kriterien wie Genre oder Zeit zu filtern. Leider verfügt RateYourMusic über keine API und verbietet auch ausdrücklich das Scrapen der Daten auf ihrer Website.
+
+\subsection{OneMusicAPI}\label{subsec:OneMusicAPI}
+OneMusicAPI ist eine API, die auf der Software von Bliss basiert.\footcite[Vgl.][]{oneMusicAPI} Während Bliss das automatische Nachladen von Cover Art ermöglichen soll,\footcite[Vgl.][]{bliss} sind mit OneMusicAPI Requests mit Interpret und Songname nach Release möglich. Dies stellt auch einen Nachteil dieser API dar, da Song-Informationen nicht so umfangreich sind, wie die anderen vorhandenen Datenbanken und außerdem nur nach Informationen gefragt werden kann, wenn Interpret und Songtitel bekannt sind. Außerdem ist die API nach 1000 Lookups kostenpflichtig.
+
+\subsection{Music Story Pro}
+Music Story Pro\footcite[Vgl.][]{musicStoryPro} ist wie OneMusicAPI (\ref{subsec:OneMusicAPI}) nur begrenzt kostenlos verfügbar. Zum einen ist die Anzahl der Requests auf 50000 pro Monat begrenzt, weiterhin ist die volle Funktionalität nur für zahlende Kunden verfügbar. Dies beinhaltet \zB Review-Informationen und Bilder. Ein Vorteil bei Music Story Pro ist, dass eine Schnittstelle für weitere APIs bietet. Dazu gehören \ua \ Spotify, Deezer, iTunes und Amazon. Außerdem implementiert es die Suche von MusicBrainz, indem es \gls{Release} im MusicBrainz-Format liefert.
+
+\subsection{Discogs}
+Discogs hat es sich zur Aufgabe gemacht die größte und umfangreichste Musikdatenbank, inkl. Market Place bereitzustellen.\footcite[Vgl.][]{discogs}
+
+\subsection{Wolfram Alpha}
+\subsection{IMDb}
+\subsection{themoviedb.org}
+\subsection{RottenTomatoes}
+\subsection{Wikipedia}
 
 \begin{itemize}
 	\item Datenquellen
@@ -44,7 +61,7 @@ http://en.wikipedia.org/w/index.php?title=Special:Export
 Die Web-Applikation wird serverseitig mittels Javascript umgesetzt. Die Software-Plattform Node.js\footcite{nodejs} bietet ein einfaches Konzept zur Erstellung und Inbetriebnahme von skalierbaren Netzwerk-Applikationen. Vorteile im Bezug auf \arbeitstitel \ ist das event-driven Konzept von großem Vorteil, da die Kommunikation mit mehreren APIs um einiges beschleunigt werden kann, indem die API-Requests von der Asynchronität Gebrauch machen.
 
 \subsection{Express.js}
-Das Web-Application-Framework \textbf{Express.js}\footcite{expressjs} wird verwendet, da es eine Palette von Funktionalität zur einfachen Implementierung von Web-Applikationen mit \textbf{node.js} bietet und trotzdem flexibel und leichtgewichtig ist. Es ist als Schicht zwischen Funktionalität und Frontend zu verstehen und agiert als API.\footcite[Vgl.][]{expressjs}
+Das Web-Application-Framework \textbf{Express.js}\footcite{expressjs} wird verwendet, da es eine Palette von Funktionalität zur einfachen Implementierung von Web-Applikationen mit \textbf{node.js} bietet und trotzdem flexibel und leichtgewichtig ist. Es ist als Schicht zwischen Funktionalität und Frontend zu verstehen und agiert als API.\footcite[Vgl.][]{expressjs} Das ist speziell für \arbeitstitel vom Vorteil, da die API somit auch für weitere Anwendungen verwendet werden kann.
 
 \subsection{MongoDB und NoSQL}
 MongoDB\footcite{mongodb} ist eine dokumentenorientierte Datenbank. Im Gegensatz zu relationalen Datenbanken lässt sich mit der NoSQL-Strategie eine flexible Datenstruktur erstellen. Das macht im Falle von \arbeitstitel \ besonders Sinn, da sich die Art und der Umfang der Daten, die verarbeitet werden, sehr schnell ändern können. Außerdem vereinfacht dies auch die Erweiterbarkeit der Web-Applikation.
