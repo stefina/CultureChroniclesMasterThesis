@@ -5,41 +5,44 @@
 
 \section{Quellen}
 %Erforderliche und benötigte Quellen und APIs
-\subsection{MusicBrainz}
+Im folgenden Abschnitt werden in Frage kommende Quellen und APIs und deren Vor- und Nachteile in Hinsicht auf Verwendung innerhalb der Web-Applikation \arbeitstitel \ vorgestellt. Untersucht werden nicht nur APIs, sondern auch andere mögliche Formen, um an die benötigten Daten für eine Suche innerhalb \arbeitstitel \ zu gelangen.
+
+
+\subsection{Musik-Quellen}
+\subsubsection{MusicBrainz}
 MusicBrainz ist eine offene Musik-Enzyklopädie, die für Mensch und Maschine lesbare Informationen über Musik öffentlich zugänglich macht.\footcite[Vgl.][]{musicbrainz} Sie enthält umfangreiche Daten über Künstler und deren veröffentlichte Musik, insbesondere auch Informationen über einzelne Erscheinungen. Darüber hinaus verfügt MusicBrainz auf den Künstler-Profilen sämtliche Verweise zu weiteren Referenzen im Internet wie Wikipedia-Artikel, Youtube-Channel, Facebook-Seite, Wikidata-Eintrag \uvm MusicBrainz verfügt über eine offene API, die für unkommerzielle Zwecke umsonst genutzt werden darf. Seperat bietet MusicBrainz den Service Cover Art Archive an, über den man anhand von MusicBrainz-IDs an Album Art der Releases abfragen kann.
 
-\subsection{RateYourMusic}
+\subsubsection{RateYourMusic}
 RateYourMusic ist wie MusicBrainz ebenso eine durch Nutzer gepflegte offene Datenbank, die über Musikdaten hinaus auch Daten über Film bietet.\footcite[Vgl.][]{rym} Ein für \textbf{\arbeitstitel} interessantes Feature ist die Möglichkeit sich Charts anzeigen zu lassen, und diese nach diversen Kriterien wie Genre oder Zeit zu filtern. Leider verfügt RateYourMusic über keine API und verbietet auch ausdrücklich das Scrapen der Daten auf ihrer Website.
 
-\subsection{OneMusicAPI}\label{subsec:OneMusicAPI}
+\subsubsection{OneMusicAPI}\label{subsubsec:OneMusicAPI}
 OneMusicAPI ist eine API, die auf der Software von Bliss basiert.\footcite[Vgl.][]{oneMusicAPI} Während Bliss das automatische Nachladen von Cover Art ermöglichen soll,\footcite[Vgl.][]{bliss} sind mit OneMusicAPI Requests mit Interpret und Songname nach Release möglich. Dies stellt auch einen Nachteil dieser API dar, da Song-Informationen nicht so umfangreich sind, wie die anderen vorhandenen Datenbanken und außerdem nur nach Informationen gefragt werden kann, wenn Interpret und Songtitel bekannt sind. Außerdem ist die API nach 1000 Lookups kostenpflichtig.
 
-\subsection{Music Story Pro}
-Music Story Pro\footcite[Vgl.][]{musicStoryPro} ist wie OneMusicAPI (\ref{subsec:OneMusicAPI}) nur begrenzt kostenlos verfügbar. Zum einen ist die Anzahl der Requests auf 50000 pro Monat begrenzt, weiterhin ist die volle Funktionalität nur für zahlende Kunden verfügbar. Dies beinhaltet \zB Review-Informationen und Bilder. Ein Vorteil bei Music Story Pro ist, dass eine Schnittstelle für weitere APIs bietet. Dazu gehören \ua \ Spotify, Deezer, iTunes und Amazon. Außerdem implementiert es die Suche von MusicBrainz, indem es \gls{Release} im MusicBrainz-Format liefert.
+\subsubsection{Music Story Pro}
+Music Story Pro\footcite[Vgl.][]{musicStoryPro} ist wie OneMusicAPI (\ref{subsubsec:OneMusicAPI}) nur begrenzt kostenlos verfügbar. Zum einen ist die Anzahl der Requests auf 50000 pro Monat begrenzt, weiterhin ist die volle Funktionalität nur für zahlende Kunden verfügbar. Dies beinhaltet \zB Review-Informationen und Bilder. Ein Vorteil bei Music Story Pro ist, dass eine Schnittstelle für weitere APIs bietet. Dazu gehören \ua \ Spotify, Deezer, iTunes und Amazon. Außerdem implementiert es die Suche von MusicBrainz, indem es \gls{Release} im MusicBrainz-Format liefert.
 
 \subsection{Discogs}
-Discogs hat es sich zur Aufgabe gemacht die größte und umfangreichste Musikdatenbank, inkl. Market Place bereitzustellen.\footcite[Vgl.][]{discogs}
+Discogs hat es sich zur Aufgabe gemacht die größte und umfangreichste Musikdatenbank, inkl. Market Place bereitzustellen.\footcite[Vgl.][]{discogs} Außerdem stellt Discogs eine API bereit, die nicht nur das Durchsuchen des Datenbestandes ermöglichen, sondern auch den MarketPlace durchsuchen lassen. Im Gegensatz zu den anderen Musikquellen, ist der soziale Charakter bei Discogs außerdem ausgeprägter.
 
-\subsection{Wolfram Alpha}
-\subsection{IMDb}
-\subsection{themoviedb.org}
-\subsection{RottenTomatoes}
-\subsection{Wikipedia}
+\subsection{Film-Quellen}
+\subsubsection{IMDb}
+IMDb ist die verbreiteste Filmdatenbank im Internet. IMDb enthält über Filmdaten hinaus auch Informationen über alle Mitwirkenden, Bewertungen, Plots \uvm Eine offizielle API bietet IMDb derzeit nicht, jedoch werden auf der Seite die Daten in Textform zum Download bereitgestellt, welche für unkommerzielle Zwecke genutzt werden dürfen.
+
+\subsubsection{themoviedb.org}
+The Movie Database ist eine offene Film- und TV-Datenbank, die ursprünglich auf Daten der Open Media Database\footcite{omdb} entstanden ist und darüberhinaus auf nutzergenerierten Inhalten basiert.\footcite[Vgl.][]{tmbd} Außerdem bietet TMDb eine unkommerziell verwendbare API für Entwickler, die sehr gut mit apiary dokumentiert ist.
+
+\subsubsection{RottenTomatoes}
+Rotten Tomatoes\footcite{rottenTomatoes} ist eine Sammlung von Filmkritiken und bietet in diesem Zuge auch detaillierte Informationen über Film- und TV-Produktionen.\footcite[Vgl.][]{rottenWiki} 
+
+\subsection{Gemischt}
+\subsubsection{Wolfram Alpha}
+
+\subsubsection{Wikipedia}
+
+\subsubsection{Marvel API}
 
 \begin{itemize}
 	\item Datenquellen
-		\begin{itemize}
-			\item MusicBrainz
-			\item RateYourMusic
-			\item OneMusicAPI
-			\item Music Story Pro
-			\item Discogs
-			\item Wolfram Alpha
-			\item IMDb
-			\item themobiedb.org
-			\item RottenTomatoes API
-			\item wikipedia
-		\end{itemize}
 	\item Dienste
 		\begin{itemize}
 			\item Spotify
@@ -55,6 +58,13 @@ http://en.wikipedia.org/w/index.php?title=Special:Export
 \subsection{Wrapper}
 \subsection{Web-Scraping}
 \subsection{Download/Dumps}
+nicht dynamisch, manuelle Downloads nötig, parsen von Textdateien
+
+\subsection{Mergen von Daten / Multiple Requests für einen Datensatz}
+Da die Verwendung von bereitgestellten APIs klar zu bevorzugen ist, da dies bedeutet sicher an konsistente und möglichst umfangreiche Daten zu gelangen, diese jedoch nicht auf die Ansprüche von \arbeitstitel \ zugeschnitten sind, wird es an vielen Stellen nötig sein, auch für einzige Datensätze auf verschiedene Services zurückzugreifen.
+
+\subsection{Begrenzung von Requests in Express}
+
 
 
 \section{Architektur der Web-Applikation}
@@ -85,9 +95,10 @@ Im Falle von \arbeitstitel \ wurde der Yeoman-Generator \textbf{generator-expres
 \end{itemize}
 
 \section{Tools}
-Im Folgenden werden verwendete Libraries und deren Nutzern erläutert.
+Im Folgenden werden verwendete Libraries und deren Nutzen erläutert.
 
 \subsection{Select2}
+Select2 ist eine einfache konfigurierbare Implementierung einer Selectbox. Sie bietet neben dem einfachen Suchen und einer Autosuggest-Funktion bereits Features wie dem automatischen Nachladen von Remote Datasets und unterstützt infinites Scrollen. Da Select2 auf jQuery basiert sind keine weiteren Includes erforderlich. Außerdem ist es ebenfalls über bower erhältlich.
 
 \subsection{async}
 Das async-Modul erlaubt eine bessere Kontrolle über asynchron ausgeführte Funktionalität. Da \arbeitstitel \ an vielen Stellen mit mehreren APIs kommunizieren muss, ist die Asynchronität zwar generell ein Vorteil, jedoch werden auch Anfragen benötigt, die von mehreren asynchronen Requests abhängig sind. \Dahe , dass einige Requests von teilweise mehreren Requests, die vorher durchgeführt werden müssen, abhängig sind. Mit async lassen sich Callbacks in vordefinierter Reihenfolge durchführen. Auch eine Serie von ein und dem selben Callbacks auf Werten aus einer Liste, ist möglich, genauso lassen sich mehrere Requests gleichzeitig abarbeiten bis dann der finale Callback ausgeführt werden kann, wenn alle Vorbedingungen erfüllt worden sind.  
