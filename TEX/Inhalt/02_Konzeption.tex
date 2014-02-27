@@ -139,6 +139,11 @@ Die Suche kann spezialisiert werden, indem die Suchanfrage verfeinert wird. Das 
 \paragraph{Genre}
 Insbesondere bei Audiodaten finden sich in den ID3-Tags Informationen über das Genre des Musikstückes. Konnten mehrere Genres ausgemacht
 
+%----- SUBSECTION -----%
+\subsection{Suchemöglichkeiten}
+Der Nutzer soll in der Art, in der er suchen kann, möglichst frei agieren können. Jedoch muss es Restriktionen geben, die Suchbegriffe und das jeweilige Ergebnis der Suche verbessern.
+
+Im Fokus der Applikation steht der Zeitpunkt, der dargestellt werden soll. Dementsprechend soll es dem Nutzer möglichst offen stehen, wie er seine Suche formuliert, solange der Suchbegriff sich in einen Zeitpunkt auflösen lässt. Von diesem Zeitpunkt lässt sich, je nach Dichte der Suchergebnisse ein Zeitraum ermitteln, \dh dass vom Zeitpunkt ausgehend die relevantesten Treffer angezeigt werden. Je mehr Ergebnisse in der Suche angezeigt werden, desto größer spannt sich der Zeitraum, der dargestellt wird.
 
 %----- SUBSECTION -----%
 \subsection{Ergebnis-Filter --- Sortieren}
@@ -152,13 +157,8 @@ Sortieren
 Darüber hinaus kann das Suchergebnis nach Medientypen gefiltert werden. Möchte sich der Nutzer beispielsweise nur einen Radiosender generieren lassen und wünscht keinen Video-Content, kann der Nutzer das Ergebnis eingrenzen.
 
 %----- SUBSECTION -----%
-\subsection{Suchemöglichkeiten}
-Der Nutzer soll in der Art, in der er suchen kann, möglichst frei agieren können. Jedoch muss es Restriktionen geben, die Suchbegriffe und das jeweilige Ergebnis der Suche verbessern.
+\subsection{Zeitraum eingrenzen}
 
-Im Fokus der Applikation steht der Zeitpunkt, der dargestellt werden soll. Dementsprechend soll es dem Nutzer möglichst offen stehen, wie er seine Suche formuliert, solange der Suchbegriff sich in einen Zeitpunkt auflösen lässt.
-
-
-Zeitpunkt <--
 
 %===== SECTION =====%
 \section{Mockup}
@@ -189,11 +189,13 @@ Fokus der Applikation ist eine komfortable Suche, anhand dessen der Nutzer keine
 Da die Web-Applikation sehr viele unterschiedliche Medienarten und -inhalte darstellen soll, ist ein sauberes aufgeräumtes Design umso wichtiger, um es dem Nutzer zu ermöglichen, sich auf die Inhalte zu konzentrieren. Darum ist es wichtig, dass das Design möglichst wandelbar ist, unabhängig vom Inhalt. Folgende Aspekte sind beim Layout zu beachten:
 
 \paragraph{Suche und Filter}
+In der Eingrenzung der Inhalte wird unterschieden, welche Eingrenzungen vor dem Starten der Suche stattfinden und welche lediglich dem Filtern des Ergebnisses dienen. Das sind zum einen die Faktoren, die die Suche ansich maßgeblich beeinflussen. Im Gegensatz dazu gibt es die Faktoren, die lediglich das vorhanden Ergebnis filtern.
 
-\paragraph{Musik-Player}
-
-\paragraph{Video-Player}
+\paragraph{Musik- und Video-Player}
+Während alle Suchergebnisse in einer Art Raster gleichmäßig angezeigt werden, gibt es für Audio- und Video-Inhalte zusätzlich einen seperaten Bereich, in dem diese nach Reihenfolge im Suchergebnis sortiert als Playlist bereit liegen. Das bedeutet, dass der Nutzer, während er im linken Bereich durch Inhalte verschiedener Medientypen scrollt, im rechten Bereich die automatisch erstellte Playliste bedienen kann und dementsprechend die Inhalte betrachten, \bzw anhören kann. Außerdem kann er einzelne Items der Playliste durch Drag \& Drop neu anordnen oder Items von der Playliste entfernen. Klickt er auf das Queue-Symbol eines Items, wird das gewählte Item an nächster Stelle in der Liste platziert und als nächstes abgespielt. Klickt man auf das Play-Symbol eines Items, wird dieses sofort abgespielt.
 
 
 %===== SECTION =====%
 \section{Eingrenzung}
+Die Masse an unterschiedlichen Medien-Typen, -Quellen und -Arten, die in \arbeitstitel \ angezeigt werden können, lässt sich kaum erfassen. Je nach Belieben und sich neu eröffnenden Möglichkeiten, kann sich sowohl das mögliche Angebot, als auch die Nachfrage nach bestimmten zeitspezifischen Kontent ändern. Zum einen sind ein Großteil der denkbaren Daten zwar im Internet verfügbar, jedoch gibt es nicht an 
+Im Rahmen dieser Masterarbeit wird daher ein Working Prototype als Proof of Concept implementiert werden. In dieser Hinsicht wird die Funktionalität von \arbeitstitel \ auf die Medientypen Musik und Film reduziert werden. Zum einen gibt es zum Thema Musik eine Vielzahl an zuverlässigen und offenen Quellen, die für unkommerzielle Zwecke zur freien Verwendung zur Verfügung stehen, außerdem ist die Art der vorliegenden Daten, insbesondere aufgrund des ID3-Standards, der Entwicklung zuträglich.
