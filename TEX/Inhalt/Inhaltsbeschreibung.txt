@@ -1,8 +1,5 @@
-%!TEX root = ../Masterarbeit.tex
-%switch Inhaltsbeschreibung on
-\newcommand*{\INHALTSBESCHREIBUNG}{}%
-\newcommand{\InhaltGrundlagen}{
-	Vorfeldrecherche
+
+2 Grundlagen
 	Status Quo				(1-2)
 	- was gibt es denn gerade so, um "sowas" im entferntesten zu machen? so zu suchen, etc.
 	- projekte, die ihre eigenen ansätze von stöbern in der vergangenheit haben, werden kurz vorgestellt und sollen einerseitz den bedarf an solch einer app verdeutlichen und natürlich andererseits zeigen, wie sehr so ne app benötigt wird
@@ -12,7 +9,29 @@
 	- soll zeigen: Ja, ich komme schon irgendwie an die Daten ran, aber besonders schick oder komfortabel ist das nicht
 	Untersuchung vorhandener Suchdienste (3)
 	- Was spucken die gängigen Suchmaschinen denn so aus, wenn ich gezielt suche? wie brauchbar ist das? wie verlässlich? wie konsistent?
-Analyse
+	Herausforderungen
+	- wie liegen Daten vor, welche Daten müssen vorliegen, wie gelangt man an diese Daten
+
+3 Konzeption
 	Anforderungsanalyse		(8)
-	- was will ich jetzt eigentlich? was soll die app können? was soll man machen können? also noch eher grob gehalten á la "nutzer soll suchergebnisse sehen und gleichzeitig musik und video konsumieren können" und "inhalte musik, film, news, wetter sind denkbar", und eingabemöglichkeiten, schön auf die spitze getrieben und so
-	Feature-Liste			(5)}
+	- was will ich jetzt eigentlich? was soll die app können? was soll man machen können? also noch eher oberflächlich gehalten á la "nutzer soll suchergebnisse sehen und gleichzeitig musik und video konsumieren können" und "inhalte musik, film, news, wetter, games sind denkbar", und eingabemöglichkeiten, schön auf die spitze getrieben und so
+	Features			(5)
+	- wie kann man suchen
+	- wie kann man filtern
+	- wie navigiert man
+	Fernkonzept
+	Mockup
+	Eingrenzung
+
+4 Implementierung
+	Quellen
+	Techniken
+	Architektur der Web-Applikation
+	Tools
+	Grobkonzept
+	Feinkonzept
+	Arbeitsweise
+
+5 Ergebnis
+
+6 Ausblick und Fazit

@@ -153,17 +153,29 @@ Insbesondere Google arbeitet daran, Suchanfragen ihrer Nutzer semantisch passend
 %Ein weiterer Aspekt ist, dass \bspw die Google-Suche nicht auf das Liefern von Ergebnissen ausgelegt ist, die im gleichen Zeitraum liegen wie die Eingabe.   und dann im zweiten Schritt nach Inhalten anhand diesem Datums zu suchen. Jedoch weist der zweite Schritt seine eigenen Hürden auf.
 
 \subsection{Arten von Daten}
-Theoretisch ließen sich in der Web-Applikation nahezu alle Daten-Arten einbeziehen, die sich zeitlich einordnen lassen, sei es das Erstellungsdatum, Entstehungsdatum, Erscheinungsdatum oder ein Datum, an welchem der Inhalt relevant ist, \zB ein Bericht über die Anschläge auf das World Trade Center, der erst Jahre später verfasst wird, sich jedoch auf den 11. September 2001 bezieht. Damit gehen jedoch eine Vielzahl von Anforderungen einher.
+Theoretisch ließen sich in der Web-Applikation nahezu alle Daten-Arten einbeziehen, die sich zeitlich einordnen lassen, sei es das Erstellungsdatum, Entstehungsdatum, Erscheinungsdatum oder ein Datum, an welchem der Inhalt relevant ist, \zB ein Bericht über die Anschläge auf das World Trade Center, der erst Jahre später verfasst wird, sich jedoch auf den 11. September 2001 bezieht. Damit gehen jedoch eine Vielzahl von Anforderungen einher. Hinzu kommt, dass die Ergebnisse nicht konsistent und auswertbar sind. In der vorangegangenen Such-Analyse wird es als gut bewertet, wenn Google oder Wikipedia \zB eine Auflistung von Musikstücken aus den 90er-Jahren anzeigen, jedoch lässt sich dieses Ergebnis nicht automatisch auswerten. 
 
-\paragraph{Konsistenz der Daten}
-Hinzu kommt, dass die Ergebnisse nicht konsistent und auswertbar sind. In der vorangegangenen Such-Analyse wird es als gut bewertet, wenn Google oder Wikipedia \zB eine Auflistung von Musikstücken aus den 90er-Jahren anzeigen, jedoch lässt sich dieses Ergebnis nicht automatisch auswerten. 
+\paragraph{Verfügbarkeit der Daten}
+Grundvorraussetzung für das Funktionieren einer Suche, die unterschiedlichste Medien-Typen von ebenso unterschiedlichen Quellen zusammenführt, ist die Verfügbarkeit der potenziell darstellbaren Daten. In der Analyse der Suchdienste geht hervor, dass es insbesondere im Bereich Kunst Datenbanken existieren, die durchsuchbar sind, jedoch viele Bilder und Gemälde aufgrund von Kopierschutz, im Internet gar nicht bereit gestellt werden können oder dürfen. Auch im Bereich von Film und Musik ist die Darstellung der entsprechenden Inhalte auch von Faktoren wie Urheberrecht stark beeinflusst.
 
-Zum Auswerten der verschiedenen Suchergebnisse, ist die Web-Applikation auf die Konsistenz der Daten, \bzw auf deren Meta-Informationen angewiesen. Das ist \zB bei Daten wie Musik größtenteils gegeben. Die meisten Musiktracks besitzen Meta-Informationen in Form eines \gls{ID3}s, die das Herausfinden von Informationen wie Interpret, Titel und Erscheinungsdatum stark vereinfachen. Außerdem gibt es im Netz eine Vielzahl an Datenbanken über einen Großteil von Musikveröffentlichungen und deren Interpreten. Im Bereich Film gibt es zwar keinen derart durchgesetzten Standard, trotzdem gibt es im Internet auch zahlreiche öffentlich zugängliche Datenbanken mit detaillierten Informationen, die weit über Titel, Schauspieler und Erscheinungsdatum hinausgehen und sowohl menschen- als auch maschinenlesbar sind. Das gilt leider nicht für alle Datenarten. News-Artikel verfügen zwar oft über Tags und Meta-Informationen, jedoch sind diese meist abhängig vom jeweiligen Verfasser. So kann die Art der Meta-Informationen über einen News-Artikel von Verfasser, News-Plattform oder Redaktion abhängen. Daher ist es hier weitaus schwieriger umfassende konsistente Daten zu bekommen. Hinzu kommt die bereits erwähnte Schwierigkeit Zeitungs-Artikel, die nicht in digitalisierter Form vorliegen, auszuwerten.
+\paragraph{Konsistenz der Daten im Bereich Musik und Film}
+Zum Auswerten der verschiedenen Suchergebnisse, ist die Web-Applikation auf die Konsistenz der Daten, \bzw auf deren Meta-Informationen angewiesen. Das ist \zB bei Daten wie Musik größtenteils gegeben. Die meisten Musiktracks besitzen Meta-Informationen in Form eines \gls{ID3}s, die das Herausfinden von Informationen wie Interpret, Titel und Erscheinungsdatum stark vereinfachen. Außerdem gibt es im Netz eine Vielzahl an Datenbanken über einen Großteil von Musikveröffentlichungen und deren Interpreten. Im Bereich Film gibt es zwar keinen derart durchgesetzten Standard, trotzdem gibt es im Internet auch zahlreiche öffentlich zugängliche Datenbanken mit detaillierten Informationen, die weit über Titel, Schauspieler und Erscheinungsdatum hinausgehen und sowohl menschen- als auch maschinenlesbar sind. 
 
-%\paragraph{Anhängigkeit von Daten}
+
+\paragraph{Konsistenz der Daten im Bereich News und Ereignisse}
+Das gilt leider nicht für alle Datenarten. News-Artikel verfügen zwar oft über Tags und Meta-Informationen, jedoch sind diese meist abhängig vom jeweiligen Verfasser. So kann die Art der Meta-Informationen über einen News-Artikel von Verfasser, News-Plattform oder Redaktion abhängen. Ansätze einer algorithmen-basierten Lösung gibt es bereits in verschiedenen wissenschaftlichen Arbeiten. Allein um das Veröffentlichungsdatum und den Titel vom eigentlichen Inhalt eines News-Artikel zu extrahieren, verfolgen \citeauthor{Cardoso:2011} den Ansatz, News-Artikel zum einen anhand ihres DOM inklusive der damit verbundenen CSS-Attribute auszuwerten. Während sich der Titel eines Artikel meistens mithilfe des DOM-Attributs \textit{title} ermittelt werden kann, kann in diesem Falle auch das Datum am besten extrahiert werden, da davon ausgegangen wird, dass das Datum mit hoher Wahrscheinlichkeit sehr nah am Titel platziert ist.\footcite[Vgl. Title and date detection, Section 3.4.2., Seite 123][]{Cardoso:2011}
+\citeauthor{Stern:2012} Daher ist es hier weitaus schwieriger umfassende konsistente Daten zu bekommen. Hinzu kommt die bereits erwähnte Schwierigkeit Zeitungs-Artikel, die nicht in digitalisierter Form vorliegen, auszuwerten.
+
+%\paragraph{Abhängigkeit von Daten}
 
 \paragraph{Vorhandene Datenformate}
+Das Angebot verschiedenster \not= as
+Die Web-Applikation soll eine Suche bieten, die verschiedenste Daten-Arten 
+
+nicht nur musik, video, news, games und whatnot, musik ist nicht gleich musik in den unterschiedlichen quellen.
 datenformat vs datentyp vs dateiformat
+
+\paragraph{Benötigte Daten}
 
 
 
@@ -176,8 +188,10 @@ datenformat vs datentyp vs dateiformat
 	\item welche Daten werden benötigt
 \end{itemize}
 
+\subsection{Exkurs: Semantik}
 
-\subsection{Die Lösung - Wikidata}
+
+\subsubsection{Die Lösung - Wikidata}
 Ein Ansatz, der einen Großteil der Herausforderungen lösen könnte, ist das Projekt Wikidata. Es verfolgt den Ansatz, Daten aller Art in strukturierter Form für Mensch und Maschine lesbar anzubieten, \ua um die Partner-Projekte Wikipedia, Wikimedia Commons und andere Wikimedia Projekte eine Schnittstelle zu bieten.\footcite{wikidataIntro}
 Eine derartige Aufbereitung von Daten kann sowohl die Anzeige, als auch die Übersetzung eines Items in ein Datum immens vereinfachen, \bzw erst ermöglichen.
 
@@ -186,6 +200,9 @@ Diese Art im Web zu suchen, erfordert bislang eine manuelle, menschengesteuerte 
 
 %zusammenfassend
 Da die Google-Suche nicht auf das Liefern von Ergebnissen anhand eines Items ausgelegt ist, sind mindestens zwei manuelle Schritte nötig. Bei einer Suche nach Kontent im Zeitraum der Veröffentlichung eines Musikalbums, muss erst das Release-Datum gesucht werden. Im zweiten Schritt kann bei geeigneten Suchdiensten nach Inhalten in diesem Zeitraum gesucht werden. Es besteht also eine große Abhängigkeit verschiedenster Schnittstellen.
+
+Auch wenn im Internet eine riesige Datenvielfalt vorliegt, die für den Suchdienst von Nutzen sein können, jedoch ist ein modularer Aufbau der Web-Applikation stark davon abhängig, dass diese Inhalte maschinell auswertbar sind.
+
 
 
 %\subsection{Geeignete Quellen}
