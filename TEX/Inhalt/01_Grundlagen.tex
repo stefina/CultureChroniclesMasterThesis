@@ -122,7 +122,7 @@ Die Suche nach Ereignissen führt auf Google neben einem Wikipedia-Artikel der \g
 
 Wikipedias Ergebnisse zu Ereignissen der verschiedenen Zeiträume fällt im Falle des Vietnamkrieges am besten aus, während die anderen Epochen größtenteils auf Wikipedia-Artikel von Sportvereinen führen. 
 
-Hier liefert history.orb liefert größtenteils passende Ergebnisse, bietet \ua aber auch Ergebnisse anderer Zeitperioden. Wolfram Alpha scheint die Suchanfrage einer Epoche nicht interpretieren zu können und liefert stattdessen Wortbedeutungen, obwohl eine Suche nach einem bestimmten Ereignis alle nötigen Informationen enthält, die es benötigt, eine Auflistung passender Ereignisse nach Datum zu liefern.
+Hier liefert history.orb größtenteils passende Ergebnisse, bietet \ua aber auch Ergebnisse anderer Zeitperioden. Wolfram Alpha scheint die Suchanfrage einer Epoche nicht interpretieren zu können und liefert stattdessen Wortbedeutungen, obwohl eine Suche nach einem bestimmten Ereignis alle nötigen Informationen enthält, die es benötigt, eine Auflistung passender Ereignisse nach Datum zu liefern.
 
 \paragraph{Kunst}
 Zwar gibt es im Bereich Kunst einige Suchdienste, jedoch sind diese für die Evaluation mit den gewählten Vorgaben nicht geeignet. Das Art Archive gibt \bspw Suchergebnisse wieder, die die Suchbegriffe \glqq 80s\grqq \ und \glqq 90s\grqq \ im Dateinamen enthalten. Die Web Gallery Of Art lässt zwar das Filtern nach einer wählbaren Zeitspanne in ihrer Suche zu, jedoch sind die gewählten Zeiträume dieser Evaluierung nicht Teil der Datenbank. Die Suche der Art Online Gallery durchsucht lediglich gesetzte Tags und findet dementsprechend nur bei einer Suche nach \glqq vietnam war\grqq \ verschiedene Gemälde, die auf der Seite käuflich zu erwerben sind. Art Cyclopedia\footcite{artCyclopedia} findet bei keinem der Suchbegriffe ein Ergebnis.
@@ -155,12 +155,14 @@ Insbesondere Google arbeitet daran, Suchanfragen ihrer Nutzer semantisch passend
 \subsection{Arten von Daten}
 Theoretisch ließen sich in der Web-Applikation nahezu alle Daten-Arten einbeziehen, die sich zeitlich einordnen lassen, sei es das Erstellungsdatum, Entstehungsdatum, Erscheinungsdatum oder ein Datum, an welchem der Inhalt relevant ist, \zB ein Bericht über die Anschläge auf das World Trade Center, der erst Jahre später verfasst wird, sich jedoch auf den 11. September 2001 bezieht. Damit gehen jedoch eine Vielzahl von Anforderungen einher. Hinzu kommt, dass die Ergebnisse nicht konsistent und auswertbar sind. In der vorangegangenen Such-Analyse wird es als gut bewertet, wenn Google oder Wikipedia \zB eine Auflistung von Musikstücken aus den 90er-Jahren anzeigen, jedoch lässt sich dieses Ergebnis nicht automatisch auswerten. 
 
+\paragraph{Medientypen}
+Grundlegende Herrausforderung ist, dass unterschiedliche Medientypen in einer Nutzeroberfläche gesammelt dargestellt werden sollen. Zu diesen Medientypen gehören Audio, Video, Text und Bild. Diese gilt es, trotz der verschiedenen Eigenschaften und Unterschiede untereinander zu durchsuchen, nach Relevanz zu bewerten und in einer übersichtlichen Nutzer-Oberfläche darzustellen. 
+
 \paragraph{Verfügbarkeit der Daten}
 Grundvorraussetzung für das Funktionieren einer Suche, die unterschiedlichste Medien-Typen von ebenso unterschiedlichen Quellen zusammenführt, ist die Verfügbarkeit der potenziell darstellbaren Daten. In der Analyse der Suchdienste geht hervor, dass es insbesondere im Bereich Kunst Datenbanken existieren, die durchsuchbar sind, jedoch viele Bilder und Gemälde aufgrund von Kopierschutz, im Internet gar nicht bereit gestellt werden können oder dürfen. Auch im Bereich von Film und Musik ist die Darstellung der entsprechenden Inhalte auch von Faktoren wie Urheberrecht stark beeinflusst.
 
 \paragraph{Konsistenz der Daten im Bereich Musik und Film}
 Zum Auswerten der verschiedenen Suchergebnisse, ist die Web-Applikation auf die Konsistenz der Daten, \bzw auf deren Meta-Informationen angewiesen. Das ist \zB bei Daten wie Musik größtenteils gegeben. Die meisten Musiktracks besitzen Meta-Informationen in Form eines \gls{ID3}s, die das Herausfinden von Informationen wie Interpret, Titel und Erscheinungsdatum stark vereinfachen. Außerdem gibt es im Netz eine Vielzahl an Datenbanken über einen Großteil von Musikveröffentlichungen und deren Interpreten. Im Bereich Film gibt es zwar keinen derart durchgesetzten Standard, trotzdem gibt es im Internet auch zahlreiche öffentlich zugängliche Datenbanken mit detaillierten Informationen, die weit über Titel, Schauspieler und Erscheinungsdatum hinausgehen und sowohl menschen- als auch maschinenlesbar sind. 
-
 
 \paragraph{Konsistenz der Daten im Bereich News und Ereignisse}
 Das gilt leider nicht für alle Datenarten. News-Artikel verfügen zwar oft über Tags und Meta-Informationen, jedoch sind diese meist abhängig vom jeweiligen Verfasser. So kann die Art der Meta-Informationen über einen News-Artikel von Verfasser, News-Plattform oder Redaktion abhängen. Ansätze einer algorithmen-basierten Lösung gibt es bereits in verschiedenen wissenschaftlichen Arbeiten. Allein um das Veröffentlichungsdatum und den Titel vom eigentlichen Inhalt eines News-Artikel zu extrahieren, verfolgen \citeauthor{Cardoso:2011} den Ansatz, News-Artikel zum einen anhand ihres DOM inklusive der damit verbundenen CSS-Attribute auszuwerten. Während sich der Titel eines Artikel meistens mithilfe des DOM-Attributs \textit{title} ermittelt werden kann, kann in diesem Falle auch das Datum am besten extrahiert werden, da davon ausgegangen wird, dass das Datum mit hoher Wahrscheinlichkeit sehr nah am Titel platziert ist.\footcite[Vgl. Title and date detection, Section 3.4.2., Seite 123][]{Cardoso:2011} Daher ist es hier weitaus schwieriger umfassende konsistente Daten zu bekommen, insbesondere News-Artikel, die ausschließlich in Zeitungen erschienen sind und noch nicht digitalisiert wurden.
@@ -170,24 +172,14 @@ Das gilt leider nicht für alle Datenarten. News-Artikel verfügen zwar oft über T
 %\paragraph{Abhängigkeit von Daten}
 
 \paragraph{Vorhandene Datenformate}
-Das Angebot verschiedenster 
-Die Web-Applikation soll eine Suche bieten, die verschiedenste Daten-Arten 
+Im Internet lässt sich allein Musik auf unterschiedlichste Art und Weise konsumieren. So gibt es zahlreiche Musik-Streaming-Dienste wie \zB Spotify, iTunes Radio und Jango, die das Hören von Musik zu Flatrate-Preisen anbieten. Außerdem gibt es die Möglichkeit über Dienste wie Last.fm Radio zu hören oder auf Soundcloud oder Mixcloud gezielt \va DJ-Mixes zu hören. Zwar bieten all diese Dienste, Musik über das Internet zu hören, sprechen damit jedoch verschiedene Zwecke und Zielgruppen an. Das spiegelt sich auch darin wieder, dass das Output dieser Dienste keinesfalls einfach nur ein Audio-Track ist, der in einem User-Interface eingebunden werden kann. Somit gilt es hier, abzuwägen, welche Dienste zum einen die gewünschten Inhalte bieten können und sich außerdem in einem Interface einbetten lassen.
 
-nicht nur musik, video, news, games und whatnot, musik ist nicht gleich musik in den unterschiedlichen quellen.
-datenformat vs datentyp vs dateiformat
+Ähnlich ist dies im Bereich Video, in dem es ebenfalls zahlreiche Dienste gibt, um online Videos zu schauen, seien es Musik-Videos, Film-Trailer, Reportagen, Filme, Serien oder Clips. Auch hier gilt es die Quellen zu suchen, dessen Daten maschinell auswertbar sind und sich extern darstellen lassen.
+
+Im Gegensatz dazu liegen Text-Quellen im Internet in den seltensten Fällen in komplizierten Formaten vor, dafür ist die Relevanz umso schwieriger zu messen.\todo{klarer formulieren. musik ist nicht gleich musik in den unterschiedlichen quellen}
 
 \paragraph{Benötigte Daten}
 
-
-
-\begin{itemize}
-	\item auswertbares Datenformat - Musik (ID3), Film - gut, News-Artikel eher semi
-	\item messbare Relevanz (primär: Datum muss bekannt sein, sekundär: popularität, tertiär: relevanz(zb im nachhinein))
-
-	\item welche Daten liegen vor
-	\item welche Form haben diese Daten
-	\item welche Daten werden benötigt
-\end{itemize}
 
 \subsection{Exkurs: Semantik}
 
