@@ -4,48 +4,111 @@
 
 
 \section{Quellen}
-%Erforderliche und ben�tigte Quellen und APIs
-\subsection{MusicBrainz}
-MusicBrainz ist eine offene Musik-Enzyklop�die, die f�r Mensch und Maschine lesbare Informationen �ber Musik �ffentlich zug�nglich macht.\footcite[Vgl.][]{musicbrainz} Sie enth�lt umfangreiche Daten �ber K�nstler und deren ver�ffentlichte Musik, insbesondere auch Informationen �ber einzelne Erscheinungen. Dar�ber hinaus kann verf�gt MusicBrainz auf den K�nstler-Profilen s�mtliche Verlinkungen zu weiteren Referenzen im Internet wie Wikipedia-Artikel, Youtube-Channel, Facebook-Seite, Wikidata-Eintrag \uvm
+%Erforderliche und benötigte Quellen und APIs
+Im folgenden Abschnitt werden in Frage kommende Quellen und APIs und deren Vor- und Nachteile in Hinsicht auf Verwendung innerhalb der Web-Applikation \arbeitstitel \ vorgestellt. Untersucht werden nicht nur APIs, sondern auch andere mögliche Formen, um an die benötigten Daten für eine Suche innerhalb \arbeitstitel \ zu gelangen.
 
 
-\begin{itemize}
-	\item Datenquellen
-		\begin{itemize}
-			\item MusicBrainz
-			\item RateYourMusic
-			\item OneMusicAPI
-			\item Music Story Pro
-			\item Discogs
-			\item Wolfram Alpha
-			\item IMDb
-			\item themobiedb.org
-			\item RottenTomatoes API
-		\end{itemize}
-	\item Dienste
-		\begin{itemize}
-			\item Spotify
-			\item youtube
-		\end{itemize}
-\end{itemize}
+\subsection{Musik-Quellen}
+\subsubsection{MusicBrainz}
+MusicBrainz ist eine offene Musik-Enzyklopädie, die für Mensch und Maschine lesbare Informationen über Musik öffentlich zugänglich macht.\footcite[Vgl.][]{musicbrainz} Sie enthält umfangreiche Daten über Künstler und deren veröffentlichte Musik, insbesondere auch Informationen über einzelne Erscheinungen. Darüber hinaus verfügt MusicBrainz auf den Künstler-Profilen sämtliche Verweise zu weiteren Referenzen im Internet wie Wikipedia-Artikel, Youtube-Channel, Facebook-Seite, Wikidata-Eintrag \uvm MusicBrainz verfügt über eine offene API, die für unkommerzielle Zwecke umsonst genutzt werden darf. Seperat bietet MusicBrainz den Service Cover Art Archive an, über den man anhand von MusicBrainz-IDs an Album Art der Releases abfragen kann.
+
+\subsubsection{RateYourMusic}
+RateYourMusic ist wie MusicBrainz ebenso eine durch Nutzer gepflegte offene Datenbank, die über Musikdaten hinaus auch Daten über Film bietet.\footcite[Vgl.][]{rym} Ein für \textbf{\arbeitstitel} interessantes Feature ist die Möglichkeit sich Charts anzeigen zu lassen, und diese nach diversen Kriterien wie Genre oder Zeit zu filtern. Leider verfügt RateYourMusic über keine API und verbietet auch ausdrücklich das Scrapen der Daten auf ihrer Website.
+
+\subsubsection{OneMusicAPI}\label{subsubsec:OneMusicAPI}
+OneMusicAPI ist eine API, die auf der Software von Bliss basiert.\footcite[Vgl.][]{oneMusicAPI} Während Bliss das automatische Nachladen von Cover Art ermöglichen soll,\footcite[Vgl.][]{bliss} sind mit OneMusicAPI Requests mit Interpret und Songname nach Release möglich. Dies stellt auch einen Nachteil dieser API dar, da Song-Informationen nicht so umfangreich sind, wie die anderen vorhandenen Datenbanken und außerdem nur nach Informationen gefragt werden kann, wenn Interpret und Songtitel bekannt sind. Außerdem ist die API nach 1000 Lookups kostenpflichtig.
+
+\subsubsection{Music Story Pro}
+Music Story Pro\footcite[Vgl.][]{musicStoryPro} ist wie OneMusicAPI (\ref{subsubsec:OneMusicAPI}) nur begrenzt kostenlos verfügbar. Zum einen ist die Anzahl der Requests auf 50000 pro Monat begrenzt, weiterhin ist die volle Funktionalität nur für zahlende Kunden verfügbar. Dies beinhaltet \zB Review-Informationen und Bilder. Ein Vorteil bei Music Story Pro ist, dass eine Schnittstelle für weitere APIs bietet. Dazu gehören \ua \ Spotify, Deezer, iTunes und Amazon. Außerdem implementiert es die Suche von MusicBrainz, indem es \gls{Release} \gls{ReleaseGroup} im MusicBrainz-Format liefert.
+
+\subsection{Discogs}
+Discogs hat es sich zur Aufgabe gemacht die größte und umfangreichste Musikdatenbank, inkl. Market Place bereitzustellen.\footcite[Vgl.][]{discogs} Außerdem stellt Discogs eine API bereit, die nicht nur das Durchsuchen des Datenbestandes ermöglichen, sondern auch den MarketPlace durchsuchen lassen. Im Gegensatz zu den anderen Musikquellen, ist der soziale Charakter bei Discogs außerdem ausgeprägter.
+
+\subsection{Film-Quellen}
+\subsubsection{IMDb}
+IMDb ist die verbreiteste Filmdatenbank im Internet. IMDb enthält über Filmdaten hinaus auch Informationen über alle Mitwirkenden, Bewertungen, Plots \uvm Eine offizielle API bietet IMDb derzeit nicht, jedoch werden auf der Seite die Daten in Textform zum Download bereitgestellt, welche für unkommerzielle Zwecke genutzt werden dürfen.
+
+\subsubsection{themoviedb.org}
+The Movie Database ist eine offene Film- und TV-Datenbank, die ursprünglich auf Daten der Open Media Database\footcite{omdb} entstanden ist und darüberhinaus auf nutzergenerierten Inhalten basiert.\footcite[Vgl.][]{tmbd} Außerdem bietet TMDb eine unkommerziell verwendbare API für Entwickler, die sehr gut mit apiary dokumentiert ist.
+
+\subsubsection{RottenTomatoes}
+Rotten Tomatoes\footcite{rottenTomatoes} ist eine Sammlung von Filmkritiken und bietet in diesem Zuge auch detaillierte Informationen über Film- und TV-Produktionen.\footcite[Vgl.][]{rottenWiki} 
+
+\subsection{Gemischt}
+\subsubsection{Wolfram|Alpha}
+Wolfram|Alpha hat es sich zum Ziel gemacht, systematisches Wissen berechenbar und für jeden verfügbar zu machen.\footcite[Vgl.][]{wolframAbout} Im Gegensatz zu Suchmaschinen wie Google, sucht Wolfram|Alpha nicht nach Kontent im Internet, sondern sammelt und kuratiert objektive Daten mit Algorithmen, die teilweise auf der Basis-Software Mathematica basieren. Die Hauptaufgabe ist es Antworten auf faktische Fragestellungen zu liefern, wobei mathematische Formeln zu den ersten Funktionen bei Wolfram|Alpha gehören. Die Suchfunktionalität wird außerdem über deren API angeboten. So bietet Wolfram|Alpha \zB die Funktionalität Daten über bekannte Personen, und \ua auch Musik- und Film-Produktionen in einem berechenbaren Format zu liefern.
+
+\subsubsection{Wikipedia}
+Wikipedia ist ein Online-Nachschlagewerk und bietet laut eigener Angabe \glqq rund 30 Millionen Artikel [...] in über 280 Sprachen\grqq .\footcite[Vgl.][]{wikiWiki} Im Gegensatz zu Google und Wolfram|Alpha verfolgt die Wikipedia die Idee einer kollaborativen Enzyklopädie, was sich auch in der Lizensierung niederschlägt, da sie unter der Creative-Commons-Attribution-ShareAlike-Lizenz weiter verwendet werden darf. Ein Nachteil ist wiederum, dass es einen großen Aufwand bedeutet, die Daten über Techniken wie scrapen oder parsen auszulesen.
+
+
+\subsubsection{Marvel API}
+
+\section{Dienste}
+Im Folgenden werden die Dienste vorgestellt, die verwendet werden können, um Audio und Video in der Playlist von \arbeitstitel, wenn auch lediglich repräsentativ oder als Verlinkung darzustellen.
+\subsection{Video}
+\paragraph{Trailer}
+Filme in \arbeitstitel einzubinden oder gar anzuzeigen, ist allein urheberrechtlich nicht erlaubt. Repräsentativ können jedoch Trailer, soweit diese online frei vorhanden sind, verwendet werden. Trailer werden oft von den Film-Produktionsfirmen selbst online zur Verfügung gestellt, um sie online leichter verbreiten zu können und den Film einer breiteren Masse bekannt zu machen. Für diesen Zweck bietet TrailerAddict eine API, die das embedden von Trailern vereinfacht. Für die Darstellung von Trailern über TrailerAddict ist jedoch Flash 9 erforderlich, was \uU große Restriktionen nach sich zieht, sollte der User kein Flash installiert haben.
+
+\paragraph{Youtube}
+
+
+\paragraph{Vimeo}
+
+\paragraph{Sonstige}
+
+
+\subsection{Audio}
+\paragraph{Spotify}
+Über den kommerziellen Streaming-Dienst Spotify lässt sich über ein musikalisches Repertoire bekannter Plattenlabels auf einer Vielzahl von Desktop- und Mobil-Geräten verfügen. Spotify verfügt über eine API, über die sich die verfügbaren Musiktitel durchsuchen und einbetten lassen können. Aufgrund des Freemium-Konzepts ergibt sich der Nachteil, dass ein Nutzer von \arbeitstitel über einen Spotify-Account verfügen muss, möchte er unbegrenzt über die Web-Applikation Musik hören.
+
+
+\section{Techniken}
+Zum Erfassen unterschiedlichster Daten im Internet gibt es verschiedene Möglichkeiten, wobei diese stark vom Angebot des Web abhängig sind. Im Folgenden werden diese Techniken vorgestellt und analysiert in unter welchen Umständen sie zu bevorzugen sind.
+
+\subsection{Web-Services}
+Web-Services folgen nicht zwangsweise den gleichen Gestaltungsgrundsätzen und basieren nicht auf den gleichen Kern-Formaten oder Protokollen, obwohl sie sich im Web bereits durchgesetzt und sich als erfolgreich erwiesen haben.\footcite[Vgl. Seite 67][]{Fensel2011} Im Folgenden werden die Standards kurz hinsichtlich ihrem Zweck für \arbeitstitel vorgestellt, sollten diese bei der Implementierung eine Rolle spielen.
+
+\paragraph{SOAP}
+
+\paragraph{RESTful-API}
+Ein Großteil der im Internet verfügbaren APIs basiert auf dem RESTful-Standard für Web-Anwendungen.
+
+
+\subsection{Wrapper}
+\subsection{Web-Scraping}
+\subsection{Sweble}
+\subsection{Download/Dumps}
+Auf Wikipedia existieren brauchbare Seiten, die jeweils die Musik- und Film-Charts für jedes verfügbare Jahr enthalten. Diese Vorgehensweise ist jedoch manuell aufwändig, da Informationen erst manuell herausgesucht werden müssen und nach den Vorgaben von Wikipedia über die Webseite bereitgestellte Funktion in Text-Dateien exportiert werden müssen. Diese Textdateien müssen geparst werden, wobei die enthaltenen Daten 
+
+http://en.wikipedia.org/w/index.php?title=Special:Export
+
+
+nicht dynamisch, manuelle Downloads nötig, parsen von Textdateien
+
+\subsection{Mergen von Daten / Multiple Requests für einen Datensatz}
+Da die Verwendung von bereitgestellten APIs klar zu bevorzugen ist, da dies bedeutet sicher an konsistente und möglichst umfangreiche Daten zu gelangen, diese jedoch nicht auf die Ansprüche von \arbeitstitel \ zugeschnitten sind, wird es an vielen Stellen nötig sein, auch für einzige Datensätze auf verschiedene Services zurückzugreifen.
+
+\subsection{Begrenzung von Requests in Express}
+
 
 
 \section{Architektur der Web-Applikation}
-Die Web-Applikation wird serverseitig mittels Javascript umgesetzt. Die Software-Plattform Node.js\footcite{nodejs} bietet ein einfaches Konzept zur Erstellung und Inbetriebnahme von skalierbaren Netzwerk-Applikationen. Vorteile im Bezug auf \arbeitstitel \ ist das event-driven Konzept von gro�em Vorteil, da die Kommunikation mit mehreren APIs um einiges beschleunigt werden kann, indem die API-Requests von der Asynchronit�t Gebrauch machen.
+Die Web-Applikation wird serverseitig mittels Javascript umgesetzt. Die Software-Plattform Node.js\footcite{nodejs} bietet ein einfaches Konzept zur Erstellung und Inbetriebnahme von skalierbaren Netzwerk-Applikationen. Vorteile im Bezug auf \arbeitstitel \ ist das event-driven Konzept von großem Vorteil, da die Kommunikation mit mehreren APIs um einiges beschleunigt werden kann, indem die API-Requests von der Asynchronität Gebrauch machen.
 
 \subsection{Express.js}
-Das Web-Application-Framework \textbf{Express.js}\footcite{expressjs} wird verwendet, da es eine Palette von Funktionalit�t zur einfachen Implementierung von Web-Applikationen mit \textbf{node.js} bietet und trotzdem flexibel und leichtgewichtig ist. Es ist als Schicht zwischen Funktionalit�t und Frontend zu verstehen und agiert als API.\footcite[Vgl.][]{expressjs}
+Das Web-Application-Framework \textbf{Express.js}\footcite{expressjs} wird verwendet, da es eine Palette von Funktionalität zur einfachen Implementierung von Web-Applikationen mit \textbf{node.js} bietet und trotzdem flexibel und leichtgewichtig ist. Es ist als Schicht zwischen Funktionalität und Frontend zu verstehen und agiert als API.\footcite[Vgl.][]{expressjs} Das ist speziell für \arbeitstitel vom Vorteil, da die API somit auch für weitere Anwendungen verwendet werden kann.
 
 \subsection{MongoDB und NoSQL}
-MongoDB\footcite{mongodb} ist eine dokumentenorientierte Datenbank. Im Gegensatz zu relationalen Datenbanken l�sst sich mit der NoSQL-Strategie eine flexible Datenstruktur erstellen. Das macht im Falle von \arbeitstitel \ besonders Sinn, da sich die Art und der Umfang der Daten, die verarbeitet werden, sehr schnell �ndern k�nnen. Au�erdem vereinfacht dies auch die Erweiterbarkeit der Web-Applikation.
+MongoDB\footcite{mongodb} ist eine dokumentenorientierte Datenbank. Im Gegensatz zu relationalen Datenbanken lässt sich mit der NoSQL-Strategie eine flexible Datenstruktur erstellen. Das macht im Falle von \arbeitstitel \ besonders Sinn, da sich die Art und der Umfang der Daten, die verarbeitet werden, sehr schnell ändern können. Außerdem vereinfacht dies auch die Erweiterbarkeit der Web-Applikation.
 
 \subsection{Frontend mit Jade und Stylus}
-Im Frontend werden die Werkzeuge Jade und Stylus verwendet. Jade\footcite{jade} ist eine Node Template Engine und vereinfacht das Schreiben von HTML-Code, indem es eine eigene Syntax implementiert. �ber die vereinfachte Schreibweise hinaus implementiert sie auch Iterationen, Bedingungen und Filter. Au�erdem k�nnen sogenannte Mixins implementiert und somit dessen Funktionalit�t wiederverwendet werden.
+Im Frontend werden die Werkzeuge Jade und Stylus verwendet. Jade\footcite{jade} ist eine Node Template Engine und vereinfacht das Schreiben von HTML-Code, indem es eine eigene Syntax implementiert. Über die vereinfachte Schreibweise hinaus implementiert sie auch Iterationen, Bedingungen und Filter. Außerdem können sogenannte Mixins implementiert und somit dessen Funktionalität wiederverwendet werden.
 
-Stylus\footcite{stylus} ist eine f�r Node entwickelte Sprache, deren Kompilat CSS ist. Die Syntax ist im Gegensatz zu CSS stark vereinfacht. Weiterhin bietet sie Funktionen wie die Deklaration von Variablen, Funktionen und Mixins.
+Stylus\footcite{stylus} ist eine für Node entwickelte Sprache, deren Kompilat CSS ist. Die Syntax ist im Gegensatz zu CSS stark vereinfacht. Weiterhin bietet sie Funktionen wie die Deklaration von Variablen, Funktionen und Mixins.
 
 \subsection{Code-Generierung mit Yeoman}
-Das Ger�st der Web-Applikation wurde mittels \textbf{Yeoman},\footcite{yeoman} einem Scaffolding-Tool f�r Webapps, generiert. Der Workflow von Yeoman basiert auf den drei Tools \textbf{Yo}, \textbf{Grunt}\footcite{grunt} und \textbf{Bower}.\footcite{bower} Bower ist ein Package Manager f�r das Frontend, Grunt ein Task Runner, mit Hilfe dessen Automatisierungsprozesse und Build-Skripte ausgef�hrt werden k�nnen. Yo kann mittles verschiedener Generatoren und Konfigurationen den Boilerplate-Code einer Web-Applikation und ein passendes Grunt Skript generieren.
+Das Gerüst der Web-Applikation wurde mittels \textbf{Yeoman},\footcite{yeoman} einem Scaffolding-Tool für Webapps, generiert. Der Workflow von Yeoman basiert auf den drei Tools \textbf{Yo}, \textbf{Grunt}\footcite{grunt} und \textbf{Bower}.\footcite{bower} Bower ist ein Package Manager für das Frontend, Grunt ein Task Runner, mit Hilfe dessen Automatisierungsprozesse und Build-Skripte ausgeführt werden können. Yo kann mittles verschiedener Generatoren und Konfigurationen den Boilerplate-Code einer Web-Applikation und ein passendes Grunt Skript generieren.
 
 Im Falle von \arbeitstitel \ wurde der Yeoman-Generator \textbf{generator-express}\footcite{yeoExpress} verwendet. Das generierte Projekt bereits aus einer MVC-Struktur und hat bereits MongoDB als Default-Datenbank vorkonfiguriert. 
 \begin{itemize}
@@ -58,9 +121,13 @@ Im Falle von \arbeitstitel \ wurde der Yeoman-Generator \textbf{generator-expres
 \end{itemize}
 
 \section{Tools}
-Im Folgenden werden verwendete Libraries und deren Nutzern erl�utert.
+Im Folgenden werden verwendete Libraries und deren Nutzen erläutert.
+
+\subsection{Select2}
+Select2 ist eine einfache konfigurierbare Implementierung einer Selectbox. Sie bietet neben dem einfachen Suchen und einer Autosuggest-Funktion bereits Features wie dem automatischen Nachladen von Remote Datasets und unterstützt infinites Scrollen. Da Select2 auf jQuery basiert sind keine weiteren Includes erforderlich. Außerdem ist es ebenfalls über bower erhältlich.
+
 \subsection{async}
-Das async-Modul erlaubt eine bessere Kontrolle �ber asynchron ausgef�hrte Funktionalit�t. Da \arbeitstitel \ an vielen Stellen mit mehreren APIs kommunizieren muss, ist die Asynchronit�t zwar generell ein Vorteil, jedoch werden auch Anfragen ben�tigt, die von mehreren asynchronen Requests abh�ngig sind. \Dahe , dass einige Requests von teilweise mehreren Requests, die vorher durchgef�hrt werden m�ssen, abh�ngig sind. Mit async lassen sich Callbacks in vordefinierter Reihenfolge durchf�hren. Auch eine Serie von ein und dem selben Callbacks auf Werten aus einer Liste, ist m�glich, genauso lassen sich mehrere Requests gleichzeitig abarbeiten bis dann der finale Callback ausgef�hrt werden kann, wenn alle Vorbedingungen erf�llt worden sind.  
+Das async-Modul erlaubt eine bessere Kontrolle über asynchron ausgeführte Funktionalität. Da \arbeitstitel \ an vielen Stellen mit mehreren APIs kommunizieren muss, ist die Asynchronität zwar generell ein Vorteil, jedoch werden auch Anfragen benötigt, die von mehreren asynchronen Requests abhängig sind. \Dahe , dass einige Requests von teilweise mehreren Requests, die vorher durchgeführt werden müssen, abhängig sind. Mit async lassen sich Callbacks in vordefinierter Reihenfolge durchführen. Auch eine Serie von ein und dem selben Callbacks auf Werten aus einer Liste, ist möglich, genauso lassen sich mehrere Requests gleichzeitig abarbeiten bis dann der finale Callback ausgeführt werden kann, wenn alle Vorbedingungen erfüllt worden sind.  
 
 \subsection{node-rest-client}
 

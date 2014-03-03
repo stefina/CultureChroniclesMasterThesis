@@ -39,23 +39,53 @@ Rotten Tomatoes\footcite{rottenTomatoes} ist eine Sammlung von Filmkritiken und 
 Wolfram|Alpha hat es sich zum Ziel gemacht, systematisches Wissen berechenbar und für jeden verfügbar zu machen.\footcite[Vgl.][]{wolframAbout} Im Gegensatz zu Suchmaschinen wie Google, sucht Wolfram|Alpha nicht nach Kontent im Internet, sondern sammelt und kuratiert objektive Daten mit Algorithmen, die teilweise auf der Basis-Software Mathematica basieren. Die Hauptaufgabe ist es Antworten auf faktische Fragestellungen zu liefern, wobei mathematische Formeln zu den ersten Funktionen bei Wolfram|Alpha gehören. Die Suchfunktionalität wird außerdem über deren API angeboten. So bietet Wolfram|Alpha \zB die Funktionalität Daten über bekannte Personen, und \ua auch Musik- und Film-Produktionen in einem berechenbaren Format zu liefern.
 
 \subsubsection{Wikipedia}
-Wikipedia ist ein Online-Nachschlagewerk und bietet laut eigener Angabe \glqq rund 30 Millionen Artikel [...] in über 280 Sprachen\grqq .\footcite[Vgl.][]{wikiWiki} Im Gegensatz zu Google und Wolfram|Alpha verfolgt die Wikipedia die Idee einer kollaborativen Enzyklopädie, was sich auch in der Lizensierung niederschlägt, da sie unter der Creative-Commons-Attribution-ShareAlike-Lizenz weiter verwendet werden darf.
+Wikipedia ist ein Online-Nachschlagewerk und bietet laut eigener Angabe \glqq rund 30 Millionen Artikel [...] in über 280 Sprachen\grqq .\footcite[Vgl.][]{wikiWiki} Im Gegensatz zu Google und Wolfram|Alpha verfolgt die Wikipedia die Idee einer kollaborativen Enzyklopädie, was sich auch in der Lizensierung niederschlägt, da sie unter der Creative-Commons-Attribution-ShareAlike-Lizenz weiter verwendet werden darf. Ein Nachteil ist wiederum, dass es einen großen Aufwand bedeutet, die Daten über Techniken wie scrapen oder parsen auszulesen.
 
 
 \subsubsection{Marvel API}
 
 \section{Dienste}
-\subsection{Spotify}
-\subsection{Youtube}
+Im Folgenden werden die Dienste vorgestellt, die verwendet werden können, um Audio und Video in der Playlist von \arbeitstitel, wenn auch lediglich repräsentativ oder als Verlinkung darzustellen.
+\subsection{Video}
+\paragraph{Trailer}
+Filme in \arbeitstitel einzubinden oder gar anzuzeigen, ist allein urheberrechtlich nicht erlaubt. Repräsentativ können jedoch Trailer, soweit diese online frei vorhanden sind, verwendet werden. Trailer werden oft von den Film-Produktionsfirmen selbst online zur Verfügung gestellt, um sie online leichter verbreiten zu können und den Film einer breiteren Masse bekannt zu machen. Für diesen Zweck bietet TrailerAddict eine API, die das embedden von Trailern vereinfacht. Für die Darstellung von Trailern über TrailerAddict ist jedoch Flash 9 erforderlich, was \uU große Restriktionen nach sich zieht, sollte der User kein Flash installiert haben.
 
-\subsection{Wikipedia-Dumps}
-http://en.wikipedia.org/w/index.php?title=Special:Export
+\paragraph{Youtube}
+
+
+\paragraph{Vimeo}
+
+\paragraph{Sonstige}
+
+
+\subsection{Audio}
+\paragraph{Spotify}
+Über den kommerziellen Streaming-Dienst Spotify lässt sich über ein musikalisches Repertoire bekannter Plattenlabels auf einer Vielzahl von Desktop- und Mobil-Geräten verfügen. Spotify verfügt über eine API, über die sich die verfügbaren Musiktitel durchsuchen und einbetten lassen können. Aufgrund des Freemium-Konzepts ergibt sich der Nachteil, dass ein Nutzer von \arbeitstitel über einen Spotify-Account verfügen muss, möchte er unbegrenzt über die Web-Applikation Musik hören.
+
 
 \section{Techniken}
-\subsection{RESTful-API}
+Zum Erfassen unterschiedlichster Daten im Internet gibt es verschiedene Möglichkeiten, wobei diese stark vom Angebot des Web abhängig sind. Im Folgenden werden diese Techniken vorgestellt und analysiert in unter welchen Umständen sie zu bevorzugen sind.
+
+\subsection{Web-Services}
+Web-Services folgen nicht zwangsweise den gleichen Gestaltungsgrundsätzen und basieren nicht auf den gleichen Kern-Formaten oder Protokollen, obwohl sie sich im Web bereits durchgesetzt und sich als erfolgreich erwiesen haben.\footcite[Vgl. Seite 67][]{Fensel2011} Im Folgenden werden die Standards kurz hinsichtlich ihrem Zweck für \arbeitstitel vorgestellt, sollten diese bei der Implementierung eine Rolle spielen.
+
+\paragraph{SOAP}
+
+\paragraph{RESTful-API}
+Ein Großteil der im Internet verfügbaren APIs basiert auf dem RESTful-Standard für Web-Anwendungen.
+
+
 \subsection{Wrapper}
 \subsection{Web-Scraping}
+\subsection{Sweble}
 \subsection{Download/Dumps}
+Auf Wikipedia existieren brauchbare Seiten, die jeweils die Musik- und Film-Charts für jedes verfügbare Jahr enthalten. Diese Vorgehensweise ist jedoch manuell aufwändig, da Informationen erst manuell herausgesucht werden müssen und nach den Vorgaben von Wikipedia über die Webseite bereitgestellte Funktion in Text-Dateien exportiert werden müssen. Diese Textdateien müssen geparst werden, wobei die enthaltenen Daten 
+
+\input{Inhalt/Code/wikipedia}	
+
+http://en.wikipedia.org/w/index.php?title=Special:Export
+
+
 nicht dynamisch, manuelle Downloads nötig, parsen von Textdateien
 
 \subsection{Mergen von Daten / Multiple Requests für einen Datensatz}
