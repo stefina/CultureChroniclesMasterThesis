@@ -93,17 +93,16 @@ Zum einen kann die Suche nach Medientypen eingegrenzt werden. Es empfiehlt sich 
 	\end{center}
 \end{table}
 
+Um über längere Zeit auch eine zuverlässige wissenschaftliche Recherche zu ermöglichen, kann es von Nutzen sein, bei der Suche bestimmte Dienste zu ex- \bzw inkludieren. Dies kann \va dann von Interesse sein, soll das Ergebnis möglichst unabhängig von den bestimmten APIs sein. Das Eingrenzen der Suche nach Quellen, APIs und anderen Suchdiensten wird \va dann interessant, wenn es für einen Medientyp verschiedene Quellen gibt. Insbesondere wenn die Quellen verschiedene Genres abdecken oder auf bestimmte Bereiche spezialisiert sind. Das ist \zB im Kunstbereich der Fall, wie aus der vorangegangenen Analyse hervorgeht, dessen Online-Angebot meist auf die jeweilige Galerie begrenzt ist. Ein weiteres Beispiel für den Bereich Musik sind Musikdienste, die sich auf spezielle Musikrichtungen spezialisiert haben. Außerdem können die Ergebnisse von Interesse sein, wenn populäre Quellen, APIs und sonstige Suchdienste nicht mit einbezogen werden um zu vergleichen, wie groß dessen Einfluss ist.\todo{grottig geschrieben}
 
-
-\begin{itemize}
-	\item Medientypen (Audio, Video, Text, Tabellen, Diagramme)
-	\item Quellen(APIs, Suchdienste, etc.)
-\end{itemize}
 
 \subsection{Filtern des Ergebnisses}
-\begin{itemize}
-	\item Kategorien (Stil, Genre)
-\end{itemize}
+Weiterhin kann das Ergebnis gefiltert werden. Dafür müssen die gesammelten Informationen jedoch Grundvorraussetzungen erfüllen. Das Filtern nach Genre bietet sich \bspw bei Musik an, da diese Informationen größtenteils bereits in den untersuchten Datenbanken vorhanden sind. In diesem Fall kann \zB nach Musik-Genres wie Rock, Pop, Klassik oder Hip-Hop gefiltert werden. Ähnlich verhält sich das Filtern bei Filmen. Insbesondere, wenn der Nutzer die Suche im Vorfeld auf den Medientyp Video und die Sub-Kategorie Film reduziert hat, bietet sich an, diese Auswahl nachträglich nach Action, Drama oder Thriller zu filtern. 
+
+Dies ist für andere Medientypen entsprechend schwieriger umzusetzen, da es zum einen wiederum eigens betitelte Genres gibt und diese in den seltensten Fällen gepflegt sind und darüber hinaus maschinell auslesbar sind.
+
+
+Der Grund, die Ergebnisse in zwei Schritten und in dieser Art zu filtern und einzugrenzen, liegt in der Art der Abfrage der Daten. Wird nach einem Zeitraum gesucht, können bestimmte Medientypen und \ggf bestimmte Quellen direkt ausgeschlossen werden. Daraus ergibt sich erst die Möglichkeit, inwiefern eine Filterung des Ergebnisses überhaupt möglich ist. In diesem Fall ist die Funktionalität davon abhängig, in welcher Form die Daten vorliegen. Wurden bei der Suche bereits Items gefunden, die \bspw über Informationen über Genre, Stil \oae verfügen, kann diese Möglichkeit erst angeboten werden. Ansonsten wäre es für den Nutzer frustrierend und auch kompliziert ein Suchergebnis zu filtern, wenn dieser letztendlich gar keine Auswirkung hat, weil dies technisch nicht mögich ist.
 
 
 %\subsection{Filtern}
