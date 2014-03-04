@@ -69,11 +69,32 @@ Eine Standard-Suche bezeichnet im Falle von \textbf{\arbeitstitel} eine Suche na
 
 %----- SUBSECTION -----%
 \subsection{Thematisches Suchen}
-Während die Suche nach einem bloßen Datum stringent alle auffindbaren Informationen, die in diesen Zeitraum fallen, anzeigt, muss es auch möglich sein, gezielt thematisch zu suchen. Zum Beispiel soll es die Möglichkeit geben ausschließlich Daten eines Zeitraumes, die sich auf das Thema Musik beziehen. Dabei sind keinesfalls lediglich Musikdateien gemeint, sondern auch \bspw Text- oder Videoquellen, die sich mit dem Thema Musik beschäftigen. Das Ergebnis wäre in diesem Falle ein Bild der derzeitigen Musikgeschichte zu bekommen. Jedoch sind die Ergebnisse einer solchen Suche stark abhängig davon, wie erfasst wird, ob ein Item dieses Thema behandelt und woran die Relevanz gemessen werden kann. Weitere mögliche Beispiele einer thematischen Suche sind \zB Filmgeschichte.
+Während die Suche nach einem bloßen Datum stringent alle auffindbaren Informationen, die in diesen Zeitraum fallen, anzeigt, muss es auch möglich sein, gezielt thematisch zu suchen. Zum Beispiel soll es die Möglichkeit geben ausschließlich Informationen eines Zeitraumes, die sich auf das Thema Musik beziehen. Dabei sind keinesfalls lediglich Musikdateien gemeint, sondern auch \bspw Text- oder Videoquellen, die sich mit dem Thema Musik beschäftigen. Das Ergebnis wäre in diesem Falle ein Bild der derzeitigen Musikgeschichte zu bekommen. Jedoch sind die Ergebnisse einer solchen Suche stark abhängig davon, wie erfasst wird, ob ein Item dieses Thema behandelt und woran die Relevanz gemessen werden kann. Weitere mögliche Beispiele einer thematischen Suche sind \zB Filmgeschichte oder Kunstgeschichte.
 
 
 %----- SUBSECTION -----%
 \subsection{Eingrenzen der Suche}
+Um den Nutzen der Web-Applikation möglichst vielseitig zu halten, kann bei der Suche die Art des Inhalts eingegrenzt werden. So kann die Wahl getroffen werden, welche Medientypen angezeigt werden sollen (Audio, Video, Text etc.). Auch ist eine Filterung der in Betracht gezogenen Dienste denkbar, sodass der Nutzer \bspw bestimmte APIs deaktivieren kann. Die Suche liefert im besten Fall ein großes Spektrum an Daten. Um ein genaueres Bild von einem Zeitraum zu bekommen, kann der User bereits beim Suchen spezifizieren, welche Inhalte ihm angezeigt werden sollen. 
+Zum einen kann die Suche nach Medientypen eingegrenzt werden. Es empfiehlt sich eine Eingrenzung nach Medientypen und -arten. Steht beim zeitspezifischen Suche \bspw eine wissenschaftliche Recherche im Vordergrund, empfiehlt es sich, die Suche auf Text- oder Tabellen-Items zu begrenzen. Will der Nutzer hauptsächlich den Unterhaltungsaspekt von \arbeitstitel nutzen, kann er die Suche auf Audio und Video begrenzen, wobei es sich bei den Medientypen \ggf anbietet, diese weiter eingrenzen zu können. Eine Aufschlüsselung der Medientypen und ihrer Subtypen ist in Tabelle \ref{tab:mediaTypes} zu sehen.
+
+\begin{table}[H]
+	\begin{center}
+		\begin{tabular}{|c||c c c c c|}
+		  %Medientyp & bla & bla \\ \hline\hline
+		  \hline
+		  Medientyp & &  & Sub-Typen & & \\ \hline\hline
+		  Text & News-Artikel & Bericht & Buch & Definition & Prosa/Lyrik \\ \hline
+		  Audio & Musik & Podcast & Radio-Sendung & Hörspiel & \\ \hline
+		  Video & Film & Reportage & TV-Sendung & Trailer & \\ \hline
+		  Bild & Fotografie & Gemälde & Zeichnung & & \\ \hline
+		  Grafik & Tabelle & Diagramm & Visualisierung & & \\ \hline
+		\end{tabular}
+		\caption{Medientypen und ihre Sub-Typen}\label{tab:mediaTypes}
+	\end{center}
+\end{table}
+
+
+
 \begin{itemize}
 	\item Medientypen (Audio, Video, Text, Tabellen, Diagramme)
 	\item Quellen(APIs, Suchdienste, etc.)
@@ -84,9 +105,6 @@ Während die Suche nach einem bloßen Datum stringent alle auffindbaren Informatio
 	\item Kategorien (Stil, Genre)
 \end{itemize}
 
-%----- SUBSECTION -----%
-\subsection{Inhaltseingrenzung}
-Um den Nutzen der Web-Applikation möglichst vielseitig zu halten, kann bei der Suche die Art des Inhalts eingegrenzt werden. So kann die Wahl getroffen werden, welche Medientypen angezeigt werden sollen (Audio, Video, Text etc.). Auch ist eine Filterung der in Betracht gezogenen Dienste denkbar, sodass der Nutzer \bspw bestimmte APIs deaktivieren kann.
 
 %\subsection{Filtern}
 %----- SUBSECTION -----%
