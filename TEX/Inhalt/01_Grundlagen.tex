@@ -90,7 +90,6 @@ Im Bereich Kunst ist die Abhängigkeit von der Art der Implementierung der Suche 
 
 Zusätzlich lassen sich Bilder im Gegensatz zu Musik schwieriger finden, da es hier an Standards wie ID3 fehlt. Hier wäre eine allgemeine Suchfunktion, die sich auf Kunstwerke aller Art spezialisiert wünschenswert. Bisher ist man hier auf existierende Kunstarchive angewiesen.
 
-
 %===================%
 %===== SECTION =====%
 %===================%
@@ -103,7 +102,6 @@ Um einen besseren Vergleich der vorhandenen Suchdienste zu bekommen, werden dies
 
 Dabei gilt es die Funktionsweise der Breitensuche, wie Google diese durchführt, von einer direkten Suche zu unterscheiden. Das bedeutet, dass bei einer Google-Suche mit angegeben werden muss, welches Medium gesucht wird. Zum einen weil Google auch eine Bild- und Video-Suche beinhaltet und damit bereits gezielt nach diesen Medientypen gesucht werden kann, zum anderen, weil bei einer Google-Suche \bspw der Begriff \textbf{90s} allein keine Aussage darüber enthält, dass Musik aus dieser Zeit gesucht wird, während das bei Diensten wie last.fm oder IMDb aufgrund des Angebots direkte Vorraussetzung ist.
 
-Ebenfalls wird untersucht, inwiefern die untersuchten Dienste ein Datum auflösen können. \todo{Ausformulieren}
 %Der grobe Ablauf, der in den Schemata zu sehen ist, lässt sich somit in zwei Schritte trennen. Zunächst wird die Eingabe des Nutzers, sei es ein Datum oder ein Item, aus dem sich ein Datum extrahieren lässt, in einen Zeitraum übersetzt, es sei denn, es wird ein Zeitraum eingegeben.
 
 %Der zweite Schritt besteht daraus, passende Inhalte aus dem Zeitraum zu sammeln und anzuzeigen.
@@ -173,12 +171,37 @@ Hier liefert history.orb größtenteils passende Ergebnisse, bietet \ua aber auch 
 \paragraph{Kunst}
 Zwar gibt es im Bereich Kunst einige Suchdienste, jedoch sind diese für die Evaluation mit den gewählten Vorgaben nicht geeignet. Das Art Archive gibt \bspw Suchergebnisse wieder, die die Suchbegriffe \glqq 80s\grqq \ und \glqq 90s\grqq \ im Dateinamen enthalten. Die Web Gallery Of Art lässt zwar das Filtern nach einer wählbaren Zeitspanne in ihrer Suche zu, jedoch sind die gewählten Zeiträume dieser Evaluierung nicht Teil der Datenbank. Die Suche der Art Online Gallery durchsucht lediglich gesetzte Tags und findet dementsprechend nur bei einer Suche nach \glqq vietnam war\grqq \ verschiedene Gemälde, die auf der Seite käuflich zu erwerben sind. Art Cyclopedia\footcite{artCyclopedia} findet bei keinem der Suchbegriffe ein Ergebnis.
 
+
+
+
+\subsection{Extrahierung eines Zeitpunktes}
+Die zeitspezifische Suche lässt sich in zwei Schritte aufteilen. Der erste Schritt ist die Extrahierung eines Datums anhand einer Eingabe, wenn \zB eine Musikveröffentlichung oder aber ein Begriff, anhand dessen sich ein Zeitraum ableiten lässt, eingegeben wird. 
+Über die generelle Suche von Inhalten hinaus, gilt es
+ bieten einige Suchdienste auch die Möglichkeit ein Item in ein Datum zu übersetzen. 
+Außerdem gilt es zu unterscheiden, inwiefern die Suchdienste fähig sind, eine zeitspezifische Suche anbieten \bzw einen Suchbegriff in einen Zeitraum oder Zeitpunkt zu übersetzen. Ebenfalls wird untersucht, inwiefern die untersuchten Dienste ein Datum auflösen können. Die Funktionen der Suche sind meist nicht darauf ausgelegt, zeitspezifisch zu suchen. \todo{Ausformulieren}
+
+\paragraph{Google.de}
+Bei einer Vielzahl von Begriffen, bietet Google.de bereits passende vorgefertigte Antworten in Form des \textbf{QuickAnswers}-Kasten an. Eine Eingabe einer prominenten Person gibt \ua das Geburtsdatum und \ggf das Todesdatum aus. Eine Eingabe des Filmtitels \glqq World War Z\grqq \ zeigt neben anderen Kerninformationen auch das Erscheinungsjahr des Films. Dies funktioniert für bestimmte Themenbereiche zuverlässig, während die Eingabe eines Musiktitels derzeit keine \textbf{QuickAnswers}-Funktionalität bietet. Ebenso liefert \textbf{QuickAnswers} derzeit keine Antwort für die Eingabe von \bspw \glqq Vietnam War\grqq \ oder \glqq Second World War\grqq .
+
+\paragraph{Wolfram|Alpha}
+Wolfram|Alpha bietet wie Google.de ebenfalls die Möglichkeit Suchbegriffe zu interpretieren und dementsprechend passende Informationen anzuzeigen. So werden die Begriffe \glqq Vietnam War\grqq \ und \glqq Second World War\grqq \ beide richtig als \glqq historical event\grqq \ interpretiert und ein Zeitraum in Form eines Zeitstrahles angegeben. Ebenso funktioniert das für die Eingabe von \glqq World War Z\grqq , der als \glqq movie\grqq interpretiert wird und neben anderen Informationen über den Film auch das Veröffentlichungsdatum ausgibt. Sogar die Eingabe von \glqq this is the end doors\grqq \ gibt neben dem Songtext auch das Veröffentlichungsdatum aus. Allerdings ist diese Suche nicht immer zuverlässig, so besteht das Ergebnis der Eingabe von \glqq this is the end \textbf{the} doors\grqq \ aus dem Film \textbf{This is the end}.
+
+\paragraph{Wikipedia}
+Das Ergebnis bei einer Suche auf Wikipedia ist hauptsächlich davon abhängig, ob ein eingegebener Begriff richtig interpretiert wird. Gibt man in die Suche der englischsprachigen Wikipedia den Begriff \glqq vietnam war\grqq \ ein, gelangt man auf den Wikipedia-Artikel des Vietnam Krieges und sieht in der Box auf der rechten Seite die Datumsangaben des Krieges. Gleiches gilt für die Eingabe von \glqq second world war\grqq . Eine Eingabe von \glqq the doors the end\grqq \ führt hingegen erst auf eine Suchergebnis-Seite statt direkt auf den passenden Artikel umzuleiten. Navigiert man auf den Wikipedia-Artikel des Songs, sind sowohl das Aufnahmedatum, als auch das Veröffentlichungs-Datum in der seperaten Box sichtbar.
+
+\paragraph{Wikidata}
+Sucht man auf Wikidata nach \glqq second world war\grqq \ wird man wie auf Wikipedia erst auf eine Suchergebnisseite umgeleitet, woraufhin man zu dem passenden Eintrag navigieren kann. Hier ist allerdings keine Zeitangabe zu finden. Eine Eingabe von \glqq david bowie changes\grqq \ leitet über den Umweg einer Suchergebnisseite ebenfalls auf den Eintrag des Songs. Auch hier ist keine Information über das Veröffentlichungsdatum zu finden. Wohingegen der Eintrag über \textbf{David Bowie} selbst zumindest das Geburtsdatum erschließen lässt.
+
+\paragraph{Zusammenfassung}
+Es gibt bereits gute Ansätze der untersuchten Dienste, Eingaben richtig zu interpretieren und einen passenden Satz an Informationen auszugeben. Im Falle von Google kommt es derzeit darauf an, welche Art von Suchbegriff eingegeben wird. Für Filme und Personen liefert \textbf{QuickAnswers} gute Ergebnisse. Sowohl die geschichtlichen Zeiträume, als auch Musikveröffentlichungen konnten dagegen nicht aufgelöst werden. Insbesondere Wolfram|Alpha bietet insgesamt gute Ergebnisse, die sich für eine Nutzung für die Entwicklung der Web-Applikation anbietet. Wikipedia verfügt über ein riesiges Repertoire an Artikeln, hier ist der Erfolg der Suche aber davon abhängig, ob eine Eingabe von der Suche direkt in einen passenden Artikel übersetzt werden kann, da ansonsten eine maschinelle Auswertung dementsprechend komplexer ist.
+
 \subsection{Auswertung}
 Allgemeines Problem insbesondere bei News-Artikeln ist die relationale Suche. Internetsuchmaschinen wie Google suchen primär relational, \dahe , dass das Suchen nach Inhalten, die lediglich zeitlich mit dem gesuchten Begriff zu tun haben, deutlich schwieriger \bzw seltener im Internet vorhanden ist. \citeauthor[Vgl. Seite 19][]{Heuser2011} formuliert diese Tatsache wie folgt: 
 \begin{quotation}\glqq Semantische Technologien bieten zahlreiche Möglichkeiten, um Daten mit Hintergrundinformationen zu ihrer Bedeutung anzureichern und sie mit weiteren relevanten Informationseinheiten zu verbinden.\grqq\end{quotation}
 Das verdeutlicht, inwiefern semantische Suchen der Implementierung der Web-Anwendung dienlich sein könnten, wobei im Gegensatz dazu aus der Evaluation der Suchmaschinen hervorgeht, dass diese noch nicht implementiert sind, \bzw noch nicht ausgereift sind.
 
 %Hier fehlt komplette die Auswertung über die Qualität der Suchergebnisse der einzelnen Datenquellen. Daraufhin begründet sich ja später auch deine Auswahl, warum du z.b. IMDB benutzt und nicht google.
+
 
 %===================%
 %===== SECTION =====%
