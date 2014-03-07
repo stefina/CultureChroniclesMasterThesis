@@ -71,6 +71,10 @@ Eine Standard-Suche bezeichnet im Falle von \textbf{\arbeitstitel} eine Suche na
 \subsection{Thematisches Suchen}
 Während die Suche nach einem bloßen Datum stringent alle auffindbaren Informationen, die in diesen Zeitraum fallen, anzeigt, muss es auch möglich sein, gezielt thematisch zu suchen. Zum Beispiel soll es die Möglichkeit geben ausschließlich Informationen eines Zeitraumes, die sich auf das Thema Musik beziehen. Dabei sind keinesfalls lediglich Musikdateien gemeint, sondern auch \bspw Text- oder Videoquellen, die sich mit dem Thema Musik beschäftigen. Das Ergebnis wäre in diesem Falle ein Bild der derzeitigen Musikgeschichte zu bekommen. Jedoch sind die Ergebnisse einer solchen Suche stark abhängig davon, wie erfasst wird, ob ein Item dieses Thema behandelt und woran die Relevanz gemessen werden kann. Weitere mögliche Beispiele einer thematischen Suche sind \zB Filmgeschichte oder Kunstgeschichte.
 
+%----- SUBSECTION -----%
+\subsection{Stöbern in der Zukunft}
+Faktisch sind Medien, die erst in der Zukunft produziert werden, noch nicht existent, jedoch gibt es bereits Medien-Items, die sich auf die Zukunft beziehen können. Ein Beispiel ist der Film \textbf{Back to the Future II}. Im zweiten Teil der Trilogie reist der Protagonist in das Jahr 2015. Somit ist der Film, auch wenn er ein imaginatives 2015 darstellt, trotzdem relevant für das Jahr 2015.
+
 
 %----- SUBSECTION -----%
 \subsection{Eingrenzen der Suche}
@@ -105,9 +109,52 @@ Dies ist für andere Medientypen entsprechend schwieriger umzusetzen, da es zum e
 Der Grund, die Ergebnisse in zwei Schritten und in dieser Art zu filtern und einzugrenzen, liegt in der Art der Abfrage der Daten. Wird nach einem Zeitraum gesucht, können bestimmte Medientypen und \ggf bestimmte Quellen direkt ausgeschlossen werden. Daraus ergibt sich erst die Möglichkeit, inwiefern eine Filterung des Ergebnisses überhaupt möglich ist. In diesem Fall ist die Funktionalität davon abhängig, in welcher Form die Daten vorliegen. Wurden bei der Suche bereits Items gefunden, die \bspw über Informationen über Genre, Stil \oae verfügen, kann diese Möglichkeit erst angeboten werden. Ansonsten wäre es für den Nutzer frustrierend und auch kompliziert ein Suchergebnis zu filtern, wenn dieser letztendlich gar keine Auswirkung hat, weil dies technisch nicht mögich ist.
 
 
-%\subsection{Filtern}
-%----- SUBSECTION -----%
-%\subsection{Betrachten von Inhalten} % vielleicht raus? kommt dann ja in design und mockup
+\section{Use Cases}
+
+% \paragraph{UserCaseName} UseCaseBeschreibung
+% \begin{enumerate}[a.]
+% 	\item VarianteA
+% 		\begin{enumerate}[1.]
+% 			\item VarianteASchritt1
+% 			\item VarianteASchritt2
+% 		\end{enumerate}
+% 	\item VarianteB
+% 		\begin{enumerate}[1.]
+% 			\item VarianteBSchritt1
+% 			\item VarianteBSchritt2
+% 		\end{enumerate}
+% \end{enumerate}
+
+
+\paragraph{Suche nach Inhalten anhand eines Zeitpunktes} Suche nach Inhalten aus dem Jahre 1948.
+\begin{enumerate}[1.]
+	\item User gibt \glqq 1948\grqq \ in das Suchfeld ein
+	\item System sucht nach Items, die zum Suchbegriff passen und sich in einen Zeitraum übersetzen lassen
+	\item User wählt den passenden Zeitraum durch die Auswahl des Items \glqq Datum - 1948\grqq \ aus
+	\item System sucht nach Items unterschiedlichen Medientyps
+	\item Frontend zeigt Musik-, Film-, Text-Items etc. aus dem Jahre 1948 an
+\end{enumerate}
+
+\paragraph{Suche nach Video-Inhalten anhand eines Ereignisses} Suche nach Video-Inhalten zur Zeit der Terroranschläge am 11. September 2001
+\begin{enumerate}[1.]
+	\item User gibt \glqq Terroranschläge Twin Tower\grqq \ in das Suchfeld ein
+	\item User grenzt die Suche nach Medientyp \textbf{Video} ein
+	\item System sucht nach Items, die zum Suchbegriff passen und sich in einen Zeitraum übersetzen lassen
+	\item User wählt den passenden Zeitraum durch die Auswahl des Items \glqq Ereignis - 11. September 2001\grqq \ aus
+	\item System sucht nach Items unterschiedlicher Medienarten des Medientyps \textbf{Video}
+	\item Frontend zeigt Reportagen-, Film-, TV-Sendungen-Items etc. des Datums 11. September 2001 an
+\end{enumerate}
+
+\paragraph{Suche nach Musik anhand eines Zeitpunktes eines Items} Suche nach Musik zur Zeit des Filmstarts von \textbf{Der Pate}.
+\begin{enumerate}[1.]
+	\item User gibt \glqq Der Pate\grqq \ in das Suchfeld ein
+	\item User grenzt die Suche nach Medientyp \textbf{Audio} und Medienart \textbf{Musik} ein
+	\item System sucht nach Items, die zum Suchbegriff passen und sich in einen Zeitraum übersetzen lassen
+	\item User wählt den passenden Zeitraum durch die Auswahl des Items \glqq Film - Der Pate - 1972\grqq \ aus
+	\item System sucht nach Items des Medientyps \textbf{Audio} mit dem Medien-Subtypen \textbf{Musik}
+	\item Frontend zeigt Musik-, Film-, Text-Items etc. aus dem Jahre 1948 an
+\end{enumerate}
+
 
 %==============================================================================%
 %==============================================================================%
