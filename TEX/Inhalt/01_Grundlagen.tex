@@ -1,7 +1,8 @@
 %!TEX root = ../Masterarbeit.tex
 \chapter{Grundlagen}
 \label{cha:grundlagen}
-Zunächst soll die Ausgangssituation beschrieben werden. (Auf dieser Grundlage werden für diese Arbeit wichtige grundlegende Begriffe geklärt.) Darauf aufbauend kann der Anforderungsumfang geklärt werden.
+Zunächst wird die Ausgangssituation beschrieben. Auf dieser Grundlage werden für diese Arbeit wichtige grundlegende Begriffe geklärt, die im Laufe dieser Arbeit vorrausgesetzt werden.
+Darauf aufbauend kann der Anforderungsumfang geklärt werden.
 
 %===================%
 %===== SECTION =====%
@@ -43,20 +44,40 @@ Einen weiteren Ansatz bietet das \textbf{Internet Archive}.\footcite{wayback} Au
 %===================%
 %===== SECTION =====%
 %===================%
-\section{Gegenüberstellung von Herangehensweise eines Nutzers und Evaluierung potenzieller Datenquellen}
+\section{Definitionen}
+Nach \citeauthor{Misoch2006} werden Medien in vier unterschiedliche Typen differenziert. Primäre Medien, Sekundäre Medien, Tertiäre Medien und Quartiäre Medien. Hier werden die Medienformen nach Bedarf von Hilfsmittel kategorisiert, sodass \zB Gestik und Mimik unter Primäre Medien zu fassen sind, Bild, Buch und Druck zu Sekundären Medien zu zählen sind. Tertiäre Medien bedürfen \glqq sowohl auf Produzenten- als auch auf der Rezipientenseite technische Hilfsmittel\grqq (\citefield[Seite 20]{shortauthor}{Fassler1997}), \ua Schallplatten, Film, Fensehen und Radio. Darüberhinaus sind vernetzte Computermedien als Quartiäre Medien zu verstehen. 
 
+\paragraph{Medium}
+\label{par:medium}
+Hypermedien werden von \citeauthor{Misoch2006} als Medienformen bezeichnet, die aufgrund der Entstehung digitaler Datenformate mit modernen Medientypen kombiniert werden. \Dahe \glqq Text, Bild, Sound usw. können miteinander verbunden werden\grqq \ (\citefield[Vgl. Seite 21]{shortauthor}{Misoch2006}).
 
+Im Allgemeinen werden in dieser Arbeit hauptsächlich die Medienformen, die von \citeauthor{Fassler1997} anhand der Eigenschaft, dass Sender und Empfänger jeweils über \glqq die computerbasierten und -verstärkten Medienbereiche netztechnischer und elektronisch-räumlicher Konsumption, Information und Kommunikation\grqq \ verfügen müssen, eingeordnet (\citefield[Vgl. Seite 117]{shortauthor}{Fassler1997}).
+
+Im Laufe dieser Arbeit sind unter dem Begriff der \textbf{Medien} die \textbf{Hypermedien} zu verstehen, die im Folgenden in Audio, Video, Text \usw kategorisiert werden.
+
+\paragraph{Medientyp}
+\label{par:medientyp}
+Über die vorangeganene Definition des Mediums hinaus, ist der im Laufe dieser Arbeit verwendete Begriff \textbf{Medientyp} als Unterscheidung zwischen den Medienformen Audio, Video, Text \usw zu verstehen.
+
+\paragraph{Medienart}
+\label{par:medienart}
+Zur weiteren Gliederung von Medientypen, werden \textbf{Medienarten} im weiteren Verlauf dafür verwendet, Sub-Medien zu unterscheiden. Bei den Medienarten des Medientyps Audio wird \bspw zwischen Musik, Hörspielen oder Radiosendungen unterschieden, während der Medientyp Video in Film, Reportagen, Video-Spiele \etc unterteilt werden kann.
+
+\paragraph{Dienst}
+\label{par:dienst}
 
 %===================%
 %===== SECTION =====%
 %===================%
-% \section{Evaluierung potenzieller Datenquellen}
+\section{Gegenüberstellung von Herangehensweise eines Nutzers und Evaluierung potenzieller Datenquellen}
 \label{sec:suchdienste}
 
 %Bitte besser beschreiben, dass es sich bei Google um eine Breitensuche handelt (und daher ja auch erst das medium wie "movies" mitangegeben werden muss). Versus die "direkte" suche bei Portalen die auf das gesuchte Medium beschränkt sind
 Das Ziel der Web-Applikation ist es, zeitabhängige Daten zu liefern. Das bedeutet, dass je nach Vorgabe eines Zeitraumes, \bzw eines Zeitpunktes, Medien-Inhalte aus dem Internet, die dem vorgegebenen Zeitraum zuzuordnen sind, angezeigt werden sollen. Im Folgenden wird analysiert, welche Daten auf welche Art und Weise im Internet zu finden sind und inwiefern ein Nutzer heutzutage vorgehen müsste, um zeitspezifisch nach Medieninhalten zu suchen.
 
-Um einen besseren Vergleich der vorhandenen Suchdienste zu bekommen, wird der Vorgehensweise des Nutzers eine Evaluation der potenziell in Frage kommenden Suchdienste und APIs gegenübergestellt, indem diese anhand ähnlicher Suchbegriffe miteinander verglichen werden. Das wichigste Kriterium der Auswahl der Suchdienste ist, ob der gewünschte \bzw erwartete Kontent auf der Website vorhanden ist \bzw den Kontent liefern können. \ZB werden Musikinhalte nicht in Filmdatenbanken gesucht, gleichzeitig wird Google mit einbezogen, da es ebenfalls Film-, Musik- und Video-Ergebnisse liefern kann. Außerdem muss bei speziellen Medienplattformen die Möglichkeit bestehen, die Website nach Inhalten zu durchsuchen. Auch spielt die Popularität der Suchmachine \bzw Website eine Rolle, da dies tendenziell ein positiver Anhaltspunkt für die Plausibilität der vorhandenen Daten und der Funktionalität der Suche ist.
+Um einen besseren Vergleich der vorhandenen Suchdienste zu bekommen, wird zunächst die Vorgehensweise eines Nutzers, der nach Inhalten verschiedenen Typs innerhalb eines selbst gewählten Zeitraumes sucht, erläutert. Dabei werden auch mögliche Dienste, die dieser nutzen könnte, kurz vorgestellt. 
+
+Der Vorgehensweise des Nutzers wird eine Evaluation der potenziell in Frage kommenden Suchdienste und APIs für die jeweiligen Medientypen gegenübergestellt, indem diese anhand ähnlicher Suchbegriffe miteinander verglichen werden. Das wichigste Kriterium der Auswahl der Suchdienste ist, ob der gewünschte \bzw erwartete Kontent auf der Website vorhanden ist \bzw den Kontent liefern können. \ZB werden Musikinhalte nicht in Filmdatenbanken gesucht, gleichzeitig wird Google mit einbezogen, da es ebenfalls Film-, Musik- und Video-Ergebnisse liefern kann. Außerdem muss bei speziellen Medienplattformen die Möglichkeit bestehen, die Website nach Inhalten zu durchsuchen. Auch spielt die Popularität der Suchmachine \bzw Website eine Rolle, da dies tendenziell ein positiver Anhaltspunkt für die Plausibilität der vorhandenen Daten und der Funktionalität der Suche ist.
 
 Dabei gilt es die Funktionsweise der Breitensuche, wie Google diese durchführt, von einer direkten Suche zu unterscheiden. Das bedeutet, dass bei einer Google-Suche mit angegeben werden muss, welches Medium gesucht wird. Zum einen weil Google auch eine Bild- und Video-Suche beinhaltet und damit bereits gezielt nach diesen Medientypen gesucht werden kann, zum anderen, weil bei einer Google-Suche \bspw der Begriff \textbf{90s} allein keine Aussage darüber enthält, dass Musik aus dieser Zeit gesucht wird, während das bei Diensten wie last.fm oder IMDb aufgrund des Angebots direkte Vorraussetzung ist.
 
@@ -106,7 +127,7 @@ Die im Bereich Musik untersuchten Dienste sind in der Tabelle \ref{tab:musicSear
 
 Dabei hat Google meist auf Ergebnisse der anderen analysierten Suchdienste verwiesen, \zB auf lastfm.de mit \glqq 80s\grqq \ getaggte Musik. Auffällig ist hier, dass die von Google gefundenen Ergebnisse, die auf andere untersuchte Suchdienste verweisen, in einigen Fällen passendere Ergebnisse liefern, als das Suchen auf der spezialisierten Seite selbst. Als Beispiel sei zum einen die Suche in der Kategorie Musik mit dem Suchbegriff \glqq music vietnam war\grqq \ genannt. Hier liefert google als erstes Suchergebnis den Wikipedia-Artikel \glqq List of songs about the Vietnam War\grqq \ \citep{wikiListSongsVietnamWar}, während dieser Artikel in der Wikipedia-Suche mit dem selben Suchbegriff gar nicht auftaucht, gleichzeitig aber auch keine besseren Ergebnisse liefert. Jedoch befinden sich in den Suchergebnissen auch subjektive Musik-Charts, die Privatpersonen nach eigenen Kriterien erstellt und online gestellt haben.
 Verhältnismäßig gute Ergebnisse liefert auch amazon.de mit Kompilationen und CD-Sammlungen aus den Jahrzehnten und der Zeit des Vietnamkrieges. Zwar befindet sich in den aufgeführten Suchergebnissen ausschließlich Musik, die direkten Bezug zum Vietnamkrieg hat, jedoch ist die amazon-Suche nicht darauf ausgelegt, semantisch passend zum Begriff zu suchen.
-\todo{david bowie ergebnis}
+Dafür, dass die Online-Musik-Datenbank Musicbrainz ein großes Repertoire an Musik-Veröffentlichungen hat, dessen Werte zumindest für einen Großteil populärer Veröffentlichungen ausführlich gepflegt sind, gibt es keine Möglichkeit, auf Musicbrainz.org zeitspezifisch zu suchen.
 
 \subsection{Herangehensweise eines Nutzers im Bereich Film}
 Eine Zusammenstellung von Filmen, die sich einem gewählten Zeitpunkt zuordnen lassen, sind meistens finite Listen, die von Privatpersonen, Filmorganisationen \oae zusammengestellt werden oder Filmsammlungen, die \zB die populärsten Filme einer Epoche, eines Jahrzehnts oder eines Themas enthalten. Listen verschiedenster Kriterien sind zahlreich im Internet zu finden, jedoch sind diese oft nicht dynamisch, sondern setzen vorraus, dass sich vorher eine Person mit dem Thema auseinandergesetzt hat. Ansonsten bleibt nur das manuelle Erstellen solch einer Liste.
@@ -158,7 +179,7 @@ Wikipedias Ergebnisse zu Ereignissen der verschiedenen Zeiträume fällt im Falle 
 
 Hier liefert history.orb größtenteils passende Ergebnisse, bietet \ua aber auch Ergebnisse anderer Zeitperioden. Wolfram Alpha scheint die Suchanfrage einer Epoche nicht interpretieren zu können und liefert stattdessen Wortbedeutungen, obwohl eine Suche nach einem bestimmten Ereignis alle nötigen Informationen enthält, die es benötigt, eine Auflistung passender Ereignisse nach Datum zu liefern.
 
-\subsection{Herangehensweise eines Nutzers im Bereich Bild/Kunst}
+\subsection{Herangehensweise eines Nutzers im Bereich Bild und Bildende Kunst}
 Im Bereich Bild und Kunst gestaltet sich eine zeitspezifische Suche weitaus schwieriger. Zwar lässt sich ein Großteil allgemeiner Informationen und Meta-Daten über Kunstwerke und Gemälde im Internet finden, eine umfassende Suche gibt es jedoch nicht. Spezielle Suchmaschinen durchsuchen \bspw einen begrenzten Katalog, \bspw die Sammlung eines bestimmten Kunst-Archivs und sind zudem oft veraltet und teilweise unvollständig. 
 
 \paragraph{Kunst-Archive im Internet}
@@ -173,15 +194,18 @@ Im Bereich Kunst ist die Abhängigkeit von der Art der Implementierung der Suche 
 Zusätzlich lassen sich Bilder im Gegensatz zu Musik schwieriger finden, da es hier an Standards wie ID3 fehlt. Hier wäre eine allgemeine Suchfunktion, die sich auf Kunstwerke aller Art spezialisiert wünschenswert. Bisher ist man hier auf existierende Kunstarchive angewiesen.
 
 
-\subsection{Evaluierung der Suchdienste im Bereich Kunst}
-Zwar gibt es im Bereich Kunst einige Suchdienste, jedoch sind diese für die Evaluation mit den gewählten Vorgaben nicht geeignet. Das Art Archive gibt \bspw Suchergebnisse wieder, die die Suchbegriffe \glqq 80s\grqq \ und \glqq 90s\grqq \ im Dateinamen enthalten. Die Web Gallery Of Art lässt zwar das Filtern nach einer wählbaren Zeitspanne in ihrer Suche zu, jedoch sind die gewählten Zeiträume dieser Evaluierung nicht Teil der Datenbank. Die Suche der Art Online Gallery durchsucht lediglich gesetzte Tags und findet dementsprechend nur bei einer Suche nach \glqq vietnam war\grqq \ verschiedene Gemälde, die auf der Seite käuflich zu erwerben sind. Art Cyclopedia\footcite{artCyclopedia} findet bei keinem der Suchbegriffe ein Ergebnis.
+\subsection{Evaluierung der Suchdienste im Bereich Bildende Kunst}
+Zwar gibt es im Bereich Bildender Kunst einige Suchdienste, jedoch sind diese für die Evaluation mit den gewählten Vorgaben nicht geeignet. Das Art Archive gibt \bspw Suchergebnisse wieder, die die Suchbegriffe \glqq 80s\grqq \ und \glqq 90s\grqq \ im Dateinamen enthalten. Die Web Gallery Of Art lässt zwar das Filtern nach einer wählbaren Zeitspanne in ihrer Suche zu, jedoch sind die gewählten Zeiträume dieser Evaluierung nicht Teil der Datenbank. Die Suche der Art Online Gallery durchsucht lediglich gesetzte Tags und findet dementsprechend nur bei einer Suche nach \glqq vietnam war\grqq \ verschiedene Gemälde, die auf der Seite käuflich zu erwerben sind. Art Cyclopedia\footcite{artCyclopedia} findet bei keinem der Suchbegriffe ein Ergebnis.
 
 
 \subsection{Extrahierung eines Zeitpunktes}
-Die zeitspezifische Suche lässt sich in zwei Schritte aufteilen. Der erste Schritt ist die Extrahierung eines Datums anhand einer Eingabe, wenn \zB eine Musikveröffentlichung oder aber ein Begriff, anhand dessen sich ein Zeitraum ableiten lässt, eingegeben wird. 
-Über die generelle Suche von Inhalten hinaus, gilt es
- bieten einige Suchdienste auch die Möglichkeit ein Item in ein Datum zu übersetzen. 
-Außerdem gilt es zu unterscheiden, inwiefern die Suchdienste fähig sind, eine zeitspezifische Suche anbieten \bzw einen Suchbegriff in einen Zeitraum oder Zeitpunkt zu übersetzen. Ebenfalls wird untersucht, inwiefern die untersuchten Dienste ein Datum auflösen können. Die Funktionen der Suche sind meist nicht darauf ausgelegt, zeitspezifisch zu suchen. \todo{Ausformulieren}
+In der vorangegangenen Analyse wird vorausgesetzt, dass der Nutzer bereits weiß, welchen Zeitraum er durchsuchen will. Dies funktioniert für weit gefasste Begriffe, die bereits einen Zeitraum beschreiben (Achtziger, Neunziger, etc.), weil diese auch als eine Art Epoche, die ihren eigenen Stil hervorgebracht haben, betrachtet werden können. 
+
+Während der Term \glqq Vietnam War\grqq \ua einen begrenzten Zeitraum beschreibt, funktioniert eine Suche nach zeitspezifischen Inhalten in diesem Fall außerdem besser, weil Musik und Film auch direkt vom Vietnamkrieg beeinflusst wurden, indem das Thema in diesen Bereichen aufgegriffen und behandelt wurde. Das bedeutet, dass bei einer Suche nach \glqq Vietnam War Music\grqq \ nicht grundsätzlich auf den Zeitraum datierte Musik gefunden wird, sondern auch Inhalte, die sich im Nachhinein darauf beziehen.
+
+Wiederrum anders verhält sich eine Suche im Internet, wenn \bspw Medieninhalte aus dem Zeitraum der Entwicklung der Relativitätstheorie angezeigt werden sollen. Hier halten sich Kulturgüter künstlerischer Natur (Musik, Film, Bildende Kunst, etc.), die sich wie im Falle des Vietnamkrieges auf ein historisches Thema beziehen, in Grenzen. In diesem Fall, muss also zunächst der Zeitpunkt der Veröffentlichung der Relativitätstheorie herausgefunden werden, worauf dieser Zeitraum in einem zweiten Schritt durchsucht wird.
+
+Im Folgenden werden Möglichkeiten vorgestellt, Zeitpunkte oder Zeiträume von Medientypen oder Ereignissen herauszufinden.
 
 \paragraph{Google.de}
 Bei einer Vielzahl von Begriffen, bietet Google.de bereits passende vorgefertigte Antworten in Form des \textbf{QuickAnswers}-Kasten an. Eine Eingabe einer prominenten Person gibt \ua das Geburtsdatum und \ggf das Todesdatum aus. Eine Eingabe des Filmtitels \glqq World War Z\grqq \ zeigt neben anderen Kerninformationen auch das Erscheinungsjahr des Films. Dies funktioniert für bestimmte Themenbereiche zuverlässig, während die Eingabe eines Musiktitels derzeit keine \textbf{QuickAnswers}-Funktionalität bietet. Ebenso liefert \textbf{QuickAnswers} derzeit keine Antwort für die Eingabe von \bspw \glqq Vietnam War\grqq \ oder \glqq Second World War\grqq .
