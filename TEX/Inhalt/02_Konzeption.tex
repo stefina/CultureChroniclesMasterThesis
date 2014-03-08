@@ -115,26 +115,24 @@ Die Suche kann spezialisiert werden, indem die Suchanfrage verfeinert wird. Das 
 \paragraph{Genre}
 Insbesondere bei Audiodaten finden sich in den ID3-Tags Informationen über das Genre des Musikstückes. Konnten mehrere Genres ausgemacht werden, können die gefundenen Items nach Genre gefiltert werden.
 
-%----- SUBSECTION -----%
-\subsection{Sortieren}
-
-
-\begin{itemize}
-	\item Relevanz
-	\item Datum (nur wenn Daten ausgehend von einem Zeitpunkt in die Zukunft ODER der Vergangenheit angezeigt werden?)
-	\item Medientyp
-\end{itemize}
-
-
 \subsection{Zeitspezifizierung} %oder 
 %----- SUBSECTION -----%
 %\subsection{Zeitraum eingrenzen}
 
-Mit der Grundeinstellung wird der Zeitpunkt als Zeitraum durchsucht. \Dahe dass vom Zeitpunkt ausgehend nach Medien in der nahen Vergangenheit als auch der Zukunft gesucht wird. Außerdem kann der Zeitraum, in dem gesucht wird, eingegrenzt werden. Zum einen kann vom Zeitpunkt ausgehend gesucht werden. Darüber hinaus kann die Suche so begrenzt werden, dass nur zu dem Zeitpunkt vorhandene Daten angezeigt werden.
+Mit der Grundeinstellung wird der Zeitpunkt als Zeitraum durchsucht. \Dahe dass vom Zeitpunkt ausgehend nach Medien in der nahen Vergangenheit als auch der Zukunft gesucht wird. Außerdem kann der Zeitraum, in dem gesucht wird, eingegrenzt werden. Zum einen kann vom Zeitpunkt ausgehend gesucht werden, sodass nur Items ab dem angegebenen Zeitpunkt angezeigt werden oder andersherum nur Items angezeigt werden, die zu dem Zeitpunkt und davor exisiert haben.
 
 Im Fokus der Applikation steht der Zeitpunkt, der dargestellt werden soll. Dementsprechend soll es dem Nutzer möglichst offen stehen, wie er seine Suche formuliert, solange der Suchbegriff sich in einen Zeitpunkt auflösen lässt. Von diesem Zeitpunkt lässt sich, je nach Dichte der Suchergebnisse ein Zeitraum ermitteln, \dh dass vom Zeitpunkt ausgehend die relevantesten Treffer angezeigt werden. Je mehr Ergebnisse in der Suche angezeigt werden, desto größer spannt sich der Zeitraum, der dargestellt wird.
 
+%----- SUBSECTION -----%
+\subsection{Sortieren}
+\paragraph{Relevanz}
+Ohne Spezifierung einer Sortierung werden gefundene Items nach Relevanz sortiert. Das bedeutet, dass von jeder Datenquelle das erste Ergebnis als erstes im Suchergebnis auftaucht. Die Reihenfolge der Datenquellen ist zufällig. Bei einer Einbindung passender Algorithmen, die das Messen der Relevanz eines Items, ermöglichen, ist auch eine zusätzliche Sortierung innerhalb der Web-Applikation denkbar. Dies setzt voraus, dass die Ergebnis-Items über genügend Informationen verfügen, die für das Messen der Relevanz nötig sind.
 
+\paragraph{Datum}
+Außerdem können die Ergebnis-Items chronologisch oder umgekehrt-chronologisch sortiert werden. Diese Möglichkeit entfällt jedoch, wenn die Such-Parameter dies ausschließen, wenn \bspw nach Inhalten eines spezifischen Datums gesucht wird, ohne den umschließenden Zeitraum in Betracht zu ziehen, können die Items nicht sortiert werden.
+
+\paragraph{Medientyp}
+Zusätzlich können die Inhalte nach Medientypen sortiert werden, sodass \bspw zuerst Audio-, dann Text- und dann Video-Inhalte angezeigt werden. Darüber hinaus ist eine Sortierung nach Medien-Subtypen oder Datenquellen denkbar, die der Nutzer \bspw durch \textbf{Drag and Drop} in der Sortierungs-Maske anordnen kann.
 
 \section{Use Cases}
 Zur Aufschlüsselung des Funktionsumfangs, werd im Folgenden eine Auswahl von Anwendungsfällen nach Fowler aufgelistet.
@@ -214,20 +212,10 @@ Auf der Abbildung \ref{fig:diagrammVietnam} ist der schematische Ablauf mit der 
 	\label{fig:diagrammVietnam}
 \end{figure}
 
-%----- SUBSECTION -----%
-\subsection{Inhalte}
-
-\begin{itemize}
-	\item Suche-Restriktion
-	\item Suche Filter
-	\item Suche Verfeinerung
-\end{itemize}
-
-
 
 %===== SECTION =====%
 \subsection{Mockup}
-
+Die Web-Applikation zeigt zum Beginn lediglich ein Suchfeld
 \begin{figure}[htb]
 	\begin{center}
 		\includegraphics[width=0.8\textwidth]{mockup/u_1972_home_disambiguation_cropped.png}
