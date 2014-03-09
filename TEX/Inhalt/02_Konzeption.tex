@@ -5,6 +5,23 @@ Im Folgenden wird das Konzept der Web-Applikation erarbeitet und vorgestellt. Da
 Auf dieser Basis wird ein Mockup der im weiteren Verlauf bei ihrem Arbeitstitel \textbf{\arbeitstitel} benannten Web-Applikation entwickelt, welches die Anwendungsfälle und Darstellungsmöglichkeiten beinhaltet.
 Anschließend wird das Fernkonzept auf ein im Rahmen dieser Masterarbeit realisierbaren Umfang reduziert und entsprechend eingegrenzt. Am zuvor erstellten Mockup sollten diesbezüglich nur wenige Änderungen \bzw Einschränkungen vorgenommen werden müssen.
 
+\section{Schematischer Aufbau} \todo{gib mir nen besseren namen!}
+Zunächst werden die Schlüsselaspekte, die in die Konzeption einfließen, erläutert. Die Abbildung \ref{fig:diagrammAllgemein} zeigt den schematischen Ablauf von \arbeitstitel. Aus den verschiedenen Input-Typen muss sich entweder ein Zeitraum ableiten lassen oder ein Datum extrahiert, von welchem sich wiederrum ein Zeitraum extrahieren lässt.
+\begin{figure}[htb]
+	\includegraphics[width=1.0\textwidth]{Diagramm_Allgemein.png}
+	\caption{Allgemeines Diagramm}
+	\label{fig:diagrammAllgemein}
+\end{figure}
+
+Auf der Abbildung \ref{fig:diagrammVietnam} ist der schematische Ablauf mit der Beispiel-Eingabe \textbf{Vietnamkrieg} zu sehen. Aus der Eingabe leitet sich der Zeitraum 1955-1975 ab. Dieser Zeitraum wird daraufhin nach den populärsten Musik- und Film-Veröffentlichungen und wichtigen News-Artikeln durchsucht, um einen Querschnitt des Zeitraumes zu erstellen.
+\begin{figure}[htb]
+	\includegraphics[width=1.0\textwidth]{Diagramm_VietnamKrieg.png}
+	\caption{Vietnam Diagramm}
+	\label{fig:diagrammVietnam}
+\end{figure}
+
+
+
 %===== SECTION =====%
 \section{Anforderungsanalyse}
 Aus der vorangegangenen Analyse der vorhandenen Suchdienste geht hervor, dass es eine umfassende Suche nach zeitspezifischen Inhalten bisher nicht sehr komfortabel ist, \bzw nicht immer relevante Suchergebnisse liefert. Diese Möglichkeit soll die Web-Applikation, die im Rahmen dieser Arbeit entwickelt wird, bieten. Über welche Funktionalität sie im Konkreten verfügen soll, wird im Folgenden analysiert und anschließend in einer Feature-Liste aufgeschlüsselt.
@@ -69,8 +86,8 @@ Eine Standard-Suche bezeichnet im Falle von \textbf{\arbeitstitel} eine Suche na
 
 %----- SUBSECTION -----%
 \subsection{Thematisches Suchen}
-Während die Suche nach einem bloßen Datum stringent alle auffindbaren Informationen, die in diesen Zeitraum fallen, anzeigt, muss es auch möglich sein, gezielt thematisch zu suchen. Zum Beispiel soll es die Möglichkeit geben ausschließlich Informationen eines Zeitraumes, die sich auf das Thema Musik beziehen. Dabei sind keinesfalls lediglich Musikdateien gemeint, sondern auch \bspw Text- oder Videoquellen, die sich mit dem Thema Musik beschäftigen. Das Ergebnis wäre in diesem Falle ein Gesamtbild der derzeitigen Musikgeschichte zu bekommen. Jedoch sind die Ergebnisse einer solchen Suche stark abhängig davon, wie erfasst wird, ob ein Item dieses Thema behandelt und woran die Relevanz gemessen werden kann. Weitere mögliche Beispiele einer thematischen Suche sind \zB Filmgeschichte oder Kunstgeschichte.
-Weitere Beispiele sind zum einen Videomaterial einer politischen Rede, die in dem gewünschten Zeitraum stattgefunden hat, zum anderen ein Zeitungsartikel, der sich mit einem bestimmten Musiktitel auseinandersetzt. Diese Funktionalität setzt die Unterscheidung zwischen Content, der zu gegebener Zeit produziert wurde, und Content, der sich auf diese Zeit bezieht, voraus. \todo{das ist noch nicht so sauber formuliert}
+Während die Suche nach einem bloßen Datum stringent alle auffindbaren Informationen, die in diesen Zeitraum fallen, anzeigt, muss es auch möglich sein, gezielt thematisch zu suchen. Zum Beispiel soll es die Möglichkeit geben ausschließlich Informationen eines Zeitraumes, die sich auf das Thema Musik beziehen. Dabei sind keinesfalls lediglich Musikdateien gemeint, sondern auch \bspw Text- oder Videoquellen, die sich mit dem Thema Musik beschäftigen. Das Ergebnis wäre in diesem Falle ein Gesamtbild der derzeitigen Musikgeschichte zu bekommen. Jedoch sind die Ergebnisse einer solchen Suche stark abhängig davon, wie erfasst wird, ob ein Item dieses Thema behandelt und woran die Relevanz gemessen werden kann. Weitere mögliche Beispiele einer thematischen Suche sind \zB Filmgeschichte oder Kunstgeschichte. Zur wissenschaftlichen Recherche bietet sich \zB an, das Thema Politik auszuwählen.
+Beispiele sind zum einen Videomaterial einer politischen Rede, die in dem gewünschten Zeitraum stattgefunden hat, zum anderen ein Zeitungsartikel, der sich mit einem bestimmten Musiktitel auseinandersetzt. Diese Funktionalität setzt die Unterscheidung zwischen Content, der zu gegebener Zeit produziert wurde, und Content, der sich auf diese Zeit bezieht und das vorgegebene Thema behandelt, voraus. \todo{das ist noch nicht so sauber formuliert}
 
 %----- SUBSECTION -----%
 \subsection{Stöbern in der Zukunft}
@@ -196,24 +213,6 @@ Zur Aufschlüsselung des Funktionsumfangs, werd im Folgenden eine Auswahl von Anw
 
 
 %===== SECTION =====%
-\section{Fernkonzept}
-
-Zunächst werden die Schlüsselaspekte, die in die Konzeption einfließen, erläutert. Die Abbildung \ref{fig:diagrammAllgemein} zeigt den schematischen Ablauf von \arbeitstitel. Aus den verschiedenen Input-Typen muss sich entweder ein Zeitraum ableiten lassen oder ein Datum extrahiert, von welchem sich wiederrum ein Zeitraum extrahieren lässt.
-\begin{figure}[htb]
-	\includegraphics[width=1.0\textwidth]{Diagramm_Allgemein.png}
-	\caption{Allgemeines Diagramm}
-	\label{fig:diagrammAllgemein}
-\end{figure}
-
-Auf der Abbildung \ref{fig:diagrammVietnam} ist der schematische Ablauf mit der Beispiel-Eingabe \textbf{Vietnamkrieg} zu sehen. Aus der Eingabe leitet sich der Zeitraum 1955-1975 ab. Dieser Zeitraum wird daraufhin nach den populärsten Musik- und Film-Veröffentlichungen und wichtigen News-Artikeln durchsucht, um einen Querschnitt des Zeitraumes zu erstellen.
-\begin{figure}[htb]
-	\includegraphics[width=1.0\textwidth]{Diagramm_VietnamKrieg.png}
-	\caption{Vietnam Diagramm}
-	\label{fig:diagrammVietnam}
-\end{figure}
-
-
-%===== SECTION =====%
 \subsection{Mockup}
 Die Web-Applikation zeigt zum Beginn lediglich ein Suchfeld mit der Möglichkeit die Suche zu begrenzen.
 
@@ -222,44 +221,65 @@ Auf Abbildung \ref{fig:homeDisambiguation} werden passende Suchvorschläge am Bei
 
 \begin{figure}[htb]
 	\begin{center}
-		\includegraphics[width=0.8\textwidth]{mockup/u_1972_home_disambiguation_cropped.png}
+		\includegraphics[width=1\textwidth]{mockup/u_1972_home_disambiguation_cropped.png}
 		\caption{Home - Disambiguation}
 	\end{center}
 	\label{fig:homeDisambiguation}
 \end{figure}
+
+\paragraph{Home - Suche eingrenzen}
+Auf Abbildung \ref{fig:homeLimit} ist die Eingrenzung der Suche zu sehen. Der Nutzer kann jede einzelne Medienart von der Suche aus- \bzw einschließen. Außerdem kann der Nutzer durch das Klicken auf die Medientypen alle Subtypen automatisch mit auswählen. Default sind alle Medien- und dessen Subtypen vorausgewählt
+
+\begin{figure}[htb]
+	\begin{center}
+		\includegraphics[width=1\textwidth]{mockup/u_1972_home_limit.png}
+		\caption{Home - Suche eingrenzen}
+	\end{center}
+	\label{fig:homeLimit}
+\end{figure}
+
 
 \paragraph{Suchergebnis}
 Die Abbildung \ref{fig:searchResult} zeigt das Suchergebnis bei einer Auswahl des Items \glqq David Bowie - Changes\glqq . Oben werden allgemeine Informationen über das Item angezeigt, \ua das Datum. Außerdem werden weitere Informationen angezeigt, wie die höchste Chart-Position der Single. 
 
 Das Suchergebnis besteht aus Items der unterschiedlichen Medientypen. Die Items sind in einer gekachelten Ansicht angeordnet, wobei jedes Item anhand eines Bildes \zB Cover Art, Film Plakat \etc repräsentiert wird, soweit vorhanden. Es sind sowohl Musikstücke und Filme, als auch das Videospiel \textbf{Pong} aufgelistet. Text-Inhalte sind ebenfalls im Raster zu sehen, wobei ein Ausschnitt des Textes zu sehen ist. Fährt der Nutzer mit der Maus über ein Item, werden ihm drei Icons angezeigt.
 
+Im rechten Bereich ist die Playlist zu sehen, die alle abspielbaren Inhalte auflistet und anzeigt. Audio- und Video-Inhalte werden in der gleichen Reihenfolge, wie sie im Suchergebnis-Raster angezeigt werden, abgespielt, sobald der Nutzer auf Play klickt. Videos werden direkt im Playlist-Bereich eingebettet. Außerdem können die Inhalte nach Belieben des Nutzers mittels Drag \& Drop in gewünschter Reihenfolge abgespielt werden.
+
 \begin{figure}[htb]
 	\begin{center}
-		\includegraphics[width=0.8\textwidth]{mockup/u_1972_search_result.png}
+		\includegraphics[width=1\textwidth]{mockup/u_1972_search_result.png}
 		\caption{Suchergebnis}
 	\end{center}
 	\label{fig:searchResult}
 \end{figure}
 
+\paragraph{Suche - Details}
+Mit Klick auf das Menu-Icon werden Details zum ausgewählten Items, an dessen Datum die Suche durchgeführt wurde, angezeigt. Auf der Abbildung \ref{fig:searchDetails} ist das Album Cover, Titel, Interpret, Veröffentlichungsdatum, Genres und Chart-Position angezeigt.
+
 \begin{figure}[htb]
 	\begin{center}
-		\includegraphics[width=0.8\textwidth]{mockup/u_1972_search_menu_details.png}
+		\includegraphics[width=1\textwidth]{mockup/u_1972_search_menu_details.png}
 		\caption{Suche - Details}
 	\end{center}
 	\label{fig:searchDetails}
 \end{figure}
 
+\paragraph{Suchmenu - Filter}
+Unter dem Menu-Eintrag \textbf{Filter Result} sieht man die Möglichkeiten zur nachträglichen Filterung des Suchergebnisses. In diesem Fall wurde nach den Medientypen
+
 \begin{figure}[htb]
 	\begin{center}
-		\includegraphics[width=0.8\textwidth]{mockup/u_1972_search_menu_filter.png}
+		\includegraphics[width=1\textwidth]{mockup/u_1972_search_menu_filter.png}
 		\caption{Suchmenu - Filter}
 	\end{center}
 	\label{fig:searchFilter}
 \end{figure}
 
+\paragraph{Suchergebnis - Cover-Info}
 \begin{figure}[htb]
 	\begin{center}
-		\includegraphics[width=0.8\textwidth]{mockup/u_1972_search_result_cover_info.png}
+		\includegraphics[width=1\textwidth]{mockup/u_1972_search_result_cover_info.png}
 		\caption{Suchergebnis - Cover-Info}
 	\end{center}
 	\label{fig:searchDetailsCoverInfo}
