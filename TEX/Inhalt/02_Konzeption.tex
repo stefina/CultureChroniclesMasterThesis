@@ -27,7 +27,7 @@ Auf der Abbildung \ref{fig:diagrammVietnam} ist der schematische Ablauf mit der 
 Aus der vorangegangenen Analyse der vorhandenen Suchdienste geht hervor, dass es eine umfassende Suche nach zeitspezifischen Inhalten bisher nicht sehr komfortabel ist, \bzw nicht immer relevante Suchergebnisse liefert. Diese Möglichkeit soll die Web-Applikation, die im Rahmen dieser Arbeit entwickelt wird, bieten. Über welche Funktionalität sie im Konkreten verfügen soll, wird im Folgenden analysiert und anschließend in einer Feature-Liste aufgeschlüsselt.
 
 \subsection{Eingabeformen}
-Ausgangspunkt für die Suche ist ihre Eingabeform. Der Nutzer soll hinsichtlich der Art seiner Eingabe möglichst frei sein können. Über die Text-Suche, wie sie in der vorangegangenen Analyse (siehe \ref{sec:suchdienste}) durchgeführt wurde, gibt es noch weitere denkbare Möglichkeiten.
+Ausgangspunkt für die Suche ist ihre Eingabeform. Der Nutzer soll hinsichtlich der Art seiner Eingabe möglichst frei sein können. Über die Text-Suche, wie sie in der vorangegangenen Analyse (siehe \ref{sec:analyse}) durchgeführt wurde, gibt es noch weitere denkbare Möglichkeiten.
 
 \paragraph{Datum}
 Die Eingabe eines Datums ist die naheliegendste Suchform um zeitspezifisch nach Kontent, der sich auf den gewählten Zeitpunkt \bzw dessen umschließenden Zeitraum bezieht, zu suchen.
@@ -138,7 +138,7 @@ Insbesondere bei Audiodaten finden sich in den ID3-Tags Informationen über das G
 
 Mit der Grundeinstellung wird der Zeitpunkt als Zeitraum durchsucht. \Dahe dass vom Zeitpunkt ausgehend nach Medien in der nahen Vergangenheit als auch der Zukunft gesucht wird. Außerdem kann der Zeitraum, in dem gesucht wird, eingegrenzt werden. Zum einen kann vom Zeitpunkt ausgehend gesucht werden, sodass nur Items ab dem angegebenen Zeitpunkt angezeigt werden oder andersherum nur Items angezeigt werden, die zu dem Zeitpunkt und davor exisiert haben.
 
-Im Fokus der Applikation steht der Zeitpunkt, der dargestellt werden soll. Dementsprechend soll es dem Nutzer möglichst offen stehen, wie er seine Suche formuliert, solange der Suchbegriff sich in einen Zeitpunkt auflösen lässt. Von diesem Zeitpunkt lässt sich, je nach Dichte der Suchergebnisse ein Zeitraum ermitteln, \dh dass vom Zeitpunkt ausgehend die relevantesten Treffer angezeigt werden. Je mehr Ergebnisse in der Suche angezeigt werden, desto größer spannt sich der Zeitraum, der dargestellt wird.
+Im Fokus der Applikation steht der Zeitpunkt, der dargestellt werden soll. Dementsprechend soll es dem Nutzer möglichst offen stehen, wie er seine Suche formuliert, solange der Suchbegriff sich in einen Zeitpunkt auflösen lässt. Von diesem Zeitpunkt lässt sich, je nach Dichte der Suchergebnisse ein Zeitraum ermitteln, \dahe dass vom Zeitpunkt ausgehend die relevantesten Treffer angezeigt werden. Je mehr Ergebnisse in der Suche angezeigt werden, desto größer spannt sich der Zeitraum, der dargestellt wird.
 
 %----- SUBSECTION -----%
 \subsection{Sortieren}
@@ -180,10 +180,10 @@ Zur Aufschlüsselung des Funktionsumfangs, werd im Folgenden eine Auswahl von Anw
 	\item System sucht nach Items, die zum Suchbegriff passen und sich in einen Zeitraum übersetzen lassen
 	\item User wählt den passenden Zeitraum durch die Auswahl des Items \glqq Film - The Godfather - 1972\grqq \ aus
 	\item System sucht nach Items des Medientyps \textbf{Audio} mit dem Medien-Subtypen \textbf{Musik}
-	\item Frontend zeigt Musik-, Film-, Text-Items etc. aus dem Jahre 1948 an
+	\item Frontend zeigt Musik-Items etc. aus dem Jahre 1972 an
 \end{enumerate}
 
-\paragraph{Suche nach wissenschaftlichen Inhalten anhand eines Ereignisses} Suche nach Text-Inhalten während des Kalten Krieges \textbf{Der Pate}.
+\paragraph{Suche nach wissenschaftlichen Inhalten anhand eines Ereignisses} Suche nach Text-Inhalten während des \textbf{Kalten Krieges}.
 \begin{enumerate}[1.]
 	\item User gibt \glqq cold war\grqq \ in das Suchfeld ein
 	\item User grenzt die Suche nach Medientyp \textbf{Text} und \textbf{Bild} ein und grenzt letzteres nach den Medien-Subtypen \textbf{Tabelle}, \textbf{Grafik} und \textbf{Diagramm} ein
@@ -283,6 +283,7 @@ Unter dem Menü-Eintrag \textbf{Filter Result} sieht man die Möglichkeiten zur na
 \end{figure}
 
 \paragraph{Suchergebnis - Cover-Info}
+Beim Hovern über ein Item des Suchergebnisses kann der Nutzer weitere Aktionen mit dem Item vornehmen. Zum einen kann er sich weitere Informationen anzeigen lassen, das Item zur Playlist hinzufügen, sollte es abspielbaren Inhalt geben, oder sich die Quelle des Items anzeigen lassen und dorthin navigieren. \todo{besser schreiben}
 \begin{figure}[htb]
 	\begin{center}
 		\includegraphics[width=1\textwidth]{mockup/u_1972_search_result_cover_info.png}
@@ -296,7 +297,9 @@ Unter dem Menü-Eintrag \textbf{Filter Result} sieht man die Möglichkeiten zur na
 \subsection{Funktionalität}
 Fokus der Applikation ist eine komfortable Suche, die dem Nutzer möglichst einfach zugänglich gemacht wird, \dahe vom Design, als auch von der Funktionalität. 
 Eine für diese Web-Applikation besondere Aufgabe ist es, die drei Kernfunktionen möglichst gleichzeitig gut erreichbar zu machen, ohne die Gesamterscheinung zu stören.
+
 \paragraph{Suchen}
+Für eine möglichst komfortable Suche, werden schon bei der Eingabe im Suchfeld, Suchvorschläge gemacht. Dafür werden Such-Requests an die APIs der Suchdienste gemacht 
 
 \paragraph{Browsen}
 
@@ -319,5 +322,5 @@ Während alle Suchergebnisse in einer Art Raster gleichmäßig angezeigt werden, gi
 
 %===== SECTION =====%
 \section{Eingrenzung}
-Die Masse an unterschiedlichen Medien-Typen, -Quellen und -Arten, die in \arbeitstitel \ angezeigt werden können, lässt sich kaum erfassen. Je nach Belieben und sich neu eröffnenden Möglichkeiten, kann sich sowohl das mögliche Angebot, als auch die Nachfrage nach bestimmten zeitspezifischen Kontent ändern. Zum einen sind ein Großteil der denkbaren Daten zwar im Internet verfügbar, jedoch gibt es nicht an 
+Die Masse an unterschiedlichen Medien-Typen, -Quellen und -Arten, die in \arbeitstitel \ angezeigt werden können, lässt sich kaum erfassen. Je nach Belieben und sich neu eröffnenden Möglichkeiten, kann sich sowohl das mögliche Angebot, als auch die Nachfrage nach bestimmten zeitspezifischen Kontent ändern. Zum einen sind ein Großteil der denkbaren Daten zwar im Internet verfügbar, jedoch fehlt es meist an komfortablen Möglichkeiten, diese insbesondere zeitspezifisch zu aggregieren.
 Im Rahmen dieser Masterarbeit wird daher ein Working Prototype als Proof of Concept implementiert werden. In dieser Hinsicht wird die Funktionalität von \arbeitstitel \ auf die Medientypen Musik und Film reduziert werden. Zum einen gibt es zum Thema Musik eine Vielzahl an zuverlässigen und offenen Quellen, die für unkommerzielle Zwecke zur freien Verwendung zur Verfügung stehen, außerdem ist die Art der vorliegenden Daten, insbesondere aufgrund des ID3-Standards, der Entwicklung zuträglich.
