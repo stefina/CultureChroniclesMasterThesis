@@ -10,7 +10,9 @@ Im folgenden Abschnitt werden in Frage kommende Quellen und APIs und deren Vor- 
 
 \subsection{Musik-Quellen}
 \subsubsection{MusicBrainz}
-MusicBrainz ist eine offene Musik-Enzyklopädie, die für Mensch und Maschine lesbare Informationen über Musik öffentlich zugänglich macht.\footcite[Vgl.][]{musicbrainz} Sie enthält umfangreiche Daten über Künstler und deren veröffentlichte Musik, insbesondere auch Informationen über einzelne Erscheinungen. Darüber hinaus verfügt MusicBrainz auf den Künstler-Profilen sämtliche Verweise zu weiteren Referenzen im Internet wie Wikipedia-Artikel, Youtube-Channel, Facebook-Seite, Wikidata-Eintrag \uvm MusicBrainz verfügt über eine offene API, die für unkommerzielle Zwecke umsonst genutzt werden darf. Seperat bietet MusicBrainz den Service Cover Art Archive an, über den man anhand von MusicBrainz-IDs an Album Art der Releases abfragen kann.
+MusicBrainz ist eine offene Musik-Enzyklopädie, die für Mensch und Maschine lesbare Informationen über Musik öffentlich zugänglich macht.\footcite[Vgl.][]{musicbrainz} Sie enthält umfangreiche Daten über Künstler und deren veröffentlichte Musik, insbesondere auch Informationen über einzelne Erscheinungen. Darüber hinaus verfügt MusicBrainz auf den Künstler-Profilen sämtliche Verweise zu weiteren Referenzen im Internet wie Wikipedia-Artikel, Youtube-Channel, Facebook-Seite, Wikidata-Eintrag \uvm 
+
+MusicBrainz verfügt über eine offene API, die für unkommerzielle Zwecke umsonst genutzt werden darf. Seperat bietet MusicBrainz den Service Cover Art Archive an, über den man anhand von MusicBrainz-IDs an Album Art der Releases abfragen kann.
 
 \subsubsection{RateYourMusic}
 RateYourMusic ist wie MusicBrainz ebenso eine durch Nutzer gepflegte offene Datenbank, die über Musikdaten hinaus auch Daten über Film bietet.\footcite[Vgl.][]{rym} Ein für \textbf{\arbeitstitel} interessantes Feature ist die Möglichkeit sich Charts anzeigen zu lassen, und diese nach diversen Kriterien wie Genre oder Zeit zu filtern. Leider verfügt RateYourMusic über keine API und verbietet auch ausdrücklich das Scrapen der Daten auf ihrer Website.
@@ -34,6 +36,11 @@ The Movie Database ist eine offene Film- und TV-Datenbank, die ursprünglich auf 
 \subsubsection{RottenTomatoes}
 Rotten Tomatoes\footcite{rottenTomatoes} ist eine Sammlung von Filmkritiken und bietet in diesem Zuge auch detaillierte Informationen über Film- und TV-Produktionen.\footcite[Vgl.][]{rottenWiki} 
 
+\subsection{TrailerAddict}
+
+
+
+
 \subsection{Gemischt}
 \subsubsection{Wolfram|Alpha}
 
@@ -45,7 +52,7 @@ Wikipedia ist ein Online-Nachschlagewerk und bietet laut eigener Angabe \glqq ru
 \subsubsection{Marvel API}
 
 \section{Dienste}
-Im Folgenden werden die Dienste vorgestellt, die verwendet werden können, um Audio und Video in der Playlist von \arbeitstitel, wenn auch lediglich repräsentativ oder als Verlinkung darzustellen.
+Im Folgenden werden die Dienste vorgestellt, die verwendet werden können, um Audio- und Video-Content in der Playlist von \arbeitstitel, wenn auch lediglich repräsentativ oder als Verlinkung darzustellen.
 \subsection{Video}
 \paragraph{Trailer}
 Filme in \arbeitstitel einzubinden oder gar anzuzeigen, ist allein urheberrechtlich nicht erlaubt. Repräsentativ können jedoch Trailer, soweit diese online frei vorhanden sind, verwendet werden. Trailer werden oft von den Film-Produktionsfirmen selbst online zur Verfügung gestellt, um sie online leichter verbreiten zu können und den Film einer breiteren Masse bekannt zu machen. Für diesen Zweck bietet TrailerAddict eine API, die das embedden von Trailern vereinfacht. Für die Darstellung von Trailern über TrailerAddict ist jedoch Flash 9 erforderlich, was \uU große Restriktionen nach sich zieht, sollte der User kein Flash installiert haben.
@@ -133,6 +140,25 @@ Die Library \citefield{shorttitle}{fontAwesome} bietet ein Set von derzeit 369 I
 
 \subsection{async}
 Das async-Modul erlaubt eine bessere Kontrolle über asynchron ausgeführte Funktionalität. Da \arbeitstitel \ an vielen Stellen mit mehreren APIs kommunizieren muss, ist die Asynchronität zwar generell ein Vorteil, jedoch werden auch Anfragen benötigt, die von mehreren asynchronen Requests abhängig sind. \Dahe , dass einige Requests von teilweise mehreren Requests, die vorher durchgeführt werden müssen, abhängig sind. Mit async lassen sich Callbacks in vordefinierter Reihenfolge durchführen. Auch eine Serie von ein und dem selben Callbacks auf Werten aus einer Liste, ist möglich, genauso lassen sich mehrere Requests gleichzeitig abarbeiten bis dann der finale Callback ausgeführt werden kann, wenn alle Vorbedingungen erfüllt worden sind.  
+
+\begin{lstlisting}[caption=Async Beispiel]
+async.parallel({
+		music_result: function(callback){
+			getMusicSuggestionsBySearchterm(searchterm, callback);
+		},
+		movie_result: function(callback){
+			getMovieSuggestionsBySearchterm(searchterm, callback);
+		}
+	},
+	function(err, results) {
+		if(err){
+			callback(err, searchterm);
+		} else {
+			var resultset = results.music_result.concat(results.movie_result);
+			callback(null, resultset);
+		}
+	});
+\end{lstlisting}
 
 \subsection{node-rest-client}
 
