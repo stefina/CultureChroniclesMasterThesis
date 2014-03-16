@@ -7,12 +7,14 @@
 %Erforderliche und benötigte Quellen und APIs
 Im folgenden Abschnitt werden in Frage kommende Quellen und APIs und deren Vor- und Nachteile in Hinsicht auf Verwendung innerhalb der Web-Applikation \arbeitstitel \ vorgestellt. Untersucht werden nicht nur APIs, sondern auch andere mögliche Formen, um an die benötigten Daten für eine Suche innerhalb \arbeitstitel \ zu gelangen.
 
-
 \subsection{Musik-Quellen}
 \subsubsection{MusicBrainz}
-MusicBrainz ist eine offene Musik-Enzyklopädie, die für Mensch und Maschine lesbare Informationen über Musik öffentlich zugänglich macht \citep[Vgl.][]{musicbrainz}. Sie enthält umfangreiche Daten über Künstler und deren veröffentlichte Musik, insbesondere auch Informationen über einzelne Erscheinungen. Darüber hinaus verfügt MusicBrainz auf den Künstler-Profilen sämtliche Verweise zu weiteren Referenzen im Internet wie Wikipedia-Artikel, Youtube-Channel, Facebook-Seite, Wikidata-Eintrag \uvm 
+MusicBrainz ist eine offene Musik-Enzyklopädie, die für Mensch und Maschine lesbare Informationen über Musik öffentlich zugänglich macht \citep[Vgl.][]{musicbrainz}. Sie enthält umfangreiche Daten über Künstler und deren veröffentlichte Musik, insbesondere auch Informationen über einzelne Erscheinungen. Darüber hinaus verfügt MusicBrainz auf den Künstler-Profilen über sämtliche Verweise zu weiteren Referenzen im Internet wie Wikipedia-Artikel, Youtube-Channel, Facebook-Seite, Wikidata-Eintrag \uvm 
 
-MusicBrainz verfügt über eine offene API, die für unkommerzielle Zwecke umsonst genutzt werden darf. Seperat bietet MusicBrainz den Service Cover Art Archive an, über den man anhand von MusicBrainz-IDs an Album Art der Releases abfragen kann.
+MusicBrainz verfügt über eine offene API, die für unkommerzielle Zwecke kostenlos genutzt werden darf. Sie bietet die Entitäten \texttt{lookup}, \texttt{browse} und \texttt{search} an. Es bieten sich insbesondere die Subqueries von \texttt{artist}, \texttt{recording}, \texttt{release} und \texttt{release-group} an. Es gilt zu beachten, dass bei einem \texttt{search}-Request der gewünschten Ergebnistyp definiert werden muss. So müssen für eine Suche, wo nicht klar ist, ob der Interpret, Titelsong oder Album eingegeben wurde, zwei Queries durchgeführt werden.
+
+Seperat bietet MusicBrainz den Service Cover Art Archive an, über den man anhand von MusicBrainz-IDs an Album Art der Releases abfragen kann.
+
 
 \subsubsection{RateYourMusic}
 RateYourMusic ist wie MusicBrainz ebenso eine durch Nutzer gepflegte offene Datenbank, die über Musikdaten hinaus auch Daten über Film bietet \citep[Vgl.][]{rym}. Ein für \textbf{\arbeitstitel} interessantes Feature ist die Möglichkeit sich Charts anzeigen zu lassen, und diese nach diversen Kriterien wie Genre oder Zeit zu filtern. Leider verfügt RateYourMusic über keine API und verbietet auch ausdrücklich das Scrapen der Daten auf ihrer Website.
@@ -21,7 +23,7 @@ RateYourMusic ist wie MusicBrainz ebenso eine durch Nutzer gepflegte offene Date
 OneMusicAPI ist eine API, die auf der Software von Bliss basiert \citep[Vgl.][]{oneMusicAPI}. Während Bliss das automatische Nachladen von Cover Art ermöglichen soll \citep[Vgl.][]{bliss}, sind mit OneMusicAPI Requests mit Interpret und Songname nach Release möglich. Dies stellt auch einen Nachteil dieser API dar, da Song-Informationen nicht so umfangreich sind, wie die anderen vorhandenen Datenbanken und außerdem nur nach Informationen gefragt werden kann, wenn Interpret und Songtitel bekannt sind. Außerdem ist die API nach 1000 Lookups kostenpflichtig.
 
 \subsubsection{Music Story Pro}
-Music Story Pro \citep[Vgl.][]{musicStoryPro} ist wie OneMusicAPI (\ref{subsubsec:OneMusicAPI}) nur begrenzt kostenlos verfügbar. Zum einen ist die Anzahl der Requests auf 50000 pro Monat begrenzt, weiterhin ist die volle Funktionalität nur für zahlende Kunden verfügbar. Dies beinhaltet \zB Review-Informationen und Bilder. Ein Vorteil bei Music Story Pro ist, dass eine Schnittstelle für weitere APIs bietet. Dazu gehören \ua \ Spotify, Deezer, iTunes und Amazon. Außerdem implementiert es die Suche von MusicBrainz, indem es \gls{Release} \gls{ReleaseGroup} im MusicBrainz-Format liefert.
+Music Story Pro \citep[Vgl.][]{musicStoryPro} ist wie OneMusicAPI (\ref{subsubsec:OneMusicAPI}) nur begrenzt kostenlos verfügbar. Zum einen ist die Anzahl der Requests auf 50000 pro Monat begrenzt, weiterhin ist die volle Funktionalität nur für zahlende Kunden verfügbar. Dies beinhaltet \zB Review-Informationen und Bilder. Ein Vorteil bei Music Story Pro ist, dass eine Schnittstelle für weitere APIs bietet. Dazu gehören \ua \ Spotify, Deezer, iTunes und Amazon. Außerdem implementiert es die Suche von MusicBrainz, indem es sowohl \gls{Release} als auch \gls{ReleaseGroup} im MusicBrainz-Format liefert.
 
 \subsection{Discogs}
 Discogs hat es sich zur Aufgabe gemacht die größte und umfangreichste Musikdatenbank, inkl. Market Place bereitzustellen \citep[Vgl.][]{discogs}. Außerdem stellt Discogs eine API bereit, die nicht nur das Durchsuchen des Datenbestandes ermöglichen, sondern auch den MarketPlace durchsuchen lassen. Im Gegensatz zu den anderen Musikquellen, ist der soziale Charakter bei Discogs außerdem ausgeprägter.
@@ -79,7 +81,11 @@ Ein Großteil der im Internet verfügbaren APIs basiert auf dem RESTful-Standard f
 
 
 \subsection{Wrapper}
+
+
 \subsection{Web-Scraping}
+Das Web-Scraping ist eine Technik, mit der Informationen einer Webseite gesammelt werden können. Die für \arbeitstitel in Frage kommende Art des Web-Scraping ist das Herunterladen eines externen Quelltextes via HTTP, der Informationen, insbesondere über Film- oder Musikcharts verfügt.
+
 \subsection{Sweble}
 \subsection{Download/Dumps}
 Auf Wikipedia existieren brauchbare Seiten, die jeweils die Musik- und Film-Charts für jedes verfügbare Jahr enthalten. Diese Vorgehensweise ist jedoch manuell aufwändig, da Informationen erst manuell herausgesucht werden müssen und nach den Vorgaben von Wikipedia über die Webseite bereitgestellte Funktion in Text-Dateien exportiert werden müssen. Diese Textdateien müssen geparst werden, wobei das Parsen der Daten in der von Wikipedia genutzten Skriptsprache Lua relativ unkomfortabel ist. Um das Editieren von Wikipedia-Artikeln einer breiten Masse möglich zu machen, ist Lua mit seiner einfachen Syntax von großem Vorteil. Dafür ist der Text nahezu zusammenhangslos und semantisch nicht automatisch auswertbar.
@@ -99,7 +105,7 @@ Da die Verwendung von bereitgestellten APIs klar zu bevorzugen ist, da dies bede
 
 
 \section{Architektur der Web-Applikation}
-Die Web-Applikation wird serverseitig mittels Javascript umgesetzt. Die Software-Plattform Node.js \citep{nodejs} bietet ein einfaches Konzept zur Erstellung und Inbetriebnahme von skalierbaren Netzwerk-Applikationen. Vorteile im Bezug auf \arbeitstitel \ ist das event-driven Konzept von großem Vorteil, da die Kommunikation mit mehreren APIs um einiges beschleunigt werden kann, indem die API-Requests von der Asynchronität Gebrauch machen.
+Die Web-Applikation wird serverseitig mittels Javascript umgesetzt. Die Software-Plattform Node.js \citep{nodejs} bietet ein einfaches Konzept zur Erstellung und Inbetriebnahme von skalierbaren Netzwerk-Applikationen. Im Bezug auf \arbeitstitel \ ist das event-driven Konzept von großem Vorteil, da die Kommunikation mit mehreren APIs um einiges beschleunigt werden kann, indem die API-Requests von der Asynchronität Gebrauch machen.
 
 \subsection{Express.js}
 Das Web-Application-Framework \textbf{Express.js} \citep{expressjs} wird verwendet, da es eine Palette von Funktionalität zur einfachen Implementierung von Web-Applikationen mit \textbf{node.js} bietet und trotzdem flexibel und leichtgewichtig ist. Es ist als Schicht zwischen Funktionalität und Frontend zu verstehen und agiert als API \citep[Vgl.][]{expressjs}. Das ist speziell für \arbeitstitel vom Vorteil, da die API somit auch für weitere Anwendungen verwendet werden kann.
