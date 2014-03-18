@@ -2,12 +2,11 @@
 \chapter{Implementierung}
 \label{cha:implementierung}
 
-
 \section{Quellen}
 %Erforderliche und benötigte Quellen und APIs
 Im folgenden Abschnitt werden in Frage kommende Quellen und APIs und deren Vor- und Nachteile in Hinsicht auf Verwendung innerhalb der Web-Applikation \arbeitstitel \ vorgestellt. Untersucht werden nicht nur APIs, sondern auch andere mögliche Formen, um an die benötigten Daten für eine Suche innerhalb \arbeitstitel \ zu gelangen.
 
-\subsection{Musik-Quellen}
+\subsection{Musik}
 \subsubsection{MusicBrainz}
 MusicBrainz ist eine offene Musik-Enzyklopädie, die für Mensch und Maschine lesbare Informationen über Musik öffentlich zugänglich macht \citep[Vgl.][]{musicbrainz}. Sie enthält umfangreiche Daten über Künstler und deren veröffentlichte Musik, insbesondere auch Informationen über einzelne Erscheinungen. Darüber hinaus verfügt MusicBrainz auf den Künstler-Profilen über sämtliche Verweise zu weiteren Referenzen im Internet wie Wikipedia-Artikel, Youtube-Channel, Facebook-Seite, Wikidata-Eintrag \uvm 
 
@@ -28,7 +27,7 @@ Music Story Pro \citep[Vgl.][]{musicStoryPro} ist wie OneMusicAPI (\ref{subsubse
 \subsection{Discogs}
 Discogs hat es sich zur Aufgabe gemacht die größte und umfangreichste Musikdatenbank, inkl. Market Place bereitzustellen \citep[Vgl.][]{discogs}. Außerdem stellt Discogs eine API bereit, die nicht nur das Durchsuchen des Datenbestandes ermöglichen, sondern auch den MarketPlace durchsuchen lassen. Im Gegensatz zu den anderen Musikquellen, ist der soziale Charakter bei Discogs außerdem ausgeprägter.
 
-\subsection{Film-Quellen}
+\subsection{Film}
 \subsubsection{IMDb}
 IMDb ist die verbreiteste Filmdatenbank im Internet. IMDb enthält über Filmdaten hinaus auch Informationen über alle Mitwirkenden, Bewertungen, Plots \uvm Eine offizielle API bietet IMDb derzeit nicht, jedoch werden auf der Seite die Daten in Textform zum Download bereitgestellt, welche für unkommerzielle Zwecke genutzt werden dürfen.
 
@@ -41,19 +40,19 @@ Rotten Tomatoes \citep{rottenTomatoes} ist eine Sammlung von Filmkritiken und bi
 
 \subsection{Gemischt}
 \subsubsection{Wolfram|Alpha}
-
+Wolfram|Alpha \citep{wolframAbout} bietet eine begrenzt kostenlose API. So ist eine kostenlose Verwendung für unkommerzielle Testzwecke auf 2000 API-Calls pro Monat begrenzt \citep[Vgl. How much I may use the Wolfram|Alpha API?][]{wolframAPIAbout}. Insbesondere das Thema \glqq People \& History\glqq \ \citep{wolframTopicHistory} ist für \arbeitstitel \ von Interesse, da das Auflösen von Historischen Ereignissen sowie Personen zu einem Zeitraum damit ermöglicht werden kann. Speziell Geburtsdaten, Todesdatum und Amtsperioden lassen sich über das Auslesen der sogenannten \texttt{Pods} \citep[Vgl. Basics of Wolfram|Alpha Output][]{wolframAPIDocumentation} erfassen.
 
 \subsubsection{Wikipedia}
 Wikipedia ist ein Online-Nachschlagewerk und bietet laut eigener Angabe \glqq rund 30 Millionen Artikel [...] in über 280 Sprachen\grqq \ \citep[Vgl.][]{wikiWiki}. Im Gegensatz zu Google und Wolfram|Alpha verfolgt die Wikipedia die Idee einer kollaborativen Enzyklopädie, was sich auch in der Lizensierung niederschlägt, da sie unter der Creative-Commons-Attribution-ShareAlike-Lizenz weiter verwendet werden darf. Ein Nachteil ist wiederum, dass es einen großen Aufwand bedeutet, die Daten über Techniken wie scrapen oder parsen auszulesen.
 
-
 \subsubsection{Marvel API}
+Eine weitere API, die sich \va aufgrund des Inhaltes für die Verwendung in \arbeitstitel \ anbieten würde, ist die Marvel API \citep{marvel}. Über diese lassen sich insbesondere inhaltliche Informationen über Marvel-Comics ermitteln. Leider gibt darüberhinaus keine Informationen über Erscheinungsdaten \oae verwertbare Daten, die sich zeitlich einordnen lassen. Das schließt derzeit auch eine Verwendung dieser API über den Umweg aus, populäre Comics anderweitig zu suchen und spezifische Daten von dieser API nachzuladen.
 
 \section{Dienste}
 Im Folgenden werden die Dienste vorgestellt, die verwendet werden können, um Audio- und Video-Content in der Playlist von \arbeitstitel, wenn auch lediglich repräsentativ oder als Verlinkung darzustellen.
 \subsection{Video}
 \paragraph{Trailer}
-Filme in \arbeitstitel einzubinden oder gar anzuzeigen, ist allein urheberrechtlich nicht erlaubt. Repräsentativ können jedoch Trailer, soweit diese online frei vorhanden sind, verwendet werden. Trailer werden oft von den Film-Produktionsfirmen selbst online zur Verfügung gestellt, um sie online leichter verbreiten zu können und den Film einer breiteren Masse bekannt zu machen. Für diesen Zweck bietet TrailerAddict \citep{trailerAddict} eine API, die das embedden von Trailern vereinfacht. Für die Darstellung von Trailern über TrailerAddict ist jedoch Flash 9 erforderlich \citep[Vgl.][]{trailerAddictAbout}, was \uU große Restriktionen nach sich zieht, sollte der User kein Flash installiert haben.
+Filme in \arbeitstitel \ einzubinden oder gar anzuzeigen, ist allein urheberrechtlich nicht erlaubt. Repräsentativ können jedoch Trailer, soweit diese online frei vorhanden sind, verwendet werden. Trailer werden oft von den Film-Produktionsfirmen selbst online zur Verfügung gestellt, um sie online leichter verbreiten zu können und den Film einer breiteren Masse bekannt zu machen. Für diesen Zweck bietet TrailerAddict \citep{trailerAddict} eine API, die das embedden von Trailern vereinfacht. Für die Darstellung von Trailern über TrailerAddict ist jedoch Flash 9 erforderlich \citep[Vgl.][]{trailerAddictAbout}, was \uU große Restriktionen nach sich zieht, sollte der User kein Flash installiert haben.
 
 \paragraph{Youtube}
 
@@ -65,14 +64,14 @@ Filme in \arbeitstitel einzubinden oder gar anzuzeigen, ist allein urheberrechtl
 
 \subsection{Audio}
 \paragraph{Spotify}
-Über den kommerziellen Streaming-Dienst Spotify lässt sich über ein musikalisches Repertoire bekannter Plattenlabels auf einer Vielzahl von Desktop- und Mobil-Geräten verfügen. Spotify verfügt über eine API, über die sich die verfügbaren Musiktitel durchsuchen und einbetten lassen können. Aufgrund des Freemium-Konzepts ergibt sich der Nachteil, dass ein Nutzer von \arbeitstitel über einen Spotify-Account verfügen muss, möchte er unbegrenzt über die Web-Applikation Musik hören.
+Über den kommerziellen Streaming-Dienst Spotify lässt sich über ein musikalisches Repertoire bekannter Plattenlabels auf einer Vielzahl von Desktop- und Mobil-Geräten verfügen. Spotify verfügt über eine API, über die sich die verfügbaren Musiktitel durchsuchen und einbetten lassen können. Aufgrund des Freemium-Konzepts ergibt sich der Nachteil, dass ein Nutzer von \arbeitstitel \ über einen Spotify-Account verfügen muss, möchte er unbegrenzt über die Web-Applikation Musik hören.
 
 
 \section{Techniken}
 Zum Erfassen unterschiedlichster Daten im Internet gibt es verschiedene Möglichkeiten, wobei diese stark vom Angebot des Web abhängig sind. Im Folgenden werden diese Techniken vorgestellt und analysiert in unter welchen Umständen sie zu bevorzugen sind.
 
 \subsection{Web-Services}
-Web-Services folgen nicht zwangsweise den gleichen Gestaltungsgrundsätzen und basieren nicht auf den gleichen Kern-Formaten oder Protokollen, obwohl sie sich im Web bereits durchgesetzt und sich als erfolgreich erwiesen haben \citep[Vgl. Seite 67][]{Fensel2011}. Im Folgenden werden die Standards kurz hinsichtlich ihrem Zweck für \arbeitstitel vorgestellt, sollten diese bei der Implementierung eine Rolle spielen.
+Web-Services folgen nicht zwangsweise den gleichen Gestaltungsgrundsätzen und basieren nicht auf den gleichen Kern-Formaten oder Protokollen, obwohl sie sich im Web bereits durchgesetzt und sich als erfolgreich erwiesen haben \citep[Vgl. Seite 67][]{Fensel2011}. Im Folgenden werden die Standards kurz hinsichtlich ihrem Zweck für \arbeitstitel \ vorgestellt, sollten diese bei der Implementierung eine Rolle spielen.
 
 \paragraph{SOAP}
 
@@ -84,7 +83,7 @@ Ein Großteil der im Internet verfügbaren APIs basiert auf dem RESTful-Standard f
 
 
 \subsection{Web-Scraping}
-Das Web-Scraping ist eine Technik, mit der Informationen einer Webseite gesammelt werden können. Die für \arbeitstitel in Frage kommende Art des Web-Scraping ist das Herunterladen eines externen Quelltextes via HTTP, der Informationen, insbesondere über Film- oder Musikcharts verfügt.
+Das Web-Scraping ist eine Technik, mit der Informationen einer Webseite gesammelt werden können. Die für \arbeitstitel \ in Frage kommende Art des Web-Scraping ist das Herunterladen eines externen Quelltextes via HTTP, der Informationen, insbesondere über Film- oder Musikcharts verfügt.
 
 \subsection{Sweble}
 \subsection{Download/Dumps}
@@ -108,7 +107,7 @@ Da die Verwendung von bereitgestellten APIs klar zu bevorzugen ist, da dies bede
 Die Web-Applikation wird serverseitig mittels Javascript umgesetzt. Die Software-Plattform Node.js \citep{nodejs} bietet ein einfaches Konzept zur Erstellung und Inbetriebnahme von skalierbaren Netzwerk-Applikationen. Im Bezug auf \arbeitstitel \ ist das event-driven Konzept von großem Vorteil, da die Kommunikation mit mehreren APIs um einiges beschleunigt werden kann, indem die API-Requests von der Asynchronität Gebrauch machen.
 
 \subsection{Express.js}
-Das Web-Application-Framework \textbf{Express.js} \citep{expressjs} wird verwendet, da es eine Palette von Funktionalität zur einfachen Implementierung von Web-Applikationen mit \textbf{node.js} bietet und trotzdem flexibel und leichtgewichtig ist. Es ist als Schicht zwischen Funktionalität und Frontend zu verstehen und agiert als API \citep[Vgl.][]{expressjs}. Das ist speziell für \arbeitstitel vom Vorteil, da die API somit auch für weitere Anwendungen verwendet werden kann.
+Das Web-Application-Framework \textbf{Express.js} \citep{expressjs} wird verwendet, da es eine Palette von Funktionalität zur einfachen Implementierung von Web-Applikationen mit \textbf{node.js} bietet und trotzdem flexibel und leichtgewichtig ist. Es ist als Schicht zwischen Funktionalität und Frontend zu verstehen und agiert als API \citep[Vgl.][]{expressjs}. Das ist speziell für \arbeitstitel \ vom Vorteil, da die API somit auch für weitere Anwendungen verwendet werden kann.
 
 \subsection{MongoDB und NoSQL}
 MongoDB \citep{mongodb} ist eine dokumentenorientierte Datenbank. Im Gegensatz zu relationalen Datenbanken lässt sich mit der NoSQL-Strategie eine flexible Datenstruktur erstellen. Das macht im Falle von \arbeitstitel \ besonders Sinn, da sich die Art und der Umfang der Daten, die verarbeitet werden, sehr schnell ändern können. Außerdem vereinfacht dies auch die Erweiterbarkeit der Web-Applikation.
