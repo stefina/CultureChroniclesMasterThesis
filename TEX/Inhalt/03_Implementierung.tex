@@ -70,12 +70,14 @@ Besonderheit ist, dass Vimeo darüberhinaus noch eine als \textbf{JavaScript API}
 Der große Nachteil von Vimeo \bzgl der Nutzung für \arbeitstitel \ ist allerdings, dass Vimeos Kernaufgabe ist, eine Plattform für Videos, die \va künstlerischer Natur sind, zu bieten. D.h., es gibt zwar Musikvideos und Film-Trailer, jedoch nicht in der ausgeprägten Form von YouTube.
 
 
-\paragraph{Sonstige}
+%\paragraph{Sonstige}
 
 
 \subsection{Audio}
 \paragraph{Spotify}
 Über den kommerziellen Streaming-Dienst Spotify lässt sich über ein musikalisches Repertoire bekannter Plattenlabels auf einer Vielzahl von Desktop- und Mobil-Geräten verfügen. Spotify verfügt über eine API, über die sich die verfügbaren Musiktitel durchsuchen und einbetten lassen können. Aufgrund des Freemium-Konzepts ergibt sich der Nachteil, dass ein Nutzer von \arbeitstitel \ über einen Spotify-Account verfügen muss, möchte er unbegrenzt über die Web-Applikation Musik hören.
+
+\todo{bissl details zur API, wie funzt das von ner suche eines titels zu nem embed-song im iframe}
 
 
 \section{Techniken}
@@ -100,7 +102,8 @@ Das Web-Scraping ist eine Technik, mit der Informationen einer Webseite gesammel
 \subsection{Download/Dumps}
 Auf Wikipedia existieren brauchbare Seiten, die jeweils die Musik- und Film-Charts für jedes verfügbare Jahr enthalten. Diese Vorgehensweise ist jedoch manuell aufwändig, da Informationen erst manuell herausgesucht werden müssen und nach den Vorgaben von Wikipedia über die Webseite bereitgestellte Funktion in Text-Dateien exportiert werden müssen. Diese Textdateien müssen geparst werden, wobei das Parsen der Daten in der von Wikipedia genutzten Skriptsprache Lua relativ unkomfortabel ist. Um das Editieren von Wikipedia-Artikeln einer breiten Masse möglich zu machen, ist Lua mit seiner einfachen Syntax von großem Vorteil. Dafür ist der Text nahezu zusammenhangslos und semantisch nicht automatisch auswertbar.
 
-\input{Inhalt/Code/wikipedia}	
+\medskip
+\input{Inhalt/Code/wikipedia}
 
 http://en.wikipedia.org/w/index.php?title=Special:Export
 
@@ -110,7 +113,8 @@ nicht dynamisch, manuelle Downloads nötig, parsen von Textdateien
 \subsection{Mergen von Daten / Multiple Requests für einen Datensatz}
 Da die Verwendung von bereitgestellten APIs klar zu bevorzugen ist, da dies bedeutet sicher an konsistente und möglichst umfangreiche Daten zu gelangen, diese jedoch nicht auf die Ansprüche von \arbeitstitel \ zugeschnitten sind, wird es an vielen Stellen nötig sein, auch für einzige Datensätze auf verschiedene Services zurückzugreifen.
 
-\subsection{Begrenzung von Requests in Express}
+\subsection{Begrenzung von Requests pro Sekunde in den unterschiedlichen APIs}
+%\subsection{Begrenzung von Requests in Express}
 
 
 
@@ -141,21 +145,26 @@ Im Falle von \arbeitstitel \ wurde der Yeoman-Generator \textbf{generator-expres
 	\item mongoose
 \end{itemize}
 
-\section{Verwendete Tools im Frontend}
+\section{Umsetzung und verwendete Tools im Frontend}
 Im Folgenden werden verwendete Libraries und deren Nutzen erläutert.
 
 \subsection{Select2}
-\textbf{Select2} ist eine einfache konfigurierbare Implementierung einer Selectbox. Sie bietet neben dem einfachen Suchen und einer Autosuggest-Funktion bereits Features wie dem automatischen Nachladen von Remote Datasets und unterstützt infinites Scrollen. Da Select2 auf jQuery basiert sind keine weiteren Includes erforderlich. Außerdem ist es ebenfalls über \textbf{Bower} erhältlich. 
+\textbf{Select2} \citep{select2} ist eine konfigurierbare Implementierung einer Selectbox. Sie bietet neben dem einfachen Suchen und einer Autosuggest-Funktion bereits Features wie dem automatischen Nachladen von Remote Datasets und unterstützt infinites Scrollen \citep[Vgl.][]{select2}. Da Select2 auf jQuery basiert sind keine weiteren Includes erforderlich. Außerdem ist es ebenfalls über \textbf{Bower} erhältlich.
 
 \subsection{Font Awesome}
-Die Library \citefield{shorttitle}{fontAwesome} bietet ein Set von derzeit 369 Icons zur Verwendung an. Sie lässt sich mittels Bower installieren und kann nach dem Einbinden der CSS-Files durch die Verwendung der vorgegebenen CSS-Klassen verwendet werden. Dies bietet den Vorteil, dass die verwendeten Icons sowohl stilkonform, als auch von der anzeigbaren Größe veränderbar sind.
+Die Library \textbf{Font Awesome} \citep{fontAwesome} bietet ein Set von derzeit 369 Icons zur Verwendung an. Sie lässt sich mittels Bower installieren und kann nach dem Einbinden der CSS-Files durch die Verwendung der vorgegebenen CSS-Klassen verwendet werden. Dies bietet den Vorteil, dass die verwendeten Icons sowohl stilkonform, als auch von der anzeigbaren Größe veränderbar sind.
 
-\section{Verwendete Tools im Backend}
+\subsection{Darstellung von Filmplakaten in unterschiedlichen Formaten}
+Um das User Interface trotz verschiedener Medientypen und deren Repräsentierung möglichst aufgeräumt und übersichtlich zu halten, wurde die Darstellung der Medien-Items in Rasterform umgesetzt. Somit ist für jedes Item eine quadratische Anzeige vorgegeben. Dies funktioniert größtenteils für Album-Cover, da diese fast ausnahmslos ebenfalls im quadratischen Format vorliegen, ohne Darstellungsprobleme. Hier können allerdings unschöne Darstellungsfehler auftreten, da die Album-Cover in unterschiedlichen Größen verfügbar sind. Diese lassen sich mit Angabe einer festen Höhe und Breite durch CSS verhindern. 
+
+Eine besondere Behandlung wird für die Darstellung von Filmplakaten benötigt. Diese liegen zwar größtenteils im Hochformat vor, jedoch gibt es auch hier Ausnahmen. Das Problem kann einerseits damit gelöst werden, indem ein Teil des Plakats in originaler Auflösung dargestellt wird. Jedoch sind die dargestellten Bildausschnitte der Filmplakate dadurch nicht zuverlässig aussagekräftig. In der Web-Applikation wird das Plakat nun unabhängig von der Größe, der Auflösung und des Formats immer auf eine Breite und eine Höhe von jeweils 200px gestreckt, \bzw gestaucht.
+
+\section{Umsetzung und verwendete Tools im Server}
 \subsection{async}
-Das async-Modul erlaubt eine bessere Kontrolle über asynchron ausgeführte Funktionalität. Da \arbeitstitel \ an vielen Stellen mit mehreren APIs kommunizieren muss, ist die Asynchronität zwar generell ein Vorteil, jedoch werden auch Anfragen benötigt, die von mehreren asynchronen Requests abhängig sind. \Dahe , dass einige Requests von teilweise mehreren Requests, die vorher durchgeführt werden müssen, abhängig sind. Mit async lassen sich Callbacks in vordefinierter Reihenfolge durchführen. Auch eine Serie von ein und dem selben Callbacks auf Werten aus einer Liste, ist möglich, genauso lassen sich mehrere Requests gleichzeitig abarbeiten bis dann der finale Callback ausgeführt werden kann, wenn alle Vorbedingungen erfüllt worden sind.
+Das \textbf{async}-Modul \citep{async} erlaubt eine bessere Kontrolle über asynchron ausgeführte Funktionalität. Da \arbeitstitel \ an vielen Stellen mit mehreren APIs kommunizieren muss, ist die Asynchronität zwar generell ein Vorteil, jedoch werden auch Anfragen benötigt, die von mehreren asynchronen Requests abhängig sind. \Dahe , dass einige Requests von teilweise mehreren Requests, die vorher durchgeführt werden müssen, abhängig sind. Mit async lassen sich Callbacks in vordefinierter Reihenfolge durchführen. Auch eine Serie von ein und dem selben Callbacks auf Werten aus einer Liste, ist möglich, genauso lassen sich mehrere Requests gleichzeitig abarbeiten bis dann der finale Callback ausgeführt werden kann, wenn alle Vorbedingungen erfüllt worden sind.
 
 
-%\medskip
+\medskip
 \begin{lstlisting}[caption=Async Beispiel]
 async.parallel({
 		music_result: function(callback){
@@ -179,13 +188,13 @@ async.parallel({
 
 
 \subsection{cheerio}
+\textbf{Cheerio} \citep{cheerio}
 
 \subsection{nodebrainz und coverart}
 
 \subsection{node-imdb-api}
 
 
-\section{Grobkonzept}
 \begin{figure}[htb]
 	\begin{center}
 		\includegraphics[width=1\textwidth]{Retrieving.pdf}
@@ -211,8 +220,7 @@ async.parallel({
 	\label{fig:searchResultsRequestDiagram}
 \end{figure}
 
-\section{Feinkonzept}
 
-\section{Arbeitsweise}
+%\section{Arbeitsweise}
 
 
