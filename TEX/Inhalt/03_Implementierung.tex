@@ -87,10 +87,14 @@ Zum Erfassen unterschiedlichster Daten im Internet gibt es verschiedene Möglichk
 Web-Services folgen nicht zwangsweise den gleichen Gestaltungsgrundsätzen und basieren nicht auf den gleichen Kern-Formaten oder Protokollen, obwohl sie sich im Web bereits durchgesetzt und sich als erfolgreich erwiesen haben \citep[Vgl. Seite 67][]{Fensel2011}. Im Folgenden werden die Standards kurz hinsichtlich ihrem Zweck für \arbeitstitel \ vorgestellt, sollten diese bei der Implementierung eine Rolle spielen.
 
 \paragraph{SOAP}
+SOAP ist ein Netzwerkprotokoll, das dem Datenaustausch zwischen Systemen dient und Remote Procedure Calls ermöglicht. Daten werden im XML-Standard repräsentiert und über Internet-Protokolle wie z.B. HTTP und FTP übertragen. SOAP ist einer der Wege, um mit einem Webservice kommunizieren zu können. Anfragen des Clients und Antworten des Servers werden damit über das SOAP-Protokoll übertragen. \citep[Vgl.][]{wikiSoap}
 
-\paragraph{RESTful-API}
-Ein Großteil der im Internet verfügbaren APIs basiert auf dem RESTful-Standard für Web-Anwendungen.
+Dieser sogenannte SOAP-Envelope (dt. Umschlag) gibt vor, in welcher Form Daten oder Funktionsaufrufe gesendet werden müssen, damit sie vom Webservice ausgeführt werden können. Der Header ist hierbei optional, während der Body vorhanden sein muss, da er alle nötigen Informationen, wie zum Beispiel die aufzurufende Funktion und deren Parameter enthält oder den angeforderten Datensatz.
 
+Obwohl die Abkürzung SOAP ursprünglich als Acronym für Simple Object Access Access Protocol galt, wird sie seit Version 1.2 offiziell nicht mehr als Akronym verwendet. Zumal es nicht nur dem Sinn des Zugriff auf Objekte (Object Access) dient, sondern weil es auch keinesfalls einfach (Simple) ist. \citep[Vgl.][]{wikiSoap}
+
+\paragraph{REST}
+Ein Großteil der im Internet verfügbaren APIs basiert auf dem RESTful-Standard für Web-Anwendungen. REST \glqq bezeichnet ein Programmierparadigma für Webanwendungen.\grqq \citep[][]{wikiRest} Der URI-Standard legt fest, das jeder Resource eine URI zugewiesen ist. Das bedeutet, dass jeder Funktionsaufruf eine eigene URI besitzt, die aufgerufen werden muss, um eine Aktion auszuführen. Daher muss ein HTTP- Request alle notwendigen Daten enthalten, die der Server benötigt, um die Anfrage zu verstehen. Damit ist jeder Funktionsaufruf ein in sich geschlossener Aufruf des Clients und es bedarf keiner Zustandsinformationen, die auf dem Server gespeichert werden müssen, wodurch auch von der Zustandslosigkeit bei REST gesprochen. Diese Art von Funktionsaufruf hält die zu sendende Datenmenge sehr gering und benötigt zudem keine weitere Transportschicht, über die Requests und Responses übertragen werden müssen. Anstatt dessen arbeitet ein Client mit Repräsentationen einer Resource.
 
 \subsection{Wrapper}
 

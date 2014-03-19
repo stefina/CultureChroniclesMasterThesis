@@ -1,0 +1,14 @@
++++
+async
+beschreiben vom einfügen neuer Dienste
+
+---
+grafiken verbessern und grafiken beschreiben
+matrizen vervollständigen mit bewertung und in den anhang packen
+Glossar vervollständigen und neu bauen
+
+todo auskommentieren
+Anhang: Suche Matrix, wie einbinden?
+zum drucken das highlighting ausstellen
+Danksagung einkommentieren
+eigennamen \textsc{} ?
