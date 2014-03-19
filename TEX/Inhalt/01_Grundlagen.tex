@@ -89,7 +89,7 @@ Es wird ausdrücklich von Zeitraum gesprochen, wird dieser durch die Suche des Nu
 %===== SECTION =====%
 %===================%
 \chapter{Analyse}
-Nachdem untersucht wurde, welche Lösungen und Ansätze es im Internet bereits gibt, um Informationen gezielt aus der Vergangenheit zu durchsuchen, stellt sich die Frage, welche Möglichkeiten im Internet existieren, \bzw Schritte nötig sind, um Daten eines spezifischen Zeitraumes verschiedener Medientypen zu aggegieren.
+Nachdem untersucht wurde, welche Lösungen und Ansätze es im Internet bereits gibt, um Informationen gezielt aus der Vergangenheit zu durchsuchen, stellt sich die Frage, welche Möglichkeiten im Internet existieren, \bzw Schritte nötig sind, um Daten eines spezifischen Zeitraumes verschiedener Medientypen zu aggregieren.
 
 \section{Herangehensweise eines Nutzers und Evaluierung potenzieller Datenquellen}
 \label{sec:analyse}
@@ -117,7 +117,43 @@ Im Bereich Musik wird zusätzlich nach \textbf{David Bowie - Changes} gesucht, da
 Das Ergebnis der Evaluierung wird anhand einer Matrix dargestellt, in denen die Bereiche Musik, Film, Kunst und Ereignisse betrachtet werden. In jeder Matrix sind die Ergebnisse nach Suchdiensten sortiert. Es werden jeweils die ersten drei Suchergebnisse aufgelistet, zusammen mit dem Titel des Beitrages (Überschrift auf der Seite, Titel des thematisierten Items, etc.). Darauf folgt eine kurze Beschreibung des Inhalts, der schnellen Aufschluss über die Relevanz der gefundenen Ergebnisse liefert.
 
 %\subsection{Bewertung der Suchergebnisse}
-Zur Bewertung des Suchergebnisses werden verschiedene Aspekte betrachtet: thematische Relevanz, Qualität des Suchergebnisses, gemessen an der Herkunft, Glaubwürdigkeit und Objektivität der Daten. Das bedeutet, dass lediglich die Komfortabilität der Suche und die Relevanz und Auswertbarkeit der Ergebnisse untersucht wird.
+Zur Bewertung des Suchergebnisses werden verschiedene Aspekte betrachtet: thematische Relevanz, Qualität des Suchergebnisses, gemessen an der Herkunft, Glaubwürdigkeit und Objektivität der Daten. Das bedeutet, dass sowohl die Komfortabilität der Suche und die Relevanz und Auswertbarkeit der Ergebnisse untersucht wird, als auch die automatische Auswertbarkeit der Quelle. Es wird jeweils ein Stern für die Relevanz, die Qualität und die automatische Auswertbarkeit des Suchergebnisses vergeben, wobei sich die automatische Auswertbarkeit \zB daran gemessen wird, ob das Suchergebnis auch durch eine API verfügbar ist \bzw der Quelltext der Webseite sich zum Sammeln der Daten eignet.\todo{besser formulieren oder raus?}
+
+\subsection{Herangehensweise eines Nutzers im Bereich Film}
+Eine Zusammenstellung von Filmen, die sich einem gewählten Zeitpunkt zuordnen lassen, sind meistens finite Listen, die von Privatpersonen, Filmorganisationen \oae zusammengestellt werden oder Filmsammlungen, die \zB die populärsten Filme einer Epoche, eines Jahrzehnts oder eines Themas enthalten. Listen verschiedenster Kriterien sind zahlreich im Internet zu finden, jedoch sind diese oft nicht dynamisch, sondern setzen vorraus, dass sich vorher eine Person mit dem Thema auseinandergesetzt hat. Ansonsten bleibt nur das manuelle Erstellen solch einer Liste.
+
+\input{Inhalt/Tabellen/Film}
+
+\paragraph{Suche nach Filmen über Amazon}
+Der Online-Versandhandel Amazon.com bietet \ua eine große Auswahl an Filmen im Sortiment. Die erweiterte Suche lässt auch die gezielte Suche nach Titeln der Kategorie \glqq Movies \& TV\grqq \ und ein Filtern nach Jahrzehnt zu. Genauer lässt sich der Zeitraum nicht eingrenzen, außerdem beschränken sich die Suchergebnisse auf Produkte, die Amazon.com anbieten kann.
+
+\paragraph{Suche nach Filmen über IMDb}
+Die Internet Movie Database IMDb.com ist die bekannteste und autoritärste Quelle für Film, TV und Prominente der Filmbranche \citep[Vgl.][]{imdbPress}. IMDb.com umfasst neben detaillierten Informationen über einzelne Kino-, Video- und Fernseh-Produktionen auch Informationen über Videospiele \citep{imdbStats}. IMDb bietet hier derzeit die zuverlässigste Möglichkeit, Filme aus einem begrenzten Zeitraum nach Kriterien wie dem MOVIEMeter oder User Rating zu sortieren.
+
+\subsection{Evaluierung der Suchdienste im Bereich Film}
+Auch im Bereich Film variiert die Qualität und Relevanz der Suchergebnisse stark zwischen den unterschiedlichen Suchdiensten. Folgende Dienste sind analysiert worden:Die untersuchten Dienste im Bereich Film sind in der Tabelle \ref{tab:movieSearches} nach Suchtyp aufgelistet.
+
+\begin{table}[H]
+	\begin{center}
+		\begin{tabular}{|c||c c c|}
+		  %Medientyp & bla & bla \\ \hline\hline
+		  \hline
+		  Suchtyp & & Suchdienst & \\ \hline\hline
+		  Breitensuche & google.de & en.wikipedia.org & amazon.com \\ \hline
+		  Spezifische Suche & IMDb & & \\ \hline
+		\end{tabular}
+		\caption{Untersuchte Suchdienste im Bereich Film}\label{tab:movieSearches}
+	\end{center}
+\end{table}
+
+
+Die ersten Ergebnisse der Google-Suche nach \glqq movies 80s\grqq \ und \glqq movies 90s\grqq \ belaufen sich größtenteils auf händisch erstellte Listen von Privatpersonen. Unter den Ergebnissen befinden sich jedoch auch Verweise auf zwei Wikipedia-Artikel, die jeweils die populärsten Filme der Achtziger und Neunziger auflisten. Während Google \ua auf diese Wikipedia-Artikel verweist, ist das Ergebnis der Suche nach dem entsprechenden Begriff auf Wikipedia selbst weniger erfolgreich. Hier taucht nur einer der sehr gut passenden Wikipedia-Artikel auf. Stattdessen werden Artikel gefunden, die größtenteils nichts mit dem Thema Film zu tun haben, sondern sich \zB mit Musik oder Persönlichkeiten beschäftigen, was darauf zurückzuführen ist, dass die Wikipedia-Suche textuell sucht. Im Gegensatz dazu, liefert die Wikipedia-Suche nach Filmen während des Vietnamkrieges äußerst relevante Ergebnisse.
+
+Amazon.com liefert mit Zuhilfenahme des Filters \glqq Movies \& TV\grqq \ hauptsächlich Filmsammlungen, die in Anbetracht des Suchbegriffes passend sind, was auch auf die Suche nach Filmen aus dem Vietnamkrieg zutrifft.
+
+Eine Standardsuche nach den entsprechenden Suchbegriffen auf IMDb.com verdeutlicht, dass es sich um eine Titelsuche handelt. Erst eine erweiterte Suche mit den eingestellten Parametern des jeweiligen Zeitraumes resultiert in eine Liste von ausschließlich zeitlich passenden Einträgen. Dabei gilt, dass der Zeitraum des Vietnamkrieges anhand von Daten eingegeben werden muss und nicht nach dem Begriff selbst gesucht werden kann. 
+
+In Tabelle \ref{tab:filmMatrix} ist ein Auszug der Auswertung für drei der untersuchten Dienste im Bereich Film zu sehen, inklusive der Bewertung des Suchergebnisses.
 
 \subsection{Herangehensweise eines Nutzers im Bereich Musik}
 Zur dynamischen Zusammenstellung von Musik, insbesondere einer gewünschten Zeit, gibt es derzeit eine Vielzahl von Möglichkeiten. Gute Ergebnisse bieten manuell erstellte Playlisten, Musik-Sampler oder CD-Sammlungen. Jedoch sind diese Inhalte entweder nicht dynamisch oder leiden an der Möglichkeit der Spezifizierung.
@@ -155,39 +191,6 @@ Verhältnismäßig gute Ergebnisse liefert auch amazon.de mit Kompilationen und CD-
 Die Suche der Musik-Datenbank \textbf{RateYourMusic} \citep{rymHome} bietet unter \textbf{Charts} eine Suche an, die die Erstellung einer Chart-Liste nach selbst gewählten Kriterien zulässt. Es ist eine Erstellung von Chartlisten pro Jahr ab 1900 möglich. Alternativ können Chart-Listen der Jahrzehnte des 20. und 21. Jahrhundert erstellt werden. Zusätzlich kann die Chartliste nach Genre eingegrenzt werden. Dementsprechend können die Ergebnisse für die Jahrzehnte \glqq 80s\grqq \ und \glqq 90s\grqq \ von RateYourMusic als sehr gut bewertet werden. Nachteil der vorgegebenen Jahre und Jahrzehnte ist, dass es über das Frontend nicht möglich ist, Charts aus selbst gewählten Zeiträumen zu erstellen. 
 
 Dafür, dass die Online-Musik-Datenbank Musicbrainz ein großes Repertoire an Musik-Veröffentlichungen hat, dessen Werte zumindest für einen Großteil populärer Veröffentlichungen ausführlich gepflegt sind, gibt es keine Möglichkeit, auf Musicbrainz.org zeitspezifisch zu suchen.
-
-\subsection{Herangehensweise eines Nutzers im Bereich Film}
-Eine Zusammenstellung von Filmen, die sich einem gewählten Zeitpunkt zuordnen lassen, sind meistens finite Listen, die von Privatpersonen, Filmorganisationen \oae zusammengestellt werden oder Filmsammlungen, die \zB die populärsten Filme einer Epoche, eines Jahrzehnts oder eines Themas enthalten. Listen verschiedenster Kriterien sind zahlreich im Internet zu finden, jedoch sind diese oft nicht dynamisch, sondern setzen vorraus, dass sich vorher eine Person mit dem Thema auseinandergesetzt hat. Ansonsten bleibt nur das manuelle Erstellen solch einer Liste.
-
-\paragraph{Suche nach Filmen über Amazon}
-Der Online-Versandhandel Amazon.com bietet \ua eine große Auswahl an Filmen im Sortiment. Die erweiterte Suche lässt auch die gezielte Suche nach Titeln der Kategorie \glqq Movies \& TV\grqq \ und ein Filtern nach Jahrzehnt zu. Genauer lässt sich der Zeitraum nicht eingrenzen, außerdem beschränken sich die Suchergebnisse auf Produkte, die Amazon.com anbieten kann.
-
-\paragraph{Suche nach Filmen über IMDb}
-Die Internet Movie Database IMDb.com ist die bekannteste und autoritärste Quelle für Film, TV und Prominente der Filmbranche \citep[Vgl.][]{imdbPress}. IMDb.com umfasst neben detaillierten Informationen über einzelne Kino-, Video- und Fernseh-Produktionen auch Informationen über Videospiele \citep{imdbStats}. IMDb bietet hier derzeit die zuverlässigste Möglichkeit, Filme aus einem begrenzten Zeitraum nach Kriterien wie dem MOVIEMeter oder User Rating zu sortieren.
-
-\subsection{Evaluierung der Suchdienste im Bereich Film}
-Auch im Bereich Film variiert die Qualität und Relevanz der Suchergebnisse stark zwischen den unterschiedlichen Suchdiensten. Folgende Dienste sind analysiert worden:Die untersuchten Dienste im Bereich Film sind in der Tabelle \ref{tab:movieSearches} nach Suchtyp aufgelistet.
-
-\begin{table}[H]
-	\begin{center}
-		\begin{tabular}{|c||c c c|}
-		  %Medientyp & bla & bla \\ \hline\hline
-		  \hline
-		  Suchtyp & & Suchdienst & \\ \hline\hline
-		  Breitensuche & google.de & en.wikipedia.org & amazon.com \\ \hline
-		  Spezifische Suche & IMDb & & \\ \hline
-		\end{tabular}
-		\caption{Untersuchte Suchdienste im Bereich Film}\label{tab:movieSearches}
-	\end{center}
-\end{table}
-
-
-Die ersten Ergebnisse der Google-Suche nach \glqq movies 80s\grqq \ und \glqq movies 90s\grqq \ belaufen sich größtenteils auf händisch erstellte Listen von Privatpersonen. Unter den Ergebnissen befinden sich jedoch auch Verweise auf zwei Wikipedia-Artikel, die jeweils die populärsten Filme der Achtziger und Neunziger auflisten. Während Google \ua auf diese Wikipedia-Artikel verweist, ist das Ergebnis der Suche nach dem entsprechenden Begriff auf Wikipedia selbst weniger erfolgreich. Hier taucht nur einer der sehr gut passenden Wikipedia-Artikel auf. Stattdessen werden Artikel gefunden, die größtenteils nichts mit dem Thema Film zu tun haben, sondern sich \zB mit Musik oder Persönlichkeiten beschäftigen, was darauf zurückzuführen ist, dass die Wikipedia-Suche textuell sucht. Im Gegensatz dazu, liefert die Wikipedia-Suche nach Filmen während des Vietnamkrieges äußerst relevante Ergebnisse.
-
-Amazon.com liefert mit Zuhilfenahme des Filters \glqq Movies \& TV\grqq \ hauptsächlich Filmsammlungen, die in Anbetracht des Suchbegriffes passend sind, was auch auf die Suche nach Filmen aus dem Vietnamkrieg zutrifft.
-
-Eine Standardsuche nach den entsprechenden Suchbegriffen auf IMDb.com verdeutlicht, dass es sich um eine Titelsuche handelt. Erst eine erweiterte Suche mit den eingestellten Parametern des jeweiligen Zeitraumes resultiert in eine Liste von ausschließlich zeitlich passenden Einträgen. Dabei gilt, dass der Zeitraum des Vietnamkrieges anhand von Daten eingegeben werden muss und nicht nach dem Begriff selbst gesucht werden kann. 
-
 
 \subsection{Herangehensweise eines Nutzers im Bereich geschichtlicher Ereignisse}
 Eine zeitspezifische Suche nach geschichtlichen Ereignissen \bzw News-Artikeln gestaltet sich weitaus schwieriger. Zwar gibt es im Internet zahlreiche Quellen an Informationen, jedoch sind diese oft nur hinlänglich zeitabhängig auffindbar.
@@ -264,8 +267,6 @@ Allgemeines Problem insbesondere bei News-Artikeln ist die relationale Suche. In
 Das verdeutlicht, inwiefern semantische Suchen der Implementierung der Web-Anwendung dienlich sein könnten, wobei im Gegensatz dazu aus der Evaluation der Suchmaschinen hervorgeht, dass diese noch nicht implementiert sind, \bzw noch nicht ausgereift sind.
 
 %Hier fehlt komplette die Auswertung über die Qualität der Suchergebnisse der einzelnen Datenquellen. Daraufhin begründet sich ja später auch deine Auswahl, warum du z.b. IMDB benutzt und nicht google.
-
-%\input{Inhalt/Tabellen/Musik}
 
 %===================%
 %===== CHAPTER =====%
