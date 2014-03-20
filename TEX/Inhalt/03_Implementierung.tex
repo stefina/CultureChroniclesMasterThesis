@@ -2,7 +2,7 @@
 \chapter{Implementierung}
 \label{cha:implementierung}
 
-\section{Quellen}
+\section{Quellen für das Erfassen von Medien-Items}
 %Erforderliche und benötigte Quellen und APIs
 Im folgenden Abschnitt werden in Frage kommende Quellen und APIs und deren Vor- und Nachteile in Hinsicht auf Verwendung innerhalb der Web-Applikation \arbeitstitel \ vorgestellt. Untersucht werden nicht nur APIs, sondern auch andere mögliche Formen, um an die benötigten Daten für eine Suche innerhalb \arbeitstitel \ zu gelangen.
 
@@ -48,8 +48,9 @@ Wikipedia ist ein Online-Nachschlagewerk und bietet laut eigener Angabe \glqq ru
 \subsubsection{Marvel API}
 Eine weitere API, die sich \va aufgrund des Inhaltes für die Verwendung in \arbeitstitel \ anbieten würde, ist die Marvel API \citep{marvel}. Über diese lassen sich insbesondere inhaltliche Informationen über Marvel-Comics ermitteln. Leider gibt darüberhinaus keine Informationen über Erscheinungsdaten \oae verwertbare Daten, die sich zeitlich einordnen lassen. Das schließt derzeit auch eine Verwendung dieser API über den Umweg aus, populäre Comics anderweitig zu suchen und spezifische Daten von dieser API nachzuladen.
 
-\section{Dienste}
+\section{Quellen für das Einbinden von Media-Inhalten im Player}
 Im Folgenden werden die Dienste vorgestellt, die verwendet werden können, um Audio- und Video-Content in der Playlist von \arbeitstitel, wenn auch lediglich repräsentativ oder als Verlinkung darzustellen.
+
 \subsection{Video}
 \paragraph{Trailer}
 Filme in \arbeitstitel \ einzubinden oder gar anzuzeigen, ist allein urheberrechtlich nicht erlaubt. Repräsentativ können jedoch Trailer, soweit diese online frei vorhanden sind, verwendet werden. Trailer werden oft von den Film-Produktionsfirmen selbst online zur Verfügung gestellt, um sie online leichter verbreiten zu können und den Film einer breiteren Masse bekannt zu machen. Für diesen Zweck bietet TrailerAddict \citep{trailerAddict} eine API, die das embedden von Trailern vereinfacht. Für die Darstellung von Trailern über TrailerAddict ist jedoch Flash 9 erforderlich \citep[Vgl.][]{trailerAddictAbout}, was \uU große Restriktionen nach sich zieht, sollte der User kein Flash installiert haben.
@@ -69,10 +70,6 @@ Besonderheit ist, dass Vimeo darüberhinaus noch eine als \textbf{JavaScript API}
 
 Der große Nachteil von Vimeo \bzgl der Nutzung für \arbeitstitel \ ist allerdings, dass Vimeos Kernaufgabe ist, eine Plattform für Videos, die \va künstlerischer Natur sind, zu bieten. D.h., es gibt zwar Musikvideos und Film-Trailer, jedoch nicht in der ausgeprägten Form von YouTube.
 
-
-%\paragraph{Sonstige}
-
-
 \subsection{Audio}
 \paragraph{Spotify}
 Über den kommerziellen Streaming-Dienst Spotify lässt sich über ein musikalisches Repertoire bekannter Plattenlabels auf einer Vielzahl von Desktop- und Mobil-Geräten verfügen. Spotify verfügt über eine API, über die sich die verfügbaren Musiktitel durchsuchen und einbetten lassen können. Aufgrund des Freemium-Konzepts ergibt sich der Nachteil, dass ein Nutzer von \arbeitstitel \ über einen Spotify-Account verfügen muss, möchte er unbegrenzt über die Web-Applikation Musik hören.
@@ -81,7 +78,7 @@ Der große Nachteil von Vimeo \bzgl der Nutzung für \arbeitstitel \ ist allerding
 
 
 \section{Techniken}
-Zum Erfassen unterschiedlichster Daten im Internet gibt es verschiedene Möglichkeiten, wobei diese stark vom Angebot des Web abhängig sind. Im Folgenden werden diese Techniken vorgestellt und analysiert in unter welchen Umständen sie zu bevorzugen sind.
+Zum Erfassen unterschiedlichster Daten im Internet gibt es verschiedene Möglichkeiten, wobei diese stark vom Angebot des Web und der einzelnen Anbieter abhängig sind. Im Folgenden werden mögliche Techniken Daten unterschiedlicher Quellen zu erfassen, kurz vorgestellt und deren Vor- und Nachteile für die Entwicklung von \arbeitstitel \ herausgestellt. Auf dessen Grundlage wird entschieden, welche Datenquellen zu bevorzugen sind.
 
 \subsection{Web-Services}
 Web-Services folgen nicht zwangsweise den gleichen Gestaltungsgrundsätzen und basieren nicht auf den gleichen Kern-Formaten oder Protokollen, obwohl sie sich im Web bereits durchgesetzt und sich als erfolgreich erwiesen haben \citep[Vgl. Seite 67][]{Fensel2011}. Im Folgenden werden die Standards kurz hinsichtlich ihrem Zweck für \arbeitstitel \ vorgestellt, sollten diese bei der Implementierung eine Rolle spielen.
@@ -108,22 +105,25 @@ Ein Nachteil ist, dass für das Sammeln von Daten meist ein größerer Aufwand nöti
 
 Zwar kann durch das Web-Scraping auf nahezu alle frei zugänglichen Daten des Webs zugegriffen werden, für die es keine Schnittstellen gibt, jedoch wird diese Methode von vielen Websites ausdrücklich verboten. Zwar lassen sich die meisten Barrieren auf unterschiedliche Arten umgehen, jedoch werden dadurch Urheberrechte verletzt, die zu strafrechtliche Konsequenzen nach sich ziehen können.
 
-\subsection{Sweble Wikitext Component}
-Das \textbf{Sweble Wikitext Components module} soll das Parsen von MediaWikis Wikitext ermöglichen und darüberhinaus eine Engine bieten, die versucht das Verhalten eines MediaWiki zu emulieren. \citep{swebleOrg} \citep[Vgl.][]{sweble} 
-
 \subsection{Download/Dumps}
-Auf Wikipedia existieren brauchbare Seiten, die jeweils die Musik- und Film-Charts für jedes verfügbare Jahr enthalten. Diese Vorgehensweise ist jedoch manuell aufwändig, da Informationen erst manuell herausgesucht werden müssen und nach den Vorgaben von Wikipedia über die Webseite bereitgestellte Funktion in Text-Dateien exportiert werden müssen. Diese Textdateien müssen geparst werden, wobei das Parsen der Daten in der von Wikipedia genutzten Skriptsprache Lua relativ unkomfortabel ist. Um das Editieren von Wikipedia-Artikeln einer breiten Masse möglich zu machen, ist Lua mit seiner einfachen Syntax von großem Vorteil. Dafür ist der Text nahezu zusammenhangslos und semantisch nicht automatisch auswertbar.
+Auf Wikipedia existieren brauchbare Seiten, die jeweils die Musik- und Film-Charts für jedes verfügbare Jahr enthalten. Diese Vorgehensweise ist jedoch manuell aufwändig, da Informationen erst manuell herausgesucht werden müssen und nach den Vorgaben von Wikipedia über die Webseite bereitgestellte Funktion in Text-Dateien exportiert werden müssen. Diese Textdateien müssen geparst werden, wobei das Parsen der Daten in der von Wikipedia genutzten Skriptsprache Lua relativ unkomfortabel ist. Um das Editieren von Wikipedia-Artikeln einer breiten Masse möglich zu machen, ist Lua mit seiner einfachen Syntax von großem Vorteil. Dafür ist der Text nahezu zusammenhangslos und semantisch nicht automatisch auswertbar. Außerdem erfordert dies eine lokale Datenhaltung der erfassten Daten, die zusätzlich regelmäßig gewartet werden muss, wenn es neue Daten gibt oder Daten geändert werden.
+
+In Listing \ref{lst:wikiExcerpt} ist ein Auszug eines Wikipedia-Downloads zu sehen.
+\url{http://en.wikipedia.org/w/index.php?title=Special:Export}
 
 \medskip
 \input{Inhalt/Code/wikipedia}
 
-http://en.wikipedia.org/w/index.php?title=Special:Export
+
+\subsection{Sweble Wikitext Component}
+Das \textbf{Sweble Wikitext Components module} soll das Parsen von MediaWikis Wikitext ermöglichen und darüberhinaus eine Engine bieten, die versucht das Verhalten eines MediaWiki zu emulieren. \citep[Vgl.][]{sweble} das bedeutet  \textbf{Sweble} addressiert das Problem, dass selbst Wikis mit einem \citep{sweblePaper} 
+
 
 
 nicht dynamisch, manuelle Downloads nötig, parsen von Textdateien
 
 \subsection{Mergen von Daten / Multiple Requests für einen Datensatz}
-Da die Verwendung von bereitgestellten APIs klar zu bevorzugen ist, da dies bedeutet sicher an konsistente und möglichst umfangreiche Daten zu gelangen, diese jedoch nicht auf die Ansprüche von \arbeitstitel \ zugeschnitten sind, wird es an vielen Stellen nötig sein, auch für einzige Datensätze auf verschiedene Services zurückzugreifen.
+Da die Verwendung von bereitgestellten APIs klar zu bevorzugen ist, da dies bedeutet sicher an konsistente und möglichst umfangreiche Daten zu gelangen, diese jedoch nicht auf die Ansprüche von \arbeitstitel \ zugeschnitten sind, ist es \ua nötig, auch für einzige Datensätze auf verschiedene Services zurückzugreifen. So wird \zB für die Anzeige eines Songtitels in der Web-Applikation, sowohl als Suchvorschlag, als auch als Suchergebnis-Item, zunächst alle benötigten Informationen von der \textbf{MusicBrainz}-API bezogen und die angezeigten Cover von der \textbf{CoverArt}-API einzeln nachgeladen.
 
 \subsection{Begrenzung von Requests pro Sekunde in den unterschiedlichen APIs}
 %\subsection{Begrenzung von Requests in Express}
@@ -133,18 +133,20 @@ Da die Verwendung von bereitgestellten APIs klar zu bevorzugen ist, da dies bede
 \section{Architektur der Web-Applikation}
 Die Web-Applikation wird serverseitig mittels Javascript umgesetzt. Die Software-Plattform Node.js \citep{nodejs} bietet ein einfaches Konzept zur Erstellung und Inbetriebnahme von skalierbaren Netzwerk-Applikationen. Im Bezug auf \arbeitstitel \ ist das event-driven Konzept von großem Vorteil, da die Kommunikation mit mehreren APIs um einiges beschleunigt werden kann, indem die API-Requests von der Asynchronität Gebrauch machen.
 
+Ein weiterer maßgeblicher Vorteil ist, dass für jede in dieser Arbeit betrachtete Schnittstelle auch ein Wrapper existiert, was die Einbindung der unterschiedlichen Quellen stark vereinfacht.
+
 \subsection{Express.js}
 Das Web-Application-Framework \textbf{Express.js} \citep{expressjs} wird verwendet, da es eine Palette von Funktionalität zur einfachen Implementierung von Web-Applikationen mit \textbf{node.js} bietet und trotzdem flexibel und leichtgewichtig ist. Es ist als Schicht zwischen Funktionalität und Frontend zu verstehen und agiert als API \citep[Vgl.][]{expressjs}. Das ist speziell für \arbeitstitel \ vom Vorteil, da die API somit auch für weitere Anwendungen verwendet werden kann.
 
 \subsection{MongoDB und NoSQL}
 MongoDB \citep{mongodb} ist eine dokumentenorientierte Datenbank. Im Gegensatz zu relationalen Datenbanken lässt sich mit der NoSQL-Strategie eine flexible Datenstruktur erstellen. Das macht im Falle von \arbeitstitel \ besonders Sinn, da sich die Art und der Umfang der Daten, die verarbeitet werden, sehr schnell ändern können. Außerdem vereinfacht dies auch die Erweiterbarkeit der Web-Applikation.
 
-\subsection{Frontend mit Jade und Stylus}
+\subsubsection{Frontend mit Jade und Stylus}
 Im Frontend werden die Werkzeuge Jade und Stylus verwendet. Jade \citep{jade} ist eine Node Template Engine und vereinfacht das Schreiben von HTML-Code, indem es eine eigene Syntax implementiert. Über die vereinfachte Schreibweise hinaus implementiert sie auch Iterationen, Bedingungen und Filter. Außerdem können sogenannte Mixins implementiert und somit dessen Funktionalität wiederverwendet werden.
 
 Stylus \citep{stylus} ist eine für Node entwickelte Sprache, deren Kompilat CSS ist. Die Syntax ist im Gegensatz zu CSS stark vereinfacht. Weiterhin bietet sie Funktionen wie die Deklaration von Variablen, Funktionen und Mixins.
 
-\subsection{Code-Generierung mit Yeoman}
+\subsubsection{Code-Generierung mit Yeoman}
 Das Gerüst der Web-Applikation wurde mittels \textbf{Yeoman} \citep{yeoman}, einem Scaffolding-Tool für Webapps, generiert. Der Workflow von Yeoman basiert auf den drei Tools \textbf{Yo}, \textbf{Grunt} \citep{grunt} und \textbf{Bower} \citep{bower}. Bower ist ein Package Manager für das Frontend, Grunt ein Task Runner, mit Hilfe dessen Automatisierungsprozesse und Build-Skripte ausgeführt werden können. Yo kann mittles verschiedener Generatoren und Konfigurationen den Boilerplate-Code einer Web-Applikation und ein passendes Grunt Skript generieren.
 
 Im Falle von \arbeitstitel \ wurde der Yeoman-Generator \textbf{generator-express} \citep{yeoExpress} verwendet. Das generierte Projekt bereits aus einer MVC-Struktur und hat bereits MongoDB als Default-Datenbank vorkonfiguriert. 
@@ -157,27 +159,29 @@ Im Falle von \arbeitstitel \ wurde der Yeoman-Generator \textbf{generator-expres
 	\item mongoose
 \end{itemize}
 
-\section{Umsetzung und verwendete Tools im Frontend}
+\subsection{Umsetzung und verwendete Tools im Frontend}
 Im Folgenden werden verwendete Libraries und deren Nutzen erläutert.
 
-\subsection{Select2}
+\subsubsection{Select2}
 \textbf{Select2} \citep{select2} ist eine konfigurierbare Implementierung einer Selectbox. Sie bietet neben dem einfachen Suchen und einer Autosuggest-Funktion bereits Features wie dem automatischen Nachladen von Remote Datasets und unterstützt infinites Scrollen \citep[Vgl.][]{select2}. Da Select2 auf jQuery basiert sind keine weiteren Includes erforderlich. Außerdem ist es ebenfalls über \textbf{Bower} erhältlich.
 
-\subsection{Font Awesome}
+\subsubsection{Font Awesome}
 Die Library \textbf{Font Awesome} \citep{fontAwesome} bietet ein Set von derzeit 369 Icons zur Verwendung an. Sie lässt sich mittels Bower installieren und kann nach dem Einbinden der CSS-Files durch die Verwendung der vorgegebenen CSS-Klassen verwendet werden. Dies bietet den Vorteil, dass die verwendeten Icons sowohl stilkonform, als auch von der anzeigbaren Größe veränderbar sind.
 
-\subsection{Darstellung von Filmplakaten in unterschiedlichen Formaten}
+\subsubsection{Darstellung von Filmplakaten in unterschiedlichen Formaten}
 Um das User Interface trotz verschiedener Medientypen und deren Repräsentierung möglichst aufgeräumt und übersichtlich zu halten, wurde die Darstellung der Medien-Items in Rasterform umgesetzt. Somit ist für jedes Item eine quadratische Anzeige vorgegeben. Dies funktioniert größtenteils für Album-Cover, da diese fast ausnahmslos ebenfalls im quadratischen Format vorliegen, ohne Darstellungsprobleme. Hier können allerdings unschöne Darstellungsfehler auftreten, da die Album-Cover in unterschiedlichen Größen verfügbar sind. Diese lassen sich mit Angabe einer festen Höhe und Breite durch CSS verhindern. 
 
 Eine besondere Behandlung wird für die Darstellung von Filmplakaten benötigt. Diese liegen zwar größtenteils im Hochformat vor, jedoch gibt es auch hier Ausnahmen. Das Problem kann einerseits damit gelöst werden, indem ein Teil des Plakats in originaler Auflösung dargestellt wird. Jedoch sind die dargestellten Bildausschnitte der Filmplakate dadurch nicht zuverlässig aussagekräftig. In der Web-Applikation wird das Plakat nun unabhängig von der Größe, der Auflösung und des Formats immer auf eine Breite und eine Höhe von jeweils 200px gestreckt, \bzw gestaucht.
 
-\section{Umsetzung und verwendete Tools im Server}
-\subsection{async}
+\subsection{Umsetzung und verwendete Tools im Server}
+\subsubsection{async}
 Das \textbf{async}-Modul \citep{async} erlaubt eine bessere Kontrolle über asynchron ausgeführte Funktionalität. Da \arbeitstitel \ an vielen Stellen mit mehreren APIs kommunizieren muss, ist die Asynchronität zwar generell ein Vorteil, jedoch werden auch Anfragen benötigt, die von mehreren asynchronen Requests abhängig sind. \Dahe , dass einige Requests von teilweise mehreren Requests, die vorher durchgeführt werden müssen, abhängig sind. Mit async lassen sich Callbacks in vordefinierter Reihenfolge durchführen. Auch eine Serie von ein und dem selben Callbacks auf Werten aus einer Liste, ist möglich, genauso lassen sich mehrere Requests gleichzeitig abarbeiten bis dann der finale Callback ausgeführt werden kann, wenn alle Vorbedingungen erfüllt worden sind.
+
+Im Listing \ref{lst:async} ist der asynchrone Aufbau der Funktionen mithilfe des \textbf{async}-Moduls zu sehen. Die Funktionen \texttt{getMusicSuggestionsBySearchterm} und \texttt{getMovieSuggestionsBySearchterm} werden parallel ausgeführt. Sobald beide Funktionen abgeschlossen sind und das Callback ausgelöst wird, wird die in Zeile \ref{lst:asyncCallback} implementierte Funktion ausgeführt. Über \texttt{results} kann auf die Ergebnisse der parallel ausgeführten Funktionen zugegriffen werden.
 
 
 \medskip
-\begin{lstlisting}[caption=Async Beispiel]
+\begin{lstlisting}[caption=Async Beispiel,label={lst:async}]
 async.parallel({
 		music_result: function(callback){
 			getMusicSuggestionsBySearchterm(searchterm, callback);
@@ -186,7 +190,7 @@ async.parallel({
 			getMovieSuggestionsBySearchterm(searchterm, callback);
 		}
 	},
-	function(err, results) {
+	function(err, results) { (*@\label{lst:asyncCallback}@*) 
 		if(err){
 			callback(err, searchterm);
 		} else {
@@ -200,7 +204,7 @@ async.parallel({
 
 
 \subsection{cheerio}
-\textbf{Cheerio} \citep{cheerio}
+Mithilfe des Node-Moduls \textbf{Cheerio} \citep{cheerio} lassen sich Informationen von Websites mithilfe von CSS-Selektoren, wie sie in der Syntax von jQuery bekannt sind, erfassen. 
 
 \subsection{nodebrainz und coverart}
 
@@ -233,6 +237,8 @@ async.parallel({
 \end{figure}
 
 
-%\section{Arbeitsweise}
+\section{Detailliert}
+Im Folgenden werden einzelne Besonderheiten, die in der Implementierung eine Rolle spielen, erläutert.
 
-
+\subsection{SuggestionItem}
+Bei Eingabe eines Suchbegriffes werden zunächst die aktivierten APIs durchsucht. Dabei werden gleichzeitig multiple Suchanfragen an externe Datenquellen geschickt, wobei für jede API oder Datenquelle unterschiedliche Besonderheiten zu beachten sind. Um zu gewährleisten, dass eine Suchanfrage sowohl über die Eingabe eines Titels, als auch über die Eingabe des Interprets zum passenden Ergebnis führt, werden zwei Suchanfragen gleichzeitig an die \textbf{MusicBrainz}-API geschickt. Dies liegt daran, dass die MusicBrainz-API die Angabe der Entität vorraussetzt, nach der gesucht werden soll. Das heißt, dass eine Eingabe von \bspw \glqq Prince\grqq \ sowohl zu Songs des Interpreten \glqq Prince\grqq , als auch zu Songs, in denen das Wort \glqq Prince \grqq \ vorkommt.
