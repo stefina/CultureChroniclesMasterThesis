@@ -106,10 +106,7 @@ Ein Nachteil ist, dass für das Sammeln von Daten meist ein größerer Aufwand nöti
 Zwar kann durch das Web-Scraping auf nahezu alle frei zugänglichen Daten des Webs zugegriffen werden, für die es keine Schnittstellen gibt, jedoch wird diese Methode von vielen Websites ausdrücklich verboten. Zwar lassen sich die meisten Barrieren auf unterschiedliche Arten umgehen, jedoch werden dadurch Urheberrechte verletzt, die zu strafrechtliche Konsequenzen nach sich ziehen können.
 
 \subsection{Download/Dumps}
-Auf Wikipedia existieren brauchbare Seiten, die jeweils die Musik- und Film-Charts für jedes verfügbare Jahr enthalten. Diese Vorgehensweise ist jedoch manuell aufwändig, da Informationen erst manuell herausgesucht werden müssen und nach den Vorgaben von Wikipedia über die Webseite bereitgestellte Funktion in Text-Dateien exportiert werden müssen. Diese Textdateien müssen geparst werden, wobei das Parsen der Daten in der von Wikipedia genutzten Skriptsprache Lua relativ unkomfortabel ist. Um das Editieren von Wikipedia-Artikeln einer breiten Masse möglich zu machen, ist Lua mit seiner einfachen Syntax von großem Vorteil. Dafür ist der Text nahezu zusammenhangslos und semantisch nicht automatisch auswertbar. Außerdem erfordert dies eine lokale Datenhaltung der erfassten Daten, die zusätzlich regelmäßig gewartet werden muss, wenn es neue Daten gibt oder Daten geändert werden.
-
-In Listing \ref{lst:wikiExcerpt} ist ein Auszug eines Wikipedia-Downloads zu sehen.
-\url{http://en.wikipedia.org/w/index.php?title=Special:Export}
+Auf Wikipedia existieren brauchbare Seiten, die jeweils die Musik- und Film-Charts für jedes verfügbare Jahr enthalten. Diese Vorgehensweise ist jedoch manuell aufwändig, da Informationen erst manuell herausgesucht werden müssen und nach den Vorgaben von Wikipedia über die Webseite bereitgestellte Funktion in Text-Dateien exportiert werden müssen. Inhalte können über die URL \url{http://en.wikipedia.org/w/index.php?title=Special:Export} heruntergeladen werden. Diese Textdateien müssen geparst werden, wobei das Parsen der Daten in der von Wikipedia genutzten Skriptsprache Lua relativ unkomfortabel ist. Um das Editieren von Wikipedia-Artikeln einer breiten Masse möglich zu machen, ist Lua mit seiner einfachen Syntax von großem Vorteil. Dafür ist der Text nahezu zusammenhangslos und semantisch nicht automatisch auswertbar. In Listing \ref{lst:wikiExcerpt} ist ein Auszug eines Wikipedia-Downloads zu sehen. Außerdem erfordert dies eine lokale Datenhaltung der erfassten Daten, die zusätzlich regelmäßig gewartet werden muss, wenn es neue Daten gibt oder Daten geändert werden.
 
 \medskip
 \input{Inhalt/Code/wikipedia}
@@ -118,9 +115,6 @@ In Listing \ref{lst:wikiExcerpt} ist ein Auszug eines Wikipedia-Downloads zu seh
 \subsection{Sweble Wikitext Component}
 Das \textbf{Sweble Wikitext Components module} soll das Parsen von MediaWikis Wikitext ermöglichen und darüberhinaus eine Engine bieten, die versucht das Verhalten eines MediaWiki zu emulieren. \citep[Vgl.][]{sweble} das bedeutet  \textbf{Sweble} addressiert das Problem, dass selbst Wikis mit einem \citep{sweblePaper} 
 
-
-
-nicht dynamisch, manuelle Downloads nötig, parsen von Textdateien
 
 \subsection{Mergen von Daten / Multiple Requests für einen Datensatz}
 Da die Verwendung von bereitgestellten APIs klar zu bevorzugen ist, da dies bedeutet sicher an konsistente und möglichst umfangreiche Daten zu gelangen, diese jedoch nicht auf die Ansprüche von \arbeitstitel \ zugeschnitten sind, ist es \ua nötig, auch für einzige Datensätze auf verschiedene Services zurückzugreifen. So wird \zB für die Anzeige eines Songtitels in der Web-Applikation, sowohl als Suchvorschlag, als auch als Suchergebnis-Item, zunächst alle benötigten Informationen von der \textbf{MusicBrainz}-API bezogen und die angezeigten Cover von der \textbf{CoverArt}-API einzeln nachgeladen.
@@ -242,3 +236,12 @@ Im Folgenden werden einzelne Besonderheiten, die in der Implementierung eine Rol
 
 \subsection{SuggestionItem}
 Bei Eingabe eines Suchbegriffes werden zunächst die aktivierten APIs durchsucht. Dabei werden gleichzeitig multiple Suchanfragen an externe Datenquellen geschickt, wobei für jede API oder Datenquelle unterschiedliche Besonderheiten zu beachten sind. Um zu gewährleisten, dass eine Suchanfrage sowohl über die Eingabe eines Titels, als auch über die Eingabe des Interprets zum passenden Ergebnis führt, werden zwei Suchanfragen gleichzeitig an die \textbf{MusicBrainz}-API geschickt. Dies liegt daran, dass die MusicBrainz-API die Angabe der Entität vorraussetzt, nach der gesucht werden soll. Das heißt, dass eine Eingabe von \bspw \glqq Prince\grqq \ sowohl zu Songs des Interpreten \glqq Prince\grqq , als auch zu Songs, in denen das Wort \glqq Prince \grqq \ vorkommt.
+\ref{fig:suggestionItem}
+
+\begin{figure}[htb]
+	\begin{center}
+		\includegraphics[width=1\textwidth]{Klassendiagramm.pdf}
+		\caption{SuggestionItem}
+	\end{center}
+	\label{fig:suggestionItem}
+\end{figure}
