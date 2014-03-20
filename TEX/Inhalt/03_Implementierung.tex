@@ -120,7 +120,7 @@ Das \textbf{Sweble Wikitext Components module} soll das Parsen von MediaWikis Wi
 Da die Verwendung von bereitgestellten APIs klar zu bevorzugen ist, da dies bedeutet sicher an konsistente und möglichst umfangreiche Daten zu gelangen, diese jedoch nicht auf die Ansprüche von \arbeitstitel \ zugeschnitten sind, ist es \ua nötig, auch für einzige Datensätze auf verschiedene Services zurückzugreifen. So wird \zB für die Anzeige eines Songtitels in der Web-Applikation, sowohl als Suchvorschlag, als auch als Suchergebnis-Item, zunächst alle benötigten Informationen von der \textbf{MusicBrainz}-API bezogen und die angezeigten Cover von der \textbf{CoverArt}-API einzeln nachgeladen.
 
 \subsection{Begrenzung von Requests pro Sekunde in den unterschiedlichen APIs}
-%\subsection{Begrenzung von Requests in Express}
+MusicBrainz limitiert, wie einige andere APIs auch, die Anzahl von Anfragen einer Ressource an den Kriterien des User-Agents und der IP-Addresse. Darüber hinaus behalten sie sich vor, bei einer generellen Überlastung des Servers eingehende Anfragen zu blockieren. Dies hat zur Folge, dass bei einzelnen Requests, insbesondere beim Nachladen einzelner Informationen pro Item, dieses Limit schnell überschritten ist. Aus diesem Grund muss dem Sammeln größerer Mengen an Items entweder mehr Zeit gegeben werden, oder generell weniger Items geliefert werden. Der beste Kompromiss ist hier, immer ein Set von Medien-Items anzufragen, welches die Kapazität nicht überschreitet, und jeweils einzelne Sets nachzuladen.
 
 
 
