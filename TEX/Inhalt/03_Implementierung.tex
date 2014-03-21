@@ -218,6 +218,7 @@ async.parallel({
 Außerdem wird die von \textbf{async} bereitgestellte Funktion \texttt{each} verwendet. Auf diesem Wege kann für jedes Item eines Result-Sets, das von einer API bezogen wurde, ein Request ausgeführt werden, um \zB Cover-Art nachzuladen. Diese Funktion wird zum Abfragen der Film-Trailer verwendet, indem anhand eines Sets von \textbf{IMDb}-IDs für jede ein Trailer gesucht wird.
 
 \subsection{node-rest-client}
+Für Requests an die Schnittstelle \textbf{TrailerAddict} wird das Node-Modul \textbf{node-rest-client} verwendet. \citep{nodeRestClient} Es vereinfacht Requests an REST-APIs und liefert JavaScript-Objekte zurück, dessen Verarbeitung dann selbst übernommen werden muss. Dies erfordert zwar mehr Aufwand, einen Request durchzuführen, als einen API-Wrapper zu verwenden, da Results eines Requests jedoch auch im Falle der Verwendung eines API-Wrappers erst auf die intern verwendeten Objekte gemappt werden müssen, hält sich der Mehraufwand in Grenzen.
 
 
 \subsection{cheerio}
