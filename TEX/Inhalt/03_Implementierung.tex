@@ -140,26 +140,28 @@ Das Gerüst der Web-Applikation wurde mittels \textbf{Yeoman} \citep{yeoman}, ein
 \arbeitstitel \ ist mithilfe des Yeoman-Generators \textbf{generator-express} \citep{yeoExpress} generiert worden. Die generierte Projektstruktur implementiert bereits das MVC-Framework. Außerdem ist MongoDB als Default-Datenbank vorkonfiguriert.
 
 \subsection{Umsetzung und verwendete Tools im Frontend}
-Im Folgenden werden verwendete Libraries und deren Nutzen erläutert.
+Im Folgenden werden verwendete Libraries und deren Nutzen, sowie sonstige Besonderheiten der Implementierung des Frontends erläutert.
 
-\subsubsection{Jade und Stylus}
+\paragraph{Jade und Stylus}
 Im Frontend werden die Werkzeuge Jade und Stylus verwendet. Jade \citep{jade} ist eine Node Template Engine und vereinfacht das Schreiben von HTML-Code, indem es eine eigene Syntax implementiert. Über die vereinfachte Schreibweise hinaus implementiert sie auch Iterationen, Bedingungen und Filter. Außerdem können sogenannte Mixins implementiert und somit dessen Funktionalität wiederverwendet werden.
 
 Stylus \citep{stylus} ist eine für Node entwickelte Sprache, deren Kompilat CSS ist. Die Syntax ist im Gegensatz zu CSS stark vereinfacht. Weiterhin bietet sie Funktionen wie die Deklaration von Variablen, Funktionen und Mixins.
 
 
-\subsubsection{Select2}
+\paragraph{Select2}
 \textbf{Select2} \citep{select2} ist eine konfigurierbare Implementierung einer Selectbox. Sie bietet neben dem einfachen Suchen und einer Autosuggest-Funktion bereits Features wie dem automatischen Nachladen von Remote Datasets und unterstützt infinites Scrollen \citep[Vgl.][]{select2}. Da Select2 auf jQuery basiert sind keine weiteren Includes erforderlich. Außerdem ist es ebenfalls über \textbf{Bower} erhältlich.
 
-\subsubsection{Font Awesome}
+\paragraph{Font Awesome}
 Die Library \textbf{Font Awesome} \citep{fontAwesome} bietet ein Set von derzeit 369 Icons zur Verwendung an. Sie lässt sich mittels Bower installieren und kann nach dem Einbinden der CSS-Files durch die Verwendung der vorgegebenen CSS-Klassen verwendet werden. Dies bietet den Vorteil, dass die verwendeten Icons sowohl stilkonform, als auch von der anzeigbaren Größe veränderbar sind.
 
-\subsubsection{Darstellung von Filmplakaten in unterschiedlichen Formaten}
+\paragraph{Darstellung von Filmplakaten in unterschiedlichen Formaten}
 Um das User Interface trotz verschiedener Medientypen und deren Repräsentierung möglichst aufgeräumt und übersichtlich zu halten, wurde die Darstellung der Medien-Items in Rasterform umgesetzt. Somit ist für jedes Item eine quadratische Anzeige vorgegeben. Dies funktioniert größtenteils für Album-Cover, da diese fast ausnahmslos ebenfalls im quadratischen Format vorliegen, ohne Darstellungsprobleme. Hier können allerdings unschöne Darstellungsfehler auftreten, da die Album-Cover in unterschiedlichen Größen verfügbar sind. Diese lassen sich mit Angabe einer festen Höhe und Breite durch CSS verhindern. 
 
 Eine besondere Behandlung wird für die Darstellung von Filmplakaten benötigt. Diese liegen zwar größtenteils im Hochformat vor, jedoch gibt es auch hier Ausnahmen. Das Problem kann einerseits damit gelöst werden, indem ein Teil des Plakats in originaler Auflösung dargestellt wird. Jedoch sind die dargestellten Bildausschnitte der Filmplakate dadurch nicht zuverlässig aussagekräftig. In der Web-Applikation wird das Plakat nun unabhängig von der Größe, der Auflösung und des Formats immer auf eine Breite und eine Höhe von jeweils 200px gestreckt, \bzw gestaucht.
 
 \subsection{Umsetzung und verwendete Tools im Server}
+Die Funktionalität des Servers baut auf verschiedenen Tools und Frameworks auf, dessen Zusammenspiel im Folgenden kurz vorgestellt wird.
+
 \subsubsection{Interne Datenübertragung mittels MongoDB}
 Da die in \arbeitstitel \ angezeigten und verarbeiteten Daten dynamisch von unterschiedlichen Quellen geladen werden sollen, ist eine Datenhaltung im Prinzip nicht erforderlich. Jedoch werden die zur Laufzeit erfassten Daten zwischengespeichert und intern auf Objekte gemappt.
 
@@ -199,7 +201,28 @@ Bei Eingabe eines Suchbegriffes werden zunächst die aktivierten APIs durchsucht.
 
 \subsubsection{Erfassen von Medien-Items von externen Quellen}
 Das Erfassen von Daten wird durch das Zusammenspiel mehrere Module bewerkstelligt. Dies sind über die API-Wrapper hinaus die Module \textbf{async}, \textbf{node-rest-client}, \textbf{cheerio} und \textbf{request}.
-Im Folgenden werden der Funktionsumfang und die Restriktionen der verwendeten API-Wrapper erläutert. Daraufhin wird erklärt, inwiefern die zusätzlichen Module die Implementierung komplettieren.
+Im Folgenden werden der Funktionsumfang und die Restriktionen der verwendeten API-Wrapper erläutert. Daraufhin wird erklärt, inwiefern die zusätzlichen Module zur Komplettierung der Implementierung nötig sind.
+
+\paragraph{NodeBrainz}
+Das Node-Modul \textbf{NodeBrainz} ist ein schlanker Wrapper, der vollen Zugang zur MusicBrainz API (Version 2) bietet. \citep[Vgl.][]{nodebrainz} Dadurch wird eine komfortable Verwendung der \texttt{search}-Entität ermöglicht. Die Suche von Interpreten und Songtiteln wird mithilfe des \textbf{NodeBrainz}-Moduls bewerkstelligt.
+
+\paragraph{Cover Art for Node}
+Die CoverArt-API ist eine seperate API von \textbf{MusicBrainz}, die das Nachschlagen von CoverArt für anhand einer MusicBrainz-\texttt{release}-ID ermöglicht. Das Node-Modul \textbf{Cover Art for Node} implementiert diese Funktionalität und bietet zum einem die Möglichkeit Cover-Art in binärer Form zurück zu liefern, zum anderen ist es möglich die gelieferten Bild-URLs zu Cover-Art in unterschiedlichen Größen, zu erfassen. \citep{coverart}
+
+
+\paragraph{node-imdb-api}
+Da \textbf{IMDb} über keine offizelle API verfügt, nutzt \citeauthor{nodeImdbApi} mehrere inoffizelle APIs, die Teile ihrer Daten aus den nächtlich erscheinenden Daten der \textbf{IMDb} aggregieren. Da keine dieser APIs vollständig ist, vereint \textbf{node-imdb-api} mehrere dieser RESTful APIs der inoffizellen Seiten. \citep[Vgl.][]{nodeImdbApi}
+
+\paragraph{node-rest-client}
+Für Requests an die Schnittstelle \textbf{TrailerAddict} wird das Node-Modul \textbf{node-rest-client} verwendet. \citep{nodeRestClient} Es vereinfacht Requests an REST-APIs und liefert JavaScript-Objekte zurück, dessen Verarbeitung dann selbst übernommen werden muss. Dies erfordert zwar mehr Aufwand, einen Request durchzuführen, als einen API-Wrapper zu verwenden, da Results eines Requests jedoch auch im Falle der Verwendung eines API-Wrappers erst auf die intern verwendeten Objekte gemappt werden müssen, hält sich der Mehraufwand in Grenzen.
+
+\paragraph{request}
+
+\paragraph{cheerio}
+Mithilfe des Node-Moduls \textbf{Cheerio} \citep{cheerio} lassen sich Informationen von Websites mithilfe von CSS-Selektoren, wie sie in der Syntax von jQuery bekannt sind, erfassen. Die Verwendung dieser Bibliothek erleichtert das Scrapen \ua von \textbf{IMDb}.
+
+\medskip
+\lstinputlisting[caption={Cheerio Beispiel},label={lst:cheerio}]{Inhalt/Code/cheerio.js}
 
 \paragraph{async}
 Das \textbf{async}-Modul \citep{async} erlaubt eine bessere Kontrolle über asynchron ausgeführte Funktionalität. Da \arbeitstitel \ an vielen Stellen mit mehreren APIs kommunizieren muss, ist die Asynchronität zwar generell ein Vorteil, jedoch werden auch Anfragen benötigt, die von mehreren asynchronen Requests abhängig sind. \Dahe , dass einige Requests von teilweise mehreren Requests, die vorher durchgeführt werden müssen, abhängig sind. Mit async lassen sich Callbacks in vordefinierter Reihenfolge durchführen. Auch eine Serie von ein und dem selben Callbacks auf Werten aus einer Liste, ist möglich, genauso lassen sich mehrere Requests gleichzeitig abarbeiten bis dann der finale Callback ausgeführt werden kann, wenn alle Vorbedingungen erfüllt worden sind.
@@ -207,74 +230,13 @@ Das \textbf{async}-Modul \citep{async} erlaubt eine bessere Kontrolle über async
 Im Listing \ref{lst:async} ist der asynchrone Aufbau der Funktionen mithilfe des \textbf{async}-Moduls zu sehen. Die Funktionen \texttt{getMusicSuggestionsBySearchterm} und \texttt{getMovieSuggestionsBySearchterm} werden parallel ausgeführt. Sobald beide Funktionen abgeschlossen sind und das Callback ausgelöst wird, wird die in Zeile \ref{lst:asyncCallback} implementierte Funktion ausgeführt. Über \texttt{results} kann auf die Ergebnisse der parallel ausgeführten Funktionen zugegriffen werden.
 
 \medskip
-\begin{lstlisting}[caption=Async Beispiel,label={lst:async}]
-async.parallel({
-		music_result: function(callback){
-			getMusicSuggestionsBySearchterm(searchterm, callback);
-		},
-		movie_result: function(callback){
-			getMovieSuggestionsBySearchterm(searchterm, callback);
-		}
-	},
-	function(err, results) { (*@\label{lst:asyncCallback}@*) 
-		if(err){
-			callback(err, searchterm);
-		} else {
-			var resultset = results.music_result.concat(results.movie_result);
-			callback(null, resultset);
-		}
-	});
-\end{lstlisting}
+\lstinputlisting[caption={Async Beispiel},label={lst:async}]{Inhalt/Code/async.js}
 
 Außerdem wird die von \textbf{async} bereitgestellte Funktion \texttt{each} verwendet. Auf diesem Wege kann für jedes Item eines Result-Sets, das von einer API bezogen wurde, ein Request ausgeführt werden, um \zB Cover-Art nachzuladen. Diese Funktion wird zum Abfragen der Film-Trailer verwendet, indem anhand eines Sets von \textbf{IMDb}-IDs für jede ein Trailer gesucht wird.
 
-\paragraph{node-rest-client}
-Für Requests an die Schnittstelle \textbf{TrailerAddict} wird das Node-Modul \textbf{node-rest-client} verwendet. \citep{nodeRestClient} Es vereinfacht Requests an REST-APIs und liefert JavaScript-Objekte zurück, dessen Verarbeitung dann selbst übernommen werden muss. Dies erfordert zwar mehr Aufwand, einen Request durchzuführen, als einen API-Wrapper zu verwenden, da Results eines Requests jedoch auch im Falle der Verwendung eines API-Wrappers erst auf die intern verwendeten Objekte gemappt werden müssen, hält sich der Mehraufwand in Grenzen.
-
-
-\paragraph{cheerio}
-Mithilfe des Node-Moduls \textbf{Cheerio} \citep{cheerio} lassen sich Informationen von Websites mithilfe von CSS-Selektoren, wie sie in der Syntax von jQuery bekannt sind, erfassen. Die Verwendung dieser Bibliothek erleichtert das Scrapen \ua von \textbf{IMDb}.
-
-\paragraph{request}
-
-\paragraph{nodebrainz und coverart}
-
-\paragraph{node-imdb-api}
-
 
 \medskip
-\begin{lstlisting}[caption=Request und Cheerio und Async in Action,label={lst:interaction}]
-request('http://www.imdb.com/search/title?release_date=' + searchterm + ',' + searchterm + '&title_type=feature', function(err, resp, body){
-
-		$ = cheerio.load(body);
-
-		var resultItemList = new Array();
-		var itemList = new Array();
-
-		async.eachLimit($('table.results tr td span.wlb_wrapper'), 1, function( item, callback) {
-			
-			// fetch List of IMDbId from IMDb-Source-Code
-
-		}, function(err, result){
-			var trailerList = new Array();
-
-			async.each(itemList, function(id, callback){
-
-				// fetch additional Movie-Information from other Sources by IMDbId
-				client.get('http://api.traileraddict.com/?imdb='  + id +  '&count=1&width=680', function(data, response){
-
-					// scrape TrailerAddict-Result with Cheerio to get the IFrame
-					var trailerResult = cheerio.load(data);
-					var videoCode = trailerResult('trailer').html() + '';
-					
-					callback();
-				});
-			}, function(err, result){
-				// do something with the result
-			});
-		});
-	});
-\end{lstlisting}
+\lstinputlisting[caption={Request, Cheerio und Async in Action},label={lst:interaction}]{Inhalt/Code/requestCheerioAsync.js}
 
 \begin{figure}[htb]
 	\begin{center}
