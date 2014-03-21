@@ -132,25 +132,12 @@ Ein weiterer maßgeblicher Vorteil ist, dass für nahezu jede in dieser Arbeit bet
 Im Folgenden wird das Setup der Web-Applikation, sowie verwendete Module und deren Verwendung anhand von Code-Beispielen erläutert.
 
 \subsection{Express.js}
-Das Web-Application-Framework \textbf{Express.js} \citep{expressjs} wird verwendet, da es eine Palette von Funktionalität zur einfachen Implementierung von Web-Applikationen mit \textbf{Node.js} bietet und trotzdem flexibel und leichtgewichtig ist. Es ist als Schicht zwischen Funktionalität und Frontend zu verstehen und agiert als API \citep[Vgl.][]{expressjs}. Das ist speziell für \arbeitstitel \ vom Vorteil, da die API somit auch für weitere Anwendungen verwendet werden kann.
-
-\subsection{MongoDB und NoSQL}
-MongoDB \citep{mongodb} ist eine dokumentenorientierte Datenbank. Im Gegensatz zu relationalen Datenbanken lässt sich mit der NoSQL-Strategie eine flexible Datenstruktur erstellen. Das macht im Falle von \arbeitstitel \ besonders Sinn, da sich die Art und der Umfang der Daten, die verarbeitet werden, sehr schnell ändern können. Außerdem vereinfacht dies auch die Erweiterbarkeit der Web-Applikation.
+Das Web-Application-Framework \textbf{Express.js} \citep{expressjs} wird verwendet, da es eine Palette von Funktionalität zur einfachen Implementierung von Web-Applikationen mit \textbf{Node.js} bietet und trotzdem flexibel und leichtgewichtig ist. Es ist als Schicht zwischen Funktionalität und Frontend zu verstehen und agiert als API \citep[Vgl.][]{expressjs}. Das ist speziell für \arbeitstitel \ vom Vorteil, da dies das Bereitstellen einer API für die Funktionalität von \arbeitstitel bietet und damit das Entwickeln von weiteren Anwendungen vereinfacht wird.
 
 \subsubsection{Code-Generierung mit Yeoman}
 Das Gerüst der Web-Applikation wurde mittels \textbf{Yeoman} \citep{yeoman}, einem Scaffolding-Tool für Webapps, generiert. Der Workflow von Yeoman basiert auf den drei Tools \textbf{Yo}, \textbf{Grunt} \citep{grunt} und \textbf{Bower} \citep{bower}. Bower ist ein Package Manager für das Frontend, Grunt ein Task Runner, mit Hilfe dessen Automatisierungsprozesse und Build-Skripte ausgeführt werden können. Yo kann mittles verschiedener Generatoren und Konfigurationen den Boilerplate-Code einer Web-Applikation und ein passendes Grunt Skript generieren.
 
 \arbeitstitel \ ist mithilfe des Yeoman-Generators \textbf{generator-express} \citep{yeoExpress} generiert worden. Die generierte Projektstruktur implementiert bereits das MVC-Framework. Außerdem ist MongoDB als Default-Datenbank vorkonfiguriert.
-
-\begin{itemize}
-	\item Node.js
-	\item Yeoman
-	\item Grunt
-	\item Bower
-	\item Jade
-	\item Stylus
-	\item mongoose
-\end{itemize}
 
 \subsection{Umsetzung und verwendete Tools im Frontend}
 Im Folgenden werden verwendete Libraries und deren Nutzen erläutert.
@@ -173,9 +160,13 @@ Um das User Interface trotz verschiedener Medientypen und deren Repräsentierung 
 Eine besondere Behandlung wird für die Darstellung von Filmplakaten benötigt. Diese liegen zwar größtenteils im Hochformat vor, jedoch gibt es auch hier Ausnahmen. Das Problem kann einerseits damit gelöst werden, indem ein Teil des Plakats in originaler Auflösung dargestellt wird. Jedoch sind die dargestellten Bildausschnitte der Filmplakate dadurch nicht zuverlässig aussagekräftig. In der Web-Applikation wird das Plakat nun unabhängig von der Größe, der Auflösung und des Formats immer auf eine Breite und eine Höhe von jeweils 200px gestreckt, \bzw gestaucht.
 
 \subsection{Umsetzung und verwendete Tools im Server}
-\subsubsection{mongoose}
-\textbf{mongoose} ist ein Objekt-Modellierungs-Tool für die Verwendung von MongoDB \citep{mongodb} unter Node.js. \citep[Vgl.][]{mongoose} Unter anderem bietet \textbf{mongoose} eine unkomplizierte, Schema-basierte Lösung zur Modellierung von Anwendungsdaten und verfügt über Business-Logik, Funktionen wie das Typisieren, Validieren und vereinfacht das Formulieren von Datenbank-Queries \uvm \citep[Vgl.][]{mongoose}
+\subsubsection{Interne Datenübertragung mittels MongoDB}
+Da die in \arbeitstitel \ angezeigten und verarbeiteten Daten dynamisch von unterschiedlichen Quellen geladen werden sollen, ist eine Datenhaltung im Prinzip nicht erforderlich. Jedoch werden die zur Laufzeit erfassten Daten zwischengespeichert und intern auf Objekte gemappt.
 
+Zu diesem Zweck wird die dokumentenorientierte Datenbank \textbf{MongoDB} \citep{mongodb} verwendet. Im Gegensatz zu relationalen Datenbanken lässt sich mit der NoSQL-Strategie eine flexible Datenstruktur erstellen. Das macht im Falle von \arbeitstitel \ besonders Sinn, da sich die Art und der Umfang der Daten, die verarbeitet werden, sehr schnell ändern können. Außerdem vereinfacht dies auch die Erweiterbarkeit der Web-Applikation.
+
+\paragraph{mongoose}
+\textbf{mongoose} ist ein Objekt-Modellierungs-Tool für die Verwendung von MongoDB \citep{mongodb} unter Node.js. \citep[Vgl.][]{mongoose} Unter anderem bietet \textbf{mongoose} eine unkomplizierte, Schema-basierte Lösung zur Modellierung von Anwendungsdaten und verfügt über Business-Logik, Funktionen wie das Typisieren, Validieren und vereinfacht das Formulieren von Datenbank-Queries \uvm \citep[Vgl.][]{mongoose}
 
 \medskip
 \begin{lstlisting}[caption=Deklaration des ResultItem mit Mongoose,label={lst:mongoose}]
@@ -192,11 +183,28 @@ var resultItemSchema = new Schema({
 });
 \end{lstlisting}
 
-\subsubsection{async}
+
+\paragraph{SuggestionItem}
+Bei Eingabe eines Suchbegriffes werden zunächst die aktivierten APIs durchsucht. Dabei werden gleichzeitig multiple Suchanfragen an externe Datenquellen geschickt, wobei für jede API oder Datenquelle unterschiedliche Besonderheiten zu beachten sind. Um zu gewährleisten, dass eine Suchanfrage sowohl über die Eingabe eines Titels, als auch über die Eingabe des Interprets zum passenden Ergebnis führt, werden zwei Suchanfragen gleichzeitig an die \textbf{MusicBrainz}-API geschickt. Dies liegt daran, dass die \textbf{MusicBrainz}-API die Angabe der Entität vorraussetzt, nach der gesucht werden soll. Das heißt, dass eine Eingabe von \bspw \glqq Prince\grqq \ sowohl zu Songs des Interpreten \glqq Prince\grqq , als auch zu Songs, in denen das Wort \glqq Prince \grqq \ vorkommt.
+\ref{fig:suggestionItem}
+
+\begin{figure}[htb]
+	\begin{center}
+		\includegraphics[width=1\textwidth]{Klassendiagramm.pdf}
+		\caption{SuggestionItem}
+	\end{center}
+	\label{fig:suggestionItem}
+\end{figure}
+
+
+\subsubsection{Erfassen von Medien-Items von externen Quellen}
+Das Erfassen von Daten wird durch das Zusammenspiel mehrere Module bewerkstelligt. Dies sind über die API-Wrapper hinaus die Module \textbf{async}, \textbf{node-rest-client}, \textbf{cheerio} und \textbf{request}.
+Im Folgenden werden der Funktionsumfang und die Restriktionen der verwendeten API-Wrapper erläutert. Daraufhin wird erklärt, inwiefern die zusätzlichen Module die Implementierung komplettieren.
+
+\paragraph{async}
 Das \textbf{async}-Modul \citep{async} erlaubt eine bessere Kontrolle über asynchron ausgeführte Funktionalität. Da \arbeitstitel \ an vielen Stellen mit mehreren APIs kommunizieren muss, ist die Asynchronität zwar generell ein Vorteil, jedoch werden auch Anfragen benötigt, die von mehreren asynchronen Requests abhängig sind. \Dahe , dass einige Requests von teilweise mehreren Requests, die vorher durchgeführt werden müssen, abhängig sind. Mit async lassen sich Callbacks in vordefinierter Reihenfolge durchführen. Auch eine Serie von ein und dem selben Callbacks auf Werten aus einer Liste, ist möglich, genauso lassen sich mehrere Requests gleichzeitig abarbeiten bis dann der finale Callback ausgeführt werden kann, wenn alle Vorbedingungen erfüllt worden sind.
 
 Im Listing \ref{lst:async} ist der asynchrone Aufbau der Funktionen mithilfe des \textbf{async}-Moduls zu sehen. Die Funktionen \texttt{getMusicSuggestionsBySearchterm} und \texttt{getMovieSuggestionsBySearchterm} werden parallel ausgeführt. Sobald beide Funktionen abgeschlossen sind und das Callback ausgelöst wird, wird die in Zeile \ref{lst:asyncCallback} implementierte Funktion ausgeführt. Über \texttt{results} kann auf die Ergebnisse der parallel ausgeführten Funktionen zugegriffen werden.
-
 
 \medskip
 \begin{lstlisting}[caption=Async Beispiel,label={lst:async}]
@@ -220,18 +228,18 @@ async.parallel({
 
 Außerdem wird die von \textbf{async} bereitgestellte Funktion \texttt{each} verwendet. Auf diesem Wege kann für jedes Item eines Result-Sets, das von einer API bezogen wurde, ein Request ausgeführt werden, um \zB Cover-Art nachzuladen. Diese Funktion wird zum Abfragen der Film-Trailer verwendet, indem anhand eines Sets von \textbf{IMDb}-IDs für jede ein Trailer gesucht wird.
 
-\subsubsection{node-rest-client}
+\paragraph{node-rest-client}
 Für Requests an die Schnittstelle \textbf{TrailerAddict} wird das Node-Modul \textbf{node-rest-client} verwendet. \citep{nodeRestClient} Es vereinfacht Requests an REST-APIs und liefert JavaScript-Objekte zurück, dessen Verarbeitung dann selbst übernommen werden muss. Dies erfordert zwar mehr Aufwand, einen Request durchzuführen, als einen API-Wrapper zu verwenden, da Results eines Requests jedoch auch im Falle der Verwendung eines API-Wrappers erst auf die intern verwendeten Objekte gemappt werden müssen, hält sich der Mehraufwand in Grenzen.
 
 
-\subsubsection{cheerio}
+\paragraph{cheerio}
 Mithilfe des Node-Moduls \textbf{Cheerio} \citep{cheerio} lassen sich Informationen von Websites mithilfe von CSS-Selektoren, wie sie in der Syntax von jQuery bekannt sind, erfassen. Die Verwendung dieser Bibliothek erleichtert das Scrapen \ua von \textbf{IMDb}.
 
-\subsubsection{request}
+\paragraph{request}
 
-\subsubsection{nodebrainz und coverart}
+\paragraph{nodebrainz und coverart}
 
-\subsubsection{node-imdb-api}
+\paragraph{node-imdb-api}
 
 
 \medskip
@@ -293,18 +301,3 @@ request('http://www.imdb.com/search/title?release_date=' + searchterm + ',' + se
 	\label{fig:searchResultsRequestDiagram}
 \end{figure}
 
-
-\section{Detailliert}
-Im Folgenden werden einzelne Besonderheiten, die in der Implementierung eine Rolle spielen, erläutert.
-
-\subsection{SuggestionItem}
-Bei Eingabe eines Suchbegriffes werden zunächst die aktivierten APIs durchsucht. Dabei werden gleichzeitig multiple Suchanfragen an externe Datenquellen geschickt, wobei für jede API oder Datenquelle unterschiedliche Besonderheiten zu beachten sind. Um zu gewährleisten, dass eine Suchanfrage sowohl über die Eingabe eines Titels, als auch über die Eingabe des Interprets zum passenden Ergebnis führt, werden zwei Suchanfragen gleichzeitig an die \textbf{MusicBrainz}-API geschickt. Dies liegt daran, dass die \textbf{MusicBrainz}-API die Angabe der Entität vorraussetzt, nach der gesucht werden soll. Das heißt, dass eine Eingabe von \bspw \glqq Prince\grqq \ sowohl zu Songs des Interpreten \glqq Prince\grqq , als auch zu Songs, in denen das Wort \glqq Prince \grqq \ vorkommt.
-\ref{fig:suggestionItem}
-
-\begin{figure}[htb]
-	\begin{center}
-		\includegraphics[width=1\textwidth]{Klassendiagramm.pdf}
-		\caption{SuggestionItem}
-	\end{center}
-	\label{fig:suggestionItem}
-\end{figure}
