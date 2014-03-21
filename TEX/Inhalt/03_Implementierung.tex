@@ -258,8 +258,9 @@ Auf Abbildung \ref{fig:requestDiagram} ist der grobe Ablauf von Nutzer-Eingabe b
 
 \subsection{Erfassen von Suchvorschlägen anhand eines Suchbegriffes}
 \label{subsec:suggestions}
-Auf Abbildung \ref{fig:suggestionsRequestDiagram} wird der interne Ablauf zur Erfassung der Suchvorschläge schematisch dargestellt.
+Auf Abbildung \ref{fig:suggestionsRequestDiagram} wird der interne Ablauf zur Erfassung der Suchvorschläge schematisch dargestellt. Bei Eingabe eines Suchbegriffs, wird bei den unterschiedlichen APIs und Quellen nach passenden Suchvorschlägen gesucht. Um Suchvorschläge im Bereich Film zu finden, werden passende Items von \textbf{Rotten Tomatoes} und \textbf{IMDb} gesammelt. 
 
+Gleichzeitig findet die Suche nach Suchvorschlägen im Bereich Musik statt. Aufgrund der Architektur der \textbf{MusicBrainz}-API, in der bei einem Request auch der Rückgabetyp angegeben werden muss, wird parallel nach passenden Songtiteln und Interpreten, die den Suchbegriff enthalten, gesucht. Besonderheit beim Erfassen der Musik-Suchvorschläge ist, dass für jedes Item ein zusätzlicher Request an die Cover-Art-API nötig ist, um ein representatives Thumbnail in der Selectbox anzeigen zu können. Weitere potenzielle Medientypen sind mit der grauen Box repräsentiert. Sobald alle benötigten Daten für die Anzeigen gesammelt wurden, indem sie auf interne SuggestionItem-Objekte gemappt wurden, werden diese zurück an das Frontend geschickt und dem Nutzer angezeigt.
 
 \begin{figure}[htb]
 	\begin{center}
@@ -272,7 +273,7 @@ Auf Abbildung \ref{fig:suggestionsRequestDiagram} wird der interne Ablauf zur Er
 
 \subsection{Erfassen von Suchergebnissen anhand eines Zeitraumes}
 \label{subsec:results}
-Auf Abbildung \ref{fig:searchResultsRequestDiagram} wird der interne Ablauf zur Erfassung der Suchvorschläge schematisch dargestellt.
+Auf Abbildung \ref{fig:searchResultsRequestDiagram} ist der interne Ablauf der Erfassung von Suchergebnissen schematisch dargestellt. Ausgangspunkt der Grafik ist ein bereits ausgewählter Zeitraum (\texttt{SuggestionDate}). Anhand des Datums wird mittels Scrapen der passenden \textbf{IMDb}-Seite eine Liste von IMDb-IDs erfasst. Alle restlichen Daten können mit Angabe der IMDb-ID von den APIs \textbf{RottenTomatoes} und \textbf{TrailerAddict} nachgeladen werden. Die Ergebnisse resultieren im Falle der Abfrage bei \textbf{RottenTomatoes} in einem Set von Movie-Results, im Falle der Abfrage von \textbf{TrailerAddict} in eine Liste von Trailern.\footnote{Genauer besteht die Liste von Trailern aus einer Liste von Quellcode-Snippets, die die eingebetteten Trailer-Videos enthalten.}
 
 \begin{figure}[htb]
 	\begin{center}
