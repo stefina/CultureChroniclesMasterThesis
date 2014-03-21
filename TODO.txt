@@ -1,6 +1,8 @@
 +++
 async
-beschreiben vom einfügen neuer Dienste
+beschreiben vom einfügen neuer Dienste:
+ccsettings
+
 wie funktioniert sweble?
 
 
@@ -8,6 +10,8 @@ wie funktioniert sweble?
 grafiken verbessern und grafiken beschreiben
 matrizen vervollständigen mit bewertung und in den anhang packen
 Glossar vervollständigen und neu bauen
+
+Abstract, Einleitung, Fazit
 
 screenshots von culture chronicles:
 - initial state
