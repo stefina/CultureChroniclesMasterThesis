@@ -24,7 +24,7 @@ Seperat bietet \textbf{MusicBrainz} den Service Cover Art Archive an, über den m
 \subsubsection{Music Story Pro}
 \textbf{Music Story Pro} \citep[Vgl.][]{musicStoryPro} ist wie \textbf{OneMusicAPI} (\ref{subsubsec:OneMusicAPI}) nur begrenzt kostenlos verfügbar. Zum einen ist die Anzahl der Requests auf 50000 pro Monat begrenzt, weiterhin ist die volle Funktionalität nur für zahlende Kunden verfügbar. Dies beinhaltet \zB Review-Informationen und Bilder. Ein Vorteil bei \textbf{Music Story Pro} ist, dass eine Schnittstelle für weitere APIs bietet. Dazu gehören \ua \ Spotify, Deezer, iTunes und Amazon. Außerdem implementiert es die Suche von \textbf{MusicBrainz}, indem es sowohl \gls{Release} als auch \gls{ReleaseGroup} im \textbf{MusicBrainz}-Format liefert.
 
-\subsection{Discogs}
+\subsubsection{Discogs}
 \textbf{Discogs} hat es sich zur Aufgabe gemacht die größte und umfangreichste Musikdatenbank, inkl. Market Place bereitzustellen \citep[Vgl.][]{discogs}. Außerdem stellt \textbf{Discogs} eine API bereit, die nicht nur das Durchsuchen des Datenbestandes ermöglichen, sondern auch den MarketPlace durchsuchen lassen. Im Gegensatz zu den anderen Musikquellen, ist der soziale Charakter bei Discogs außerdem ausgeprägter.
 
 \subsection{Film}
@@ -38,7 +38,7 @@ Seperat bietet \textbf{MusicBrainz} den Service Cover Art Archive an, über den m
 \textbf{Rotten Tomatoes} \citep{rottenTomatoes} ist eine Sammlung von Filmkritiken und bietet in diesem Zuge auch detaillierte Informationen über Film- und TV-Produktionen \citep[Vgl.][]{rottenWiki}.
 
 
-\subsection{Gemischt}
+\subsection{Sonstige}
 \subsubsection{Wolfram|Alpha}
 \textbf{Wolfram|Alpha} \citep{wolframAbout} bietet eine begrenzt kostenlose API. So ist eine kostenlose Verwendung für unkommerzielle Testzwecke auf 2000 API-Calls pro Monat begrenzt \citep[Vgl. How much I may use the Wolfram|Alpha API?][]{wolframAPIAbout}. Insbesondere das Thema \glqq People \& History\glqq \ \citep{wolframTopicHistory} ist für \arbeitstitel \ von Interesse, da das Auflösen von Historischen Ereignissen sowie Personen zu einem Zeitraum damit ermöglicht werden kann. Speziell Geburtsdaten, Todesdatum und Amtsperioden lassen sich über das Auslesen der sogenannten \texttt{Pods} \citep[Vgl. Basics of Wolfram|Alpha Output][]{wolframAPIDocumentation} erfassen.
 
@@ -127,18 +127,15 @@ MusicBrainz limitiert, wie einige andere APIs auch, die Anzahl von Anfragen eine
 \section{Architektur der Web-Applikation}
 Die Web-Applikation wird serverseitig mittels Javascript umgesetzt. Die Software-Plattform Node.js \citep{nodejs} bietet ein einfaches Konzept zur Erstellung und Inbetriebnahme von skalierbaren Netzwerk-Applikationen. Im Bezug auf \arbeitstitel \ ist das event-driven Konzept von großem Vorteil, da die Kommunikation mit mehreren APIs um einiges beschleunigt werden kann, indem die API-Requests von der Asynchronität Gebrauch machen.
 
-Ein weiterer maßgeblicher Vorteil ist, dass für jede in dieser Arbeit betrachtete Schnittstelle auch ein Wrapper existiert, was die Einbindung der unterschiedlichen Quellen stark vereinfacht.
+Ein weiterer maßgeblicher Vorteil ist, dass für nahezu jede in dieser Arbeit betrachtete Schnittstelle auch ein Wrapper existiert, was die Einbindung der unterschiedlichen Quellen stark vereinfacht.
+
+Im Folgenden wird das Setup der Web-Applikation, sowie verwendete Module und deren Verwendung anhand von Code-Beispielen erläutert.
 
 \subsection{Express.js}
 Das Web-Application-Framework \textbf{Express.js} \citep{expressjs} wird verwendet, da es eine Palette von Funktionalität zur einfachen Implementierung von Web-Applikationen mit \textbf{Node.js} bietet und trotzdem flexibel und leichtgewichtig ist. Es ist als Schicht zwischen Funktionalität und Frontend zu verstehen und agiert als API \citep[Vgl.][]{expressjs}. Das ist speziell für \arbeitstitel \ vom Vorteil, da die API somit auch für weitere Anwendungen verwendet werden kann.
 
 \subsection{MongoDB und NoSQL}
 MongoDB \citep{mongodb} ist eine dokumentenorientierte Datenbank. Im Gegensatz zu relationalen Datenbanken lässt sich mit der NoSQL-Strategie eine flexible Datenstruktur erstellen. Das macht im Falle von \arbeitstitel \ besonders Sinn, da sich die Art und der Umfang der Daten, die verarbeitet werden, sehr schnell ändern können. Außerdem vereinfacht dies auch die Erweiterbarkeit der Web-Applikation.
-
-\subsubsection{Frontend mit Jade und Stylus}
-Im Frontend werden die Werkzeuge Jade und Stylus verwendet. Jade \citep{jade} ist eine Node Template Engine und vereinfacht das Schreiben von HTML-Code, indem es eine eigene Syntax implementiert. Über die vereinfachte Schreibweise hinaus implementiert sie auch Iterationen, Bedingungen und Filter. Außerdem können sogenannte Mixins implementiert und somit dessen Funktionalität wiederverwendet werden.
-
-Stylus \citep{stylus} ist eine für Node entwickelte Sprache, deren Kompilat CSS ist. Die Syntax ist im Gegensatz zu CSS stark vereinfacht. Weiterhin bietet sie Funktionen wie die Deklaration von Variablen, Funktionen und Mixins.
 
 \subsubsection{Code-Generierung mit Yeoman}
 Das Gerüst der Web-Applikation wurde mittels \textbf{Yeoman} \citep{yeoman}, einem Scaffolding-Tool für Webapps, generiert. Der Workflow von Yeoman basiert auf den drei Tools \textbf{Yo}, \textbf{Grunt} \citep{grunt} und \textbf{Bower} \citep{bower}. Bower ist ein Package Manager für das Frontend, Grunt ein Task Runner, mit Hilfe dessen Automatisierungsprozesse und Build-Skripte ausgeführt werden können. Yo kann mittles verschiedener Generatoren und Konfigurationen den Boilerplate-Code einer Web-Applikation und ein passendes Grunt Skript generieren.
@@ -157,6 +154,12 @@ Das Gerüst der Web-Applikation wurde mittels \textbf{Yeoman} \citep{yeoman}, ein
 
 \subsection{Umsetzung und verwendete Tools im Frontend}
 Im Folgenden werden verwendete Libraries und deren Nutzen erläutert.
+
+\subsubsection{Jade und Stylus}
+Im Frontend werden die Werkzeuge Jade und Stylus verwendet. Jade \citep{jade} ist eine Node Template Engine und vereinfacht das Schreiben von HTML-Code, indem es eine eigene Syntax implementiert. Über die vereinfachte Schreibweise hinaus implementiert sie auch Iterationen, Bedingungen und Filter. Außerdem können sogenannte Mixins implementiert und somit dessen Funktionalität wiederverwendet werden.
+
+Stylus \citep{stylus} ist eine für Node entwickelte Sprache, deren Kompilat CSS ist. Die Syntax ist im Gegensatz zu CSS stark vereinfacht. Weiterhin bietet sie Funktionen wie die Deklaration von Variablen, Funktionen und Mixins.
+
 
 \subsubsection{Select2}
 \textbf{Select2} \citep{select2} ist eine konfigurierbare Implementierung einer Selectbox. Sie bietet neben dem einfachen Suchen und einer Autosuggest-Funktion bereits Features wie dem automatischen Nachladen von Remote Datasets und unterstützt infinites Scrollen \citep[Vgl.][]{select2}. Da Select2 auf jQuery basiert sind keine weiteren Includes erforderlich. Außerdem ist es ebenfalls über \textbf{Bower} erhältlich.
@@ -217,18 +220,18 @@ async.parallel({
 
 Außerdem wird die von \textbf{async} bereitgestellte Funktion \texttt{each} verwendet. Auf diesem Wege kann für jedes Item eines Result-Sets, das von einer API bezogen wurde, ein Request ausgeführt werden, um \zB Cover-Art nachzuladen. Diese Funktion wird zum Abfragen der Film-Trailer verwendet, indem anhand eines Sets von \textbf{IMDb}-IDs für jede ein Trailer gesucht wird.
 
-\subsection{node-rest-client}
+\subsubsection{node-rest-client}
 Für Requests an die Schnittstelle \textbf{TrailerAddict} wird das Node-Modul \textbf{node-rest-client} verwendet. \citep{nodeRestClient} Es vereinfacht Requests an REST-APIs und liefert JavaScript-Objekte zurück, dessen Verarbeitung dann selbst übernommen werden muss. Dies erfordert zwar mehr Aufwand, einen Request durchzuführen, als einen API-Wrapper zu verwenden, da Results eines Requests jedoch auch im Falle der Verwendung eines API-Wrappers erst auf die intern verwendeten Objekte gemappt werden müssen, hält sich der Mehraufwand in Grenzen.
 
 
-\subsection{cheerio}
+\subsubsection{cheerio}
 Mithilfe des Node-Moduls \textbf{Cheerio} \citep{cheerio} lassen sich Informationen von Websites mithilfe von CSS-Selektoren, wie sie in der Syntax von jQuery bekannt sind, erfassen. Die Verwendung dieser Bibliothek erleichtert das Scrapen \ua von \textbf{IMDb}.
 
-\subsection{request}
+\subsubsection{request}
 
-\subsection{nodebrainz und coverart}
+\subsubsection{nodebrainz und coverart}
 
-\subsection{node-imdb-api}
+\subsubsection{node-imdb-api}
 
 
 \medskip
