@@ -214,12 +214,19 @@ Die CoverArt-API ist eine seperate API von \textbf{MusicBrainz}, die das Nachsch
 Da \textbf{IMDb} über keine offizelle API verfügt, nutzt \citeauthor{nodeImdbApi} mehrere inoffizelle APIs, die Teile ihrer Daten aus den nächtlich erscheinenden Daten der \textbf{IMDb} aggregieren. Da keine dieser APIs vollständig ist, vereint \textbf{node-imdb-api} mehrere dieser RESTful APIs der inoffizellen Seiten. \citep[Vgl.][]{nodeImdbApi}
 
 \paragraph{node-rest-client}
-Für Requests an die Schnittstelle \textbf{TrailerAddict} wird das Node-Modul \textbf{node-rest-client} verwendet. \citep{nodeRestClient} Es vereinfacht Requests an REST-APIs und liefert JavaScript-Objekte zurück, dessen Verarbeitung dann selbst übernommen werden muss. Dies erfordert zwar mehr Aufwand, einen Request durchzuführen, als einen API-Wrapper zu verwenden, da Results eines Requests jedoch auch im Falle der Verwendung eines API-Wrappers erst auf die intern verwendeten Objekte gemappt werden müssen, hält sich der Mehraufwand in Grenzen.
+Für Requests an die Schnittstelle \textbf{TrailerAddict} wird das Node-Modul \textbf{node-rest-client} verwendet. \citep{nodeRestClient} Es vereinfacht Requests an REST-APIs und liefert JavaScript-Objekte zurück, dessen Verarbeitung dann selbst übernommen werden muss. Dies erfordert zwar mehr Aufwand, einen Request durchzuführen, als einen API-Wrapper zu verwenden, da Results eines Requests jedoch auch im Falle der Verwendung eines API-Wrappers erst auf die intern verwendeten Objekte gemappt werden müssen, hält sich der Mehraufwand in Grenzen. Im Listing \ref{lst:nodeRestClient} ist der Aufruf der TrailerAddict-API anhand einer IMDb-ID zu sehen.
 
-\paragraph{request}
+\medskip
+\lstinputlisting[caption={Node-Rest-Client Beispiel},label={lst:nodeRestClient}]{Inhalt/Code/nodeRestClient.js}
+
+\paragraph{Request}
+Das Modul \textbf{Request} bewerkstelligt HTTP-Anfragen \citep{request} und dient in der Web-Applikation dem Erfassen des Quelltext von \textbf{IMDb} zum Erfragen der populärsten Filme eines spezifischen Jahres. Im Listing \ref{lst:request} ist zu sehen, wie der Quelltext der gegebenen IMDb-URL geladen wird.
+
+\medskip
+\lstinputlisting[caption={Request Beispiel},label={lst:request}]{Inhalt/Code/request.js}
 
 \paragraph{cheerio}
-Mithilfe des Node-Moduls \textbf{Cheerio} \citep{cheerio} lassen sich Informationen von Websites mithilfe von CSS-Selektoren, wie sie in der Syntax von jQuery bekannt sind, erfassen. Die Verwendung dieser Bibliothek erleichtert das Scrapen \ua von \textbf{IMDb}.
+Mithilfe des Node-Moduls \textbf{Cheerio} \citep{cheerio} lassen sich Informationen von Websites mithilfe von CSS-Selektoren, wie sie in der Syntax von jQuery bekannt sind, erfassen. Die Verwendung dieser Bibliothek erleichtert das Scrapen \ua von \textbf{IMDb}. Im Listing \ref{lst:cheerio} ist zu sehen, wie die IMDb-IDs aus dem durch das Scrapen erhaltenen Quelltext, erfasst werden. 
 
 \medskip
 \lstinputlisting[caption={Cheerio Beispiel},label={lst:cheerio}]{Inhalt/Code/cheerio.js}
@@ -236,7 +243,10 @@ Außerdem wird die von \textbf{async} bereitgestellte Funktion \texttt{each} verw
 
 
 \medskip
-\lstinputlisting[caption={Request, Cheerio und Async in Action},label={lst:interaction}]{Inhalt/Code/requestCheerioAsync.js}
+\lstinputlisting[float,caption={Request, Cheerio und Async in Action},label={lst:interaction}]{Inhalt/Code/requestCheerioAsync.js}
+
+\subsection{Interner Aufbau und Ablauf von Requests}
+Auf Abbildung \ref{fig:requestDiagram} ist der grobe Ablauf von Nutzer-Eingabe bis zur Lieferung der resultierenden Medien-Items zu sehen. Bei der Eingabe eines Suchbegriffes werden zunächst mögliche Suchvorschläge gegeben.\footnote{Der schematische Ablauf der Sammlung der Suchvorschläge ist in Abbildung \ref{fig:suggestionsRequestDiagram} zu sehen und wird in Abschnitt \ref{subsec:suggestions} beschrieben} Anhand der Suchvorschläge kann der Nutzer sich ein Item aussuchen, dessen Zeitraum durchsucht werden soll. Anhand diesen Zeitraumes sendet \arbeitstitel \ Suchrequests an die verbundenen APIs und Quellen und gibt ein Set an Suchergebnissen (\texttt{MusicResults}) und abspielbaren Medieninhalten (\texttt{TrailerResults}) zurück.\footnote{Der schematische Ablauf der Sammlung von Suchergebnissen ist auf Abbildung \ref{fig:searchResultsRequestDiagram} zu sehen und wird in Abschnitt \ref{subsec:results} genauer beschrieben.}
 
 \begin{figure}[htb]
 	\begin{center}
@@ -246,6 +256,11 @@ Außerdem wird die von \textbf{async} bereitgestellte Funktion \texttt{each} verw
 	\label{fig:requestDiagram}
 \end{figure}
 
+\subsection{Erfassen von Suchvorschlägen anhand eines Suchbegriffes}
+\label{subsec:suggestions}
+Auf Abbildung \ref{fig:suggestionsRequestDiagram} wird der interne Ablauf zur Erfassung der Suchvorschläge schematisch dargestellt.
+
+
 \begin{figure}[htb]
 	\begin{center}
 		\includegraphics[width=0.7\textwidth]{RetrievingSuggestions.pdf}
@@ -254,6 +269,10 @@ Außerdem wird die von \textbf{async} bereitgestellte Funktion \texttt{each} verw
 	\label{fig:suggestionsRequestDiagram}
 \end{figure}
 
+
+\subsection{Erfassen von Suchergebnissen anhand eines Zeitraumes}
+\label{subsec:results}
+Auf Abbildung \ref{fig:searchResultsRequestDiagram} wird der interne Ablauf zur Erfassung der Suchvorschläge schematisch dargestellt.
 
 \begin{figure}[htb]
 	\begin{center}
