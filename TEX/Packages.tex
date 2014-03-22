@@ -155,8 +155,14 @@
 \usepackage{ragged2e}
 \usepackage{lscape}
 
+\usepackage{rotating} 
+
 % Spaltendefinition rechtsbündig mit definierter Breite ------------------------
 \newcolumntype{w}[1]{>{\raggedleft\hspace{0pt}}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\hspace{0pt}\arraybackslash}p{#1}}
+%\newcolumntype{s}{>{\raggedleft\arraybackslash}p{2,5cm}}
+
+\newcolumntype{P}[1]{>{\hspace{0pt}}p{#1}}
 
 % Formatierung von Listen ändern -----------------------------------------------
 \usepackage{paralist}
