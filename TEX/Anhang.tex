@@ -5,25 +5,28 @@
 \section{Inhalt der beigelegten CD}
 
 \begin{itemize}
-	\item Architekturdiagramm.png
-	\item Klassendiagramm.png
-	\item JavaDoc
-	\item Thesis.pdf
-	\item Sonstiges
-	\begin{itemize}
-		\item Apache
+	\item Grafiken
 		\begin{itemize}
-			\item Ant
-			\item Axis
-			\item Maven
-			\item Tomcat
+			\item Diagramm\_Allgemein.png
+			\item Diagramm\_VietnamKrieg.png
+			\item Retrieving.pdf
+			\item RetrievingSearchresultsAndPlaylist.pdf
+			\item RetrievingSuggestions.pdf
 		\end{itemize}
-		\item Shopsysteme
+	\item Masterarbeit.pdf
+	\item Software
 		\begin{itemize}
-			\item Magento
-			\item ePages
+			\item Node
+			\begin{itemize}
+				\item node-v0.10.26.pkg
+				\item node.exe
+			\end{itemize}
+			\item MongoDB
+			\begin{itemize}
+				\item mongodb-osx-x86\_64-2.4.9.tgz
+				\item mongodb-win32-x86\_64-2008plus-2.4.9.zip
+			\end{itemize}
 		\end{itemize}
-	\end{itemize}
 	\item SourceCode
 \end{itemize}
 
@@ -80,53 +83,43 @@ Auf den folgenden Seiten ist die tabellarische Übersicht der untersuchten Suchdi
 				& Grafikkarte & NVIDIA GeForce 9400M 256 MB\\
 				& Software & OS X 10.9.2 (13C64)\\
 			\hline
-			Software & Google Chrome & Version 33.0.1750.152 \\
-				& Google Chrome & Version 33.0.1750.152 \\
-				& Node.js & Version v0.10.22 \\
-				& MongoDB & shell version: 2.4.8 \\	
+			Software & Node.js & Version v0.10.26 \\
+				& MongoDB & Shell Version: 2.4.9 \\
+				& ~ & DB Version: v2.4.9 \\
 			\hline
 			Module & express & ~3.3.4 \\
 				& jade & ~0.34.0 \\
 				& mongoose & ~3.6.14 \\
-				& Tool & Version \\
-
-				% "grunt": "~0.4.1",
-    % "grunt-develop": "~0.2.2",
-    % "grunt-contrib-watch": "~0.5.3",
-    % "request": "~2.27.0",
-    % "time-grunt": "~0.1.1",
-    % "load-grunt-tasks": "~0.2.0",
-    % "grunt-contrib-copy": "~0.5.0",
-    % "stylus": "~0.42.0",
-    % "grunt-contrib-stylus": "~0.12.0",
-    % "nib": "~1.0.2",
-    % "grunt-contrib-clean": "~0.5.0",
-    % "node-rest-client": "~0.7.5",
-    % "async": "~0.2.10",
-    % "coverart": "0.0.1",
-    % "cheerio": "~0.13.1",
-    % "imdb-api": "~1.3.3",
-    % "node-fs": "~0.1.7",
-    % "grunt-bower": "~0.8.4",
-    % "tomatoes": "0.0.1"
-
-
-
+				& grunt & ~0.4.1 \\
+				& grunt-develop &  ~0.2.2 \\ 
+				& grunt-contrib-watch &  ~0.5.3 \\ 
+				& request &  ~2.27.0 \\ 
+				& time-grunt &  ~0.1.1 \\ 
+				& load-grunt-tasks &  ~0.2.0 \\ 
+				& grunt-contrib-copy &  ~0.5.0 \\ 
+				& stylus &  ~0.42.0 \\ 
+				& grunt-contrib-stylus &  ~0.12.0 \\ 
+				& nib &  ~1.0.2 \\ 
+				& grunt-contrib-clean &  ~0.5.0 \\ 
+				& node-rest-client &  ~0.7.5 \\ 
+				& async &  ~0.2.10 \\ 
+				& coverart &  0.0.1 \\ 
+				& cheerio &  ~0.13.1 \\ 
+				& imdb-api &  ~1.3.3 \\ 
+				& node-fs &  ~0.1.7 \\ 
+				& grunt-bower &  ~0.8.4 \\ 
+				& tomatoes &  0.0.1" \\
+			\hline
+			Browser (Tested) & Google Chrome & Version 33.0.1750.152 \\
+				& Safari & Version 7.0.2 (9537.74.9) \\
+				& Mozilla Firefox & Version 26.0 \\
 			\hline
 		\end{tabular}
 	\end{center}
-	\caption{Ausstattung am Arbeitsplatz}
-	\label{default}
+	\caption{Verwendete Hard- und Software}
+	\label{tab:hardSoftware}
 \end{table}%
 
 
-\section*{Vorraussetzungen}
-
-
-
-\begin{enumerate}
-
-	\item Node.js (Version v0.10.22)
-	\item MongoDB shell version: 2.4.8
-\end{enumerate}
-Zum lokalen Aufsetzen der Web-Applikation muss Node.js installiert sein. \arbeitstitel \ wurde mit der 
+\section*{Vorraussetzungen und lokale Installation}
+Zum lokalen Aufsetzen der Web-Applikation muss Node.js sowie MongoDB installiert sein.\footnote{Die genauen Versionen sind der Tabelle \ref{tab:hardSoftware} zu entnehmen und werden hier nicht erneut aufgeführt.} Über die Konsole(Windows) oder im Terminal(Mac OS X) in den Ordner \glqq CultureChronicles\grqq \ navigieren und \lstinline$npm install$ ausführen um alle benötigten Module zu installieren. Zur Ausführung von \arbeitstitel \ muss MongoDB laufen.\footnote{Auf Mac OS X wird MongoDB über den Befehl \lstinline$mongod$ im Terminal gestartet.} Nun kann die Web-Applikation mit dem Befehl \lstinline$grunt$ gestartet werden und ist über \url{localhost:3000/} zu erreichen.

@@ -19,20 +19,20 @@ Seperat bietet \textbf{MusicBrainz} den Service Cover Art Archive an, über den m
 \textbf{RateYourMusic} ist wie \textbf{MusicBrainz} ebenso eine durch Nutzer gepflegte offene Datenbank, die über Musikdaten hinaus auch Daten über Film bietet \citep[Vgl.][]{rym}. Ein für \textbf{\arbeitstitel} interessantes Feature ist die Möglichkeit sich Charts anzeigen zu lassen, und diese nach diversen Kriterien wie Genre oder Zeit zu filtern. Leider verfügt \textbf{RateYourMusic} über keine API und verbietet auch ausdrücklich das Scrapen der Daten auf ihrer Website.
 
 \subsubsection{OneMusicAPI}\label{subsubsec:OneMusicAPI}
-\textbf{OneMusicAPI} ist eine API, die auf der Software von Bliss basiert \citep[Vgl.][]{oneMusicAPI}. Während Bliss das automatische Nachladen von Cover Art ermöglichen soll \citep[Vgl.][]{bliss}, sind mit \textbf{OneMusicAPI} Requests mit Interpret und Songname nach Release möglich. Dies stellt auch einen Nachteil dieser API dar, da Song-Informationen nicht so umfangreich sind, wie die anderen vorhandenen Datenbanken und außerdem nur nach Informationen gefragt werden kann, wenn Interpret und Songtitel bekannt sind. Außerdem ist die API nach 1000 Lookups kostenpflichtig.
+\textbf{OneMusicAPI} ist eine API, die auf der Software von Bliss basiert \citep[Vgl.][]{oneMusicAPI}. Während Bliss das automatische Nachladen von Cover Art ermöglichen soll \citep[Vgl.][]{bliss}, sind mit \textbf{OneMusicAPI} Requests mit Interpret und Songtitel nach Release möglich. Dies stellt auch einen Nachteil dieser API dar, da Song-Informationen nicht so umfangreich sind, wie die anderen vorhandenen Datenbanken und außerdem nur nach Informationen gefragt werden kann, wenn Interpret und Songtitel bekannt sind. Außerdem ist die API nach 1000 Lookups kostenpflichtig.
 
 \subsubsection{Music Story Pro}
 \textbf{Music Story Pro} \citep[Vgl.][]{musicStoryPro} ist wie \textbf{OneMusicAPI} (\ref{subsubsec:OneMusicAPI}) nur begrenzt kostenlos verfügbar. Zum einen ist die Anzahl der Requests auf 50000 pro Monat begrenzt, weiterhin ist die volle Funktionalität nur für zahlende Kunden verfügbar. Dies beinhaltet \zB Review-Informationen und Bilder. Ein Vorteil bei \textbf{Music Story Pro} ist, dass eine Schnittstelle für weitere APIs bietet. Dazu gehören \ua \ Spotify, Deezer, iTunes und Amazon. Außerdem implementiert es die Suche von \textbf{MusicBrainz}, indem es sowohl \gls{Release} als auch \gls{ReleaseGroup} im \textbf{MusicBrainz}-Format liefert.
 
 \subsubsection{Discogs}
-\textbf{Discogs} hat es sich zur Aufgabe gemacht die größte und umfangreichste Musikdatenbank, inkl. Market Place bereitzustellen \citep[Vgl.][]{discogs}. Außerdem stellt \textbf{Discogs} eine API bereit, die nicht nur das Durchsuchen des Datenbestandes ermöglichen, sondern auch den MarketPlace durchsuchen lassen. Im Gegensatz zu den anderen Musikquellen, ist der soziale Charakter bei Discogs außerdem ausgeprägter.
+\textbf{Discogs} hat es sich zur Aufgabe gemacht die größte und umfangreichste Musikdatenbank, inkl. Market Place bereitzustellen \citep[Vgl.][]{discogs}. Außerdem stellt \textbf{Discogs} eine API bereit, die nicht nur das Durchsuchen des Datenbestandes ermöglichen, sondern auch den Market Place durchsuchen lassen. Im Gegensatz zu den anderen Musikquellen, ist der soziale Charakter bei Discogs außerdem ausgeprägter.
 
 \subsection{Film}
 \subsubsection{IMDb}
-\textbf{IMDb} ist die verbreiteste Filmdatenbank im Internet. \textbf{IMDb} enthält über Filmdaten hinaus auch Informationen über alle Mitwirkenden, Bewertungen, Plots \uvm Eine offizielle API bietet \textbf{IMDb} derzeit nicht, jedoch werden auf der Seite die Daten in Textform zum Download bereitgestellt, welche für unkommerzielle Zwecke genutzt werden dürfen.
+\textbf{IMDb} ist die verbreitetste Filmdatenbank im Internet. \textbf{IMDb} enthält über Filmdaten hinaus auch Informationen über alle Mitwirkenden, Bewertungen, Plots \uvm Eine offizielle API bietet \textbf{IMDb} derzeit nicht, jedoch werden auf der Seite die Daten in Textform zum Download bereitgestellt, welche für unkommerzielle Zwecke genutzt werden dürfen.
 
 \subsubsection{themoviedb.org}
-\textbf{The Movie Database} ist eine offene Film- und TV-Datenbank, die ursprünglich auf Daten der \textbf{Open Media Database} \citep{omdb} entstanden ist und darüberhinaus auf nutzergenerierten Inhalten basiert \citep[Vgl.][]{tmbd}. Außerdem bietet \textbf{The Movie Database} eine unkommerziell verwendbare API für Entwickler, die sehr gut mit apiary dokumentiert ist.
+\textbf{The Movie Database} ist eine offene Film- und TV-Datenbank, die ursprünglich auf Daten der \textbf{Open Media Database} \citep{omdb} entstanden ist und darüber hinaus auf nutzergenerierten Inhalten basiert \citep[Vgl.][]{tmbd}. Außerdem bietet \textbf{The Movie Database} eine unkommerziell verwendbare API für Entwickler, die sehr gut mit apiary dokumentiert ist.
 
 \subsubsection{Rotten Tomatoes}
 \textbf{Rotten Tomatoes} \citep{rottenTomatoes} ist eine Sammlung von Filmkritiken und bietet in diesem Zuge auch detaillierte Informationen über Film- und TV-Produktionen \citep[Vgl.][]{rottenWiki}.
@@ -46,7 +46,7 @@ Seperat bietet \textbf{MusicBrainz} den Service Cover Art Archive an, über den m
 \textbf{Wikipedia} ist ein Online-Nachschlagewerk und bietet laut eigener Angabe \glqq rund 30 Millionen Artikel [...] in über 280 Sprachen\grqq \ \citep[Vgl.][]{wikiWiki}. Im Gegensatz zu \textbf{Google} und \textbf{Wolfram|Alpha} verfolgt die \textbf{Wikipedia} die Idee einer kollaborativen Enzyklopädie, was sich auch in der Lizensierung niederschlägt, da sie unter der Creative-Commons-Attribution-ShareAlike-Lizenz weiter verwendet werden darf. Ein Nachteil ist wiederum, dass es einen großen Aufwand bedeutet, die Daten über Techniken wie scrapen oder parsen auszulesen.
 
 \subsubsection{Marvel API}
-Eine weitere API, die sich \va aufgrund des Inhaltes für die Verwendung in \arbeitstitel \ anbieten würde, ist die \textbf{Marvel API} \citep{marvel}. Über diese lassen sich insbesondere inhaltliche Informationen über Marvel-Comics ermitteln. Leider gibt darüberhinaus keine Informationen über Erscheinungsdaten \oae verwertbare Daten, die sich zeitlich einordnen lassen. Das schließt derzeit auch eine Verwendung dieser API über den Umweg aus, populäre Comics anderweitig zu suchen und spezifische Daten von dieser API nachzuladen.
+Eine weitere API, die sich \va aufgrund des Inhaltes für die Verwendung in \arbeitstitel \ anbieten würde, ist die \textbf{Marvel API} \citep{marvel}. Über diese lassen sich insbesondere inhaltliche Informationen über Marvel-Comics ermitteln. Leider gibt darüber hinaus keine Informationen über Erscheinungsdaten \oae verwertbare Daten, die sich zeitlich einordnen lassen. Das schließt derzeit auch eine Verwendung dieser API über den Umweg aus, populäre Comics anderweitig zu suchen und spezifische Daten von dieser API nachzuladen.
 
 \section{Quellen für das Einbinden von Media-Inhalten im Player}
 Im Folgenden werden die Dienste vorgestellt, die verwendet werden können, um Audio- und Video-Content in der Playlist von \arbeitstitel, wenn auch lediglich repräsentativ oder als Verlinkung darzustellen.
@@ -66,7 +66,7 @@ Ein Problem, welches gegen die Verwendung von \textbf{YouTube}-Inhalten spricht,
 \paragraph{Vimeo}
 \textbf{Vimeo} \citep{vimeo} ist ebenso wie \textbf{YouTube} ein Video-Dienst der das Uploaden von Videos mit der sozialen Komponente verbindet. \textbf{Vimeo} bietet derzeit drei verschiedene APIs an. Die derzeit offizielle API gibt es in zwei Versionen, die \textbf{Simple API} \citep[][Vimeo Simple API]{vimeoAPIsSimple} und die \textbf{Advanced API}  \citep[][Vimeo Advanced API]{vimeoAPIsAdvanced}. Momentan arbeitet \textbf{Vimeo} an einer neuen API, die bereits verwendet werden kann, aber sich noch im Beta-Stadium befindet \citep[][Vimeo API (Beta)]{vimeoAPI}. 
 
-Besonderheit ist, dass \textbf{Vimeo} darüberhinaus noch eine als \textbf{JavaScript API} \citep[][Vimeo JavaScript API]{vimeoJSAPI} deklarierte API bereitstellt, die insbesondere die Steuerung des \textbf{Vimeo}-Players ermöglicht. Diese Funktionalität kann für die Realisierung des Players genutzt werden. 
+Besonderheit ist, dass \textbf{Vimeo} darüber hinaus noch eine als \textbf{JavaScript API} \citep[][Vimeo JavaScript API]{vimeoJSAPI} deklarierte API bereitstellt, die insbesondere die Steuerung des \textbf{Vimeo}-Players ermöglicht. Diese Funktionalität kann für die Realisierung des Players genutzt werden. 
 
 Der große Nachteil von \textbf{Vimeo} \bzgl der Nutzung für \arbeitstitel \ ist allerdings, dass \textbf{Vimeos} Kernaufgabe ist, eine Plattform für Videos, die \va künstlerischer Natur sind, zu bieten. D.h., es gibt zwar Musikvideos und Film-Trailer, jedoch nicht in der ausgeprägten Form von YouTube.
 
@@ -96,7 +96,7 @@ Ein Großteil der im Internet verfügbaren APIs basiert auf dem \textbf{RESTful}-S
 \subsection{Library- und API-Wrapper}
 Unabhängig von der Art der Implementierung der Web-Services existieren für einen Großteil von \va bekannten APIs sogenannte \textbf{Wrapper}. Ein API-Wrapper kann dabei unterschiedliche Bedürfnisse bedienen. Zum einen können lediglich einzelne von der API bereitgestellte Funktionen implementiert sein, um unabhängig von Formaten oder Programmiersprachen von der Funktionalität einer API zugreifen zu können. Dies kann sowohl die Verwendung, als auch die Einbindung einer API sehr stark vereinfachen. \citep[Vgl.][]{wikiWrapper}
 
-Darüberhinaus kann ein Wrapper auch die Funktionalität der API erweitern, indem \zB intern mehrere API-Calls sinnvoll miteinander verknüpft werden und damit einfacher weiter verarbeitet werden können. \citep[Vgl.][]{wikiWrapper}
+Darüber hinaus kann ein Wrapper auch die Funktionalität der API erweitern, indem \zB intern mehrere API-Calls sinnvoll miteinander verknüpft werden und damit einfacher weiter verarbeitet werden können. \citep[Vgl.][]{wikiWrapper}
 
 \subsection{Web-Scraping}
 Das Web-Scraping (oder Screen-Scraping) ist eine Technik, mit der Informationen einer Webseite gesammelt werden können. Die für \arbeitstitel \ in Frage kommende Art des Web-Scraping ist das Herunterladen eines externen Quelltextes via HTTP, der Informationen, insbesondere über Film- oder Musikcharts verfügt. Aus der vorangegangenen Analyse der Suchdienste (siehe Kapitel \ref{cha:analyse}) geht bereits hervor, dass es im Internet Massen an passenden Daten, die für \arbeitstitel \ von Interesse sind, gibt, jedoch keine Schnittstellen existieren. 
@@ -113,7 +113,7 @@ Auf Wikipedia existieren brauchbare Seiten, die jeweils die Musik- und Film-Char
 
 
 \subsection{Sweble Wikitext Component}
-Das \textbf{Sweble Wikitext Components module} soll das Parsen von MediaWikis Wikitext ermöglichen und darüberhinaus eine Engine bieten, die versucht das Verhalten eines MediaWiki zu emulieren. \citep[Vgl.][]{sweble} das bedeutet  \textbf{Sweble} addressiert das Problem, dass selbst Wikis mit einem \citep{sweblePaper} 
+Das \textbf{Sweble Wikitext Components module} soll das Parsen von MediaWikis Wikitext ermöglichen und darüber hinaus eine Engine bieten, die versucht das Verhalten eines MediaWiki zu emulieren. \citep[Vgl.][]{sweble} das bedeutet  \textbf{Sweble} addressiert das Problem, dass selbst Wikis mit einem \citep{sweblePaper} 
 
 
 \subsection{Mergen von Daten / Multiple Requests für einen Datensatz}
@@ -135,7 +135,7 @@ Im Folgenden wird das Setup der Web-Applikation, sowie verwendete Module und der
 Das Web-Application-Framework \textbf{Express.js} \citep{expressjs} wird verwendet, da es eine Palette von Funktionalität zur einfachen Implementierung von Web-Applikationen mit \textbf{Node.js} bietet und trotzdem flexibel und leichtgewichtig ist. Es ist als Schicht zwischen Funktionalität und Frontend zu verstehen und agiert als API \citep[Vgl.][]{expressjs}. Das ist speziell für \arbeitstitel \ vom Vorteil, da dies das Bereitstellen einer API für die Funktionalität von \arbeitstitel bietet und damit das Entwickeln von weiteren Anwendungen vereinfacht wird.
 
 \subsubsection{Code-Generierung mit Yeoman}
-Das Gerüst der Web-Applikation wurde mittels \textbf{Yeoman} \citep{yeoman}, einem Scaffolding-Tool für Webapps, generiert. Der Workflow von Yeoman basiert auf den drei Tools \textbf{Yo}, \textbf{Grunt} \citep{grunt} und \textbf{Bower} \citep{bower}. Bower ist ein Package Manager für das Frontend, Grunt ein Task Runner, mit Hilfe dessen Automatisierungsprozesse und Build-Skripte ausgeführt werden können. Yo kann mittles verschiedener Generatoren und Konfigurationen den Boilerplate-Code einer Web-Applikation und ein passendes Grunt Skript generieren.
+Das Gerüst der Web-Applikation wurde mittels \textbf{Yeoman} \citep{yeoman}, einem Scaffolding-Tool für Webapps, generiert. Der Workflow von Yeoman basiert auf den drei Tools \textbf{Yo}, \textbf{Grunt} \citep{grunt} und \textbf{Bower} \citep{bower}. Bower ist ein Package Manager für das Frontend, Grunt ein Task Runner, mit Hilfe dessen Automatisierungsprozesse und Build-Skripte ausgeführt werden können. Yo kann mittels verschiedener Generatoren und Konfigurationen den Boilerplate-Code einer Web-Applikation und ein passendes Grunt Skript generieren.
 
 \arbeitstitel \ ist mithilfe des Yeoman-Generators \textbf{generator-express} \citep{yeoExpress} generiert worden. Die generierte Projektstruktur implementiert bereits das MVC-Framework. Außerdem ist MongoDB als Default-Datenbank vorkonfiguriert.
 
@@ -171,7 +171,7 @@ Zu diesem Zweck wird die dokumentenorientierte Datenbank \textbf{MongoDB} \citep
 \textbf{mongoose} ist ein Objekt-Modellierungs-Tool für die Verwendung von MongoDB \citep{mongodb} unter Node.js. \citep[Vgl.][]{mongoose} Unter anderem bietet \textbf{mongoose} eine unkomplizierte, Schema-basierte Lösung zur Modellierung von Anwendungsdaten und verfügt über Business-Logik, Funktionen wie das Typisieren, Validieren und vereinfacht das Formulieren von Datenbank-Queries \uvm \citep[Vgl.][]{mongoose}
 
 \medskip
-\begin{lstlisting}[caption=Deklaration des ResultItem mit Mongoose,label={lst:mongoose}]
+\begin{lstlisting}[language=JavaScript,caption=Deklaration des ResultItem mit Mongoose,label={lst:mongoose}]
 var resultItemSchema = new Schema({
 	mediaType: {type: String, enum: ['audio', 'video', 'text', 'other']},
 	mediaSubtype: {type: String, enum: ['movie', 'music', 'time', 'other']},
@@ -207,7 +207,7 @@ Im Folgenden werden der Funktionsumfang und die Restriktionen der verwendeten AP
 Das Node-Modul \textbf{NodeBrainz} ist ein schlanker Wrapper, der vollen Zugang zur MusicBrainz API (Version 2) bietet. \citep[Vgl.][]{nodebrainz} Dadurch wird eine komfortable Verwendung der \texttt{search}-Entität ermöglicht. Die Suche von Interpreten und Songtiteln wird mithilfe des \textbf{NodeBrainz}-Moduls bewerkstelligt.
 
 \paragraph{Cover Art for Node}
-Die CoverArt-API ist eine seperate API von \textbf{MusicBrainz}, die das Nachschlagen von CoverArt für anhand einer MusicBrainz-\texttt{release}-ID ermöglicht. Das Node-Modul \textbf{Cover Art for Node} implementiert diese Funktionalität und bietet zum einem die Möglichkeit Cover-Art in binärer Form zurück zu liefern, zum anderen ist es möglich die gelieferten Bild-URLs zu Cover-Art in unterschiedlichen Größen, zu erfassen. \citep{coverart}
+Die CoverArt-API ist eine separate API von \textbf{MusicBrainz}, die das Nachschlagen von CoverArt für anhand einer MusicBrainz-\texttt{release}-ID ermöglicht. Das Node-Modul \textbf{Cover Art for Node} implementiert diese Funktionalität und bietet zum einem die Möglichkeit Cover-Art in binärer Form zurück zu liefern, zum anderen ist es möglich die gelieferten Bild-URLs zu Cover-Art in unterschiedlichen Größen, zu erfassen. \citep{coverart}
 
 
 \paragraph{node-imdb-api}
@@ -217,19 +217,19 @@ Da \textbf{IMDb} über keine offizelle API verfügt, nutzt \citeauthor{nodeImdbApi
 Für Requests an die Schnittstelle \textbf{TrailerAddict} wird das Node-Modul \textbf{node-rest-client} verwendet. \citep{nodeRestClient} Es vereinfacht Requests an REST-APIs und liefert JavaScript-Objekte zurück, dessen Verarbeitung dann selbst übernommen werden muss. Dies erfordert zwar mehr Aufwand, einen Request durchzuführen, als einen API-Wrapper zu verwenden, da Results eines Requests jedoch auch im Falle der Verwendung eines API-Wrappers erst auf die intern verwendeten Objekte gemappt werden müssen, hält sich der Mehraufwand in Grenzen. Im Listing \ref{lst:nodeRestClient} ist der Aufruf der TrailerAddict-API anhand einer IMDb-ID zu sehen.
 
 \medskip
-\lstinputlisting[caption={Node-Rest-Client Beispiel},label={lst:nodeRestClient}]{Inhalt/Code/nodeRestClient.js}
+\lstinputlisting[language=JavaScript,caption={Node-Rest-Client Beispiel},label={lst:nodeRestClient}]{Inhalt/Code/nodeRestClient.js}
 
 \paragraph{Request}
 Das Modul \textbf{Request} bewerkstelligt HTTP-Anfragen \citep{request} und dient in der Web-Applikation dem Erfassen des Quelltext von \textbf{IMDb} zum Erfragen der populärsten Filme eines spezifischen Jahres. Im Listing \ref{lst:request} ist zu sehen, wie der Quelltext der gegebenen IMDb-URL geladen wird.
 
 \medskip
-\lstinputlisting[caption={Request Beispiel},label={lst:request}]{Inhalt/Code/request.js}
+\lstinputlisting[language=JavaScript,caption={Request Beispiel},label={lst:request}]{Inhalt/Code/request.js}
 
 \paragraph{cheerio}
 Mithilfe des Node-Moduls \textbf{Cheerio} \citep{cheerio} lassen sich Informationen von Websites mithilfe von CSS-Selektoren, wie sie in der Syntax von jQuery bekannt sind, erfassen. Die Verwendung dieser Bibliothek erleichtert das Scrapen \ua von \textbf{IMDb}. Im Listing \ref{lst:cheerio} ist zu sehen, wie die IMDb-IDs aus dem durch das Scrapen erhaltenen Quelltext, erfasst werden. 
 
 \medskip
-\lstinputlisting[caption={Cheerio Beispiel},label={lst:cheerio}]{Inhalt/Code/cheerio.js}
+\lstinputlisting[language=JavaScript,caption={Cheerio Beispiel},label={lst:cheerio}]{Inhalt/Code/cheerio.js}
 
 \paragraph{async}
 Das \textbf{async}-Modul \citep{async} erlaubt eine bessere Kontrolle über asynchron ausgeführte Funktionalität. Da \arbeitstitel \ an vielen Stellen mit mehreren APIs kommunizieren muss, ist die Asynchronität zwar generell ein Vorteil, jedoch werden auch Anfragen benötigt, die von mehreren asynchronen Requests abhängig sind. \Dahe , dass einige Requests von teilweise mehreren Requests, die vorher durchgeführt werden müssen, abhängig sind. Mit async lassen sich Callbacks in vordefinierter Reihenfolge durchführen. Auch eine Serie von ein und dem selben Callbacks auf Werten aus einer Liste, ist möglich, genauso lassen sich mehrere Requests gleichzeitig abarbeiten bis dann der finale Callback ausgeführt werden kann, wenn alle Vorbedingungen erfüllt worden sind.
@@ -237,16 +237,16 @@ Das \textbf{async}-Modul \citep{async} erlaubt eine bessere Kontrolle über async
 Im Listing \ref{lst:async} ist der asynchrone Aufbau der Funktionen mithilfe des \textbf{async}-Moduls zu sehen. Die Funktionen \texttt{getMusicSuggestionsBySearchterm} und \texttt{getMovieSuggestionsBySearchterm} werden parallel ausgeführt. Sobald beide Funktionen abgeschlossen sind und das Callback ausgelöst wird, wird die in Zeile \ref{lst:asyncCallback} implementierte Funktion ausgeführt. Über \texttt{results} kann auf die Ergebnisse der parallel ausgeführten Funktionen zugegriffen werden.
 
 \medskip
-\lstinputlisting[caption={Async Beispiel},label={lst:async}]{Inhalt/Code/async.js}
+\lstinputlisting[language=JavaScript,caption={Async Beispiel},label={lst:async}]{Inhalt/Code/async.js}
 
 Außerdem wird die von \textbf{async} bereitgestellte Funktion \texttt{each} verwendet. Auf diesem Wege kann für jedes Item eines Result-Sets, das von einer API bezogen wurde, ein Request ausgeführt werden, um \zB Cover-Art nachzuladen. Diese Funktion wird zum Abfragen der Film-Trailer verwendet, indem anhand eines Sets von \textbf{IMDb}-IDs für jede ein Trailer gesucht wird.
 
 
 \medskip
-\lstinputlisting[float,caption={Request, Cheerio und Async in Action},label={lst:interaction}]{Inhalt/Code/requestCheerioAsync.js}
+\lstinputlisting[language=JavaScript,float,caption={Request, Cheerio und Async in Action},label={lst:interaction}]{Inhalt/Code/requestCheerioAsync.js}
 
 \subsection{Interner Aufbau und Ablauf von Requests}
-Auf Abbildung \ref{fig:requestDiagram} ist der grobe Ablauf von Nutzer-Eingabe bis zur Lieferung der resultierenden Medien-Items zu sehen. Bei der Eingabe eines Suchbegriffes werden zunächst mögliche Suchvorschläge gegeben.\footnote{Der schematische Ablauf der Sammlung der Suchvorschläge ist in Abbildung \ref{fig:suggestionsRequestDiagram} zu sehen und wird in Abschnitt \ref{subsec:suggestions} beschrieben} Anhand der Suchvorschläge kann der Nutzer sich ein Item aussuchen, dessen Zeitraum durchsucht werden soll. Anhand diesen Zeitraumes sendet \arbeitstitel \ Suchrequests an die verbundenen APIs und Quellen und gibt ein Set an Suchergebnissen (\texttt{MusicResults}) und abspielbaren Medieninhalten (\texttt{TrailerResults}) zurück.\footnote{Der schematische Ablauf der Sammlung von Suchergebnissen ist auf Abbildung \ref{fig:searchResultsRequestDiagram} zu sehen und wird in Abschnitt \ref{subsec:results} genauer beschrieben.}
+Auf Abbildung \ref{fig:requestDiagram} ist der grobe Ablauf von Nutzer-Eingabe bis zur Lieferung der resultierenden Medien-Items zu sehen. Bei der Eingabe eines Suchbegriffes werden zunächst mögliche Suchvorschläge gegeben.\footnote{Der schematische Ablauf der Sammlung der Suchvorschläge ist in Abbildung \ref{fig:suggestionsRequestDiagram} zu sehen und wird in Abschnitt \ref{subsec:suggestions} beschrieben} Anhand der Suchvorschläge kann der Nutzer sich ein Item aussuchen, dessen Zeitraum durchsucht werden soll. Anhand diesen Zeitraumes sendet \arbeitstitel \ Sucherequests an die verbundenen APIs und Quellen und gibt ein Set an Suchergebnissen (\texttt{MusicResults}) und abspielbaren Medieninhalten (\texttt{TrailerResults}) zurück.\footnote{Der schematische Ablauf der Sammlung von Suchergebnissen ist auf Abbildung \ref{fig:searchResultsRequestDiagram} zu sehen und wird in Abschnitt \ref{subsec:results} genauer beschrieben.}
 
 \begin{figure}[htb]
 	\begin{center}
@@ -260,7 +260,7 @@ Auf Abbildung \ref{fig:requestDiagram} ist der grobe Ablauf von Nutzer-Eingabe b
 \label{subsec:suggestions}
 Auf Abbildung \ref{fig:suggestionsRequestDiagram} wird der interne Ablauf zur Erfassung der Suchvorschläge schematisch dargestellt. Bei Eingabe eines Suchbegriffs, wird bei den unterschiedlichen APIs und Quellen nach passenden Suchvorschlägen gesucht. Um Suchvorschläge im Bereich Film zu finden, werden passende Items von \textbf{Rotten Tomatoes} und \textbf{IMDb} gesammelt. 
 
-Gleichzeitig findet die Suche nach Suchvorschlägen im Bereich Musik statt. Aufgrund der Architektur der \textbf{MusicBrainz}-API, in der bei einem Request auch der Rückgabetyp angegeben werden muss, wird parallel nach passenden Songtiteln und Interpreten, die den Suchbegriff enthalten, gesucht. Besonderheit beim Erfassen der Musik-Suchvorschläge ist, dass für jedes Item ein zusätzlicher Request an die Cover-Art-API nötig ist, um ein representatives Thumbnail in der Selectbox anzeigen zu können. Weitere potenzielle Medientypen sind mit der grauen Box repräsentiert. Sobald alle benötigten Daten für die Anzeigen gesammelt wurden, indem sie auf interne SuggestionItem-Objekte gemappt wurden, werden diese zurück an das Frontend geschickt und dem Nutzer angezeigt.
+Gleichzeitig findet die Suche nach Suchvorschlägen im Bereich Musik statt. Aufgrund der Architektur der \textbf{MusicBrainz}-API, in der bei einem Request auch der Rückgabetyp angegeben werden muss, wird parallel nach passenden Songtiteln und Interpreten, die den Suchbegriff enthalten, gesucht. Besonderheit beim Erfassen der Musik-Suchvorschläge ist, dass für jedes Item ein zusätzlicher Request an die Cover-Art-API nötig ist, um ein repräsentatives Thumbnail in der Selectbox anzeigen zu können. Weitere potenzielle Medientypen sind mit der grauen Box repräsentiert. Sobald alle benötigten Daten für die Anzeigen gesammelt wurden, indem sie auf interne SuggestionItem-Objekte gemappt wurden, werden diese zurück an das Frontend geschickt und dem Nutzer angezeigt.
 
 \begin{figure}[htb]
 	\begin{center}

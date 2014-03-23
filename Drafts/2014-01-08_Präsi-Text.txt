@@ -1,0 +1,14 @@
+Culture Chronicles
+
+Meiner Master-Arbeit habe ich den Working-Title Culture Chronicles gegeben, weil es darum geht eine Chronik kultureller Inhalte, die im Internet vorhanden sind, zu erstellen.
+
+Culture Chronicles im speziellen dient vor allen zwei Aspekten: 
+1.	Zum einen der Aspekt der Unterhaltung - Das Stöbern in der Vergangenheit
+2.	Zum anderen einen wissenschaftlichen Aspekt - Das zeitspezifische Recherchieren
+
+So würde ich Culture Chronicles zu Rate ziehen, wenn ich mir z.B. folgende Fragen stelle:
+1.	Welche großen Hits gab es während meiner Teenager-Zeit?
+	Was war los, als The Clash ihren Hit London Calling herausbrachten?
+2.	Was war während des Vietnamkrieges los?
+
+Der schematische Ablauf vom User-Input zum Output zeige ich auf diesem Schema.
