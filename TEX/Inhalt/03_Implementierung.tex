@@ -245,6 +245,31 @@ Außerdem wird die von \textbf{async} bereitgestellte Funktion \texttt{each} verw
 \medskip
 \lstinputlisting[language=JavaScript,float,caption={Request, Cheerio und Async in Action},label={lst:interaction}]{Inhalt/Code/requestCheerioAsync.js}
 
+\subsection{Einbinden weiterer Medientypen und Dienste}
+Die Architektur des Servers ist zur einfachen Einbindung zusätzlicher Medientypen und Datenquellen vorgesehen. Hier ist zu unterscheiden, ob eine weitere Quelle lediglich zum Liefern von Suchvorschlägen eingebunden werden soll, zum Liefern von Suchergebnissen oder beidem. Dafür sind intern die Datenbank-Objekte \texttt{Suggestion} und \texttt{ResultItem} essentiell.
+
+\paragraph{Einbinden eines Dienstes für Suchvorschläge}
+Für das Einbinden einer weiteren Schnittstelle zum Liefern von Suchvorschlägen muss eine Funktion implementiert werden, die anhand des Parameters \texttt{String:searchTerm} eine Liste von \texttt{Suggestion}-Objekten (\texttt{List<Suggestion>:suggestions} zurück gibt. Werden die Ergebnisse der Suchvorschläge inklusive eines Icons oder Platzhalters für den implementierten Dienst und den Suchvorschlagdienst und die Quelle richtig angegeben, können die zusätzlichen Suchvorschläge ohne Darstellungsfehler in der Selectbox angezeigt werden. Mithilfe von \textbf{mongoose} kann das resultierende Ergebnis eines neuen Dienstes auf ein \texttt{Suggestion}-Objekt gemappt werden (siehe Listing \ref{lst:imdbToSuggestion}).
+
+\paragraph{Einbinden eines Dienstes für Suchergebnisse}
+Das Einbinden einer weiteren Schnittstelle für Suchergebnisse ist äquivalent zur Einbindung eine weiteren Dienstes für Suchvorschläge. In diesem Fall wird als Parameter der Zeitpunkt mitgegeben\footnote{Derzeit ist dies die jeweilige Jahreszahl mit vier Stellen, \zB \glqq 1985\grqq \ oder \glqq 2014\grqq .} und eine Liste an \texttt{ResultItem}-Objekten (\texttt{List<ResultItem>:resultItems}) zurück geliefert.
+
+Die implementierte Funktion wird dann im \texttt{async}-Rumpf eingebunden werden. Dies ist am Beispiel der Film-Suchvorschläge mit den beiden Diensten \textbf{IMDb} und \textbf{Rotten Tomatoes} in Listing \ref{lst:movieSuggestions} zu sehen.
+
+\medskip
+\lstinputlisting[float,language=JavaScript,caption={Einbinden von zusätzlichen Diensten am Beispiel des Medientyps Film},label={lst:movieSuggestions}]{Inhalt/Code/getMovieSuggestionsBySearchterm.js}
+
+\medskip
+\lstinputlisting[float,language=JavaScript,caption={Mappen eines IMDb-Results zu einem Suggestion-Objekt},label={lst:imdbToSuggestion}]{Inhalt/Code/imdbToSuggestion.js}
+
+
+\paragraph{Einbinden eines weiteren Medientyps}
+Das Einbinden eines weiteren Medientyps verhält sich äquivalent zur Einbindung eines Dienstes für Suchvorschläge oder -ergebnisse. Die einzelnen Dienste werden nach Medientyp sortiert abgefragt (siehe Listing \ref{lst:getSuggestions}).
+
+\medskip
+\lstinputlisting[float,language=JavaScript,caption={Mappen eines IMDb-Results zu einem Suggestion-Objekt},label={lst:getSuggestions}]{Inhalt/Code/getSuggestions.js}
+
+
 \subsection{Interner Aufbau und Ablauf von Requests}
 Auf Abbildung \ref{fig:requestDiagram} ist der grobe Ablauf von Nutzer-Eingabe bis zur Lieferung der resultierenden Medien-Items zu sehen. Bei der Eingabe eines Suchbegriffes werden zunächst mögliche Suchvorschläge gegeben.\footnote{Der schematische Ablauf der Sammlung der Suchvorschläge ist in Abbildung \ref{fig:suggestionsRequestDiagram} zu sehen und wird in Abschnitt \ref{subsec:suggestions} beschrieben} Anhand der Suchvorschläge kann der Nutzer sich ein Item aussuchen, dessen Zeitraum durchsucht werden soll. Anhand diesen Zeitraumes sendet \arbeitstitel \ Sucherequests an die verbundenen APIs und Quellen und gibt ein Set an Suchergebnissen (\texttt{MusicResults}) und abspielbaren Medieninhalten (\texttt{TrailerResults}) zurück.\footnote{Der schematische Ablauf der Sammlung von Suchergebnissen ist auf Abbildung \ref{fig:searchResultsRequestDiagram} zu sehen und wird in Abschnitt \ref{subsec:results} genauer beschrieben.}
 
