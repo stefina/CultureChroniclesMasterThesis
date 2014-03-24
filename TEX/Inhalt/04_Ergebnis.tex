@@ -4,7 +4,14 @@
 Im Folgenden wird der Funktionsumfang und die Anwendung der Web-Applikation beschrieben.
 
 \section{Anwendung}
+\subsection{Eingeben eines Suchbegriffes}
+Auf Abbildung \ref{fig:screenHome} ist die Web-Applikation in ihrer Ausgangssituation zu sehen. Der Nutzer kann mit einem Klick auf die Selectbox (\glqq Choose a timeframe!\grqq) einen Suchbegriff eingeben. Um unnötige Requests zu vermeiden, wird erst bei Eingabe des dritten Zeichens eine Suche gestartet. Auf Abbildung \ref{fig:screenSuggestions} ist die Anzeige von Suchvorschlägen zu sehen. Anhand des Icons ist zu erkennen, von welcher Quelle der Suchvorschlag kommt. Soweit vorhanden, wird daneben ein Thumbnail des Filmplakats angezeigt, sollte keines gefunden worden, wird ein Platzhalter angezeigt. Außerdem werden Titel der vorgeschlagenen Items, sowie das jeweilige Erscheinungsjahr angezeigt. Das Jahr bezeichnet den Zeitraum, der durchsucht wird, wenn der Nutzer darauf klickt.
 
+\subsection{Präsentation des Suchergebnisses}
+Auf Abbildung \ref{fig:screenSearchResults} ist die Anzeige der Suchergebnisse für das Jahr 1990 zu sehen. Im Hauptbereich sind alle Filmplakate zu sehen, die beim Scrapen der \textbf{IMDb}-Seite für das Jahr gefunden und dessen Daten über die \textbf{Rotten Tomatoes}-API vervollständigt werden. Im rechten Drittel der Anzeige ist die Liste der gefundenen Trailer von der API \textbf{TrailerAddict} zu sehen. Diese sind jeweils in IFrames eingebettet und können unabhängig voneinander abgespielt werden.\footnote{Auf dem Screenshot \ref{fig:screenSearchResults} wird der Trailer zu \glqq Robocop II\grqq \ abgespielt. (Erster Eintrag in der Player-Ansicht.)}
+
+
+Beim Hovern über ein Filmplakat \footnote{Die Hover-Ansicht ist auf der Abbildung \ref{fig:screenSearchResults} am Beispiel des Filmes \glqq Rocky V\grqq \ zu sehen. (Erste Reihe, 3. v.l.)}
 
 \begin{figure}[htb]
 	\begin{center}
@@ -39,8 +46,7 @@ jahr (nicht datum)
 
 \section{Funktionalität}
 
-
+mimimi
 \begin{itemize}
-    \item screenshots vom Prototypen
-    \item was ist gut gelaufen, was ist schlecht gelaufen, wo wurde gespart
+    \item select2 schickt erst Requests ab der Eingabe des dritten Zeichens. Daher ist eine Suche nach \bspw Stephen King\grq s \glqq Es\grqq \ derzeit nicht möglich. Da auch die API von \textbf{Rotten Tomatoes} die Anzahl von Requests pro Sekunde begrenzt, werden im Zweifelsfall keine Ergebnisse gefunden, wenn der Suchvorschlag unmittelbar danach ausgewählt wird.
 \end{itemize}
