@@ -12,7 +12,7 @@ request('http://www.imdb.com/search/title?release_date=' + searchterm + ',' + se
 	}, function(err, result){
 		var trailerList = new Array();
 
-		async.each(itemList, function(id, callback){
+		async.each(itemList, function(id, callback){ (*@\label{lst:asyncEach}@*)
 
 			// fetch additional Movie-Information from other Sources by IMDbId
 			client.get('http://api.traileraddict.com/?imdb='  + id +  '&count=1&width=680', function(data, response){

@@ -137,7 +137,7 @@ Das Web-Application-Framework \textbf{Express.js} \citep{expressjs} wird verwend
 \subsubsection{Code-Generierung mit Yeoman}
 Das Gerüst der Web-Applikation wurde mittels \textbf{Yeoman} \citep{yeoman}, einem Scaffolding-Tool für Webapps, generiert. Der Workflow von Yeoman basiert auf den drei Tools \textbf{Yo}, \textbf{Grunt} \citep{grunt} und \textbf{Bower} \citep{bower}. Bower ist ein Package Manager für das Frontend, Grunt ein Task Runner, mit Hilfe dessen Automatisierungsprozesse und Build-Skripte ausgeführt werden können. Yo kann mittels verschiedener Generatoren und Konfigurationen den Boilerplate-Code einer Web-Applikation und ein passendes Grunt Skript generieren.
 
-\arbeitstitel \ ist mithilfe des Yeoman-Generators \textbf{generator-express} \citep{yeoExpress} generiert worden. Die generierte Projektstruktur implementiert bereits das MVC-Framework. Außerdem ist MongoDB als Default-Datenbank vorkonfiguriert.
+\arbeitstitel \ ist mithilfe des Yeoman-Generators \textbf{generator-express} \citep{yeoExpress} generiert worden. Die generierte Projektstruktur implementiert bereits das MVC-Framework, in dem Funktionalität, Darstellung und Objekte klar voneinander getrennt werden. Außerdem ist MongoDB als Default-Datenbank vorkonfiguriert.
 
 \subsection{Umsetzung und verwendete Tools im Frontend}
 Im Folgenden werden verwendete Libraries und deren Nutzen, sowie sonstige Besonderheiten der Implementierung des Frontends erläutert.
@@ -152,7 +152,7 @@ Stylus \citep{stylus} ist eine für Node entwickelte Sprache, deren Kompilat CSS 
 \textbf{Select2} \citep{select2} ist eine konfigurierbare Implementierung einer Selectbox. Sie bietet neben dem einfachen Suchen und einer Autosuggest-Funktion bereits Features wie dem automatischen Nachladen von Remote Datasets und unterstützt infinites Scrollen \citep[Vgl.][]{select2}. Da Select2 auf jQuery basiert sind keine weiteren Includes erforderlich. Außerdem ist es ebenfalls über \textbf{Bower} erhältlich.
 
 \paragraph{Font Awesome}
-Die Library \textbf{Font Awesome} \citep{fontAwesome} bietet ein Set von derzeit 369 Icons zur Verwendung an. Sie lässt sich mittels Bower installieren und kann nach dem Einbinden der CSS-Files durch die Verwendung der vorgegebenen CSS-Klassen verwendet werden. Dies bietet den Vorteil, dass die verwendeten Icons sowohl stilkonform, als auch von der anzeigbaren Größe veränderbar sind.
+Die Library \textbf{Font Awesome} \citep{fontAwesome} bietet ein Set von derzeit 369 Icons zur Verwendung an. Sie lässt sich mittels \textbf{Bower} installieren und kann nach dem Einbinden der CSS-Files durch die Verwendung der vorgegebenen CSS-Klassen verwendet werden. Dies bietet den Vorteil, dass die verwendeten Icons sowohl stilkonform, als auch von der anzeigbaren Größe veränderbar sind.
 
 \paragraph{Darstellung von Filmplakaten in unterschiedlichen Formaten}
 Um das User Interface trotz verschiedener Medientypen und deren Repräsentierung möglichst aufgeräumt und übersichtlich zu halten, wurde die Darstellung der Medien-Items in Rasterform umgesetzt. Somit ist für jedes Item eine quadratische Anzeige vorgegeben. Dies funktioniert größtenteils für Album-Cover, da diese fast ausnahmslos ebenfalls im quadratischen Format vorliegen, ohne Darstellungsprobleme. Hier können allerdings unschöne Darstellungsfehler auftreten, da die Album-Cover in unterschiedlichen Größen verfügbar sind. Diese lassen sich mit Angabe einer festen Höhe und Breite durch CSS verhindern. 
@@ -193,7 +193,7 @@ Bei Eingabe eines Suchbegriffes werden zunächst die aktivierten APIs durchsucht.
 \begin{figure}[htb]
 	\begin{center}
 		\includegraphics[width=1\textwidth]{Klassendiagramm.pdf}
-		\caption{SuggestionItem}
+		\caption{Objekt-Diagramm des Suggestion-Objektes}
 	\end{center}
 	\label{fig:suggestionItem}
 \end{figure}
@@ -234,12 +234,12 @@ Mithilfe des Node-Moduls \textbf{Cheerio} \citep{cheerio} lassen sich Informatio
 \paragraph{async}
 Das \textbf{async}-Modul \citep{async} erlaubt eine bessere Kontrolle über asynchron ausgeführte Funktionalität. Da \arbeitstitel \ an vielen Stellen mit mehreren APIs kommunizieren muss, ist die Asynchronität zwar generell ein Vorteil, jedoch werden auch Anfragen benötigt, die von mehreren asynchronen Requests abhängig sind. \Dahe , dass einige Requests von teilweise mehreren Requests, die vorher durchgeführt werden müssen, abhängig sind. Mit async lassen sich Callbacks in vordefinierter Reihenfolge durchführen. Auch eine Serie von ein und dem selben Callbacks auf Werten aus einer Liste, ist möglich, genauso lassen sich mehrere Requests gleichzeitig abarbeiten bis dann der finale Callback ausgeführt werden kann, wenn alle Vorbedingungen erfüllt worden sind.
 
-Im Listing \ref{lst:async} ist der asynchrone Aufbau der Funktionen mithilfe des \textbf{async}-Moduls zu sehen. Die Funktionen \texttt{getMusicSuggestionsBySearchterm} und \texttt{getMovieSuggestionsBySearchterm} werden parallel ausgeführt. Sobald beide Funktionen abgeschlossen sind und das Callback ausgelöst wird, wird die in Zeile \ref{lst:asyncCallback} implementierte Funktion ausgeführt. Über \texttt{results} kann auf die Ergebnisse der parallel ausgeführten Funktionen zugegriffen werden.
+Im Listing \ref{lst:async} ist zu sehen, wie das \texttt{async}-Modul zur parallelen Ausführung von Funktionen beiträgt. Die Funktionen \texttt{get""Music""Suggestions""By""Searchterm} und \texttt{get""Movie""Suggestions""By""Searchterm} werden parallel ausgeführt. Sobald beide Funktionen abgeschlossen sind und die jeweiligen Callback-Funktionen ausgeführt werden, wird das in Zeile \ref{lst:asyncCallback} implementierte Callback ausgeführt. Über \texttt{results} kann auf die Ergebnisse der parallel ausgeführten Funktionen zugegriffen werden.
 
 \medskip
-\lstinputlisting[language=JavaScript,caption={Async Beispiel},label={lst:async}]{Inhalt/Code/async.js}
+\lstinputlisting[language=JavaScript,float,caption={Async Beispiel},label={lst:async}]{Inhalt/Code/async.js}
 
-Außerdem wird die von \textbf{async} bereitgestellte Funktion \texttt{each} verwendet. Auf diesem Wege kann für jedes Item eines Result-Sets, das von einer API bezogen wurde, ein Request ausgeführt werden, um \zB Cover-Art nachzuladen. Diese Funktion wird zum Abfragen der Film-Trailer verwendet, indem anhand eines Sets von \textbf{IMDb}-IDs für jede ein Trailer gesucht wird.
+Außerdem wird die von \textbf{async} bereitgestellte Funktion \texttt{each} verwendet. Auf diesem Wege kann für jedes Item eines Result-Sets, das von einer API bezogen wurde, ein Request ausgeführt werden, um \zB Cover-Art nachzuladen. Diese Funktion wird zum Abfragen der Film-Trailer verwendet, indem anhand eines Sets von \textbf{IMDb}-IDs für jede ein Trailer gesucht wird. Dies ist \ua im Listing \ref{lst:interaction} in Zeile \ref{lst:asyncEach} zu sehen.
 
 
 \medskip
