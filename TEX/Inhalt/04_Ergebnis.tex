@@ -24,6 +24,15 @@ In Abbildung \ref{fig:screenHome} ist die Web-Applikation in ihrer Ausgangssitua
 	\label{fig:screenSuggestions}
 \end{figure}
 
+\begin{figure}[htb]
+	\begin{center}
+		\shadowimage[width=14cm]{screenSuggestionFerris.png}
+		\caption{Screenshot der Anzeige der Detailansicht der Suchanfrage}
+	\end{center}
+	\label{fig:screenSearchDetail}
+\end{figure}
+
+
 \subsection{Präsentation des Suchergebnisses}
 In Abbildung \ref{fig:screenSearchResults} ist die Anzeige der Suchergebnisse für das Jahr 1990 zu sehen. Im Hauptbereich sind alle Filmplakate zu sehen, die beim Scrapen der \textbf{IMDb}-Seite für das Jahr gefunden und dessen Daten über die \textbf{Rotten Tomatoes}-API vervollständigt werden. Im rechten Drittel der Anzeige ist die Liste der gefundenen Trailer von der API \textbf{TrailerAddict} zu sehen. Diese sind jeweils in IFrames eingebettet und können unabhängig voneinander abgespielt werden.\footnote{Auf dem Screenshot \ref{fig:screenSearchResults} wird der Trailer zu \glqq Robocop II\grqq \ abgespielt. (Erster Eintrag in der Player-Ansicht.)}
 
@@ -37,6 +46,9 @@ Beim Hovern über ein Filmplakat erscheinen die Icons zum Aufrufen des Source-Lin
 	\end{center}
 	\label{fig:screenSearchResults}
 \end{figure}
+
+\subsection{Anzeige der Suchdetails}
+Nach dem Durchführen einer Suche, kann über das Menu-Icon, welches sich neben dem Suche-Eingabefeld befindet, das Menu aufgerufen werden. Wie in Abbildung \ref{fig:screenSearchDetail} zu sehen ist, werden unter Search Details das gesuchte Jahr, der Titel des gesuchten Items, sowie der Medien- und Medien-Subtyp angezeigt. Außerdem wird, soweit vorhanden, ein repräsentatives Bild angezeigt, in diesem Fall das Filmplakat von \glqq Ferris Bueller\'s Day off\glqq . Über den Link der Quelle, in der Abbildung \glqq RottenTomatoes\grqq , kann auf die Webseite des jeweiligen Items auf der Dienstseite navigiert werden.
 
 
 \subsection{Eingabe}
