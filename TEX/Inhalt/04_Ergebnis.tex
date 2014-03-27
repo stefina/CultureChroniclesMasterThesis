@@ -37,7 +37,13 @@ In Abbildung \ref{fig:screenHome} ist die Web-Applikation in ihrer Ausgangssitua
 In Abbildung \ref{fig:screenSearchResults} ist die Anzeige der Suchergebnisse für das Jahr 1990 zu sehen. Im Hauptbereich sind alle Filmplakate zu sehen, die beim Scrapen der \textbf{IMDb}-Seite für das Jahr gefunden und dessen Daten über die \textbf{Rotten Tomatoes}-API vervollständigt werden. Im rechten Drittel der Anzeige ist die Liste der gefundenen Trailer von der API \textbf{TrailerAddict} zu sehen. Diese sind jeweils in IFrames eingebettet und können unabhängig voneinander abgespielt werden.\footnote{Auf dem Screenshot \ref{fig:screenSearchResults} wird der Trailer zu \glqq Robocop II\grqq \ abgespielt. (Erster Eintrag in der Player-Ansicht.)}
 
 \subsection{Ansicht zusätzlicher Informationen eines Ergebnis-Items}
-Beim Hovern über ein Filmplakat erscheinen die Icons zum Aufrufen des Source-Links des Items, zusätzlicher Informationen, je nach Medientyp und die Möglichkeit das Item der Playlist-Queue hinzuzufügen, sollte es sich um abspielbaren Inhalt handeln.\footnote{Die Hover-Ansicht ist in Abbildung \ref{fig:screenSearchResults} am Beispiel des Filmes \glqq Rocky V\grqq \ zu sehen. (Erste Reihe, 3. v.l.)}
+Fährt man mit dem Mauszeiger über ein Item \zB ein Filmplakat, erscheinen drei Icons, über die weitere Aktionen, die das Item betreffen, durchgeführt werden können.\footnote{Die Hover-Ansicht ist in Abbildung \ref{fig:screenSearchResults} am Beispiel des Filmes \glqq Rocky V\grqq \ zu sehen. (Erste Reihe, 3. v.l.)}
+
+\paragraph{Informations-Icon} Dieses Icon dient der Anzeige des Item-Titels, sowie den Namen des Dienstes, von dem dieses Item bezogen wurde. Ebenfalls werden der Medien-Typ und Medien-Subtyp angezeigt.
+
+\paragraph{Link-Icon} Über das Link-Icon kann der Nutzer direkt zur URL des gewählten Items navigieren. Im Falle eines Filmes, der auf \textbf{Rotten Tomatoes} gefunden wurde, wird die Detailseite des Filmes auf der \textbf{Rotten Tomatoes}-Website in einem neuen Tab geöffnet.
+
+\paragraph{Plus-Icon} Das Plus-Icon verfügt zu diesem Zeitpunkt über keine Funktion, soll in Zukunft jedoch die Funktion bieten, sollte es sich bei dem Item um abspielbaren Inhalt handeln, dieses zur Playlist-Queue hinzuzufügen.
 
 \begin{figure}[htb]
 	\begin{center}
@@ -48,14 +54,38 @@ Beim Hovern über ein Filmplakat erscheinen die Icons zum Aufrufen des Source-Lin
 \end{figure}
 
 \subsection{Anzeige der Suchdetails}
-Nach dem Durchführen einer Suche, kann über das Menu-Icon, welches sich neben dem Suche-Eingabefeld befindet, das Menu aufgerufen werden. Wie in Abbildung \ref{fig:screenSearchDetail} zu sehen ist, werden unter Search Details das gesuchte Jahr, der Titel des gesuchten Items, sowie der Medien- und Medien-Subtyp angezeigt. Außerdem wird, soweit vorhanden, ein repräsentatives Bild angezeigt, in diesem Fall das Filmplakat von \glqq Ferris Bueller\'s Day off\glqq . Über den Link der Quelle, in der Abbildung \glqq RottenTomatoes\grqq , kann auf die Webseite des jeweiligen Items auf der Dienstseite navigiert werden.
+Nach dem Durchführen einer Suche, kann über das Menu-Icon, welches sich neben dem Suche-Eingabefeld befindet, das Menu aufgerufen werden. Wie in Abbildung \ref{fig:screenSearchDetail} zu sehen ist, werden unter \glqq Search Details\grqq \ das gesuchte Jahr, der Titel des gesuchten Items, sowie der Medien- und Medien-Subtyp angezeigt. Außerdem wird, soweit vorhanden, ein repräsentatives Bild angezeigt, in diesem Fall das Filmplakat von \glqq Ferris Bueller\grq s Day off\glqq . Über den Link der Quelle, in der Abbildung \glqq RottenTomatoes\grqq , kann auf die Webseite des jeweiligen Items auf der Dienstseite navigiert werden. Die Option \glqq Filter Result\grqq \ dient zu diesem Zeitpunkt lediglich als Platzhalter für die zukünftige Funktion des Filterns des Ergebnisses.
 
 
-\subsection{Eingabe}
-jahr (nicht datum)
+\subsection{Eingabe-Möglichkeiten}
+Derzeit kann lediglich anhand eines Filmtitels ein Zeitraum ausgewählt werden. 
+
+\subsection{Funktionalität des Players}
+Derzeit wird der Player lediglich mit Film-Trailern befüllt. Die Funktionalität des Players konnte nicht implementiert werden, da die \textbf{TrailerAddict}-API lediglich das Einbetten ihrer Trailer vorsieht. Dementsprechend ist das Result, welches von dieser API zurückkommt, ein HTML-Snippet, das in einem IFrame in \arbeitstitel \ eingebettet wird. Eine externe Steuerung von IFrames, sodass die Player-Funktionalität, wie das Abspielen, Skippen oder Pausieren eines Trailers nicht über die Player-Buttons von \arbeitstitel \ nicht bewerkstelligt werden kann.
+
+\subsection{Responsive} \todo{naja, so halbwegs, mal sehen, wenn mir nix besseres einfällt}
 
 
-\section{Funktionalität}
+\section{\arbeitstitel -API}
+Durch das \textbf{Express}-Framework ist die implementierte Funktionalität ebenfalls als RESTful-API verwendbar. Zu einer Einbindung der API werden die Routen \lstinline{/suggestions} und \lstinline{/search} bereitgestellt. 
+
+\todo{schöner formatieren}
+\begin{itemize}
+	\item \lstinline{GET /suggestions}
+	\begin{itemize}
+		\item Liefert eine Liste an Suchvorschlägen anhand eines Suchbegriffes
+		\item \textbf{params}: \texttt{String:searchterm}
+		\item \textbf{returnValue}: \texttt{List<suggestion>}
+	\end{itemize}
+	\item \lstinline{GET /search}
+	\begin{itemize}
+		\item Liefert eine Liste an Suchergebnissen anhand eines Suchbegriffes
+		\item \textbf{params}: \texttt{String:suggestionId}
+		\item \textbf{returnValue}: \texttt{List<resultItem>}
+	\end{itemize}
+\end{itemize}
+
+
 
 mimimi
 \begin{itemize}

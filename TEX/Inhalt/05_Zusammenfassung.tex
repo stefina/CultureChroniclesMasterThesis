@@ -3,18 +3,17 @@
 \label{cha:ausblick}
 
 \section{Problematik und Weiterentwicklung} % Ausblick
-Im Laufe der Entwicklung von \arbeitstitel \ mussten aufgrund der großen Abhängigkeit von sehr vielen unterschiedlichen Faktoren sehr viele Kompromisse im Funktionsumfang gemacht werden. Der wichtigste Faktor ist die Verfügbarkeit der vorhandenen Daten, insbesondere an frei zugänglichen Musik- oder Film-Charts. Über Umwege, wie \zB das Scrapen, können zwar auch diese Daten erfasst und verwendet werden, jedoch ist dies zum einen erheblicher Mehraufwand, zum anderen ist dies äußerst fehleranfällig. \Va wenn sich Strukturen des Quelltextes ändern, muss der Code dementsprechend angepasst werden. Außerdem ist zu Bedenken, dass viele Websites dies ausdrücklich verbieten. Betreiber von Websites, die diese Technik (noch) nicht ausschließen, können durch erhöhten Traffic, der durch \arbeitstitel \ verursacht würde, ebenfalls Urheberrechtsansprüche geltend machen.
+\subsection{Abhängigkeit von unterschiedlichen APIs}
+Im Laufe der Entwicklung von \arbeitstitel \ mussten aufgrund der großen Abhängigkeit von sehr vielen unterschiedlichen Faktoren sehr viele Kompromisse im Funktionsumfang gemacht werden. Der wichtigste Faktor ist die Verfügbarkeit der vorhandenen Daten, insbesondere an frei zugänglichen Musik- oder Film-Charts. Über Umwege, wie \zB das Web-Scraping, können zwar auch diese Daten erfasst und verwendet werden, jedoch ist dies zum einen mit erheblichen Mehraufwand verbunden, zum anderen ist dies äußerst fehleranfällig. \Va wenn sich Strukturen des Quelltextes ändern, muss der Code dementsprechend angepasst werden. Außerdem ist zu Bedenken, dass viele Websites dies ausdrücklich verbieten. Betreiber von Websites, die diese Technik (noch) nicht ausschließen, können durch erhöhten Traffic, der durch \arbeitstitel \ verursacht würde, ebenfalls Urheberrechtsansprüche geltend machen.
 
-Das Erfassen externer Daten ist nicht nur von externen APIs abhängig, sondern auch von ihrem Aufbau. Ein Suchbegriff kann einen Songtitel oder einen Interpreten enthalten, d.h., dass für die Suche nach einer passenden Musikveröffentlichung zwei Requests an die Entitäten \texttt{Artist} und \texttt{Release-Group} gemacht werden müssen. Das Ergebnis ist eine Liste an Release-Groups. Es wird nach Release-Groups gesucht, weil Release-Groups die unterschiedlichen Releases enthalten, die sich größtenteils sehr ähneln, da es sich lediglich um unterschiedliche Veröffentlichungen in bestimmten Ländern handelt, während diese in der Suche von \arbeitstitel \ als ein Medien-Item behandelt werden können. Eine Suche nach Releases führt also zu sehr vielen redundanten Suchergebnissen. Hinzu kommt, dass die Cover Art API von MusicBrainz ebenfalls eine Release-Group-MusicBrainz-Id benötigt. Um jedoch herausfinden zu können, wann ein Song oder Album veröffentlicht wurde, muss anhand der bereits gefundene Release-Group ein Release gewählt werden. Erst anhand einer Release-MusicBrainz-Id kann das Veröffentlichungsdatum herausgefunden werden.
+Das Erfassen externer Daten ist nicht nur von externen APIs abhängig, sondern auch von ihrem Aufbau. Ein Suchbegriff kann einen Songtitel oder einen Interpreten enthalten, d.h., dass für die Suche bei nach einer passenden Musikveröffentlichung \textbf{MusicBrainz} zwei Requests an die Entitäten \texttt{Artist} und \texttt{Release-Group} gemacht werden müssen. Das Ergebnis ist eine Liste an Release-Groups. Es wird nach Release-Groups gesucht, weil Release-Groups die unterschiedlichen Releases enthalten, die sich größtenteils sehr ähneln, da es sich lediglich um unterschiedliche Veröffentlichungen in bestimmten Ländern handelt, während diese in der Suche von \arbeitstitel \ als ein Medien-Item behandelt werden können. Eine Suche nach Releases führt also zu sehr vielen redundanten Suchergebnissen. Hinzu kommt, dass die \textbf{Cover Art API} von \textbf{MusicBrainz} ebenfalls eine Release-Group-MusicBrainz-Id benötigt. Um jedoch herausfinden zu können, wann ein Song oder Album veröffentlicht wurde, muss anhand der bereits gefundene Release-Group ein Release gewählt werden. Erst anhand einer Release-MusicBrainz-Id kann das Veröffentlichungsdatum herausgefunden werden.
 
-Somit sind allein für die Abfrage von Suchvorschlägen diverse Requests an unterschiedliche APIs nötig. Darüber hinaus begrenzt MusicBrainz die Anzahl an möglichen Requests pro Sekunde auf eine Zahl, die für das Finden mehrerer Ergebnisse für \arbeitstitel \ nötig sind.
+Somit sind allein für die Abfrage von Suchvorschlägen von Musik-Veröffentlichungen diverse Requests an unterschiedliche APIs, \bzw deren Entitäten, nötig. Darüber hinaus begrenzt \textbf{MusicBrainz} die Anzahl an möglichen Requests pro Sekunde auf eine Zahl, die für das Finden mehrerer Ergebnisse für \arbeitstitel \ nötig sind.
 
-Der im Rahmen dieser Master-Arbeit zu implementierende Funktionsumfang der Web-Applikation wurde auf die Möglichkeiten, die das Internet heute bietet, angepasst. Jedoch stellen auch die offizell verwendbaren APIs vor eigene Herausforderungen. Keine der untersuchten APIs bietet eine Suche von Daten-Items anhand eines Zeitpunktes oder Zeitraumes. 
-
-
-Über semantische Funktionalität kann derzeit hinweg gesehen werden.
+Der im Rahmen dieser Master-Arbeit zu implementierende Funktionsumfang der Web-Applikation wurde auf die Möglichkeiten, die das Internet heute bietet, angepasst. Jedoch stellen auch die offizell verwendbaren APIs vor eigene Herausforderungen. Keine der untersuchten APIs bietet eine Suche von Daten-Items anhand eines Zeitpunktes oder Zeitraumes. Dies gilt insbesondere für das Erlangen von Charts-Informationen.
 
 
+TODO:
 \begin{itemize}
 	\item langsam
 	\item dynamisches nachladen
@@ -23,6 +22,11 @@ Der im Rahmen dieser Master-Arbeit zu implementierende Funktionsumfang der Web-A
 	\item zeitspezifische Content-Abfragen oft nicht möglich
 	\item große Abhängigkeit von sehr vielen unterschiedlichen APIs
 	\item Player-Funktionalität
+	\item Über semantische Funktionalität kann derzeit hinweg gesehen werden, die Probleme treten schon viel früher auf
 \end{itemize}
+
+
+
+
 
 \section{Fazit und kritische Bewertung} % Fazit
