@@ -1,0 +1,2380 @@
+\begin{Verbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Audio Fabula User Interface using Pygame and Pyttsx}
+
+\PY{l+s+sd}{   Copyright 2013 Linda Kerkhoff}
+\PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+
+\PY{c}{\PYZsh{} This file is part of Fabula.}
+\PY{c}{\PYZsh{}}
+\PY{c}{\PYZsh{} Fabula is free software: you can redistribute it and/or modify}
+\PY{c}{\PYZsh{} it under the terms of the GNU General Public License as published by}
+\PY{c}{\PYZsh{} the Free Software Foundation, either version 3 of the License, or}
+\PY{c}{\PYZsh{} (at your option) any later version.}
+\PY{c}{\PYZsh{}}
+\PY{c}{\PYZsh{} Fabula is distributed in the hope that it will be useful,}
+\PY{c}{\PYZsh{} but WITHOUT ANY WARRANTY; without even the implied warranty of}
+\PY{c}{\PYZsh{} MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the}
+\PY{c}{\PYZsh{} GNU General Public License for more details.}
+\PY{c}{\PYZsh{}}
+\PY{c}{\PYZsh{} You should have received a copy of the GNU General Public License}
+\PY{c}{\PYZsh{} along with Fabula.  If not, see \PYZlt{}http://www.gnu.org/licenses/\PYZgt{}.}
+
+\PY{c}{\PYZsh{} work started on 12. Sep 2013}
+
+\PY{k+kn}{import} \PY{n+nn}{sys}
+
+\PY{k+kn}{import} \PY{n+nn}{fabula.plugins.ui}
+\PY{k+kn}{import} \PY{n+nn}{pygame}
+\PY{k+kn}{import} \PY{n+nn}{datetime}
+\PY{k+kn}{import} \PY{n+nn}{os}
+\PY{k+kn}{import} \PY{n+nn}{unicodedata}
+\PY{k+kn}{import} \PY{n+nn}{pyttsx}
+\PY{c}{\PYZsh{} For cx\PYZus{}Freeze}
+\PY{k+kn}{import} \PY{n+nn}{pyttsx.drivers.sapi5}
+
+\PY{c}{\PYZsh{} Hardwired screen size.}
+\PY{c}{\PYZsh{}}
+\PY{n}{SCREENSIZE} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{400}\PY{p}{,} \PY{l+m+mi}{300}\PY{p}{)}
+
+\PY{n}{ENTRY\PYZus{}UP\PYZus{}KEYS} \PY{o}{=} \PY{p}{[}\PY{n}{pygame}\PY{o}{.}\PY{n}{K\PYZus{}UP}\PY{p}{]}
+\PY{n}{ENTRY\PYZus{}DOWN\PYZus{}KEYS} \PY{o}{=} \PY{p}{[}\PY{n}{pygame}\PY{o}{.}\PY{n}{K\PYZus{}DOWN}\PY{p}{]}
+\PY{n}{SELECT\PYZus{}ENTRY\PYZus{}KEYS} \PY{o}{=} \PY{p}{[}\PY{n}{pygame}\PY{o}{.}\PY{n}{K\PYZus{}RIGHT}\PY{p}{,} \PY{n}{pygame}\PY{o}{.}\PY{n}{K\PYZus{}RETURN}\PY{p}{]}
+\PY{n}{EXIT\PYZus{}AUDIO\PYZus{}MENU\PYZus{}LIST\PYZus{}KEYS} \PY{o}{=} \PY{p}{[}\PY{n}{pygame}\PY{o}{.}\PY{n}{K\PYZus{}LEFT}\PY{p}{]}
+\PY{n}{ENTER\PYZus{}KEYS} \PY{o}{=} \PY{p}{[}\PY{n}{pygame}\PY{o}{.}\PY{n}{K\PYZus{}RETURN}\PY{p}{]}
+
+\PY{k}{class} \PY{n+nc}{AudioMenuList}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+    \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}An AudioMenuList is an acoustic widget for a list menu. It can be opened}
+\PY{l+s+sd}{       and while it is opened scrolling with key\PYZhy{}events through its entries is}
+\PY{l+s+sd}{       enabled as well as select an entry or exit the menu by pressing a key.}
+
+\PY{l+s+sd}{       A callback method can be provided to handle the selection of an entry.}
+\PY{l+s+sd}{       A second callback method is called if the list is exited.}
+
+\PY{l+s+sd}{       If an AudioMenuList with an empty list is opened its empty\PYZus{}sound is}
+\PY{l+s+sd}{       played and the callback\PYZus{}on\PYZus{}exit method is called.}
+
+\PY{l+s+sd}{       AudioMenuList.list}
+\PY{l+s+sd}{           A list containing all entries of the menu.}
+
+\PY{l+s+sd}{       AudioMenuList.list\PYZus{}index}
+\PY{l+s+sd}{           Current index to the list of the AudioMenuList. Initially set to}
+\PY{l+s+sd}{           None.}
+
+\PY{l+s+sd}{       AudioMenuList.menu\PYZus{}sound}
+\PY{l+s+sd}{           Supposed to be a pygame.mixer.Sound and is played as title when the}
+\PY{l+s+sd}{           list opens.}
+
+\PY{l+s+sd}{       AudioMenuList.empty\PYZus{}sound}
+\PY{l+s+sd}{           Supposed to be a pygame.mixer.Sound and is played when the list opens}
+\PY{l+s+sd}{           and has no entries.}
+
+\PY{l+s+sd}{       AudioMenuList.channel}
+\PY{l+s+sd}{           Supposed to be a pygame.mixer.channel and is used to play back all}
+\PY{l+s+sd}{           sounds of the list.}
+
+\PY{l+s+sd}{       AudioMenuList.callback\PYZus{}on\PYZus{}entry\PYZus{}selected}
+\PY{l+s+sd}{           Callback function to handle the selection of an entry.}
+
+\PY{l+s+sd}{       AudioMenuList.callback\PYZus{}on\PYZus{}exit}
+\PY{l+s+sd}{           Callback function to handle exiting the list without a previous}
+\PY{l+s+sd}{           selection.}
+
+\PY{l+s+sd}{       To get acoustic feedback a specific subclass of AudioMenuList is}
+\PY{l+s+sd}{       needed to provide a way of creating an acoustic version of all the list}
+\PY{l+s+sd}{       entries.}
+\PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n+nb}{list}\PY{p}{,} \PY{n}{menu\PYZus{}sound}\PY{p}{,} \PY{n}{empty\PYZus{}sound}\PY{p}{,} \PY{n}{channel}\PY{p}{,} \PY{n}{callback\PYZus{}on\PYZus{}entry\PYZus{}selected}\PY{p}{,} \PY{n}{callback\PYZus{}on\PYZus{}exit}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Initialize with given parameters and the list\PYZus{}index set to None.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{list} \PY{o}{=} \PY{n+nb}{list}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{list\PYZus{}index} \PY{o}{=} \PY{n+nb+bp}{None}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{menu\PYZus{}sound} \PY{o}{=} \PY{n}{menu\PYZus{}sound}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{empty\PYZus{}sound} \PY{o}{=} \PY{n}{empty\PYZus{}sound}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel} \PY{o}{=} \PY{n}{channel}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{callback\PYZus{}on\PYZus{}entry\PYZus{}selected} \PY{o}{=} \PY{n}{callback\PYZus{}on\PYZus{}entry\PYZus{}selected}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{callback\PYZus{}on\PYZus{}exit} \PY{o}{=} \PY{n}{callback\PYZus{}on\PYZus{}exit}
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{try\PYZus{}to\PYZus{}open\PYZus{}menu\PYZus{}list}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Tries to open the AudioMenuList. If the list is empty it plays the}
+\PY{l+s+sd}{           empty\PYZus{}sound, calls callback\PYZus{}on\PYZus{}exit and returns False.}
+\PY{l+s+sd}{           If the list is not empty it calls open\PYZus{}menu\PYZus{}list and returns True.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{n}{has\PYZus{}entries} \PY{o}{=} \PY{n+nb+bp}{False}
+
+        \PY{c}{\PYZsh{} If the list is empty just leave the menu and play the empty sound}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{list}\PY{p}{)} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{0}\PY{p}{:}
+
+            \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{empty\PYZus{}sound} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{None}\PY{p}{:}
+
+                \PY{c}{\PYZsh{} Play back menu lists empty sound}
+                \PY{c}{\PYZsh{}}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel}\PY{o}{.}\PY{n}{play}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{empty\PYZus{}sound}\PY{p}{)}
+
+                \PY{c}{\PYZsh{} Wait till sound is complete}
+                \PY{c}{\PYZsh{}}
+                \PY{k}{while} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel}\PY{o}{.}\PY{n}{get\PYZus{}busy}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{pass}
+
+            \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{callback\PYZus{}on\PYZus{}exit} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{None}\PY{p}{:}
+
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{callback\PYZus{}on\PYZus{}exit}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}
+
+        \PY{k}{else}\PY{p}{:}
+
+            \PY{n}{has\PYZus{}entries} \PY{o}{=} \PY{n+nb+bp}{True}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{open\PYZus{}menu\PYZus{}list}\PY{p}{(}\PY{p}{)}
+
+        \PY{k}{return} \PY{n}{has\PYZus{}entries}
+
+    \PY{k}{def} \PY{n+nf}{open\PYZus{}menu\PYZus{}list}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Opens the AudioMenuList by playing its menu\PYZus{}sound as title and sets the index to the first entry.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{menu\PYZus{}sound} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{None}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Play back menu lists name}
+            \PY{c}{\PYZsh{}}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel}\PY{o}{.}\PY{n}{play}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{menu\PYZus{}sound}\PY{p}{)}
+
+            \PY{c}{\PYZsh{} Wait till sound is complete}
+            \PY{c}{\PYZsh{}}
+            \PY{k}{while} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel}\PY{o}{.}\PY{n}{get\PYZus{}busy}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                \PY{k}{pass}
+
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{list\PYZus{}index} \PY{o}{=} \PY{l+m+mi}{0}
+
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{process\PYZus{}key\PYZus{}input}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{key}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Processes key input and performs the corresponding action on the AudioMenuList.}
+\PY{l+s+sd}{           Actions are the selection of an entry, scrolling entries up and down}
+\PY{l+s+sd}{           and exiting the list.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{c}{\PYZsh{} Scrolling through entries with up and down arrow keys}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{if} \PY{n}{key} \PY{o+ow}{in} \PY{n}{ENTRY\PYZus{}DOWN\PYZus{}KEYS} \PY{o+ow}{or} \PY{n}{key} \PY{o+ow}{in} \PY{n}{ENTRY\PYZus{}UP\PYZus{}KEYS}\PY{p}{:}
+
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{scroll\PYZus{}list}\PY{p}{(}\PY{n}{key}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Call callback function for entry selected}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{elif} \PY{p}{(}\PY{n}{key} \PY{o+ow}{in} \PY{n}{SELECT\PYZus{}ENTRY\PYZus{}KEYS}
+              \PY{o+ow}{and} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{callback\PYZus{}on\PYZus{}entry\PYZus{}selected} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{None}\PY{p}{)}\PY{p}{:}
+
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{callback\PYZus{}on\PYZus{}entry\PYZus{}selected}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Call callback function for exit menu list}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{elif} \PY{p}{(}\PY{n}{key} \PY{o+ow}{in} \PY{n}{EXIT\PYZus{}AUDIO\PYZus{}MENU\PYZus{}LIST\PYZus{}KEYS}
+              \PY{o+ow}{and} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{callback\PYZus{}on\PYZus{}exit} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{None}\PY{p}{)}\PY{p}{:}
+
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{callback\PYZus{}on\PYZus{}exit}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}
+
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{scroll\PYZus{}list}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{key}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Scrolls entries by decreasing or increasing the list\PYZus{}index.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{c}{\PYZsh{} Scrolling through entries with up and down arrow keys}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{if} \PY{n}{key} \PY{o+ow}{in} \PY{n}{ENTRY\PYZus{}UP\PYZus{}KEYS}\PY{p}{:}
+
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{list\PYZus{}index} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{1}
+
+        \PY{k}{elif} \PY{n}{key} \PY{o+ow}{in} \PY{n}{ENTRY\PYZus{}DOWN\PYZus{}KEYS}\PY{p}{:}
+
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{list\PYZus{}index} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+
+        \PY{c}{\PYZsh{} Keep the index in bounds of length of list}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{list\PYZus{}index} \PY{o}{\PYZpc{}}\PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{list}\PY{p}{)}
+
+        \PY{k}{return}
+
+\PY{k}{class} \PY{n+nc}{SoundMenuList}\PY{p}{(}\PY{n}{AudioMenuList}\PY{p}{)}\PY{p}{:}
+    \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}A SoundMenuList is a specific AudioMenuList whose list is supposed to contain pygame.mixer.Sounds.}
+\PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n+nb}{list}\PY{p}{,} \PY{n}{menu\PYZus{}sound}\PY{p}{,} \PY{n}{empty\PYZus{}sound}\PY{p}{,} \PY{n}{channel}\PY{p}{,} \PY{n}{callback\PYZus{}on\PYZus{}entry\PYZus{}selected}\PY{p}{,} \PY{n}{callback\PYZus{}on\PYZus{}exit}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Initialize with given parameters.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{c}{\PYZsh{} Call base class}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{AudioMenuList}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}
+                               \PY{n+nb}{list}\PY{p}{,}
+                               \PY{n}{menu\PYZus{}sound}\PY{p}{,}
+                               \PY{n}{empty\PYZus{}sound}\PY{p}{,}
+                               \PY{n}{channel}\PY{p}{,}
+                               \PY{n}{callback\PYZus{}on\PYZus{}entry\PYZus{}selected}\PY{p}{,}
+                               \PY{n}{callback\PYZus{}on\PYZus{}exit}\PY{p}{)}
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{open\PYZus{}menu\PYZus{}list}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Opens the SoundMenuList and plays the first sound at index 0.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{c}{\PYZsh{} Call base class}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{AudioMenuList}\PY{o}{.}\PY{n}{open\PYZus{}menu\PYZus{}list}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Play back first entry}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel}\PY{o}{.}\PY{n}{play}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{list}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{list\PYZus{}index}\PY{p}{]}\PY{p}{)}
+
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{scroll\PYZus{}list}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{key}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Scrolls entries by decreasing or increasing the list\PYZus{}index and plays the sound in the list at the current index.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{c}{\PYZsh{} Call base class}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{AudioMenuList}\PY{o}{.}\PY{n}{scroll\PYZus{}list}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{key}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Play back current entry}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel}\PY{o}{.}\PY{n}{play}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{list}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{list\PYZus{}index}\PY{p}{]}\PY{p}{)}
+
+        \PY{k}{return}
+
+\PY{k}{class} \PY{n+nc}{EntityMenuList}\PY{p}{(}\PY{n}{AudioMenuList}\PY{p}{)}\PY{p}{:}
+    \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}An EntityMenuList is a specific AudioMenuList whose list is supposed to contain fabula.Entity information.}
+\PY{l+s+sd}{       This information is supposed to be a tuple of Entity, and}
+\PY{l+s+sd}{       Entity.identifier or a location.}
+
+\PY{l+s+sd}{       It can be used to provide entity selection for fabula.Events, for which}
+\PY{l+s+sd}{       the second value of the tuple is used.}
+
+\PY{l+s+sd}{       When scrolling the menu the Entity\PYZsq{}s identifier or the text/plain asset}
+\PY{l+s+sd}{       of the Entity is read out by a text\PYZhy{}to\PYZhy{}speech engine.}
+
+\PY{l+s+sd}{       Additional attributes:}
+
+\PY{l+s+sd}{       EntityMenuList.tts\PYZus{}engine}
+\PY{l+s+sd}{           A pyttsx\PYZhy{}engine to transform text to speech.}
+\PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+
+    \PY{c}{\PYZsh{} Parameter list must contain a tuple of (Entity, Entity.identifier) if the Entity is in the rack}
+    \PY{c}{\PYZsh{} or (entity, location) if the Entity is in the room}
+    \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n+nb}{list}\PY{p}{,} \PY{n}{menu\PYZus{}sound}\PY{p}{,} \PY{n}{empty\PYZus{}sound}\PY{p}{,} \PY{n}{channel}\PY{p}{,} \PY{n}{callback\PYZus{}on\PYZus{}entry\PYZus{}selected}\PY{p}{,} \PY{n}{callback\PYZus{}on\PYZus{}exit}\PY{p}{,} \PY{n}{tts\PYZus{}engine}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Initialize with given parameters.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{c}{\PYZsh{} Call base class}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{AudioMenuList}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n+nb}{list}\PY{p}{,} \PY{n}{menu\PYZus{}sound}\PY{p}{,} \PY{n}{empty\PYZus{}sound}\PY{p}{,} \PY{n}{channel}\PY{p}{,} \PY{n}{callback\PYZus{}on\PYZus{}entry\PYZus{}selected}\PY{p}{,} \PY{n}{callback\PYZus{}on\PYZus{}exit}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine} \PY{o}{=} \PY{n}{tts\PYZus{}engine}
+
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{open\PYZus{}menu\PYZus{}list}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Opens the EntityMenuList and reads out the identifier or text/plain asset of the first Entity in the list.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{c}{\PYZsh{} Call base class}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{AudioMenuList}\PY{o}{.}\PY{n}{open\PYZus{}menu\PYZus{}list}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Entries are a tuple like (Entity, \PYZlt{}Entity.identifier|location\PYZgt{})}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{entity} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{list}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{list\PYZus{}index}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+
+        \PY{n}{entity\PYZus{}text} \PY{o}{=} \PY{n}{entity}\PY{o}{.}\PY{n}{identifier}
+
+        \PY{c}{\PYZsh{} Check if entity provides a name}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{if} \PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}
+            \PY{o+ow}{and} \PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{data} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{None}\PY{p}{)}\PY{p}{:}
+
+            \PY{n}{entity\PYZus{}text} \PY{o}{=} \PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+
+        \PY{c}{\PYZsh{} Let the TTS engine read the entry at index}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{say}\PY{p}{(}\PY{n}{entity\PYZus{}text}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{runAndWait}\PY{p}{(}\PY{p}{)}
+
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{scroll\PYZus{}list}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{key}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Scrolls entries by decreasing or increasing the list\PYZus{}index and reads out the currently selected Entity.}
+\PY{l+s+sd}{           The identifier or text/plain asset of the selected Entity is read}
+\PY{l+s+sd}{           out.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{c}{\PYZsh{} Call base class}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{AudioMenuList}\PY{o}{.}\PY{n}{scroll\PYZus{}list}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{key}\PY{p}{)}
+
+        \PY{n}{entity} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{list}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{list\PYZus{}index}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+
+        \PY{n}{entity\PYZus{}text} \PY{o}{=} \PY{n}{entity}\PY{o}{.}\PY{n}{identifier}
+
+        \PY{c}{\PYZsh{} Check if entity provides a name}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{if} \PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}
+            \PY{o+ow}{and} \PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{data} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{None}\PY{p}{)}\PY{p}{:}
+
+            \PY{n}{entity\PYZus{}text} \PY{o}{=} \PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+
+        \PY{c}{\PYZsh{} Let the TTS engine read the entry at index}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{say}\PY{p}{(}\PY{n}{entity\PYZus{}text}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{runAndWait}\PY{p}{(}\PY{p}{)}
+
+        \PY{k}{return}
+
+\PY{k}{class} \PY{n+nc}{TextMenuList}\PY{p}{(}\PY{n}{AudioMenuList}\PY{p}{)}\PY{p}{:}
+    \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}A TextMenuList is a specific AudioMenuList whose list is supposed to contain strings.}
+
+\PY{l+s+sd}{       When scrolling the menu the string entry is read out by a text\PYZhy{}to\PYZhy{}speech}
+\PY{l+s+sd}{       engine.}
+
+\PY{l+s+sd}{       Additional attributes:}
+
+\PY{l+s+sd}{       TextMenuList.tts\PYZus{}engine}
+\PY{l+s+sd}{           A pyttsx\PYZhy{}engine to transform text to speech.}
+\PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n+nb}{list}\PY{p}{,} \PY{n}{menu\PYZus{}sound}\PY{p}{,} \PY{n}{empty\PYZus{}sound}\PY{p}{,} \PY{n}{channel}\PY{p}{,} \PY{n}{callback\PYZus{}on\PYZus{}entry\PYZus{}selected}\PY{p}{,} \PY{n}{callback\PYZus{}on\PYZus{}exit}\PY{p}{,} \PY{n}{tts\PYZus{}engine}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Initialize with given parameters.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{c}{\PYZsh{} Call base class}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{AudioMenuList}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n+nb}{list}\PY{p}{,} \PY{n}{menu\PYZus{}sound}\PY{p}{,} \PY{n}{empty\PYZus{}sound}\PY{p}{,} \PY{n}{channel}\PY{p}{,} \PY{n}{callback\PYZus{}on\PYZus{}entry\PYZus{}selected}\PY{p}{,} \PY{n}{callback\PYZus{}on\PYZus{}exit}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine} \PY{o}{=} \PY{n}{tts\PYZus{}engine}
+
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{open\PYZus{}menu\PYZus{}list}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Opens the TextMenuList and reads out the first entry in the list.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{c}{\PYZsh{} Call base class}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{AudioMenuList}\PY{o}{.}\PY{n}{open\PYZus{}menu\PYZus{}list}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Let the TTS engine read the current entry}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{say}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{list}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{list\PYZus{}index}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{runAndWait}\PY{p}{(}\PY{p}{)}
+
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{scroll\PYZus{}list}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{key}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Scrolls entries by decreasing or increasing the list\PYZus{}index and reads out the the current entry of the list.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{c}{\PYZsh{} Call base class}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{AudioMenuList}\PY{o}{.}\PY{n}{scroll\PYZus{}list}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{key}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Let the TTS engine read the current entry}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{say}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{list}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{list\PYZus{}index}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{runAndWait}\PY{p}{(}\PY{p}{)}
+
+        \PY{k}{return}
+
+\PY{k}{class} \PY{n+nc}{AudioTextField}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+    \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}An AudioTextField is an acoustic widget for a text input field. It}
+\PY{l+s+sd}{       collects key input and its text\PYZhy{}to\PYZhy{}speech engine reads out the entered}
+\PY{l+s+sd}{       key. The input ends if one of the defined ENTER\PYZus{}KEYS is pressed and the}
+\PY{l+s+sd}{       text\PYZhy{}to\PYZhy{}speech engine reads out the complete collected input string. When}
+\PY{l+s+sd}{       an AudioTextField gains focus its label is read out.}
+
+\PY{l+s+sd}{       Unfortunately the text\PYZhy{}to\PYZhy{}speech engine is not able to read single}
+\PY{l+s+sd}{       periods. But this may be considered as normal text\PYZhy{}to\PYZhy{}speech behavior.}
+
+\PY{l+s+sd}{       AudioTextField.label}
+\PY{l+s+sd}{           Label of the text field. Read out if the field gains focus.}
+
+\PY{l+s+sd}{       AudioTextField.tts\PYZus{}engine}
+\PY{l+s+sd}{           A pyttsx\PYZhy{}engine to transform text to speech.}
+
+\PY{l+s+sd}{       AudioTextField.input\PYZus{}text}
+\PY{l+s+sd}{           A string containing the current input string. When a valid key is}
+\PY{l+s+sd}{           pressed it will be appended to input\PYZus{}text. By default empty string.}
+
+\PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{label}\PY{p}{,} \PY{n}{tts\PYZus{}engine}\PY{p}{,} \PY{n}{input\PYZus{}text}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Initialize with given parameters.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{label} \PY{o}{=} \PY{n}{label}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine} \PY{o}{=} \PY{n}{tts\PYZus{}engine}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}text} \PY{o}{=} \PY{n}{input\PYZus{}text}
+
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{focus\PYZus{}audio\PYZus{}text\PYZus{}field}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Empties the content of the AudioTextField an reads out the label.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}text} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZsq{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{say}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{label}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{runAndWait}\PY{p}{(}\PY{p}{)}
+
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{process\PYZus{}key\PYZus{}input}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Processes key input while active. Any Unicode symbols of category}
+\PY{l+s+sd}{           letter, number, punctuation, symbols and separators will be appended}
+\PY{l+s+sd}{           to input\PYZus{}text. Backspace key will delete the last entered symbol and}
+\PY{l+s+sd}{           any of the defined ENTER\PYZus{}KEYS will end the input processing and read}
+\PY{l+s+sd}{           out the entered input\PYZus{}text and return it.}
+
+\PY{l+s+sd}{           Returns content of AudioTextField.input\PYZus{}text}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{n}{gets\PYZus{}input} \PY{o}{=} \PY{n+nb+bp}{True}
+
+        \PY{k}{while} \PY{n}{gets\PYZus{}input}\PY{p}{:}
+
+            \PY{n}{events} \PY{o}{=} \PY{n}{pygame}\PY{o}{.}\PY{n}{event}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{p}{)}
+
+            \PY{k}{for} \PY{n}{event} \PY{o+ow}{in} \PY{n}{events}\PY{p}{:}
+
+                \PY{k}{if} \PY{n}{event}\PY{o}{.}\PY{n}{type} \PY{o}{==} \PY{n}{pygame}\PY{o}{.}\PY{n}{KEYDOWN}\PY{p}{:}
+
+                    \PY{k}{if} \PY{n}{event}\PY{o}{.}\PY{n}{key} \PY{o}{==} \PY{n}{pygame}\PY{o}{.}\PY{n}{K\PYZus{}BACKSPACE}\PY{p}{:}
+
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}text} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}text}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+
+                    \PY{k}{elif} \PY{n}{event}\PY{o}{.}\PY{n}{key} \PY{o+ow}{in} \PY{n}{ENTER\PYZus{}KEYS}\PY{p}{:}
+
+                        \PY{n}{gets\PYZus{}input} \PY{o}{=} \PY{n+nb+bp}{False}
+
+                    \PY{c}{\PYZsh{} Copied from planes.gui.keydown(self, keydown\PYZus{}event)}
+                    \PY{c}{\PYZsh{} We can not use Python 3\PYZsq{}s str.isprintable() for Python 2 compatibility}
+                    \PY{c}{\PYZsh{} reasons. As a workaround, we check the Unicode category of the input.}
+                    \PY{c}{\PYZsh{} See}
+                    \PY{c}{\PYZsh{} http://www.unicode.org/Public/5.1.0/ucd/UCD.html\PYZsh{}General\PYZus{}Category\PYZus{}Values}
+                    \PY{c}{\PYZsh{}}
+                    \PY{k}{elif} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{unicode}\PY{p}{)}
+                          \PY{o+ow}{and} \PY{n}{unicodedata}\PY{o}{.}\PY{n}{category}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{unicode}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o+ow}{in} \PY{l+s}{\PYZdq{}}\PY{l+s}{LNPSZ}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{say}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{unicode}\PY{p}{)}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{runAndWait}\PY{p}{(}\PY{p}{)}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}text} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}text} \PY{o}{+} \PY{n}{event}\PY{o}{.}\PY{n}{unicode}
+
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{say}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}text}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{runAndWait}\PY{p}{(}\PY{p}{)}
+
+        \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}text}
+
+\PY{k}{class} \PY{n+nc}{AudioEntity}\PY{p}{(}\PY{n}{fabula}\PY{o}{.}\PY{n}{Entity}\PY{p}{)}\PY{p}{:}
+    \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Pygame\PYZhy{}aware subclass of Entity to be used in AudioUserInterface.}
+
+\PY{l+s+sd}{       AudioEntity.assets[\PYZdq{}sound/ogg\PYZdq{}].data is supposed to be an instance of}
+\PY{l+s+sd}{       pygame.mixer.Sound and contain movement sound e.g. step sounds.}
+
+\PY{l+s+sd}{       If the AudioEntity is moving it plays its moving sound.}
+\PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+
+    \PY{k}{def} \PY{n+nf}{process\PYZus{}MovesToEvent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{event}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Plays back the movement sounds of the AudioEntity.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{k}{if} \PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{identifier} \PY{o+ow}{is} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{identifier}
+            \PY{o+ow}{and} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{audio/ogg}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{data} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{None}
+            \PY{o+ow}{and} \PY{l+s}{\PYZsq{}}\PY{l+s}{steps}\PY{l+s}{\PYZsq{}} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{audio/ogg}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{uri}\PY{p}{)}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Play footsteps}
+            \PY{c}{\PYZsh{}}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{audio/ogg}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{play}\PY{p}{(}\PY{p}{)}
+
+        \PY{k}{return}
+
+\PY{k}{class} \PY{n+nc}{AudioUserInterface}\PY{p}{(}\PY{n}{fabula}\PY{o}{.}\PY{n}{plugins}\PY{o}{.}\PY{n}{ui}\PY{o}{.}\PY{n}{UserInterface}\PY{p}{)}\PY{p}{:}
+    \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}This is an auditive implementation of an UserInterface for the Fabula Client.}
+\PY{l+s+sd}{       It uses Pygame to process input and a text\PYZhy{}to\PYZhy{}speech engine to read.}
+\PY{l+s+sd}{       The interaction concept is based on Audio Widgets which represent the}
+\PY{l+s+sd}{       user interface and give acoustic feedback on player input.}
+
+\PY{l+s+sd}{       Entities in the room are playing their sounds if they are in the}
+\PY{l+s+sd}{       surrounding positions of the PLAYER of this user interface.}
+
+\PY{l+s+sd}{       Additional attributes:}
+
+\PY{l+s+sd}{       AudioUserInterface.input\PYZus{}dict[\PYZsq{}keyboard\PYZsq{}] = True}
+\PY{l+s+sd}{           AudioUserInterface used keyboard events to collect player input.}
+
+\PY{l+s+sd}{       AudioUserInterface.input\PYZus{}state\PYZus{}stack}
+\PY{l+s+sd}{           A list representing the stack of input states. The current state is}
+\PY{l+s+sd}{           the topmost. INPUT\PYZus{}STATE\PYZus{}IN\PYZus{}ROOM is the default in\PYZhy{}game input state,}
+\PY{l+s+sd}{           therefore it is always present as the bottommost state on the stack.}
+\PY{l+s+sd}{           Whenever the input state is switched to in room, the stack is reset}
+\PY{l+s+sd}{           to contain only INPUT\PYZus{}STATE\PYZus{}IN\PYZus{}ROOM.}
+
+\PY{l+s+sd}{       AudioUserInterface.tts\PYZus{}engine}
+\PY{l+s+sd}{           Text\PYZhy{}to\PYZhy{}speech engine, by default None.}
+
+\PY{l+s+sd}{       AudioUserInterface.surrounding\PYZus{}position\PYZus{}channels}
+\PY{l+s+sd}{           Saves for each of the surrounding positions and the player position}
+\PY{l+s+sd}{           itself a tuple if a pygame.mixer.channel, a volume for left and a}
+\PY{l+s+sd}{           volume for right speaker to play back entities of surrounding fields}
+\PY{l+s+sd}{           with a specific spatial volume (result of different volumes for}
+\PY{l+s+sd}{           left and right speaker).}
+
+\PY{l+s+sd}{       AudioUserInterface.channel\PYZus{}system}
+\PY{l+s+sd}{           pygame.mixer.channel to play back menus and system events such as}
+\PY{l+s+sd}{           loading\PYZus{}sound.}
+
+\PY{l+s+sd}{       AudioUserInterface.channel\PYZus{}ambience}
+\PY{l+s+sd}{           pygame.mixer.channel to play back the ambience sounds of a room.}
+
+\PY{l+s+sd}{       AudioUserInterface.room\PYZus{}ambience\PYZus{}sound}
+\PY{l+s+sd}{           pygame.mixer.Sound to be played when entering in room input state.}
+
+\PY{l+s+sd}{       AudioUserInterface.loading\PYZus{}sound}
+\PY{l+s+sd}{           pygame.mixer.Sound to be played when a room is loading.}
+
+\PY{l+s+sd}{       AudioUserInterface.loading\PYZus{}complete\PYZus{}sound}
+\PY{l+s+sd}{           pygame.mixer.Sound to be played when loading a room is complete.}
+
+\PY{l+s+sd}{       AudioUserInterface.attempt\PYZus{}failed\PYZus{}sound}
+\PY{l+s+sd}{           pygame.mixer.Sound to be played if an AttemptFailedEvent is sent to}
+\PY{l+s+sd}{           this user interface.}
+
+\PY{l+s+sd}{       AudioUserInterface.connection\PYZus{}details\PYZus{}complete}
+\PY{l+s+sd}{           Flag to set if connection details are complete.}
+
+\PY{l+s+sd}{       AudioUserInterface.interaction\PYZus{}sound\PYZus{}menu}
+\PY{l+s+sd}{           SoundMenuList for interaction menu. List contains a}
+\PY{l+s+sd}{           pygame.mixer.Sound for every interaction.}
+
+\PY{l+s+sd}{       AudioUserInterface.select\PYZus{}item\PYZus{}menu}
+\PY{l+s+sd}{           EntityMenuList for item selection for a \PYZsq{}use\PYZsq{} interaction. List}
+\PY{l+s+sd}{           contains tuples of (Entity, \PYZlt{}Entity.identifier|location\PYZgt{}). The}
+\PY{l+s+sd}{           second value depends on the origin of the Entity. If from the rack,}
+\PY{l+s+sd}{           Entity.identifier is present. If from the room, a location is}
+\PY{l+s+sd}{           present.}
+
+\PY{l+s+sd}{       AudioUserInterface.select\PYZus{}target\PYZus{}menu}
+\PY{l+s+sd}{           EntityMenuList for item selection for a \PYZsq{}lockAt\PYZsq{}, \PYZsq{}pickUp\PYZsq{}, \PYZsq{}talkTo\PYZsq{}}
+\PY{l+s+sd}{           or \PYZsq{}use\PYZsq{} interaction. List contains tuples of}
+\PY{l+s+sd}{           (Entity, \PYZlt{}Entity.identifier|location\PYZgt{}). The second value depends on}
+\PY{l+s+sd}{           the origin of the Entity. If from the rack, Entity.identifier is}
+\PY{l+s+sd}{           present. If from the room, a location is present.}
+
+\PY{l+s+sd}{       AudioUserInterface.inventory\PYZus{}menu}
+\PY{l+s+sd}{           EntityMenuList for all items in the inventory. List contains tuples}
+\PY{l+s+sd}{           of (Entity, Entity.identifier).}
+
+\PY{l+s+sd}{       AudioUserInterface.select\PYZus{}sentence\PYZus{}menu}
+\PY{l+s+sd}{           TextMenuList for all sentences if user interface has to process a}
+\PY{l+s+sd}{           CanSpeakEvent. List contains all possible sentences.}
+
+\PY{l+s+sd}{       AudioUserInterface.see\PYZus{}room\PYZus{}menu}
+\PY{l+s+sd}{           EntityMenuList for all entities in the room. List contains tuples}
+\PY{l+s+sd}{           of (Entity, location).}
+
+\PY{l+s+sd}{       AudioUserInterface.help\PYZus{}menu}
+\PY{l+s+sd}{           TextMenuList for keyboard layout help menu. List contains keys and}
+\PY{l+s+sd}{           on selection the corresponding function is read out.}
+
+\PY{l+s+sd}{       AudioUserInterface.taker\PYZus{}in\PYZus{}room\PYZus{}dict}
+\PY{l+s+sd}{           A dict to store the Entity objects of the other players that are in}
+\PY{l+s+sd}{           the same room as the client. Keys are supposed to be}
+\PY{l+s+sd}{           Entity.identifier.}
+
+\PY{l+s+sd}{       AudioUserInterface.in\PYZus{}inventory\PYZus{}msg}
+\PY{l+s+sd}{           A feedback message given to the user when an item is added to the}
+\PY{l+s+sd}{           inventory. Initially it is \PYZsq{}\PYZob{}\PYZcb{} in inventory\PYZsq{} where the braces are}
+\PY{l+s+sd}{           replaced by the items name, or identifier if it does not provide one.}
+
+\PY{l+s+sd}{       AudioUserInterface.taker\PYZus{}in\PYZus{}\PYZus{}room\PYZus{}msg}
+\PY{l+s+sd}{           A feedback message given to the user when another player already is}
+\PY{l+s+sd}{           in or entered the room. Initially it is \PYZsq{}\PYZob{}\PYZcb{} is in the room\PYZsq{} where the}
+\PY{l+s+sd}{           braces are replaced by the players name.}
+
+\PY{l+s+sd}{       AudioUserInterface.taker\PYZus{}left\PYZus{}room\PYZus{}msg}
+\PY{l+s+sd}{           A feedback message given to the user when another player left the}
+\PY{l+s+sd}{           room. Initially it is \PYZsq{}\PYZob{}\PYZcb{} left the room\PYZsq{} where the braces are}
+\PY{l+s+sd}{           replaced by the players name.}
+
+\PY{l+s+sd}{       The following variables map the different input states of the client to}
+\PY{l+s+sd}{       numeric values. To check in collect\PYZus{}player\PYZus{}input which menu the input}
+\PY{l+s+sd}{       should be delegated to.}
+
+\PY{l+s+sd}{       AudioUserInterface.INPUT\PYZus{}STATE\PYZus{}IN\PYZus{}ROOM}
+\PY{l+s+sd}{           To collect input when player is in room.}
+
+\PY{l+s+sd}{       AudioUserInterface.INPUT\PYZus{}STATE\PYZus{}INTERACTION}
+\PY{l+s+sd}{           To collect input when player is in interaction menu.}
+
+\PY{l+s+sd}{       AudioUserInterface.INPUT\PYZus{}STATE\PYZus{}SELECT\PYZus{}TARGET}
+\PY{l+s+sd}{           To collect input when player is in select target menu.}
+
+\PY{l+s+sd}{       AudioUserInterface.INPUT\PYZus{}STATE\PYZus{}SELECT\PYZus{}ITEM}
+\PY{l+s+sd}{           To collect input when player is in select item menu.}
+
+\PY{l+s+sd}{       AudioUserInterface.INPUT\PYZus{}STATE\PYZus{}SEE\PYZus{}RACK}
+\PY{l+s+sd}{           Enables to scroll the rack to hear what it contains.}
+
+\PY{l+s+sd}{       AudioUserInterface.INPUT\PYZus{}STATE\PYZus{}CAN\PYZus{}SPEEK}
+\PY{l+s+sd}{           Enables to select a sentence to say.}
+
+\PY{l+s+sd}{       AudioUserInterface.INPUT\PYZus{}STATE\PYZus{}SEE\PYZus{}ROOM}
+\PY{l+s+sd}{           Enables to select entries in the room.}
+
+\PY{l+s+sd}{       AudioUserInterface.INPUT\PYZus{}STATE\PYZus{}CONNECTION\PYZus{}DETAILS}
+\PY{l+s+sd}{           Enables to select entries for connection detail input.}
+
+\PY{l+s+sd}{       AudioUserInterface.INPUT\PYZus{}STATE\PYZus{}HELP\PYZus{}MENU}
+\PY{l+s+sd}{           Enables to select entries of the help menu.}
+
+\PY{l+s+sd}{       The following attributes map an interaction to numeric values to decide}
+\PY{l+s+sd}{       which interaction is selected. Used in interaction\PYZus{}sound\PYZus{}menu and}
+\PY{l+s+sd}{       select\PYZus{}target\PYZus{}menu to sent the event corresponding to the current}
+\PY{l+s+sd}{       interaction.}
+
+\PY{l+s+sd}{       AudioUserInterface.ATTEMPT\PYZus{}LOOK\PYZus{}AT}
+\PY{l+s+sd}{           For a look at interaction.}
+
+\PY{l+s+sd}{       AudioUserInterface.ATTEMPT\PYZus{}TALK\PYZus{}TO}
+\PY{l+s+sd}{           For a talk to interaction.}
+
+\PY{l+s+sd}{       AudioUserInterface.ATTEMPT\PYZus{}PICK\PYZus{}UP}
+\PY{l+s+sd}{           For a pick up interaction.}
+
+\PY{l+s+sd}{       AudioUserInterface.ATTEMPT\PYZus{}USE}
+\PY{l+s+sd}{           For an use interaction.}
+
+\PY{l+s+sd}{       AudioUserInterface.CANCEL}
+\PY{l+s+sd}{           For cancel the interaction menu.}
+\PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+
+    \PY{n}{VOICE\PYZus{}SPECIFICATIONS} \PY{o}{=} \PY{p}{[}\PY{n+nb}{str}\PY{p}{(}\PY{n}{b}\PY{l+s}{\PYZsq{}}\PY{l+s}{english}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+                            \PY{n+nb}{str}\PY{p}{(}\PY{n}{b}\PY{l+s}{\PYZsq{}}\PY{l+s}{English}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+                            \PY{n+nb}{str}\PY{p}{(}\PY{n}{b}\PY{l+s}{\PYZsq{}}\PY{l+s}{en}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+                            \PY{n+nb}{str}\PY{p}{(}\PY{n}{b}\PY{l+s}{\PYZsq{}}\PY{l+s}{En}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+                            \PY{n+nb}{str}\PY{p}{(}\PY{n}{b}\PY{l+s}{\PYZsq{}}\PY{l+s}{EN}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+                            \PY{l+s}{\PYZsq{}}\PY{l+s}{english}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                            \PY{l+s}{\PYZsq{}}\PY{l+s}{en}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                            \PY{l+s}{\PYZsq{}}\PY{l+s}{English}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                            \PY{l+s}{\PYZsq{}}\PY{l+s}{En}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                            \PY{l+s}{\PYZsq{}}\PY{l+s}{EN}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+
+    \PY{c}{\PYZsh{} \PYZsq{}Constants\PYZsq{} for the different input states:}
+    \PY{c}{\PYZsh{}}
+    \PY{n}{INPUT\PYZus{}STATE\PYZus{}IN\PYZus{}ROOM} \PY{o}{=} \PY{l+m+mi}{0}
+    \PY{n}{INPUT\PYZus{}STATE\PYZus{}INTERACTION} \PY{o}{=} \PY{l+m+mi}{1}
+    \PY{n}{INPUT\PYZus{}STATE\PYZus{}SELECT\PYZus{}TARGET} \PY{o}{=} \PY{l+m+mi}{2}
+    \PY{n}{INPUT\PYZus{}STATE\PYZus{}SELECT\PYZus{}ITEM} \PY{o}{=} \PY{l+m+mi}{3}
+    \PY{n}{INPUT\PYZus{}STATE\PYZus{}SEE\PYZus{}RACK} \PY{o}{=} \PY{l+m+mi}{4}
+    \PY{n}{INPUT\PYZus{}STATE\PYZus{}CAN\PYZus{}SPEEK} \PY{o}{=} \PY{l+m+mi}{5}
+    \PY{n}{INPUT\PYZus{}STATE\PYZus{}SEE\PYZus{}ROOM} \PY{o}{=} \PY{l+m+mi}{6}
+    \PY{n}{INPUT\PYZus{}STATE\PYZus{}CONNECTION\PYZus{}DETAILS} \PY{o}{=} \PY{l+m+mi}{7}
+    \PY{n}{INPUT\PYZus{}STATE\PYZus{}HELP\PYZus{}MENU} \PY{o}{=} \PY{l+m+mi}{8}
+
+    \PY{c}{\PYZsh{} \PYZsq{}Constants\PYZsq{} for the different attempt actions:}
+    \PY{c}{\PYZsh{}}
+    \PY{n}{ATTEMPT\PYZus{}LOOK\PYZus{}AT} \PY{o}{=} \PY{l+m+mi}{0}
+    \PY{n}{ATTEMPT\PYZus{}TALK\PYZus{}TO} \PY{o}{=} \PY{l+m+mi}{1}
+    \PY{n}{ATTEMPT\PYZus{}PICK\PYZus{}UP} \PY{o}{=} \PY{l+m+mi}{2}
+    \PY{n}{ATTEMPT\PYZus{}USE} \PY{o}{=} \PY{l+m+mi}{3}
+    \PY{n}{ATTEMPT\PYZus{}MANIPULATE} \PY{o}{=} \PY{l+m+mi}{4}
+    \PY{n}{CANCEL} \PY{o}{=} \PY{l+m+mi}{5}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{assets}\PY{p}{,} \PY{n}{framerate}\PY{p}{,} \PY{n}{host}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Initializes the AudioUserInterface.}
+
+\PY{l+s+sd}{           assets must be an instance of fabula.Assets or a subclass.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{c}{\PYZsh{} Call base class}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{fabula}\PY{o}{.}\PY{n}{plugins}\PY{o}{.}\PY{n}{ui}\PY{o}{.}\PY{n}{UserInterface}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}
+                                                 \PY{n}{assets}\PY{p}{,}
+                                                 \PY{n}{framerate}\PY{p}{,}
+                                                 \PY{n}{host}\PY{p}{)}
+
+        \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{called}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}dict}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{keyboard}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n+nb+bp}{True}
+
+        \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{initializing pygame}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+
+        \PY{n}{pygame}\PY{o}{.}\PY{n}{init}\PY{p}{(}\PY{p}{)}
+        \PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{init}\PY{p}{(}\PY{p}{)}
+        \PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{set\PYZus{}num\PYZus{}channels}\PY{p}{(}\PY{l+m+mi}{11}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Center window. Hint from the pygame\PYZhy{}users mailing list.}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{os}\PY{o}{.}\PY{n}{environ}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{SDL\PYZus{}VIDEO\PYZus{}CENTERED}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{1}\PY{l+s}{\PYZsq{}}
+
+        \PY{c}{\PYZsh{} Open a window to collect pygame events and add a caption.}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{pygame}\PY{o}{.}\PY{n}{display}\PY{o}{.}\PY{n}{set\PYZus{}mode}\PY{p}{(}\PY{n}{SCREENSIZE}\PY{p}{)}
+        \PY{n}{pygame}\PY{o}{.}\PY{n}{display}\PY{o}{.}\PY{n}{set\PYZus{}caption}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{fabula audio client}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Initialize input state stack}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}state\PYZus{}stack} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+
+
+        \PY{c}{\PYZsh{} Set up text\PYZhy{}to\PYZhy{}speech engine}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine} \PY{o}{=} \PY{n}{pyttsx}\PY{o}{.}\PY{n}{init}\PY{p}{(}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Variable for the main voice}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{main\PYZus{}voice\PYZus{}id} \PY{o}{=} \PY{n+nb+bp}{None}
+
+        \PY{c}{\PYZsh{} Setting up voices for text\PYZhy{}to\PYZhy{}speech engine}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{for} \PY{n}{voice} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{getProperty}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{voices}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Voices can have different names on different platforms}
+            \PY{c}{\PYZsh{}}
+            \PY{k}{for} \PY{n}{specification} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{VOICE\PYZus{}SPECIFICATIONS}\PY{p}{:}
+
+                \PY{k}{if} \PY{n}{specification} \PY{o+ow}{in} \PY{n+nb}{str}\PY{p}{(}\PY{n}{voice}\PY{o}{.}\PY{n}{name}\PY{p}{)}\PY{p}{:}
+
+                    \PY{n}{main\PYZus{}voice\PYZus{}id} \PY{o}{=} \PY{n}{voice}\PY{o}{.}\PY{n}{id}
+
+        \PY{k}{if} \PY{n}{main\PYZus{}voice\PYZus{}id}\PY{p}{:}
+
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{setProperty}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{voice}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{main\PYZus{}voice\PYZus{}id}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Callback methods which can be bound to the events of the engine via}
+        \PY{c}{\PYZsh{} engine.connect(\PYZsq{}engine\PYZus{}event\PYZsq{}, method\PYZus{}example) where definition of}
+        \PY{c}{\PYZsh{} method\PYZus{}example would be def method\PYZus{}example(param):}
+        \PY{k}{def} \PY{n+nf}{tts\PYZus{}started}\PY{p}{(}\PY{n}{name}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Callback function for TTS engine starting an utterance.}
+\PY{l+s+sd}{            \PYZdq{}\PYZdq{}\PYZdq{}}
+
+            \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{TTS: started utterance }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZob{}\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{name}\PY{p}{)}\PY{p}{)}
+
+            \PY{k}{return}
+
+        \PY{k}{def} \PY{n+nf}{tts\PYZus{}finished}\PY{p}{(}\PY{n}{completed}\PY{p}{,} \PY{n}{name}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Callback function for TTS engine finished an utterance.}
+\PY{l+s+sd}{            \PYZdq{}\PYZdq{}\PYZdq{}}
+
+            \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{TTS: finished utterance}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+
+            \PY{k}{return}
+
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{connect}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{started\PYZhy{}utterance}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{tts\PYZus{}started}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{connect}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{finished\PYZhy{}utterance}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{tts\PYZus{}finished}\PY{p}{)}
+
+        \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Audio engine based on pyttsx added}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+
+
+        \PY{c}{\PYZsh{} Set up sounds and menus}
+
+        \PY{c}{\PYZsh{} Channels: Give every channel an unique ID}
+        \PY{c}{\PYZsh{}}
+        \PY{c}{\PYZsh{} One channel for each surrounding position including client position.}
+        \PY{c}{\PYZsh{} Used to play sounds for items in the surrounding positions \PYZhy{} for}
+        \PY{c}{\PYZsh{} example when moving.}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{surrounding\PYZus{}position\PYZus{}channels} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Channel}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{0.7}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,}
+                                              \PY{p}{(}\PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Channel}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{)}\PY{p}{,}
+                                              \PY{p}{(}\PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Channel}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.7}\PY{p}{)}\PY{p}{,}
+                                              \PY{p}{(}\PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Channel}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{)}\PY{p}{,}
+                                              \PY{p}{(}\PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Channel}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{0.3}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,}
+                                              \PY{p}{(}\PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Channel}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{0.4}\PY{p}{,} \PY{l+m+mf}{0.4}\PY{p}{)}\PY{p}{,}
+                                              \PY{p}{(}\PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Channel}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.3}\PY{p}{)}\PY{p}{,}
+                                              \PY{p}{(}\PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Channel}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{)}\PY{p}{,}
+                                              \PY{p}{(}\PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Channel}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+
+        \PY{c}{\PYZsh{} Channel to play back menus and events}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel\PYZus{}system} \PY{o}{=} \PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Channel}\PY{p}{(}\PY{l+m+mi}{9}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Channel to play back the ambience sounds of a room}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel\PYZus{}ambience} \PY{o}{=} \PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Channel}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Sound to be played when entering in room input state}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb}{file} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{fetch}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{ambience\PYZus{}room.ogg}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{room\PYZus{}ambience\PYZus{}sound} \PY{o}{=} \PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Sound}\PY{p}{(}\PY{n+nb}{file}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{room\PYZus{}ambience\PYZus{}sound}\PY{o}{.}\PY{n}{set\PYZus{}volume}\PY{p}{(}\PY{l+m+mf}{0.4}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Sound to be played when a room is loading}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb}{file} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{fetch}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{loading.ogg}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{loading\PYZus{}sound} \PY{o}{=} \PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Sound}\PY{p}{(}\PY{n+nb}{file}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Sound to be played when loading a room is complete}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb}{file} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{fetch}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{loading\PYZus{}complete.ogg}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{loading\PYZus{}complete\PYZus{}sound} \PY{o}{=} \PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Sound}\PY{p}{(}\PY{n+nb}{file}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Sound to be played if an attempt failed event is sent by the server}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb}{file} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{fetch}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{attempt\PYZus{}failed.ogg}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{attempt\PYZus{}failed\PYZus{}sound} \PY{o}{=} \PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Sound}\PY{p}{(}\PY{n+nb}{file}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Flag to set if connection details are complete}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{connection\PYZus{}details\PYZus{}complete} \PY{o}{=} \PY{n+nb+bp}{False}
+
+        \PY{c}{\PYZsh{} Interaction menu \PYZhy{} to chose an interaction type}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{interaction\PYZus{}sound\PYZus{}menu} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}set\PYZus{}up\PYZus{}interaction\PYZus{}menu}\PY{p}{(}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Select item menu \PYZhy{} to select an item for interaction use}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{select\PYZus{}item\PYZus{}menu} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}set\PYZus{}up\PYZus{}select\PYZus{}item\PYZus{}menu}\PY{p}{(}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Select target menu \PYZhy{} to select a target for an interaction}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{select\PYZus{}target\PYZus{}menu} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}set\PYZus{}up\PYZus{}select\PYZus{}target\PYZus{}menu}\PY{p}{(}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Inventory menu \PYZhy{} to read out and look at all inventory (rack) items}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{inventory\PYZus{}menu} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}set\PYZus{}up\PYZus{}inventory\PYZus{}menu}\PY{p}{(}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Can speak menu \PYZhy{} to select a sentence to speak}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{select\PYZus{}sentence\PYZus{}menu} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}set\PYZus{}up\PYZus{}can\PYZus{}speak\PYZus{}menu}\PY{p}{(}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} See room menu \PYZhy{} get spatial information about all entities in the room}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{see\PYZus{}room\PYZus{}menu} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}set\PYZus{}up\PYZus{}see\PYZus{}room\PYZus{}menu}\PY{p}{(}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Help menu \PYZhy{} to receive help and select help options}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{help\PYZus{}menu} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}set\PYZus{}up\PYZus{}help\PYZus{}menu}\PY{p}{(}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Initialize empty dict for other players in the same room}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{taker\PYZus{}in\PYZus{}room\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+
+        \PY{c}{\PYZsh{} Initialize passive event messages}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{in\PYZus{}inventory\PYZus{}msg} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZob{}\PYZcb{} in inventory}\PY{l+s}{\PYZdq{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{taker\PYZus{}in\PYZus{}room\PYZus{}msg} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZob{}\PYZcb{} is in the room}\PY{l+s}{\PYZdq{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{taker\PYZus{}left\PYZus{}room\PYZus{}msg} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZob{}\PYZcb{} left the room}\PY{l+s}{\PYZdq{}}
+
+        \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{complete}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{get\PYZus{}connection\PYZus{}details}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{prompt\PYZus{}connector}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Initially, the client Interface is not connected to the Server. This}
+\PY{l+s+sd}{           method should prompt the user for connection details.}
+
+\PY{l+s+sd}{           It must return a tuple (identifier, connector), where}
+\PY{l+s+sd}{           connector will be used for Interface.connect(connector) and}
+\PY{l+s+sd}{           identifier will be used to send InitEvent(identifier) to the server.}
+
+\PY{l+s+sd}{           If prompt\PYZus{}connector is False, the dialog will not ask for a connector}
+\PY{l+s+sd}{           and use None instead.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{called}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Use a container so we can access it from an ad\PYZhy{}hoc function.}
+        \PY{c}{\PYZsh{} That\PYZsq{}s Python.}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{container\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{login\PYZus{}name}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{player}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                          \PY{l+s}{\PYZsq{}}\PY{l+s}{connector}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{n+nb+bp}{None}\PY{p}{\PYZcb{}}
+
+        \PY{c}{\PYZsh{} Connection details menu}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{connection\PYZus{}details\PYZus{}entries} \PY{o}{=} \PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{Login name}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+                                      \PY{l+s}{\PYZdq{}}\PY{l+s}{Enter new login}\PY{l+s}{\PYZdq{}}\PY{p}{]}
+
+        \PY{c}{\PYZsh{} Optional connector prompt}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{if} \PY{n}{prompt\PYZus{}connector}\PY{p}{:}
+
+            \PY{n}{connection\PYZus{}details\PYZus{}entries}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{IP address}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{connection\PYZus{}details\PYZus{}entries}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Enter new IP address}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+
+            \PY{c}{\PYZsh{} Set default IP address}
+            \PY{c}{\PYZsh{}}
+            \PY{n}{container\PYZus{}dict}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{connector}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{127.0.0.1}\PY{l+s}{\PYZsq{}}
+
+            \PY{n}{audio\PYZus{}text\PYZus{}field\PYZus{}ip\PYZus{}address} \PY{o}{=} \PY{n}{AudioTextField}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Enter IP address}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                                                         \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{p}{)}
+
+        \PY{n}{connection\PYZus{}details\PYZus{}entries}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Start game}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{connection\PYZus{}details\PYZus{}entries}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Exit}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+
+        \PY{n}{audio\PYZus{}text\PYZus{}field\PYZus{}login} \PY{o}{=} \PY{n}{AudioTextField}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Enter login}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                                                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{p}{)}
+
+
+        \PY{k}{def} \PY{n+nf}{callback\PYZus{}on\PYZus{}entry\PYZus{}selected}\PY{p}{(}\PY{n}{connection\PYZus{}details\PYZus{}menu}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Callback function for entry selected in self.connection\PYZus{}details\PYZus{}menu.}
+\PY{l+s+sd}{               connection\PYZus{}details\PYZus{}menu is supposed to be the TextMenuList for}
+\PY{l+s+sd}{               the connection details.}
+\PY{l+s+sd}{            \PYZdq{}\PYZdq{}\PYZdq{}}
+
+            \PY{n}{selected\PYZus{}entry} \PY{o}{=} \PY{n}{connection\PYZus{}details\PYZus{}menu}\PY{o}{.}\PY{n}{list}\PY{p}{[}\PY{n}{connection\PYZus{}details\PYZus{}menu}\PY{o}{.}\PY{n}{list\PYZus{}index}\PY{p}{]}
+
+            \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Entry selected: \PYZob{}\PYZcb{}}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{selected\PYZus{}entry}\PY{p}{)}\PY{p}{)}
+
+            \PY{k}{if} \PY{n}{selected\PYZus{}entry} \PY{o}{==} \PY{l+s}{\PYZdq{}}\PY{l+s}{Login name}\PY{l+s}{\PYZdq{}}\PY{p}{:}
+
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{say}\PY{p}{(}\PY{n}{container\PYZus{}dict}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{login\PYZus{}name}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{runAndWait}\PY{p}{(}\PY{p}{)}
+
+            \PY{k}{elif} \PY{n}{selected\PYZus{}entry} \PY{o}{==} \PY{l+s}{\PYZdq{}}\PY{l+s}{Enter new login}\PY{l+s}{\PYZdq{}}\PY{p}{:}
+
+                \PY{n}{audio\PYZus{}text\PYZus{}field\PYZus{}login}\PY{o}{.}\PY{n}{focus\PYZus{}audio\PYZus{}text\PYZus{}field}\PY{p}{(}\PY{p}{)}
+
+                \PY{n}{container\PYZus{}dict}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{login\PYZus{}name}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{audio\PYZus{}text\PYZus{}field\PYZus{}login}\PY{o}{.}\PY{n}{process\PYZus{}key\PYZus{}input}\PY{p}{(}\PY{p}{)}
+
+            \PY{k}{elif} \PY{n}{selected\PYZus{}entry} \PY{o}{==} \PY{l+s}{\PYZdq{}}\PY{l+s}{IP address}\PY{l+s}{\PYZdq{}}\PY{p}{:}
+
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{say}\PY{p}{(}\PY{n}{container\PYZus{}dict}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{connector}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{runAndWait}\PY{p}{(}\PY{p}{)}
+
+            \PY{k}{elif} \PY{n}{selected\PYZus{}entry} \PY{o}{==} \PY{l+s}{\PYZdq{}}\PY{l+s}{Enter new IP address}\PY{l+s}{\PYZdq{}}\PY{p}{:}
+
+                \PY{n}{audio\PYZus{}text\PYZus{}field\PYZus{}ip\PYZus{}address}\PY{o}{.}\PY{n}{focus\PYZus{}audio\PYZus{}text\PYZus{}field}\PY{p}{(}\PY{p}{)}
+
+                \PY{n}{container\PYZus{}dict}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{connector}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{audio\PYZus{}text\PYZus{}field\PYZus{}ip\PYZus{}address}\PY{o}{.}\PY{n}{process\PYZus{}key\PYZus{}input}\PY{p}{(}\PY{p}{)}
+
+            \PY{k}{elif} \PY{n}{selected\PYZus{}entry} \PY{o}{==} \PY{l+s}{\PYZdq{}}\PY{l+s}{Start game}\PY{l+s}{\PYZdq{}}\PY{p}{:}
+
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{connection\PYZus{}details\PYZus{}complete} \PY{o}{=} \PY{n+nb+bp}{True}
+
+            \PY{k}{elif} \PY{n}{selected\PYZus{}entry} \PY{o}{==} \PY{l+s}{\PYZdq{}}\PY{l+s}{Exit}\PY{l+s}{\PYZdq{}}\PY{p}{:}
+
+                \PY{n}{callback\PYZus{}on\PYZus{}menu\PYZus{}exit}\PY{p}{(}\PY{n}{connection\PYZus{}details\PYZus{}menu}\PY{p}{)}
+
+            \PY{k}{return}
+
+        \PY{c}{\PYZsh{} Sound to be played when entering menu}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb}{file} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{fetch}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{fabula\PYZus{}main\PYZus{}menu.ogg}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{main\PYZus{}menu\PYZus{}sound} \PY{o}{=} \PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Sound}\PY{p}{(}\PY{n+nb}{file}\PY{p}{)}
+
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{connection\PYZus{}details\PYZus{}menu} \PY{o}{=} \PY{n}{TextMenuList}\PY{p}{(}\PY{n}{connection\PYZus{}details\PYZus{}entries}\PY{p}{,}
+                                                    \PY{n}{main\PYZus{}menu\PYZus{}sound}\PY{p}{,}
+                                                    \PY{n+nb+bp}{None}\PY{p}{,}
+                                                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel\PYZus{}system}\PY{p}{,}
+                                                    \PY{n}{callback\PYZus{}on\PYZus{}entry\PYZus{}selected}\PY{p}{,}
+                                                    \PY{n+nb+bp}{None}\PY{p}{,}
+                                                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Switch to connection\PYZhy{}details\PYZhy{}input\PYZhy{}state}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}push\PYZus{}input\PYZus{}state\PYZus{}on\PYZus{}stack}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}CONNECTION\PYZus{}DETAILS}\PY{p}{)}
+
+        \PY{k}{while} \PY{o+ow}{not} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{connection\PYZus{}details\PYZus{}complete}\PY{p}{:}
+
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{collect\PYZus{}player\PYZus{}input}\PY{p}{(}\PY{p}{)}
+
+        \PY{k}{return} \PY{p}{(}\PY{n}{container\PYZus{}dict}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{login\PYZus{}name}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                \PY{p}{(}\PY{n}{container\PYZus{}dict}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{connector}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{4011}\PY{p}{)}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf}{display\PYZus{}single\PYZus{}frame}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Pumps the Pygame event queue.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{c}{\PYZsh{} Call base class}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{fabula}\PY{o}{.}\PY{n}{plugins}\PY{o}{.}\PY{n}{ui}\PY{o}{.}\PY{n}{UserInterface}\PY{o}{.}\PY{n}{display\PYZus{}single\PYZus{}frame}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Pump the Pygame Event Queue}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{pygame}\PY{o}{.}\PY{n}{event}\PY{o}{.}\PY{n}{pump}\PY{p}{(}\PY{p}{)}
+
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{collect\PYZus{}player\PYZus{}input}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Gather Pygame events, scan for QUIT or special keys.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{c}{\PYZsh{} Handle events}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{events} \PY{o}{=} \PY{n}{pygame}\PY{o}{.}\PY{n}{event}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{p}{)}
+
+        \PY{k}{for} \PY{n}{event} \PY{o+ow}{in} \PY{n}{events}\PY{p}{:}
+
+            \PY{n}{current\PYZus{}state} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}state\PYZus{}stack}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+
+            \PY{k}{if} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{room} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{None}
+                \PY{o+ow}{and} \PY{n}{event}\PY{o}{.}\PY{n}{type} \PY{o}{==} \PY{n}{pygame}\PY{o}{.}\PY{n}{KEYDOWN}\PY{p}{)}\PY{p}{:}
+
+                \PY{c}{\PYZsh{} Let the position be read out when key pressed}
+                \PY{c}{\PYZsh{}}
+                \PY{k}{if} \PY{n}{event}\PY{o}{.}\PY{n}{key} \PY{o}{==} \PY{n}{pygame}\PY{o}{.}\PY{n}{K\PYZus{}x}\PY{p}{:}
+
+                    \PY{n}{position} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{room}\PY{o}{.}\PY{n}{entity\PYZus{}locations}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}\PY{p}{]}
+
+                    \PY{c}{\PYZsh{} Let the TTS engine read out the current client position}
+                    \PY{c}{\PYZsh{}}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{say}\PY{p}{(}\PY{n}{position}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{position}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{runAndWait}\PY{p}{(}\PY{p}{)}
+
+                \PY{c}{\PYZsh{} Open list with all objects in room}
+                \PY{c}{\PYZsh{}}
+                \PY{k}{elif} \PY{n}{event}\PY{o}{.}\PY{n}{key} \PY{o}{==} \PY{n}{pygame}\PY{o}{.}\PY{n}{K\PYZus{}z}\PY{p}{:} \PY{c}{\PYZsh{} English keyboard layout for \PYZdq{}y\PYZdq{}}
+
+                    \PY{c}{\PYZsh{} Transition to see\PYZhy{}room\PYZhy{}input\PYZhy{}state}
+                    \PY{c}{\PYZsh{}}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}push\PYZus{}input\PYZus{}state\PYZus{}on\PYZus{}stack}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}SEE\PYZus{}ROOM}\PY{p}{)}
+
+                \PY{k}{elif} \PY{n}{event}\PY{o}{.}\PY{n}{key} \PY{o}{==} \PY{n}{pygame}\PY{o}{.}\PY{n}{K\PYZus{}F1}\PY{p}{:}
+
+                    \PY{c}{\PYZsh{} Transition to help\PYZhy{}menu\PYZhy{}input\PYZhy{}state}
+                    \PY{c}{\PYZsh{}}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}push\PYZus{}input\PYZus{}state\PYZus{}on\PYZus{}stack}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}HELP\PYZus{}MENU}\PY{p}{)}
+
+                \PY{c}{\PYZsh{} Default input state, player is in room and can move or start}
+                \PY{c}{\PYZsh{} to interact or open the rack}
+                \PY{c}{\PYZsh{}}
+                \PY{k}{if} \PY{n}{current\PYZus{}state} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}IN\PYZus{}ROOM}\PY{p}{:}
+
+                    \PY{c}{\PYZsh{} Check if collected input for movement}
+                    \PY{c}{\PYZsh{}}
+                    \PY{k}{if} \PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{key} \PY{o+ow}{in} \PY{p}{(}\PY{n}{pygame}\PY{o}{.}\PY{n}{K\PYZus{}w}\PY{p}{,} \PY{n}{pygame}\PY{o}{.}\PY{n}{K\PYZus{}a}\PY{p}{,} \PY{n}{pygame}\PY{o}{.}\PY{n}{K\PYZus{}s}\PY{p}{,} \PY{n}{pygame}\PY{o}{.}\PY{n}{K\PYZus{}d}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+
+                        \PY{n}{surrounding\PYZus{}positions} \PY{o}{=} \PY{n}{fabula}\PY{o}{.}\PY{n}{surrounding\PYZus{}positions}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{room}\PY{o}{.}\PY{n}{entity\PYZus{}locations}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}\PY{p}{]}\PY{p}{)}
+
+                        \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{got key }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZob{}\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{ from user, returning TriesToMoveToEvent}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{key}\PY{p}{)}\PY{p}{)}
+
+                        \PY{n}{moves\PYZus{}event} \PY{o}{=} \PY{n}{fabula}\PY{o}{.}\PY{n}{TriesToMoveEvent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}\PY{p}{,}
+                                                              \PY{p}{\PYZob{}}\PY{n}{pygame}\PY{o}{.}\PY{n}{K\PYZus{}w} \PY{p}{:} \PY{n}{surrounding\PYZus{}positions}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                                                               \PY{n}{pygame}\PY{o}{.}\PY{n}{K\PYZus{}d} \PY{p}{:} \PY{n}{surrounding\PYZus{}positions}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,}
+                                                               \PY{n}{pygame}\PY{o}{.}\PY{n}{K\PYZus{}s} \PY{p}{:} \PY{n}{surrounding\PYZus{}positions}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,}
+                                                               \PY{n}{pygame}\PY{o}{.}\PY{n}{K\PYZus{}a} \PY{p}{:} \PY{n}{surrounding\PYZus{}positions}\PY{p}{[}\PY{l+m+mi}{7}\PY{p}{]}
+                                                               \PY{p}{\PYZcb{}}\PY{p}{[}\PY{n}{event}\PY{o}{.}\PY{n}{key}\PY{p}{]}\PY{p}{)}
+
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{message\PYZus{}for\PYZus{}host}\PY{o}{.}\PY{n}{event\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{moves\PYZus{}event}\PY{p}{)}
+
+                    \PY{c}{\PYZsh{} Open rack}
+                    \PY{c}{\PYZsh{}}
+                    \PY{k}{elif}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{key} \PY{o}{==} \PY{n}{pygame}\PY{o}{.}\PY{n}{K\PYZus{}q}\PY{p}{)}\PY{p}{:}
+
+                        \PY{c}{\PYZsh{} Transition to see\PYZhy{}rack\PYZhy{}input\PYZhy{}state}
+                        \PY{c}{\PYZsh{}}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}push\PYZus{}input\PYZus{}state\PYZus{}on\PYZus{}stack}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}SEE\PYZus{}RACK}\PY{p}{)}
+
+                    \PY{c}{\PYZsh{} Start interaction input state}
+                    \PY{c}{\PYZsh{}}
+                    \PY{k}{elif}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{key} \PY{o}{==} \PY{n}{pygame}\PY{o}{.}\PY{n}{K\PYZus{}e}\PY{p}{)}\PY{p}{:}
+
+                        \PY{c}{\PYZsh{} Transition to interaction\PYZhy{}menu\PYZhy{}input\PYZhy{}state}
+                        \PY{c}{\PYZsh{}}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}push\PYZus{}input\PYZus{}state\PYZus{}on\PYZus{}stack}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}INTERACTION}\PY{p}{)}
+
+                \PY{k}{elif} \PY{n}{current\PYZus{}state} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}INTERACTION}\PY{p}{:}
+
+                    \PY{c}{\PYZsh{} Scroll ways of interaction, select one or go back}
+                    \PY{c}{\PYZsh{}}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{interaction\PYZus{}sound\PYZus{}menu}\PY{o}{.}\PY{n}{process\PYZus{}key\PYZus{}input}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{key}\PY{p}{)}
+
+                \PY{k}{elif} \PY{n}{current\PYZus{}state} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}SELECT\PYZus{}ITEM}\PY{p}{:}
+
+                    \PY{c}{\PYZsh{} Scroll possible items to be used to drop on a target,}
+                    \PY{c}{\PYZsh{} select one or go back}
+                    \PY{c}{\PYZsh{}}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{select\PYZus{}item\PYZus{}menu}\PY{o}{.}\PY{n}{process\PYZus{}key\PYZus{}input}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{key}\PY{p}{)}
+
+                \PY{k}{elif} \PY{n}{current\PYZus{}state} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}SELECT\PYZus{}TARGET}\PY{p}{:}
+
+                    \PY{c}{\PYZsh{} Scroll possible targets, select one or go back}
+                    \PY{c}{\PYZsh{}}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{select\PYZus{}target\PYZus{}menu}\PY{o}{.}\PY{n}{process\PYZus{}key\PYZus{}input}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{key}\PY{p}{)}
+
+                \PY{k}{elif} \PY{n}{current\PYZus{}state} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}SEE\PYZus{}RACK}\PY{p}{:}
+
+                    \PY{c}{\PYZsh{} Scroll the entities in the rack, select one or go back}
+                    \PY{c}{\PYZsh{}}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{inventory\PYZus{}menu}\PY{o}{.}\PY{n}{process\PYZus{}key\PYZus{}input}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{key}\PY{p}{)}
+
+                \PY{k}{elif} \PY{n}{current\PYZus{}state} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}CAN\PYZus{}SPEEK}\PY{p}{:}
+
+                    \PY{c}{\PYZsh{} Scroll possible sentences, select a sentence to be spoken}
+                    \PY{c}{\PYZsh{}}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{select\PYZus{}sentence\PYZus{}menu}\PY{o}{.}\PY{n}{process\PYZus{}key\PYZus{}input}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{key}\PY{p}{)}
+
+                \PY{k}{elif} \PY{n}{current\PYZus{}state} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}SEE\PYZus{}ROOM}\PY{p}{:}
+
+                    \PY{c}{\PYZsh{} Scroll the entities in the room, select one or go back}
+                    \PY{c}{\PYZsh{}}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{see\PYZus{}room\PYZus{}menu}\PY{o}{.}\PY{n}{process\PYZus{}key\PYZus{}input}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{key}\PY{p}{)}
+
+                \PY{k}{elif} \PY{n}{current\PYZus{}state} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}HELP\PYZus{}MENU}\PY{p}{:}
+
+                    \PY{c}{\PYZsh{} Scroll help menu options, select one or go back}
+                    \PY{c}{\PYZsh{}}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{help\PYZus{}menu}\PY{o}{.}\PY{n}{process\PYZus{}key\PYZus{}input}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{key}\PY{p}{)}
+
+            \PY{k}{if} \PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{type} \PY{o}{==} \PY{n}{pygame}\PY{o}{.}\PY{n}{KEYDOWN}
+                \PY{o+ow}{and} \PY{n}{current\PYZus{}state} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}CONNECTION\PYZus{}DETAILS}\PY{p}{)}\PY{p}{:}
+
+                    \PY{c}{\PYZsh{} Scroll connection detail options or select one}
+                    \PY{c}{\PYZsh{}}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{connection\PYZus{}details\PYZus{}menu}\PY{o}{.}\PY{n}{process\PYZus{}key\PYZus{}input}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{key}\PY{p}{)}
+
+            \PY{k}{if} \PY{n}{event}\PY{o}{.}\PY{n}{type} \PY{o}{==} \PY{n}{pygame}\PY{o}{.}\PY{n}{QUIT} \PY{o+ow}{or} \PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{type} \PY{o}{==} \PY{n}{pygame}\PY{o}{.}\PY{n}{KEYDOWN}
+                                             \PY{o+ow}{and} \PY{n}{event}\PY{o}{.}\PY{n}{key} \PY{o}{==} \PY{n}{pygame}\PY{o}{.}\PY{n}{K\PYZus{}q}
+                                             \PY{o+ow}{and} \PY{n}{pygame}\PY{o}{.}\PY{n}{key}\PY{o}{.}\PY{n}{get\PYZus{}mods}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZam{}} \PY{n}{pygame}\PY{o}{.}\PY{n}{KMOD\PYZus{}CTRL}\PY{p}{)}\PY{p}{:}
+
+                \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{exit request from user}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{exit\PYZus{}requested} \PY{o}{=} \PY{n+nb+bp}{True}
+
+                \PY{c}{\PYZsh{} Quit pygame here, though there is still shutdown work to be}
+                \PY{c}{\PYZsh{} done in Client and ClientInterface.}
+                \PY{c}{\PYZsh{}}
+                \PY{n}{pygame}\PY{o}{.}\PY{n}{quit}\PY{p}{(}\PY{p}{)}
+
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{process\PYZus{}EnterRoomEvent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{event}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Play loading\PYZus{}sound.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{entering room: \PYZob{}\PYZcb{}}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{room\PYZus{}identifier}\PY{p}{)}\PY{p}{)}
+
+        \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{freezing}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{freeze} \PY{o}{=} \PY{n+nb+bp}{True}
+
+        \PY{c}{\PYZsh{} Pause room ambience sound if playing}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel\PYZus{}ambience}\PY{o}{.}\PY{n}{get\PYZus{}busy}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel\PYZus{}ambience}\PY{o}{.}\PY{n}{pause}\PY{p}{(}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Play back loading sound}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel\PYZus{}system}\PY{o}{.}\PY{n}{play}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{loading\PYZus{}sound}\PY{p}{)}
+
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{process\PYZus{}RoomCompleteEvent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{event}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Play loading\PYZus{}complete\PYZus{}sound and change input state to INPUT\PYZus{}STATE\PYZus{}IN\PYZus{}ROOM.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{unfreezing}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{freeze} \PY{o}{=} \PY{n+nb+bp}{False}
+
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel\PYZus{}system}\PY{o}{.}\PY{n}{queue}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{loading\PYZus{}complete\PYZus{}sound}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Wait for loading sound and loading complete sound to be played}
+        \PY{c}{\PYZsh{} completely}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{while} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel\PYZus{}system}\PY{o}{.}\PY{n}{get\PYZus{}busy}\PY{p}{(}\PY{p}{)}
+               \PY{o+ow}{or} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel\PYZus{}system}\PY{o}{.}\PY{n}{get\PYZus{}queue}\PY{p}{(}\PY{p}{)} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{None}\PY{p}{)}\PY{p}{:}
+            \PY{k}{pass}
+
+        \PY{c}{\PYZsh{} process\PYZus{}ChangeMapElementEvent and process\PYZus{}SpawnEvent should have}
+        \PY{c}{\PYZsh{} set up everything by now}
+        \PY{c}{\PYZsh{}}
+        \PY{c}{\PYZsh{} Switch to in\PYZhy{}room\PYZhy{}input\PYZhy{}state to collect the right input}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}push\PYZus{}input\PYZus{}state\PYZus{}on\PYZus{}stack}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}IN\PYZus{}ROOM}\PY{p}{)}
+
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{process\PYZus{}CanSpeakEvent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{event}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Opens a select sentence menu with the events sentences.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{c}{\PYZsh{} If it\PYZsq{}s not for us, ignore.}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{if} \PY{n}{event}\PY{o}{.}\PY{n}{identifier} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id} \PY{o+ow}{and} \PY{n}{event}\PY{o}{.}\PY{n}{sentences}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Set up sentence menu and switch to can\PYZhy{}speak\PYZhy{}input\PYZhy{}state}
+            \PY{c}{\PYZsh{}}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{select\PYZus{}sentence\PYZus{}menu}\PY{o}{.}\PY{n}{list} \PY{o}{=} \PY{n}{event}\PY{o}{.}\PY{n}{sentences}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}push\PYZus{}input\PYZus{}state\PYZus{}on\PYZus{}stack}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}CAN\PYZus{}SPEEK}\PY{p}{)}
+
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{process\PYZus{}SpawnEvent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{event}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Entity.asset points to the sound or the text asset of the Entity.}
+
+\PY{l+s+sd}{           If the asset file name contains \PYZsq{}steps\PYZsq{}, this method will treat}
+\PY{l+s+sd}{           the sound as a step sound. See the AudioEntity documentation for}
+\PY{l+s+sd}{           details.}
+
+\PY{l+s+sd}{           If the spawned entity is another PLAYER, it will be added to the}
+\PY{l+s+sd}{           self.taker\PYZus{}in\PYZus{}room\PYZus{}dict and its name will be announced.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{k}{if} \PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{user\PYZus{}interface} \PY{o+ow}{is} \PY{n+nb+bp}{None}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Call base class}
+            \PY{c}{\PYZsh{}}
+            \PY{n}{fabula}\PY{o}{.}\PY{n}{plugins}\PY{o}{.}\PY{n}{ui}\PY{o}{.}\PY{n}{UserInterface}\PY{o}{.}\PY{n}{process\PYZus{}SpawnEvent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{event}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Set up entity\PYZsq{}s sound asset}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{if} \PY{l+s}{\PYZsq{}}\PY{l+s}{audio/ogg}\PY{l+s}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} This is possibly a respawn from Rack, and the entity already has}
+            \PY{c}{\PYZsh{} an asset.}
+            \PY{c}{\PYZsh{}}
+            \PY{k}{if} \PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{audio/ogg}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{data} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{None}\PY{p}{:}
+
+                \PY{n}{msg} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Entity }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZob{}\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{ already has an audio asset}\PY{l+s}{\PYZdq{}}
+                \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{n}{msg}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{identifier}\PY{p}{)}\PY{p}{)}
+
+            \PY{k}{else}\PY{p}{:}
+
+                \PY{c}{\PYZsh{} Entity has an audio file attached, fetch the asset}
+                \PY{c}{\PYZsh{}}
+                \PY{k}{try}\PY{p}{:}
+
+                    \PY{c}{\PYZsh{} Get a file\PYZhy{}like object from asset manager}
+                    \PY{c}{\PYZsh{}}
+                    \PY{n+nb}{file} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{fetch}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{audio/ogg}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{uri}\PY{p}{)}
+
+                \PY{k}{except}\PY{p}{:}
+
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{display\PYZus{}asset\PYZus{}exception}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{audio/ogg}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{uri}\PY{p}{)}
+
+                \PY{c}{\PYZsh{} Replace with pygame.mixer.Sound from file}
+                \PY{c}{\PYZsh{}}
+                \PY{n}{sound} \PY{o}{=} \PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Sound}\PY{p}{(}\PY{n+nb}{file}\PY{p}{)}
+
+                \PY{n+nb}{file}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+
+                \PY{c}{\PYZsh{} Finally attach the Sound as the Entity\PYZsq{}s asset}
+                \PY{c}{\PYZsh{}}
+                \PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{audio/ogg}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{data} \PY{o}{=} \PY{n}{sound}
+
+            \PY{c}{\PYZsh{} Entity has a step sound which consists of a left and a right step.}
+            \PY{c}{\PYZsh{} Special handling for this \PYZsq{}sound animation\PYZsq{} is done in the}
+            \PY{c}{\PYZsh{} AudioEntity class so change the entity\PYZsq{}s class to support steps.}
+            \PY{c}{\PYZsh{}}
+            \PY{k}{if} \PY{l+s}{\PYZsq{}}\PY{l+s}{steps}\PY{l+s}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{audio/ogg}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{uri}\PY{p}{:}
+
+                \PY{c}{\PYZsh{} The Entity must be able to react to events. These reactions}
+                \PY{c}{\PYZsh{} are Pygame specific and are thus not covered in the basic}
+                \PY{c}{\PYZsh{} fabula.Entity class. Thus, we exploit a Python feature here}
+                \PY{c}{\PYZsh{} and change the entity\PYZsq{}s class at runtime to a class that}
+                \PY{c}{\PYZsh{} supports Pygame.}
+                \PY{c}{\PYZsh{}}
+                \PY{k}{if} \PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}class\PYZus{}\PYZus{}} \PY{o+ow}{is} \PY{n}{AudioEntity}
+                    \PY{o+ow}{or} \PY{n}{AudioEntity} \PY{o+ow}{in} \PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}class\PYZus{}\PYZus{}}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}bases\PYZus{}\PYZus{}}\PY{p}{)}\PY{p}{:}
+
+                    \PY{c}{\PYZsh{} AudioEntity already in use? Great!}
+                    \PY{c}{\PYZsh{}}
+                    \PY{k}{pass}
+
+                \PY{k}{elif} \PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}class\PYZus{}\PYZus{}} \PY{o+ow}{is} \PY{n}{fabula}\PY{o}{.}\PY{n}{Entity}\PY{p}{:}
+
+                    \PY{c}{\PYZsh{} Oh well. Just swap.}
+                    \PY{c}{\PYZsh{}}
+                    \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{changing class of }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZob{}\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{ from \PYZob{}\PYZcb{} to \PYZob{}\PYZcb{}}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{identifier}\PY{p}{,}
+                                                                                      \PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}class\PYZus{}\PYZus{}}\PY{p}{,}
+                                                                                      \PY{n}{AudioEntity}\PY{p}{)}\PY{p}{)}
+
+                    \PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}class\PYZus{}\PYZus{}} \PY{o}{=} \PY{n}{AudioEntity}
+
+                \PY{k}{else}\PY{p}{:}
+                    \PY{c}{\PYZsh{} To preserve the class, create a new class that inherits from}
+                    \PY{c}{\PYZsh{} the current one and from PygameEntity.}
+                    \PY{c}{\PYZsh{}}
+                    \PY{k}{class} \PY{n+nc}{ExtendedEntity}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}class\PYZus{}\PYZus{}}\PY{p}{,} \PY{n}{AudioEntity}\PY{p}{)}\PY{p}{:}
+
+                        \PY{k}{pass}
+
+                    \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{changing class of }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZob{}\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{ from \PYZob{}\PYZcb{} to bases \PYZob{}\PYZcb{}}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{identifier}\PY{p}{,}
+                                                                                            \PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}class\PYZus{}\PYZus{}}\PY{p}{,}
+                                                                                            \PY{n}{ExtendedEntity}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}bases\PYZus{}\PYZus{}}\PY{p}{)}\PY{p}{)}
+
+                    \PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}class\PYZus{}\PYZus{}} \PY{o}{=} \PY{n}{ExtendedEntity}
+
+                \PY{c}{\PYZsh{} Since we do not call AudioEntity.\PYZus{}\PYZus{}init\PYZus{}\PYZus{}() to prevent messing}
+                \PY{c}{\PYZsh{} up already present data, we add required attributes}
+                \PY{c}{\PYZsh{} TODO: it\PYZsq{}s easy to miss that when changing the PygameEntity.\PYZus{}\PYZus{}init\PYZus{}\PYZus{}()}
+                \PY{c}{\PYZsh{}}
+                \PY{c}{\PYZsh{} Steps are played every movement therefore they play at a low}
+                \PY{c}{\PYZsh{} volume}
+                \PY{c}{\PYZsh{}}
+                \PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{audio/ogg}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{set\PYZus{}volume}\PY{p}{(}\PY{l+m+mf}{0.3}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Set up entity\PYZsq{}s text asset}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{if} \PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} This is possibly a respawn from Rack, and the entity already has}
+            \PY{c}{\PYZsh{} an asset.}
+            \PY{c}{\PYZsh{}}
+            \PY{k}{if} \PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{data} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{None}\PY{p}{:}
+
+                \PY{n}{msg} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Entity }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZob{}\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{ already has an text asset}\PY{l+s}{\PYZdq{}}
+                \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{n}{msg}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{identifier}\PY{p}{)}\PY{p}{)}
+
+            \PY{k}{else}\PY{p}{:}
+
+                \PY{c}{\PYZsh{} Entity has no text file attached so get a \PYZsq{}text/plain\PYZsq{}}
+                \PY{c}{\PYZsh{} representation for it}
+                \PY{c}{\PYZsh{}}
+                \PY{k}{try}\PY{p}{:}
+
+                    \PY{c}{\PYZsh{} Get a file\PYZhy{}like object from asset manager}
+                    \PY{c}{\PYZsh{}}
+                    \PY{n+nb}{file} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{fetch}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{uri}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{t}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+
+                \PY{k}{except}\PY{p}{:}
+
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{display\PYZus{}asset\PYZus{}exception}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{uri}\PY{p}{)}
+
+                \PY{n}{text} \PY{o}{=} \PY{n+nb}{file}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}
+
+                \PY{n+nb}{file}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+
+                \PY{c}{\PYZsh{} Finally attach the text as the entity\PYZsq{}s asset}
+                \PY{c}{\PYZsh{}}
+                \PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{data} \PY{o}{=} \PY{n}{text}
+
+        \PY{c}{\PYZsh{} Play sound if spawned entity is close to client}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}play\PYZus{}sound\PYZus{}surrounding\PYZus{}entity}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} If another player entity was spawned (i.e. is in the room), play its}
+        \PY{c}{\PYZsh{} name and store its entity in self.taker\PYZus{}in\PYZus{}room\PYZus{}dict}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{if} \PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{entity\PYZus{}type} \PY{o}{==} \PY{n}{fabula}\PY{o}{.}\PY{n}{PLAYER} \PY{o+ow}{and}
+            \PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{identifier} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}\PY{p}{)}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Store other players entity}
+            \PY{c}{\PYZsh{}}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{taker\PYZus{}in\PYZus{}room\PYZus{}dict}\PY{p}{[}\PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{identifier}\PY{p}{]} \PY{o}{=} \PY{n}{event}\PY{o}{.}\PY{n}{entity}
+
+            \PY{n}{player\PYZus{}name} \PY{o}{=} \PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{identifier}
+
+            \PY{c}{\PYZsh{} Check if player provides a name}
+            \PY{c}{\PYZsh{}}
+            \PY{k}{if} \PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}
+                \PY{o+ow}{and} \PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{data} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{None}\PY{p}{)}\PY{p}{:}
+
+                \PY{n}{player\PYZus{}name} \PY{o}{=} \PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+
+            \PY{n}{taker\PYZus{}in\PYZus{}room\PYZus{}event} \PY{o}{=} \PY{n}{fabula}\PY{o}{.}\PY{n}{PerceptionEvent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}\PY{p}{,}
+                                                         \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{taker\PYZus{}in\PYZus{}room\PYZus{}msg}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{player\PYZus{}name}\PY{p}{)}\PY{p}{)}
+
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{process\PYZus{}PerceptionEvent}\PY{p}{(}\PY{n}{taker\PYZus{}in\PYZus{}room\PYZus{}event}\PY{p}{)}
+
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{process\PYZus{}DeleteEvent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{event}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}If the deleted entity is another PLAYER, it will be announced that the player left the room.}
+\PY{l+s+sd}{           Its Entity will be removed from the self.taker\PYZus{}in\PYZus{}room\PYZus{}dict.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{c}{\PYZsh{} Play sound if other player entity was deleted (left the room) and}
+        \PY{c}{\PYZsh{} delete it from self.taker\PYZus{}in\PYZus{}room\PYZus{}dict}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{if} \PY{n}{event}\PY{o}{.}\PY{n}{identifier} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{taker\PYZus{}in\PYZus{}room\PYZus{}dict}\PY{p}{:}
+
+            \PY{n}{entity} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{taker\PYZus{}in\PYZus{}room\PYZus{}dict}\PY{p}{[}\PY{n}{event}\PY{o}{.}\PY{n}{identifier}\PY{p}{]}
+
+            \PY{n}{player\PYZus{}name} \PY{o}{=} \PY{n}{entity}\PY{o}{.}\PY{n}{identifier}
+
+            \PY{c}{\PYZsh{} Check if player provides a name}
+            \PY{c}{\PYZsh{}}
+            \PY{k}{if} \PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}
+                \PY{o+ow}{and} \PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{data} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{None}\PY{p}{)}\PY{p}{:}
+
+                \PY{n}{player\PYZus{}name} \PY{o}{=} \PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+
+            \PY{n}{taker\PYZus{}left\PYZus{}room\PYZus{}event} \PY{o}{=} \PY{n}{fabula}\PY{o}{.}\PY{n}{PerceptionEvent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}\PY{p}{,}
+                                                           \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{taker\PYZus{}left\PYZus{}room\PYZus{}msg}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{player\PYZus{}name}\PY{p}{)}\PY{p}{)}
+
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{process\PYZus{}PerceptionEvent}\PY{p}{(}\PY{n}{taker\PYZus{}left\PYZus{}room\PYZus{}event}\PY{p}{)}
+
+            \PY{c}{\PYZsh{} Remove other players entity}
+            \PY{c}{\PYZsh{}}
+            \PY{k}{del} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{taker\PYZus{}in\PYZus{}room\PYZus{}dict}\PY{p}{[}\PY{n}{event}\PY{o}{.}\PY{n}{identifier}\PY{p}{]}
+
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{process\PYZus{}ChangeMapElementEvent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{event}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Fetch asset and register/replace tile.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{called}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+
+        \PY{n}{tile\PYZus{}from\PYZus{}list} \PY{o}{=} \PY{n+nb+bp}{None}
+
+        \PY{c}{\PYZsh{} The Client should have added the Tile to self.host.room.tile\PYZus{}list}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{for} \PY{n}{tile} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{room}\PY{o}{.}\PY{n}{tile\PYZus{}list}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} This should succeed only once}
+            \PY{c}{\PYZsh{}}
+            \PY{k}{if} \PY{n}{tile} \PY{o}{==} \PY{n}{event}\PY{o}{.}\PY{n}{tile}\PY{p}{:}
+
+                \PY{c}{\PYZsh{} Tiles may compare equal, but they may not refer to the same}
+                \PY{c}{\PYZsh{} instance, so we use tile from tile\PYZus{}list.}
+                \PY{c}{\PYZsh{}}
+                \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{found event.tile in self.host.room.tile\PYZus{}list}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+                \PY{n}{tile\PYZus{}from\PYZus{}list} \PY{o}{=} \PY{n}{tile}
+
+        \PY{k}{if} \PY{n}{tile\PYZus{}from\PYZus{}list} \PY{o+ow}{is} \PY{n+nb+bp}{None}\PY{p}{:}
+
+            \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{error}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{could not find tile \PYZob{}\PYZcb{} in tile\PYZus{}list of room }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZob{}\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{tile}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{room}\PY{o}{.}\PY{n}{identifier}\PY{p}{)}\PY{p}{)}
+            \PY{k}{raise} \PY{n+ne}{RuntimeError}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{could not find tile \PYZob{}\PYZcb{} in tile\PYZus{}list of room }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZob{}\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{tile}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{room}\PY{o}{.}\PY{n}{identifier}\PY{p}{)}\PY{p}{)}
+
+        \PY{k}{if} \PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{audio/ogg}\PY{l+s}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{tile\PYZus{}from\PYZus{}list}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}
+            \PY{o+ow}{and} \PY{n}{tile\PYZus{}from\PYZus{}list}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{audio/ogg}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{data} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{None}\PY{p}{)}\PY{p}{:}
+
+            \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{tile already has an audio asset: \PYZob{}\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{tile\PYZus{}from\PYZus{}list}\PY{p}{)}\PY{p}{)}
+
+        \PY{k}{elif} \PY{l+s}{\PYZsq{}}\PY{l+s}{audio/ogg}\PY{l+s}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{event}\PY{o}{.}\PY{n}{tile}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Assets are entirely up to the UserInterface, so we fetch}
+            \PY{c}{\PYZsh{} the asset here}
+            \PY{c}{\PYZsh{}}
+            \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{no asset for \PYZob{}\PYZcb{}, attempting to fetch}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{tile\PYZus{}from\PYZus{}list}\PY{p}{)}\PY{p}{)}
+
+            \PY{c}{\PYZsh{} Entity has an audio file attached, fetch the asset}
+            \PY{c}{\PYZsh{}}
+            \PY{k}{try}\PY{p}{:}
+
+                \PY{c}{\PYZsh{} Get a file\PYZhy{}like object from asset manager}
+                \PY{c}{\PYZsh{}}
+                \PY{n+nb}{file} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{fetch}\PY{p}{(}\PY{n}{tile\PYZus{}from\PYZus{}list}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{audio/ogg}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{uri}\PY{p}{)}
+
+            \PY{k}{except}\PY{p}{:}
+
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{display\PYZus{}asset\PYZus{}exception}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{audio/ogg}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{uri}\PY{p}{)}
+
+            \PY{c}{\PYZsh{} Replace with pygame.mixer.Sound from file}
+            \PY{c}{\PYZsh{}}
+            \PY{n}{sound} \PY{o}{=} \PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Sound}\PY{p}{(}\PY{n+nb}{file}\PY{p}{)}
+
+            \PY{n+nb}{file}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+
+            \PY{c}{\PYZsh{} Finally attach the Sound as the Tile\PYZsq{}s asset, update sound}
+            \PY{c}{\PYZsh{} regardless whether the Tile existed or not}
+            \PY{c}{\PYZsh{}}
+            \PY{n}{tile\PYZus{}from\PYZus{}list}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{audio/ogg}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{data} \PY{o}{=} \PY{n}{sound}
+
+            \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{changing sound for tile at \PYZob{}0\PYZcb{} to \PYZob{}1\PYZcb{}}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{location}\PY{p}{)}\PY{p}{,}
+                                                                               \PY{n}{tile\PYZus{}from\PYZus{}list}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{audio/ogg}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{data}\PY{p}{)}\PY{p}{)}
+
+        \PY{k}{if} \PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{tile\PYZus{}from\PYZus{}list}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}
+            \PY{o+ow}{and} \PY{n}{tile\PYZus{}from\PYZus{}list}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{data} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{None}\PY{p}{)}\PY{p}{:}
+
+            \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{tile already has an text asset: \PYZob{}\PYZcb{}}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{tile\PYZus{}from\PYZus{}list}\PY{p}{)}\PY{p}{)}
+
+        \PY{k}{elif} \PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{event}\PY{o}{.}\PY{n}{tile}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Assets are entirely up to the UserInterface, so we fetch}
+            \PY{c}{\PYZsh{} the asset here}
+            \PY{c}{\PYZsh{}}
+            \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{no asset for \PYZob{}\PYZcb{}, attempting to fetch}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{tile\PYZus{}from\PYZus{}list}\PY{p}{)}\PY{p}{)}
+
+            \PY{c}{\PYZsh{} Entity has no audio file attached so get a \PYZsq{}text/plain\PYZsq{}}
+            \PY{c}{\PYZsh{} representation for it}
+            \PY{c}{\PYZsh{}}
+            \PY{k}{try}\PY{p}{:}
+
+                \PY{c}{\PYZsh{} Get a file\PYZhy{}like object from asset manager}
+                \PY{c}{\PYZsh{}}
+                \PY{n+nb}{file} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{fetch}\PY{p}{(}\PY{n}{tile\PYZus{}from\PYZus{}list}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{uri}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{t}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+
+            \PY{k}{except}\PY{p}{:}
+
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{display\PYZus{}asset\PYZus{}exception}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{uri}\PY{p}{)}
+
+            \PY{n}{text} \PY{o}{=} \PY{n+nb}{file}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}
+
+            \PY{n+nb}{file}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+
+            \PY{c}{\PYZsh{} Finally attach the Text as the Tile\PYZsq{}s asset, update text}
+            \PY{c}{\PYZsh{} regardless whether the Tile existed or not}
+            \PY{c}{\PYZsh{}}
+            \PY{n}{tile\PYZus{}from\PYZus{}list}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{data} \PY{o}{=} \PY{n}{text}
+
+            \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{changing text for tile at \PYZob{}0\PYZcb{} to \PYZob{}1\PYZcb{}}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{location}\PY{p}{)}\PY{p}{,}
+                                                                              \PY{n}{tile\PYZus{}from\PYZus{}list}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{data}\PY{p}{)}\PY{p}{)}
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{process\PYZus{}PerceptionEvent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{event}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Read out the perception with the text\PYZhy{}to\PYZhy{}speech engine.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{called}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} If it\PYZsq{}s not for us, ignore.}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{if} \PY{n}{event}\PY{o}{.}\PY{n}{identifier} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Let the TTS engine read the perception text}
+            \PY{c}{\PYZsh{}}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{say}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{perception}\PY{p}{)}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{runAndWait}\PY{p}{(}\PY{p}{)}
+
+        \PY{k}{else}\PY{p}{:}
+
+            \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{warning}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{perception for }\PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZob{}\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{, not read out}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{identifier}\PY{p}{)}\PY{p}{)}
+
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{process\PYZus{}AttemptFailedEvent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{event}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Play back attempt failed sound.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{called}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} If it\PYZsq{}s not for us, ignore.}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{if} \PY{n}{event}\PY{o}{.}\PY{n}{identifier} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Acoustic feedback for attempt failed}
+            \PY{c}{\PYZsh{}}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel\PYZus{}system}\PY{o}{.}\PY{n}{play}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{attempt\PYZus{}failed\PYZus{}sound}\PY{p}{)}
+
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{process\PYZus{}MovesToEvent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{event}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Call the base class and make Entity\PYZsq{}s surrounding the new player position audible.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{called}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} To listen to the new surrounding entities, fade the old ones out}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}fadeout\PYZus{}sound\PYZus{}surrounding\PYZus{}entities}\PY{p}{(}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Collect entities from surrounding\PYZus{}positions}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{surrounding\PYZus{}positions} \PY{o}{=} \PY{n}{fabula}\PY{o}{.}\PY{n}{surrounding\PYZus{}positions}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{room}\PY{o}{.}\PY{n}{entity\PYZus{}locations}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}\PY{p}{]}\PY{p}{)}
+        \PY{k}{for} \PY{n}{entity} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{room}\PY{o}{.}\PY{n}{entity\PYZus{}dict}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Delegate play sound}
+            \PY{c}{\PYZsh{}}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}play\PYZus{}sound\PYZus{}surrounding\PYZus{}entity}\PY{p}{(}\PY{n}{entity}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Call base class, this will forward the Event to the affected Entity.}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{fabula}\PY{o}{.}\PY{n}{plugins}\PY{o}{.}\PY{n}{ui}\PY{o}{.}\PY{n}{UserInterface}\PY{o}{.}\PY{n}{process\PYZus{}MovesToEvent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{event}\PY{p}{)}
+
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{process\PYZus{}PicksUpEvent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{event}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Check the affected Entity, and give feedback that item is now in the inventory.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{c}{\PYZsh{} The Client has already put the item from Client.room to Client.rack.}
+        \PY{c}{\PYZsh{} We have to inform the client that the item is now in the inventory}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{if} \PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{item\PYZus{}identifier} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{rack}\PY{o}{.}\PY{n}{owner\PYZus{}dict}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}
+            \PY{o+ow}{and} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{rack}\PY{o}{.}\PY{n}{owner\PYZus{}dict}\PY{p}{[}\PY{n}{event}\PY{o}{.}\PY{n}{item\PYZus{}identifier}\PY{p}{]} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}\PY{p}{)}\PY{p}{:}
+
+            \PY{n}{item\PYZus{}name} \PY{o}{=} \PY{n}{event}\PY{o}{.}\PY{n}{item\PYZus{}identifier}
+
+            \PY{n}{item} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{rack}\PY{o}{.}\PY{n}{entity\PYZus{}dict}\PY{p}{[}\PY{n}{event}\PY{o}{.}\PY{n}{item\PYZus{}identifier}\PY{p}{]}
+
+            \PY{c}{\PYZsh{} Check if Entity provides a name}
+            \PY{c}{\PYZsh{}}
+            \PY{k}{if} \PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{item}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}
+                \PY{o+ow}{and} \PY{n}{item}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{data} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{None}\PY{p}{)}\PY{p}{:}
+
+                \PY{n}{item\PYZus{}name} \PY{o}{=} \PY{n}{item}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+
+            \PY{n}{picked\PYZus{}up\PYZus{}perception} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{in\PYZus{}inventory\PYZus{}msg}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{item\PYZus{}name}\PY{p}{)}
+            \PY{n}{perception\PYZus{}event} \PY{o}{=} \PY{n}{fabula}\PY{o}{.}\PY{n}{PerceptionEvent}\PY{p}{(}\PY{n}{identifier}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}\PY{p}{,}
+                                                      \PY{n}{perception}\PY{o}{=}\PY{n}{picked\PYZus{}up\PYZus{}perception}\PY{p}{)}
+
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{process\PYZus{}PerceptionEvent}\PY{p}{(}\PY{n}{perception\PYZus{}event}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Call base class to notify the Entity}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{fabula}\PY{o}{.}\PY{n}{plugins}\PY{o}{.}\PY{n}{ui}\PY{o}{.}\PY{n}{UserInterface}\PY{o}{.}\PY{n}{process\PYZus{}PicksUpEvent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{event}\PY{p}{)}
+
+    \PY{k}{def} \PY{n+nf}{process\PYZus{}SaysEvent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{event}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Call the base class, then present the text to the user and wait some time.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{called}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Call base class, this will forward the event to the Entity.}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{fabula}\PY{o}{.}\PY{n}{plugins}\PY{o}{.}\PY{n}{ui}\PY{o}{.}\PY{n}{UserInterface}\PY{o}{.}\PY{n}{process\PYZus{}SaysEvent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{event}\PY{p}{)}
+
+        \PY{n}{entity\PYZus{}id} \PY{o}{=} \PY{n}{event}\PY{o}{.}\PY{n}{identifier}
+
+        \PY{k}{if} \PY{n}{event}\PY{o}{.}\PY{n}{identifier} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{room}\PY{o}{.}\PY{n}{entity\PYZus{}dict}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+
+            \PY{n}{entity} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{room}\PY{o}{.}\PY{n}{entity\PYZus{}dict}\PY{p}{[}\PY{n}{event}\PY{o}{.}\PY{n}{identifier}\PY{p}{]}
+
+            \PY{c}{\PYZsh{} Check if Entity provides a name}
+            \PY{c}{\PYZsh{}}
+            \PY{k}{if} \PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}
+                \PY{o+ow}{and} \PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{data} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{None}\PY{p}{)}\PY{p}{:}
+
+                \PY{n}{entity\PYZus{}id} \PY{o}{=} \PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{text/plain}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+
+        \PY{c}{\PYZsh{} Let the TTS engine read the sentence, lead by the speakers name, the}
+        \PY{c}{\PYZsh{} colon results in a small pause between identifier and text}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{entity\PYZus{}id} \PY{o}{+}\PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{: }\PY{l+s}{\PYZdq{}}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{say}\PY{p}{(}\PY{n}{entity\PYZus{}id}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{\PYZob{}\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{entity\PYZus{}id}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{say}\PY{p}{(}\PY{n}{event}\PY{o}{.}\PY{n}{text}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{SaysEvent}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{runAndWait}\PY{p}{(}\PY{p}{)}
+
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}set\PYZus{}up\PYZus{}interaction\PYZus{}menu}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Sets up the interaction menu list.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{k}{def} \PY{n+nf}{callback\PYZus{}on\PYZus{}interaction\PYZus{}selected}\PY{p}{(}\PY{n}{interaction\PYZus{}sound\PYZus{}menu}\PY{p}{)}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} attempt\PYZus{}look\PYZus{}at, attempt\PYZus{}talk\PYZus{}to, attempt\PYZus{}pick\PYZus{}up and}
+            \PY{c}{\PYZsh{} attempt\PYZus{}manipulate}
+            \PY{c}{\PYZsh{}}
+            \PY{k}{if} \PY{n}{interaction\PYZus{}sound\PYZus{}menu}\PY{o}{.}\PY{n}{list\PYZus{}index} \PY{o+ow}{in} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ATTEMPT\PYZus{}LOOK\PYZus{}AT}\PY{p}{,}
+                                                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ATTEMPT\PYZus{}TALK\PYZus{}TO}\PY{p}{,}
+                                                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ATTEMPT\PYZus{}PICK\PYZus{}UP}\PY{p}{,}
+                                                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ATTEMPT\PYZus{}MANIPULATE}\PY{p}{)}\PY{p}{:}
+
+                \PY{c}{\PYZsh{} Transition to select\PYZhy{}target\PYZhy{}input\PYZhy{}state}
+                \PY{c}{\PYZsh{}}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}push\PYZus{}input\PYZus{}state\PYZus{}on\PYZus{}stack}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}SELECT\PYZus{}TARGET}\PY{p}{)}
+
+            \PY{c}{\PYZsh{} attempt\PYZus{}use}
+            \PY{c}{\PYZsh{}}
+            \PY{k}{elif} \PY{n}{interaction\PYZus{}sound\PYZus{}menu}\PY{o}{.}\PY{n}{list\PYZus{}index} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ATTEMPT\PYZus{}USE}\PY{p}{:}
+
+                \PY{c}{\PYZsh{} Transition to select\PYZhy{}item\PYZhy{}input\PYZhy{}state}
+                \PY{c}{\PYZsh{}}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}push\PYZus{}input\PYZus{}state\PYZus{}on\PYZus{}stack}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}SELECT\PYZus{}ITEM}\PY{p}{)}
+
+            \PY{c}{\PYZsh{} cancel}
+            \PY{c}{\PYZsh{}}
+            \PY{k}{elif} \PY{n}{interaction\PYZus{}sound\PYZus{}menu}\PY{o}{.}\PY{n}{list\PYZus{}index} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{CANCEL}\PY{p}{:}
+
+                \PY{n}{callback\PYZus{}on\PYZus{}interaction\PYZus{}menu\PYZus{}exit}\PY{p}{(}\PY{n}{interaction\PYZus{}sound\PYZus{}menu}\PY{p}{)}
+
+            \PY{k}{return}
+
+        \PY{k}{def} \PY{n+nf}{callback\PYZus{}on\PYZus{}interaction\PYZus{}menu\PYZus{}exit}\PY{p}{(}\PY{n}{interaction\PYZus{}sound\PYZus{}menu}\PY{p}{)}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Going back to previous input state}
+            \PY{c}{\PYZsh{}}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}pop\PYZus{}input\PYZus{}state\PYZus{}from\PYZus{}stack}\PY{p}{(}\PY{p}{)}
+
+            \PY{k}{return}
+
+        \PY{c}{\PYZsh{} Load the standard attempt interaction sounds}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{interaction\PYZus{}sounds} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+
+        \PY{c}{\PYZsh{} Pay Attention to order of index, must be same as in}
+        \PY{c}{\PYZsh{}}
+        \PY{c}{\PYZsh{} ATTEMPT\PYZus{}LOOK\PYZus{}AT = 0}
+        \PY{c}{\PYZsh{} ATTEMPT\PYZus{}TALK\PYZus{}TO = 1}
+        \PY{c}{\PYZsh{} ATTEMPT\PYZus{}PICK\PYZus{}UP = 2}
+        \PY{c}{\PYZsh{} ATTEMPT\PYZus{}USE = 3}
+        \PY{c}{\PYZsh{} ATTEMPT\PYZus{}MANIPULATE = 4}
+        \PY{c}{\PYZsh{} CANCEL = 5}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{for} \PY{n}{name} \PY{o+ow}{in} \PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{attempt\PYZus{}look\PYZus{}at}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                     \PY{l+s}{\PYZsq{}}\PY{l+s}{attempt\PYZus{}talk\PYZus{}to}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                     \PY{l+s}{\PYZsq{}}\PY{l+s}{attempt\PYZus{}pick\PYZus{}up}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                     \PY{l+s}{\PYZsq{}}\PY{l+s}{attempt\PYZus{}use}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                     \PY{l+s}{\PYZsq{}}\PY{l+s}{attempt\PYZus{}manipulate}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                     \PY{l+s}{\PYZsq{}}\PY{l+s}{cancel}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Load sound file and save it as pygame.mixer.Sound:}
+            \PY{c}{\PYZsh{}}
+            \PY{n+nb}{file} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{fetch}\PY{p}{(}\PY{n}{name} \PY{o}{+} \PY{l+s}{\PYZsq{}}\PY{l+s}{.ogg}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{sound} \PY{o}{=} \PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Sound}\PY{p}{(}\PY{n+nb}{file}\PY{p}{)}
+            \PY{n}{sound}\PY{o}{.}\PY{n}{set\PYZus{}volume}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+
+            \PY{n}{interaction\PYZus{}sounds}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{sound}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Sound to be played when interaction menu is opened}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb}{file} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{fetch}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{interaction\PYZus{}menu.ogg}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{menu\PYZus{}sound} \PY{o}{=} \PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Sound}\PY{p}{(}\PY{n+nb}{file}\PY{p}{)}
+
+        \PY{n}{interaction\PYZus{}sound\PYZus{}menu} \PY{o}{=} \PY{n}{SoundMenuList}\PY{p}{(}\PY{n}{interaction\PYZus{}sounds}\PY{p}{,}
+                                               \PY{n}{menu\PYZus{}sound}\PY{p}{,}
+                                               \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{attempt\PYZus{}failed\PYZus{}sound}\PY{p}{,}
+                                               \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel\PYZus{}system}\PY{p}{,}
+                                               \PY{n}{callback\PYZus{}on\PYZus{}interaction\PYZus{}selected}\PY{p}{,}
+                                               \PY{n}{callback\PYZus{}on\PYZus{}interaction\PYZus{}menu\PYZus{}exit}\PY{p}{)}
+
+        \PY{k}{return} \PY{n}{interaction\PYZus{}sound\PYZus{}menu}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}set\PYZus{}up\PYZus{}select\PYZus{}item\PYZus{}menu}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Sets up the item selection menu list.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{k}{def} \PY{n+nf}{callback\PYZus{}on\PYZus{}item\PYZus{}selected}\PY{p}{(}\PY{n}{select\PYZus{}item\PYZus{}menu}\PY{p}{)}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Transition to select\PYZhy{}target\PYZhy{}input\PYZhy{}state}
+            \PY{c}{\PYZsh{}}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}push\PYZus{}input\PYZus{}state\PYZus{}on\PYZus{}stack}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}SELECT\PYZus{}TARGET}\PY{p}{)}
+
+            \PY{k}{return}
+
+        \PY{k}{def} \PY{n+nf}{callback\PYZus{}on\PYZus{}item\PYZus{}menu\PYZus{}exit}\PY{p}{(}\PY{n}{select\PYZus{}item\PYZus{}menu}\PY{p}{)}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Going back to previous input state}
+            \PY{c}{\PYZsh{}}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}pop\PYZus{}input\PYZus{}state\PYZus{}from\PYZus{}stack}\PY{p}{(}\PY{p}{)}
+
+            \PY{k}{return}
+
+        \PY{c}{\PYZsh{} Sound to be played when item selection menu is opened}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb}{file} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{fetch}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{select\PYZus{}item\PYZus{}menu.ogg}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{select\PYZus{}item\PYZus{}menu\PYZus{}sound} \PY{o}{=} \PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Sound}\PY{p}{(}\PY{n+nb}{file}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Sound to be played when no items present to be selected}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb}{file} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{fetch}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{empty\PYZus{}item\PYZus{}menu.ogg}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{empty\PYZus{}item\PYZus{}menu\PYZus{}sound} \PY{o}{=} \PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Sound}\PY{p}{(}\PY{n+nb}{file}\PY{p}{)}
+
+        \PY{n}{select\PYZus{}item\PYZus{}menu} \PY{o}{=} \PY{n}{EntityMenuList}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{,}
+                                          \PY{n}{select\PYZus{}item\PYZus{}menu\PYZus{}sound}\PY{p}{,}
+                                          \PY{n}{empty\PYZus{}item\PYZus{}menu\PYZus{}sound}\PY{p}{,}
+                                          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel\PYZus{}system}\PY{p}{,}
+                                          \PY{n}{callback\PYZus{}on\PYZus{}item\PYZus{}selected}\PY{p}{,}
+                                          \PY{n}{callback\PYZus{}on\PYZus{}item\PYZus{}menu\PYZus{}exit}\PY{p}{,}
+                                          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{p}{)}
+
+        \PY{k}{return} \PY{n}{select\PYZus{}item\PYZus{}menu}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}set\PYZus{}up\PYZus{}select\PYZus{}target\PYZus{}menu}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Sets up the target selection menu list.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{k}{def} \PY{n+nf}{callback\PYZus{}on\PYZus{}target\PYZus{}selected}\PY{p}{(}\PY{n}{select\PYZus{}target\PYZus{}menu}\PY{p}{)}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Selects target for the event and appends the resulting event to}
+            \PY{c}{\PYZsh{} messages for the server. Remember selected target is a tuple of}
+            \PY{c}{\PYZsh{} (Entity, \PYZlt{}Entity.identifier|location\PYZgt{}) and we need the second}
+            \PY{c}{\PYZsh{} value to create an event.}
+            \PY{c}{\PYZsh{}}
+            \PY{n}{selected\PYZus{}target} \PY{o}{=} \PY{n}{select\PYZus{}target\PYZus{}menu}\PY{o}{.}\PY{n}{list}\PY{p}{[}\PY{n}{select\PYZus{}target\PYZus{}menu}\PY{o}{.}\PY{n}{list\PYZus{}index}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+
+            \PY{c}{\PYZsh{} attempt\PYZus{}look\PYZus{}at}
+            \PY{c}{\PYZsh{}}
+            \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{interaction\PYZus{}sound\PYZus{}menu}\PY{o}{.}\PY{n}{list\PYZus{}index} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ATTEMPT\PYZus{}LOOK\PYZus{}AT}\PY{p}{:}
+
+                \PY{n}{interaction\PYZus{}event} \PY{o}{=} \PY{n}{fabula}\PY{o}{.}\PY{n}{TriesToLookAtEvent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}\PY{p}{,}
+                                                              \PY{n}{selected\PYZus{}target}\PY{p}{)}
+
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{message\PYZus{}for\PYZus{}host}\PY{o}{.}\PY{n}{event\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{interaction\PYZus{}event}\PY{p}{)}
+
+            \PY{c}{\PYZsh{} attempt\PYZus{}talk\PYZus{}to}
+            \PY{c}{\PYZsh{}}
+            \PY{k}{elif} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{interaction\PYZus{}sound\PYZus{}menu}\PY{o}{.}\PY{n}{list\PYZus{}index} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ATTEMPT\PYZus{}TALK\PYZus{}TO}\PY{p}{:}
+
+                \PY{n}{interaction\PYZus{}event} \PY{o}{=} \PY{n}{fabula}\PY{o}{.}\PY{n}{TriesToTalkToEvent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}\PY{p}{,}
+                                                              \PY{n}{selected\PYZus{}target}\PY{p}{)}
+
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{message\PYZus{}for\PYZus{}host}\PY{o}{.}\PY{n}{event\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{interaction\PYZus{}event}\PY{p}{)}
+
+            \PY{c}{\PYZsh{} attempt\PYZus{}pick\PYZus{}up}
+            \PY{c}{\PYZsh{}}
+            \PY{k}{elif} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{interaction\PYZus{}sound\PYZus{}menu}\PY{o}{.}\PY{n}{list\PYZus{}index} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ATTEMPT\PYZus{}PICK\PYZus{}UP}\PY{p}{:}
+
+                \PY{n}{interaction\PYZus{}event} \PY{o}{=} \PY{n}{fabula}\PY{o}{.}\PY{n}{TriesToPickUpEvent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}\PY{p}{,}
+                                                              \PY{n}{selected\PYZus{}target}\PY{p}{)}
+
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{message\PYZus{}for\PYZus{}host}\PY{o}{.}\PY{n}{event\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{interaction\PYZus{}event}\PY{p}{)}
+
+            \PY{c}{\PYZsh{} attempt\PYZus{}manipulate}
+            \PY{c}{\PYZsh{}}
+            \PY{k}{elif} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{interaction\PYZus{}sound\PYZus{}menu}\PY{o}{.}\PY{n}{list\PYZus{}index} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ATTEMPT\PYZus{}MANIPULATE}\PY{p}{:}
+
+                \PY{n}{interaction\PYZus{}event} \PY{o}{=} \PY{n}{fabula}\PY{o}{.}\PY{n}{TriesToManipulateEvent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}\PY{p}{,}
+                                                                  \PY{n}{selected\PYZus{}target}\PY{p}{)}
+
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{message\PYZus{}for\PYZus{}host}\PY{o}{.}\PY{n}{event\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{interaction\PYZus{}event}\PY{p}{)}
+
+            \PY{c}{\PYZsh{} attempt\PYZus{}use}
+            \PY{c}{\PYZsh{}}
+            \PY{k}{elif} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{interaction\PYZus{}sound\PYZus{}menu}\PY{o}{.}\PY{n}{list\PYZus{}index} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ATTEMPT\PYZus{}USE}\PY{p}{:}
+
+                \PY{c}{\PYZsh{} Remember selected item is a tuple of}
+                \PY{c}{\PYZsh{} (Entity, \PYZlt{}Entity.identifier|location\PYZgt{}) and we need the second}
+                \PY{c}{\PYZsh{} value to create an event                \PYZsh{}}
+                \PY{n}{selected\PYZus{}item} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{select\PYZus{}item\PYZus{}menu}\PY{o}{.}\PY{n}{list}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{select\PYZus{}item\PYZus{}menu}\PY{o}{.}\PY{n}{list\PYZus{}index}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+
+                \PY{n}{interaction\PYZus{}event} \PY{o}{=} \PY{n}{fabula}\PY{o}{.}\PY{n}{TriesToDropEvent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}\PY{p}{,}
+                                                            \PY{n}{selected\PYZus{}item}\PY{p}{,}
+                                                            \PY{n}{selected\PYZus{}target}\PY{p}{)}
+
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{message\PYZus{}for\PYZus{}host}\PY{o}{.}\PY{n}{event\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{interaction\PYZus{}event}\PY{p}{)}
+
+            \PY{c}{\PYZsh{}  After interaction return to in\PYZhy{}room\PYZhy{}input\PYZhy{}state}
+            \PY{c}{\PYZsh{}}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}push\PYZus{}input\PYZus{}state\PYZus{}on\PYZus{}stack}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}IN\PYZus{}ROOM}\PY{p}{)}
+
+            \PY{k}{return}
+
+        \PY{k}{def} \PY{n+nf}{callback\PYZus{}on\PYZus{}target\PYZus{}menu\PYZus{}exit}\PY{p}{(}\PY{n}{select\PYZus{}target\PYZus{}menu}\PY{p}{)}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Going back to previous input state}
+            \PY{c}{\PYZsh{}}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}pop\PYZus{}input\PYZus{}state\PYZus{}from\PYZus{}stack}\PY{p}{(}\PY{p}{)}
+
+            \PY{k}{return}
+
+        \PY{c}{\PYZsh{} Sound to be played when target selection menu is opened}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb}{file} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{fetch}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{select\PYZus{}target\PYZus{}menu.ogg}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{select\PYZus{}target\PYZus{}menu\PYZus{}sound} \PY{o}{=} \PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Sound}\PY{p}{(}\PY{n+nb}{file}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Sound to be played when no targets present to be selected}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb}{file} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{fetch}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{empty\PYZus{}target\PYZus{}menu.ogg}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{empty\PYZus{}target\PYZus{}menu\PYZus{}sound} \PY{o}{=} \PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Sound}\PY{p}{(}\PY{n+nb}{file}\PY{p}{)}
+
+        \PY{n}{select\PYZus{}target\PYZus{}menu} \PY{o}{=} \PY{n}{EntityMenuList}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{,}
+                                            \PY{n}{select\PYZus{}target\PYZus{}menu\PYZus{}sound}\PY{p}{,}
+                                            \PY{n}{empty\PYZus{}target\PYZus{}menu\PYZus{}sound}\PY{p}{,}
+                                            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel\PYZus{}system}\PY{p}{,}
+                                            \PY{n}{callback\PYZus{}on\PYZus{}target\PYZus{}selected}\PY{p}{,}
+                                            \PY{n}{callback\PYZus{}on\PYZus{}target\PYZus{}menu\PYZus{}exit}\PY{p}{,}
+                                            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{p}{)}
+
+        \PY{k}{return} \PY{n}{select\PYZus{}target\PYZus{}menu}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}set\PYZus{}up\PYZus{}inventory\PYZus{}menu}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Sets up the inventory menu list.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{k}{def} \PY{n+nf}{callback\PYZus{}on\PYZus{}inventory\PYZus{}item\PYZus{}selected}\PY{p}{(}\PY{n}{inventory\PYZus{}menu}\PY{p}{)}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Remember selected item is a tuple of}
+            \PY{c}{\PYZsh{} (Entity, \PYZlt{}Entity.identifier|location\PYZgt{}) and we need the second}
+            \PY{c}{\PYZsh{} value to create an event.}
+            \PY{c}{\PYZsh{}}
+            \PY{n}{selected\PYZus{}item} \PY{o}{=} \PY{n}{inventory\PYZus{}menu}\PY{o}{.}\PY{n}{list}\PY{p}{[}\PY{n}{inventory\PYZus{}menu}\PY{o}{.}\PY{n}{list\PYZus{}index}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+
+            \PY{c}{\PYZsh{} Attempt to look at selected item}
+            \PY{c}{\PYZsh{}}
+            \PY{n}{look\PYZus{}at\PYZus{}event} \PY{o}{=} \PY{n}{fabula}\PY{o}{.}\PY{n}{TriesToLookAtEvent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}\PY{p}{,}
+                                                      \PY{n}{selected\PYZus{}item}\PY{p}{)}
+
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{message\PYZus{}for\PYZus{}host}\PY{o}{.}\PY{n}{event\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{look\PYZus{}at\PYZus{}event}\PY{p}{)}
+
+            \PY{k}{return}
+
+        \PY{k}{def} \PY{n+nf}{callback\PYZus{}on\PYZus{}inventory\PYZus{}menu\PYZus{}exit}\PY{p}{(}\PY{n}{inventory\PYZus{}menu}\PY{p}{)}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Going back to previous input state}
+            \PY{c}{\PYZsh{}}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}pop\PYZus{}input\PYZus{}state\PYZus{}from\PYZus{}stack}\PY{p}{(}\PY{p}{)}
+
+            \PY{k}{return}
+
+        \PY{c}{\PYZsh{} Sound to be played when inventory is opened}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb}{file} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{fetch}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{inventory.ogg}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{inventory\PYZus{}sound} \PY{o}{=} \PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Sound}\PY{p}{(}\PY{n+nb}{file}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Sound to be played when inventory is empty}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb}{file} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{fetch}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{empty\PYZus{}inventory\PYZus{}menu.ogg}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{empty\PYZus{}inventory\PYZus{}menu\PYZus{}sound} \PY{o}{=} \PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Sound}\PY{p}{(}\PY{n+nb}{file}\PY{p}{)}
+
+        \PY{n}{inventory\PYZus{}menu} \PY{o}{=} \PY{n}{EntityMenuList}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{,}
+                                        \PY{n}{inventory\PYZus{}sound}\PY{p}{,}
+                                        \PY{n}{empty\PYZus{}inventory\PYZus{}menu\PYZus{}sound}\PY{p}{,}
+                                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel\PYZus{}system}\PY{p}{,}
+                                        \PY{n}{callback\PYZus{}on\PYZus{}inventory\PYZus{}item\PYZus{}selected}\PY{p}{,}
+                                        \PY{n}{callback\PYZus{}on\PYZus{}inventory\PYZus{}menu\PYZus{}exit}\PY{p}{,}
+                                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{p}{)}
+
+        \PY{k}{return} \PY{n}{inventory\PYZus{}menu}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}set\PYZus{}up\PYZus{}can\PYZus{}speak\PYZus{}menu}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Sets up the can speak menu list.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{k}{def} \PY{n+nf}{callback\PYZus{}on\PYZus{}sentence\PYZus{}selected}\PY{p}{(}\PY{n}{select\PYZus{}sentence\PYZus{}menu}\PY{p}{)}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Send an event to the server with the selected sentence}
+            \PY{c}{\PYZsh{}}
+            \PY{n}{selected\PYZus{}sentence} \PY{o}{=} \PY{n}{select\PYZus{}sentence\PYZus{}menu}\PY{o}{.}\PY{n}{list}\PY{p}{[}\PY{n}{select\PYZus{}sentence\PYZus{}menu}\PY{o}{.}\PY{n}{list\PYZus{}index}\PY{p}{]}
+
+            \PY{n}{says\PYZus{}event} \PY{o}{=} \PY{n}{fabula}\PY{o}{.}\PY{n}{SaysEvent}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}\PY{p}{,} \PY{n}{selected\PYZus{}sentence}\PY{p}{)}
+
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{message\PYZus{}for\PYZus{}host}\PY{o}{.}\PY{n}{event\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{says\PYZus{}event}\PY{p}{)}
+
+            \PY{c}{\PYZsh{} Return to previous input state}
+            \PY{c}{\PYZsh{}}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}pop\PYZus{}input\PYZus{}state\PYZus{}from\PYZus{}stack}\PY{p}{(}\PY{p}{)}
+
+            \PY{k}{return}
+
+        \PY{c}{\PYZsh{} Sound to be played when a CanSpeak Event is processed and a sentence}
+        \PY{c}{\PYZsh{} should be selected}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb}{file} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{fetch}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{select\PYZus{}sentence.ogg}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{select\PYZus{}sentence\PYZus{}sound} \PY{o}{=} \PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Sound}\PY{p}{(}\PY{n+nb}{file}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Sound to be played when a CanSpeak Event is processed and no sentences}
+        \PY{c}{\PYZsh{} are provided}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb}{file} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{fetch}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{empty\PYZus{}sentences\PYZus{}menu.ogg}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{empty\PYZus{}sentences\PYZus{}menu\PYZus{}sound} \PY{o}{=} \PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Sound}\PY{p}{(}\PY{n+nb}{file}\PY{p}{)}
+
+        \PY{n}{select\PYZus{}sentence\PYZus{}menu} \PY{o}{=} \PY{n}{TextMenuList}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{,}
+                                            \PY{n}{select\PYZus{}sentence\PYZus{}sound}\PY{p}{,}
+                                            \PY{n}{empty\PYZus{}sentences\PYZus{}menu\PYZus{}sound}\PY{p}{,}
+                                            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel\PYZus{}system}\PY{p}{,}
+                                            \PY{n}{callback\PYZus{}on\PYZus{}sentence\PYZus{}selected}\PY{p}{,}
+                                            \PY{n+nb+bp}{None}\PY{p}{,}
+                                            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{p}{)}
+
+        \PY{k}{return} \PY{n}{select\PYZus{}sentence\PYZus{}menu}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}set\PYZus{}up\PYZus{}see\PYZus{}room\PYZus{}menu}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Sets up the see room entities menu list.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{k}{def} \PY{n+nf}{callback\PYZus{}on\PYZus{}item\PYZus{}in\PYZus{}room\PYZus{}selected}\PY{p}{(}\PY{n}{see\PYZus{}room\PYZus{}menu}\PY{p}{)}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Reads out the selected item\PYZsq{}s location, selected item is a tuple}
+            \PY{c}{\PYZsh{} of (Entity, \PYZlt{}Entity.identifier|location\PYZgt{}) and we need the second}
+            \PY{c}{\PYZsh{} value to create an event.}
+            \PY{c}{\PYZsh{}}
+            \PY{n}{selected\PYZus{}item\PYZus{}id} \PY{o}{=} \PY{n}{see\PYZus{}room\PYZus{}menu}\PY{o}{.}\PY{n}{list}\PY{p}{[}\PY{n}{see\PYZus{}room\PYZus{}menu}\PY{o}{.}\PY{n}{list\PYZus{}index}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+
+            \PY{k}{if} \PY{n}{selected\PYZus{}item\PYZus{}id} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{room}\PY{o}{.}\PY{n}{entity\PYZus{}locations}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+
+                \PY{n}{position} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{room}\PY{o}{.}\PY{n}{entity\PYZus{}locations}\PY{p}{[}\PY{n}{selected\PYZus{}item\PYZus{}id}\PY{p}{]}
+
+                \PY{c}{\PYZsh{} Let the TTS engine read the position of the entity at current}
+                \PY{c}{\PYZsh{} index}
+                \PY{c}{\PYZsh{}}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{say}\PY{p}{(}\PY{n}{position}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{runAndWait}\PY{p}{(}\PY{p}{)}
+
+            \PY{k}{return}
+
+        \PY{k}{def} \PY{n+nf}{callback\PYZus{}on\PYZus{}see\PYZus{}room\PYZus{}menu\PYZus{}exit}\PY{p}{(}\PY{n}{see\PYZus{}room\PYZus{}menu}\PY{p}{)}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Going back to previous input state}
+            \PY{c}{\PYZsh{}}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}pop\PYZus{}input\PYZus{}state\PYZus{}from\PYZus{}stack}\PY{p}{(}\PY{p}{)}
+
+            \PY{k}{return}
+
+        \PY{c}{\PYZsh{} Sound to be played when see room entities menu is opened}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb}{file} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{fetch}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{entities\PYZus{}in\PYZus{}room.ogg}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{entities\PYZus{}in\PYZus{}room\PYZus{}sound} \PY{o}{=} \PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Sound}\PY{p}{(}\PY{n+nb}{file}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Sound to be played when there are no entities in the room}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb}{file} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{fetch}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{empty\PYZus{}entities\PYZus{}in\PYZus{}room.ogg}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{empty\PYZus{}entities\PYZus{}in\PYZus{}room\PYZus{}sound} \PY{o}{=} \PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Sound}\PY{p}{(}\PY{n+nb}{file}\PY{p}{)}
+
+        \PY{n}{see\PYZus{}room\PYZus{}menu} \PY{o}{=} \PY{n}{EntityMenuList}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{,}
+                                       \PY{n}{entities\PYZus{}in\PYZus{}room\PYZus{}sound}\PY{p}{,}
+                                       \PY{n}{empty\PYZus{}entities\PYZus{}in\PYZus{}room\PYZus{}sound}\PY{p}{,}
+                                       \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel\PYZus{}system}\PY{p}{,}
+                                       \PY{n}{callback\PYZus{}on\PYZus{}item\PYZus{}in\PYZus{}room\PYZus{}selected}\PY{p}{,}
+                                       \PY{n}{callback\PYZus{}on\PYZus{}see\PYZus{}room\PYZus{}menu\PYZus{}exit}\PY{p}{,}
+                                       \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{p}{)}
+
+        \PY{k}{return} \PY{n}{see\PYZus{}room\PYZus{}menu}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}set\PYZus{}up\PYZus{}help\PYZus{}menu}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Sets up the help menu list.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{k}{def} \PY{n+nf}{callback\PYZus{}on\PYZus{}help\PYZus{}entry\PYZus{}selected}\PY{p}{(}\PY{n}{help\PYZus{}menu}\PY{p}{)}\PY{p}{:}
+
+            \PY{n}{selected\PYZus{}entry} \PY{o}{=} \PY{n}{help\PYZus{}menu}\PY{o}{.}\PY{n}{list}\PY{p}{[}\PY{n}{help\PYZus{}menu}\PY{o}{.}\PY{n}{list\PYZus{}index}\PY{p}{]}
+
+            \PY{c}{\PYZsh{} Let the TTS engine read the help information at current index}
+            \PY{c}{\PYZsh{}}
+            \PY{n}{help\PYZus{}menu}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{say}\PY{p}{(}\PY{n}{help\PYZus{}menu\PYZus{}entries\PYZus{}values}\PY{p}{[}\PY{n}{selected\PYZus{}entry}\PY{p}{]}\PY{p}{)}
+            \PY{n}{help\PYZus{}menu}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{o}{.}\PY{n}{runAndWait}\PY{p}{(}\PY{p}{)}
+
+            \PY{k}{return}
+
+        \PY{k}{def} \PY{n+nf}{callback\PYZus{}on\PYZus{}help\PYZus{}menu\PYZus{}exit}\PY{p}{(}\PY{n}{help\PYZus{}menu}\PY{p}{)}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Going back to previous input state}
+            \PY{c}{\PYZsh{}}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}pop\PYZus{}input\PYZus{}state\PYZus{}from\PYZus{}stack}\PY{p}{(}\PY{p}{)}
+
+            \PY{k}{return}
+
+        \PY{c}{\PYZsh{} Default help menu (for adventure games)}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{help\PYZus{}menu\PYZus{}entries\PYZus{}values} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s}{\PYZsq{}}\PY{l+s}{key q}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{open inventory}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                                    \PY{l+s}{\PYZsq{}}\PY{l+s}{key e}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{open interaction menu}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                                    \PY{l+s}{\PYZsq{}}\PY{l+s}{key x}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{read out player position}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                                    \PY{l+s}{\PYZsq{}}\PY{l+s}{key y}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{list all items in room}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                                    \PY{l+s}{\PYZsq{}}\PY{l+s}{movement}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{w a s d keys}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                                    \PY{l+s}{\PYZsq{}}\PY{l+s}{key w}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{move one field up}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                                    \PY{l+s}{\PYZsq{}}\PY{l+s}{key a}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{move one field to the left}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                                    \PY{l+s}{\PYZsq{}}\PY{l+s}{key s}\PY{l+s}{\PYZsq{}}\PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{move one field down}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                                    \PY{l+s}{\PYZsq{}}\PY{l+s}{key d}\PY{l+s}{\PYZsq{}} \PY{p}{:} \PY{l+s}{\PYZsq{}}\PY{l+s}{move one field to the right}\PY{l+s}{\PYZsq{}}\PY{p}{\PYZcb{}}
+
+        \PY{c}{\PYZsh{} Keys for help menu entries, notice that the order of this list defines}
+        \PY{c}{\PYZsh{} the order in which the entries are sorted in the list}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{help\PYZus{}menu\PYZus{}entries} \PY{o}{=} \PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{key q}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                             \PY{l+s}{\PYZsq{}}\PY{l+s}{key e}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                             \PY{l+s}{\PYZsq{}}\PY{l+s}{key x}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                             \PY{l+s}{\PYZsq{}}\PY{l+s}{key y}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                             \PY{l+s}{\PYZsq{}}\PY{l+s}{movement}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                             \PY{l+s}{\PYZsq{}}\PY{l+s}{key w}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                             \PY{l+s}{\PYZsq{}}\PY{l+s}{key a}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                             \PY{l+s}{\PYZsq{}}\PY{l+s}{key s}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                             \PY{l+s}{\PYZsq{}}\PY{l+s}{key d}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+
+        \PY{c}{\PYZsh{} Sound to be played when help menu is opened}
+        \PY{c}{\PYZsh{}}
+        \PY{n+nb}{file} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{fetch}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{help\PYZus{}menu.ogg}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{help\PYZus{}menu\PYZus{}sound} \PY{o}{=} \PY{n}{pygame}\PY{o}{.}\PY{n}{mixer}\PY{o}{.}\PY{n}{Sound}\PY{p}{(}\PY{n+nb}{file}\PY{p}{)}
+
+        \PY{n}{help\PYZus{}menu} \PY{o}{=} \PY{n}{TextMenuList}\PY{p}{(}\PY{n}{help\PYZus{}menu\PYZus{}entries}\PY{p}{,}
+                                 \PY{n}{help\PYZus{}menu\PYZus{}sound}\PY{p}{,}
+                                 \PY{n+nb+bp}{None}\PY{p}{,}
+                                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel\PYZus{}system}\PY{p}{,}
+                                 \PY{n}{callback\PYZus{}on\PYZus{}help\PYZus{}entry\PYZus{}selected}\PY{p}{,}
+                                 \PY{n}{callback\PYZus{}on\PYZus{}help\PYZus{}menu\PYZus{}exit}\PY{p}{,}
+                                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tts\PYZus{}engine}\PY{p}{)}
+
+        \PY{k}{return} \PY{n}{help\PYZus{}menu}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}play\PYZus{}sound\PYZus{}surrounding\PYZus{}entity}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{entity}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Plays back the audio assets of the given entity if it is on a position close enough to the client.}
+\PY{l+s+sd}{           The stereo volumes of the sound will be adjusted to simulate a}
+\PY{l+s+sd}{           spatial impression.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{c}{\PYZsh{} Get client position and positions close to it}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{client\PYZus{}position} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{room}\PY{o}{.}\PY{n}{entity\PYZus{}locations}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}\PY{p}{]}
+        \PY{n}{surrounding\PYZus{}positions} \PY{o}{=} \PY{n}{fabula}\PY{o}{.}\PY{n}{surrounding\PYZus{}positions}\PY{p}{(}\PY{n}{client\PYZus{}position}\PY{p}{)}
+
+        \PY{n}{surrounding\PYZus{}positions}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{client\PYZus{}position}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Get location of given entity}
+        \PY{c}{\PYZsh{}}
+        \PY{n}{location} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{room}\PY{o}{.}\PY{n}{entity\PYZus{}locations}\PY{p}{[}\PY{n}{entity}\PY{o}{.}\PY{n}{identifier}\PY{p}{]}
+
+        \PY{c}{\PYZsh{} If given entity close enough, play its sound}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{if} \PY{p}{(}\PY{n}{location} \PY{o+ow}{in} \PY{n}{surrounding\PYZus{}positions}
+            \PY{o+ow}{and} \PY{n}{entity}\PY{o}{.}\PY{n}{identifier} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}
+            \PY{o+ow}{and} \PY{l+s}{\PYZsq{}}\PY{l+s}{audio/ogg}\PY{l+s}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}
+            \PY{o+ow}{and} \PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{audio/ogg}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{data} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{None}\PY{p}{)}\PY{p}{:}
+
+            \PY{n}{fabula}\PY{o}{.}\PY{n}{LOGGER}\PY{o}{.}\PY{n}{debug}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Playing Sound of: \PYZob{}\PYZcb{}}\PY{l+s}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{entity}\PY{o}{.}\PY{n}{identifier}\PY{p}{)}\PY{p}{)}
+
+            \PY{c}{\PYZsh{} Channel consist of a mixer.channel, a value for left volume and}
+            \PY{c}{\PYZsh{} a value for right volume.}
+            \PY{c}{\PYZsh{}}
+            \PY{n}{channel} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{surrounding\PYZus{}positions}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{surrounding\PYZus{}position\PYZus{}channels}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                       \PY{n}{surrounding\PYZus{}positions}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{surrounding\PYZus{}position\PYZus{}channels}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                       \PY{n}{surrounding\PYZus{}positions}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{surrounding\PYZus{}position\PYZus{}channels}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+                       \PY{n}{surrounding\PYZus{}positions}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]} \PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{surrounding\PYZus{}position\PYZus{}channels}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,}
+                       \PY{n}{surrounding\PYZus{}positions}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]} \PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{surrounding\PYZus{}position\PYZus{}channels}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,}
+                       \PY{n}{surrounding\PYZus{}positions}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]} \PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{surrounding\PYZus{}position\PYZus{}channels}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,}
+                       \PY{n}{surrounding\PYZus{}positions}\PY{p}{[}\PY{l+m+mi}{6}\PY{p}{]} \PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{surrounding\PYZus{}position\PYZus{}channels}\PY{p}{[}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{,}
+                       \PY{n}{surrounding\PYZus{}positions}\PY{p}{[}\PY{l+m+mi}{7}\PY{p}{]} \PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{surrounding\PYZus{}position\PYZus{}channels}\PY{p}{[}\PY{l+m+mi}{7}\PY{p}{]}\PY{p}{,}
+                       \PY{n}{surrounding\PYZus{}positions}\PY{p}{[}\PY{l+m+mi}{8}\PY{p}{]} \PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{surrounding\PYZus{}position\PYZus{}channels}\PY{p}{[}\PY{l+m+mi}{8}\PY{p}{]}
+                      \PY{p}{\PYZcb{}}\PY{p}{[}\PY{n}{location}\PY{p}{]}
+
+            \PY{n}{channel}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{play}\PY{p}{(}\PY{n}{entity}\PY{o}{.}\PY{n}{assets}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{audio/ogg}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{data}\PY{p}{)}
+            \PY{n}{channel}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}volume}\PY{p}{(}\PY{n}{channel}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{channel}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}fadeout\PYZus{}sound\PYZus{}surrounding\PYZus{}entities}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Fades out all sounds that are playing from surrounding Entities.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{k}{for} \PY{n}{channel} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{surrounding\PYZus{}position\PYZus{}channels}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Fade out every channel which could play back sounds of}
+            \PY{c}{\PYZsh{} surrounding entities}
+            \PY{c}{\PYZsh{}}
+            \PY{n}{channel}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{fadeout}\PY{p}{(}\PY{l+m+mi}{300}\PY{p}{)}
+
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}push\PYZus{}input\PYZus{}state\PYZus{}on\PYZus{}stack}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{state}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Pushes the given input state on the stack and performs a state transition to it.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{c}{\PYZsh{} Handling for states which are already on the stack}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{if} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}state\PYZus{}stack}\PY{p}{)} \PY{o+ow}{is} \PY{l+m+mi}{0}
+            \PY{o+ow}{or} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}state\PYZus{}stack}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}
+                \PY{o+ow}{and} \PY{n}{state} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}state\PYZus{}stack}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}state\PYZus{}stack}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{state}\PY{p}{)}
+
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}transition\PYZus{}to\PYZus{}input\PYZus{}state}\PY{p}{(}\PY{p}{)}
+
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}pop\PYZus{}input\PYZus{}state\PYZus{}from\PYZus{}stack}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Pops the topmost input state from the stack and performs a transition to the previous state.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}state\PYZus{}stack}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}state\PYZus{}stack}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{p}{)}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}transition\PYZus{}to\PYZus{}input\PYZus{}state}\PY{p}{(}\PY{p}{)}
+
+        \PY{k}{else}\PY{p}{:}
+
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}push\PYZus{}input\PYZus{}state\PYZus{}on\PYZus{}stack}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}IN\PYZus{}ROOM}\PY{p}{)}
+
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}transition\PYZus{}to\PYZus{}input\PYZus{}state}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Performs the state transition from the former input state to the topmost input state.}
+\PY{l+s+sd}{           Before calling this method the new state has to be pushed on the}
+\PY{l+s+sd}{           stack.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{n}{audio\PYZus{}menu\PYZus{}list} \PY{o}{=} \PY{n+nb+bp}{None}
+        \PY{n}{current\PYZus{}state} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}state\PYZus{}stack}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+
+        \PY{k}{if} \PY{n}{current\PYZus{}state} \PY{o+ow}{is} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}IN\PYZus{}ROOM}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Empty stack from old history whenever in room}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}state\PYZus{}stack} \PY{o}{=} \PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}IN\PYZus{}ROOM}\PY{p}{]}
+
+            \PY{c}{\PYZsh{} Play ambience sound for room if not already playing}
+            \PY{c}{\PYZsh{}}
+            \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel\PYZus{}ambience}\PY{o}{.}\PY{n}{get\PYZus{}busy}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel\PYZus{}ambience}\PY{o}{.}\PY{n}{unpause}\PY{p}{(}\PY{p}{)}
+
+            \PY{k}{else}\PY{p}{:}
+
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel\PYZus{}ambience}\PY{o}{.}\PY{n}{play}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{room\PYZus{}ambience\PYZus{}sound}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+
+        \PY{k}{elif} \PY{n}{current\PYZus{}state} \PY{o+ow}{is} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}INTERACTION}\PY{p}{:}
+
+            \PY{n}{audio\PYZus{}menu\PYZus{}list} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{interaction\PYZus{}sound\PYZus{}menu}
+
+        \PY{k}{elif} \PY{n}{current\PYZus{}state} \PY{o+ow}{is} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}SELECT\PYZus{}TARGET}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Get the current attempt type}
+            \PY{c}{\PYZsh{}}
+            \PY{n}{attempt\PYZus{}type} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{interaction\PYZus{}sound\PYZus{}menu}\PY{o}{.}\PY{n}{list\PYZus{}index}
+
+            \PY{c}{\PYZsh{} Set up list with possible targets}
+            \PY{c}{\PYZsh{}}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{select\PYZus{}target\PYZus{}menu}\PY{o}{.}\PY{n}{list} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}get\PYZus{}possible\PYZus{}targets}\PY{p}{(}\PY{n}{attempt\PYZus{}type}\PY{p}{)}
+            \PY{n}{audio\PYZus{}menu\PYZus{}list} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{select\PYZus{}target\PYZus{}menu}
+
+        \PY{k}{elif} \PY{n}{current\PYZus{}state} \PY{o+ow}{is} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}SELECT\PYZus{}ITEM}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Set up list with possible items}
+            \PY{c}{\PYZsh{}}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{select\PYZus{}item\PYZus{}menu}\PY{o}{.}\PY{n}{list} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}get\PYZus{}possible\PYZus{}items}\PY{p}{(}\PY{p}{)}
+            \PY{n}{audio\PYZus{}menu\PYZus{}list} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{select\PYZus{}item\PYZus{}menu}
+
+        \PY{k}{elif} \PY{n}{current\PYZus{}state} \PY{o+ow}{is} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}CAN\PYZus{}SPEEK}\PY{p}{:}
+
+            \PY{n}{audio\PYZus{}menu\PYZus{}list} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{select\PYZus{}sentence\PYZus{}menu}
+
+        \PY{k}{elif} \PY{n}{current\PYZus{}state} \PY{o+ow}{is} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}SEE\PYZus{}RACK}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Gather all rack items}
+            \PY{c}{\PYZsh{}}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{inventory\PYZus{}menu}\PY{o}{.}\PY{n}{list} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}get\PYZus{}rack\PYZus{}items}\PY{p}{(}\PY{p}{)}
+            \PY{n}{audio\PYZus{}menu\PYZus{}list} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{inventory\PYZus{}menu}
+
+        \PY{k}{elif} \PY{n}{current\PYZus{}state} \PY{o+ow}{is} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}SEE\PYZus{}ROOM}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Set up list with all entities in room}
+            \PY{c}{\PYZsh{}}
+            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{see\PYZus{}room\PYZus{}menu}\PY{o}{.}\PY{n}{list} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}get\PYZus{}room\PYZus{}entities}\PY{p}{(}\PY{p}{)}
+            \PY{n}{audio\PYZus{}menu\PYZus{}list} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{see\PYZus{}room\PYZus{}menu}
+
+        \PY{k}{elif} \PY{n}{current\PYZus{}state} \PY{o+ow}{is} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}HELP\PYZus{}MENU}\PY{p}{:}
+
+            \PY{n}{audio\PYZus{}menu\PYZus{}list} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{help\PYZus{}menu}
+
+        \PY{k}{elif} \PY{n}{current\PYZus{}state} \PY{o+ow}{is} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{INPUT\PYZus{}STATE\PYZus{}CONNECTION\PYZus{}DETAILS}\PY{p}{:}
+
+            \PY{n}{audio\PYZus{}menu\PYZus{}list} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{connection\PYZus{}details\PYZus{}menu}
+
+
+        \PY{k}{if} \PY{n}{audio\PYZus{}menu\PYZus{}list} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{None}\PY{p}{:}
+
+            \PY{k}{if} \PY{n}{audio\PYZus{}menu\PYZus{}list}\PY{o}{.}\PY{n}{try\PYZus{}to\PYZus{}open\PYZus{}menu\PYZus{}list}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+
+                \PY{c}{\PYZsh{} Pause ambient sound and fade out sounds of surrounding}
+                \PY{c}{\PYZsh{} objects while in menu}
+                \PY{c}{\PYZsh{}}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{channel\PYZus{}ambience}\PY{o}{.}\PY{n}{pause}\PY{p}{(}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}fadeout\PYZus{}sound\PYZus{}surrounding\PYZus{}entities}\PY{p}{(}\PY{p}{)}
+
+        \PY{k}{return}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}get\PYZus{}possible\PYZus{}items}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{attempt\PYZus{}type}\PY{o}{=}\PY{n}{ATTEMPT\PYZus{}USE}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Returns the possible items for the given interaction type.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{n}{items} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+
+        \PY{n}{surrounding\PYZus{}positions} \PY{o}{=} \PY{n}{fabula}\PY{o}{.}\PY{n}{surrounding\PYZus{}positions}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{room}\PY{o}{.}\PY{n}{entity\PYZus{}locations}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}\PY{p}{]}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Add entities from surrounding\PYZus{}positions}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{for} \PY{n}{entity} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{room}\PY{o}{.}\PY{n}{entity\PYZus{}dict}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+
+            \PY{k}{if} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{room}\PY{o}{.}\PY{n}{entity\PYZus{}locations}\PY{p}{[}\PY{n}{entity}\PY{o}{.}\PY{n}{identifier}\PY{p}{]} \PY{o+ow}{in} \PY{n}{surrounding\PYZus{}positions}
+                \PY{o+ow}{and} \PY{n}{entity}\PY{o}{.}\PY{n}{entity\PYZus{}type} \PY{o+ow}{not} \PY{o+ow}{in} \PY{p}{(}\PY{n}{fabula}\PY{o}{.}\PY{n}{PLAYER}\PY{p}{,} \PY{n}{fabula}\PY{o}{.}\PY{n}{NPC}\PY{p}{)}
+                \PY{o+ow}{and} \PY{n}{entity}\PY{o}{.}\PY{n}{mobile}\PY{p}{)}\PY{p}{:}
+
+                \PY{n}{items}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{entity}\PY{p}{,} \PY{n}{entity}\PY{o}{.}\PY{n}{identifier}\PY{p}{)}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Add entities from rack}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{for} \PY{n}{entity} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{rack}\PY{o}{.}\PY{n}{entity\PYZus{}dict}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+
+            \PY{k}{if} \PY{p}{(}\PY{n}{entity}\PY{o}{.}\PY{n}{identifier} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{rack}\PY{o}{.}\PY{n}{owner\PYZus{}dict}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}
+                \PY{o+ow}{and} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{rack}\PY{o}{.}\PY{n}{owner\PYZus{}dict}\PY{p}{[}\PY{n}{entity}\PY{o}{.}\PY{n}{identifier}\PY{p}{]} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}\PY{p}{)}\PY{p}{:}
+
+                \PY{n}{items}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{entity}\PY{p}{,} \PY{n}{entity}\PY{o}{.}\PY{n}{identifier}\PY{p}{)}\PY{p}{)}
+
+        \PY{k}{return} \PY{n}{items}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}get\PYZus{}possible\PYZus{}targets}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{attempt\PYZus{}type}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Returns the possible targets for the given interaction type.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{n}{targets} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+
+        \PY{n}{client\PYZus{}position} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{room}\PY{o}{.}\PY{n}{entity\PYZus{}locations}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}\PY{p}{]}
+        \PY{n}{surrounding\PYZus{}positions} \PY{o}{=} \PY{n}{fabula}\PY{o}{.}\PY{n}{surrounding\PYZus{}positions}\PY{p}{(}\PY{n}{client\PYZus{}position}\PY{p}{)}
+        \PY{n}{surrounding\PYZus{}positions}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{client\PYZus{}position}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Add entities from room}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{for} \PY{n}{entity} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{room}\PY{o}{.}\PY{n}{entity\PYZus{}dict}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+
+            \PY{n}{location} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{room}\PY{o}{.}\PY{n}{entity\PYZus{}locations}\PY{p}{[}\PY{n}{entity}\PY{o}{.}\PY{n}{identifier}\PY{p}{]}
+
+            \PY{k}{if} \PY{n}{attempt\PYZus{}type} \PY{o+ow}{is} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ATTEMPT\PYZus{}TALK\PYZus{}TO}\PY{p}{:}
+
+                \PY{k}{if} \PY{p}{(}\PY{n}{entity}\PY{o}{.}\PY{n}{entity\PYZus{}type} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n}{fabula}\PY{o}{.}\PY{n}{ITEM}
+                    \PY{o+ow}{and} \PY{n}{entity}\PY{o}{.}\PY{n}{identifier} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}\PY{p}{)}\PY{p}{:}
+
+                    \PY{n}{targets}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{entity}\PY{p}{,} \PY{n}{location}\PY{p}{)}\PY{p}{)}
+
+            \PY{k}{elif} \PY{n}{attempt\PYZus{}type} \PY{o+ow}{is} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ATTEMPT\PYZus{}LOOK\PYZus{}AT}\PY{p}{:}
+
+                \PY{k}{if} \PY{n}{entity}\PY{o}{.}\PY{n}{identifier} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}\PY{p}{:}
+
+                    \PY{n}{targets}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{entity}\PY{p}{,} \PY{n}{location}\PY{p}{)}\PY{p}{)}
+
+            \PY{c}{\PYZsh{} Add only entities from surrounding positions for pick up and use}
+            \PY{c}{\PYZsh{}}
+            \PY{k}{if} \PY{n}{location} \PY{o+ow}{in} \PY{n}{surrounding\PYZus{}positions}\PY{p}{:}
+
+                \PY{k}{if} \PY{n}{attempt\PYZus{}type} \PY{o+ow}{is} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ATTEMPT\PYZus{}PICK\PYZus{}UP}\PY{p}{:}
+
+                    \PY{c}{\PYZsh{} Add only mobile entities of type item for pickup}
+                    \PY{c}{\PYZsh{}}
+                    \PY{k}{if} \PY{n}{entity}\PY{o}{.}\PY{n}{entity\PYZus{}type} \PY{o+ow}{is} \PY{n}{fabula}\PY{o}{.}\PY{n}{ITEM} \PY{o+ow}{and} \PY{n}{entity}\PY{o}{.}\PY{n}{mobile}\PY{p}{:}
+
+                        \PY{n}{targets}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{entity}\PY{p}{,} \PY{n}{location}\PY{p}{)}\PY{p}{)}
+
+                \PY{c}{\PYZsh{} Add entities for use}
+                \PY{c}{\PYZsh{}}
+                \PY{k}{elif} \PY{n}{attempt\PYZus{}type} \PY{o+ow}{is} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ATTEMPT\PYZus{}USE}\PY{p}{:}
+
+                    \PY{n}{targets}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{entity}\PY{p}{,} \PY{n}{location}\PY{p}{)}\PY{p}{)}
+
+                \PY{c}{\PYZsh{} Add items for manipulate}
+                \PY{c}{\PYZsh{}}
+                \PY{k}{elif} \PY{n}{attempt\PYZus{}type} \PY{o+ow}{is} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ATTEMPT\PYZus{}MANIPULATE}\PY{p}{:}
+
+                    \PY{c}{\PYZsh{} Add only entities of type item for manipulate}
+                    \PY{c}{\PYZsh{}}
+                    \PY{k}{if} \PY{n}{entity}\PY{o}{.}\PY{n}{entity\PYZus{}type} \PY{o+ow}{is} \PY{n}{fabula}\PY{o}{.}\PY{n}{ITEM}\PY{p}{:}
+
+                        \PY{n}{targets}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{entity}\PY{p}{,} \PY{n}{location}\PY{p}{)}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Add entities from rack for look at, use and manipulate}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{if} \PY{n}{attempt\PYZus{}type} \PY{o+ow}{in} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ATTEMPT\PYZus{}LOOK\PYZus{}AT}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ATTEMPT\PYZus{}USE}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ATTEMPT\PYZus{}MANIPULATE}\PY{p}{)}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Check all entities in rack}
+            \PY{c}{\PYZsh{}}
+            \PY{k}{for} \PY{n}{entity} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{rack}\PY{o}{.}\PY{n}{entity\PYZus{}dict}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+
+                \PY{c}{\PYZsh{} Check if the entity is owned by someone and if the client is}
+                \PY{c}{\PYZsh{} that someone}
+                \PY{c}{\PYZsh{}}
+                \PY{k}{if} \PY{p}{(}\PY{n}{entity}\PY{o}{.}\PY{n}{identifier} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{rack}\PY{o}{.}\PY{n}{owner\PYZus{}dict}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}
+                    \PY{o+ow}{and} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{rack}\PY{o}{.}\PY{n}{owner\PYZus{}dict}\PY{p}{[}\PY{n}{entity}\PY{o}{.}\PY{n}{identifier}\PY{p}{]} \PY{o+ow}{is} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}\PY{p}{)}\PY{p}{:}
+
+                    \PY{n}{targets}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{entity}\PY{p}{,} \PY{n}{entity}\PY{o}{.}\PY{n}{identifier}\PY{p}{)}\PY{p}{)}
+
+        \PY{c}{\PYZsh{} Remove item for use from the target list to prevent using it with}
+        \PY{c}{\PYZsh{} itself}
+        \PY{c}{\PYZsh{}}
+        \PY{k}{if} \PY{n}{attempt\PYZus{}type} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ATTEMPT\PYZus{}USE}\PY{p}{:}
+
+            \PY{n}{selected\PYZus{}item} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{select\PYZus{}item\PYZus{}menu}\PY{o}{.}\PY{n}{list}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{select\PYZus{}item\PYZus{}menu}\PY{o}{.}\PY{n}{list\PYZus{}index}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+
+            \PY{c}{\PYZsh{} If selected item is as well in target list remove it because an item}
+            \PY{c}{\PYZsh{} can not be used with itself}
+            \PY{c}{\PYZsh{}}
+            \PY{k}{for} \PY{n}{target} \PY{o+ow}{in} \PY{n}{targets}\PY{p}{:}
+
+                \PY{k}{if} \PY{n}{target}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o+ow}{is} \PY{n}{selected\PYZus{}item}\PY{p}{:}
+                    \PY{n}{targets}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{n}{target}\PY{p}{)}
+
+        \PY{k}{return} \PY{n}{targets}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}get\PYZus{}rack\PYZus{}items}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Returns the items in the rack (inventory).}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{n}{items} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+
+        \PY{k}{for} \PY{n}{entity} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{rack}\PY{o}{.}\PY{n}{entity\PYZus{}dict}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+
+            \PY{c}{\PYZsh{} Check if the entity is owned by someone and if client is}
+            \PY{c}{\PYZsh{} that someone}
+            \PY{c}{\PYZsh{}}
+            \PY{k}{if} \PY{p}{(}\PY{n}{entity}\PY{o}{.}\PY{n}{identifier} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{rack}\PY{o}{.}\PY{n}{owner\PYZus{}dict}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}
+                \PY{o+ow}{and} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{rack}\PY{o}{.}\PY{n}{owner\PYZus{}dict}\PY{p}{[}\PY{n}{entity}\PY{o}{.}\PY{n}{identifier}\PY{p}{]} \PY{o+ow}{is} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}\PY{p}{)}\PY{p}{:}
+
+                \PY{n}{items}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{entity}\PY{p}{,} \PY{n}{entity}\PY{o}{.}\PY{n}{identifier}\PY{p}{)}\PY{p}{)}
+
+        \PY{k}{return} \PY{n}{items}
+
+    \PY{k}{def} \PY{n+nf}{\PYZus{}get\PYZus{}room\PYZus{}entities}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Returns all entities in the room except for the client.}
+\PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{n}{items} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+
+        \PY{k}{for} \PY{n}{entity} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{room}\PY{o}{.}\PY{n}{entity\PYZus{}dict}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+
+            \PY{k}{if} \PY{n}{entity}\PY{o}{.}\PY{n}{identifier} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{host}\PY{o}{.}\PY{n}{client\PYZus{}id}\PY{p}{:}
+
+                \PY{n}{items}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{entity}\PY{p}{,} \PY{n}{entity}\PY{o}{.}\PY{n}{identifier}\PY{p}{)}\PY{p}{)}
+
+        \PY{k}{return} \PY{n}{items}
+\end{Verbatim}

@@ -1,0 +1,42 @@
+\begin{Verbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PY{k+kn}{import} \PY{n+nn}{sys}
+
+\PY{c}{\PYZsh{} Add current and parent directory. One of them is supposed to contain the fabula}
+\PY{c}{\PYZsh{} package.}
+\PY{c}{\PYZsh{}}
+\PY{n}{sys}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{../}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+\PY{n}{sys}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{./}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+
+\PY{k+kn}{import} \PY{n+nn}{fabula.plugins.serverside}
+\PY{k+kn}{import} \PY{n+nn}{fabula.run}
+\PY{k+kn}{import} \PY{n+nn}{fabula.interfaces.python\PYZus{}tcp}
+\PY{k+kn}{from} \PY{n+nn}{optparse} \PY{k+kn}{import} \PY{n}{OptionParser}
+
+\PY{k+kn}{from} \PY{n+nn}{zauberwald} \PY{k+kn}{import} \PY{n}{ZWServerPlugin}
+
+\PY{k}{def} \PY{n+nf}{main}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+    \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Run the zauberwald server. Can optionally accept an ip address from the}
+\PY{l+s+sd}{       command line.}
+\PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+    
+    \PY{n}{parser} \PY{o}{=} \PY{n}{OptionParser}\PY{p}{(}\PY{p}{)}
+    \PY{n}{parser}\PY{o}{.}\PY{n}{add\PYZus{}option}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZhy{}a}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{dest}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{ip\PYZus{}address}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{default}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{127.0.0.1}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+                      \PY{n}{help}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{IP address of the server (default is 127.0.0.1)}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+    
+    \PY{p}{(}\PY{n}{options}\PY{p}{,} \PY{n}{args}\PY{p}{)} \PY{o}{=} \PY{n}{parser}\PY{o}{.}\PY{n}{parse\PYZus{}args}\PY{p}{(}\PY{p}{)}
+    \PY{k}{print}\PY{p}{(}\PY{n}{options}\PY{o}{.}\PY{n}{ip\PYZus{}address}\PY{p}{)}
+
+    \PY{c}{\PYZsh{} Setting up server interface}
+    \PY{c}{\PYZsh{}}
+    \PY{n}{server\PYZus{}interface} \PY{o}{=} \PY{n}{fabula}\PY{o}{.}\PY{n}{interfaces}\PY{o}{.}\PY{n}{python\PYZus{}tcp}\PY{o}{.}\PY{n}{TCPServerInterface}\PY{p}{(}\PY{p}{)}
+
+    \PY{n}{app\PYZus{}server} \PY{o}{=} \PY{n}{fabula}\PY{o}{.}\PY{n}{run}\PY{o}{.}\PY{n}{App}\PY{p}{(}\PY{n}{timeout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+    \PY{n}{app\PYZus{}server}\PY{o}{.}\PY{n}{server\PYZus{}plugin\PYZus{}class} \PY{o}{=} \PY{n}{ZWServerPlugin}
+    \PY{n}{app\PYZus{}server}\PY{o}{.}\PY{n}{run\PYZus{}server}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{,} \PY{n}{server\PYZus{}interface}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{,}  \PY{n}{options}\PY{o}{.}\PY{n}{ip\PYZus{}address}\PY{p}{,} \PY{n+nb+bp}{True}\PY{p}{)}
+
+    \PY{k}{return}
+
+\PY{k}{if} \PY{n}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}} \PY{o}{==} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZus{}\PYZus{}main\PYZus{}\PYZus{}}\PY{l+s}{\PYZdq{}}\PY{p}{:}
+
+    \PY{n}{main}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}

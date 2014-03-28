@@ -1,0 +1,33 @@
+\begin{Verbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PY{k+kn}{import} \PY{n+nn}{sys}
+
+\PY{c}{\PYZsh{} Add current and parent directory. One of them is supposed to contain the fabula}
+\PY{c}{\PYZsh{} package.}
+\PY{c}{\PYZsh{}}
+\PY{n}{sys}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{../}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+\PY{n}{sys}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{./}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+
+\PY{k+kn}{import} \PY{n+nn}{fabula.plugins.serverside}
+\PY{k+kn}{import} \PY{n+nn}{fabula.run}
+\PY{k+kn}{import} \PY{n+nn}{fabula.interfaces.python\PYZus{}tcp}
+
+\PY{k+kn}{from} \PY{n+nn}{zauberwald} \PY{k+kn}{import} \PY{n}{ZWAudioUI}
+
+\PY{k}{def} \PY{n+nf}{main}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+    \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Run a zauberwald audio client.}
+\PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+
+    \PY{c}{\PYZsh{} Setting up client interface}
+    \PY{c}{\PYZsh{}}
+    \PY{n}{client\PYZus{}interface\PYZus{}player} \PY{o}{=} \PY{n}{fabula}\PY{o}{.}\PY{n}{interfaces}\PY{o}{.}\PY{n}{python\PYZus{}tcp}\PY{o}{.}\PY{n}{TCPClientInterface}\PY{p}{(}\PY{p}{)}
+
+    \PY{n}{app\PYZus{}client} \PY{o}{=} \PY{n}{fabula}\PY{o}{.}\PY{n}{run}\PY{o}{.}\PY{n}{App}\PY{p}{(}\PY{n}{timeout}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+    \PY{n}{app\PYZus{}client}\PY{o}{.}\PY{n}{user\PYZus{}interface\PYZus{}class} \PY{o}{=} \PY{n}{ZWAudioUI}
+    \PY{n}{app\PYZus{}client}\PY{o}{.}\PY{n}{run\PYZus{}client}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{,} \PY{n}{client\PYZus{}interface\PYZus{}player}\PY{p}{)}
+
+    \PY{k}{return}
+
+\PY{k}{if} \PY{n}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}} \PY{o}{==} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZus{}\PYZus{}main\PYZus{}\PYZus{}}\PY{l+s}{\PYZdq{}}\PY{p}{:}
+
+    \PY{n}{main}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}

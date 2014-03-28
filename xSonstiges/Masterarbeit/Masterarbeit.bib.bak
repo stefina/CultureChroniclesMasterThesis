@@ -1,0 +1,1950 @@
+% This file was created with JabRef 2.9.2.
+% Encoding: Cp1252
+
+@INPROCEEDINGS{allman2009,
+  author = {Allman, T. and Dhillon, R.K. and Landau, M.A.E. and Kurniawan, S.H.},
+  title = {Rock Vibe: Rock Band{\textregistered} Computer Games for People with
+	No or Limited Vision},
+  booktitle = {Proceedings of the 11th international ACM SIGACCESS conference on
+	Computers and accessibility},
+  year = {2009},
+  series = {Assets '09},
+  pages = {51--58},
+  address = {New York, NY, USA},
+  publisher = {ACM},
+  abstract = {This paper reports Rock Vibe, a modification performed on Rock Band®
+	computer game to represent visual information using haptic and audio
+	feedback to allow people with no or limited vision to enjoy the game.
+	We modified the drumming activity of Rock Band® by providing users
+	with vibrations on upper and lower arms to represent the drumhead
+	cues and on ankle to represent the kick drum cue. Auditory information
+	is used to provide feedback on correct and timely hit (with various
+	drumming sounds) or errors (with a click sound). Computer’s standard
+	speech synthesizer is used to read the menu, song title, instruction
+	and score. A series of evaluations with people with various levels
+	of visual impairment were performed at different stages of the system
+	development. We found that users were able to master the system almost
+	immediately, with some users making no error halfway through the
+	first song.},
+  acmid = {1639653},
+  doi = {10.1145/1639642.1639653},
+  isbn = {978-1-60558-558-1},
+  keywords = {blindness, games, haptic, visual impairment},
+  location = {Pittsburgh, Pennsylvania, USA},
+  numpages = {8},
+  owner = {Lyra},
+  review = {Cites 13
+	
+	
+	Ähnlicher Ansatz wie Blind Hero, nur für Rock Band Schlagzeug. Allerdings
+	wenig Neues im Paper.
+	
+	
+	Lösung auch über haptische Sensoren die An Oberarmen und Unterarmen
+	befestigt werden
+	
+	
+	Ergebnisse:
+	
+	Balance finden zwischen Warnung und Nerven},
+  timestamp = {2013.06.19},
+  url = {\url{http://doi.acm.org/10.1145/1639642.1639653}}
+}
+
+@INPROCEEDINGS{archambault2005,
+  author = {Archambault, Dominique and Olivier, Damien},
+  title = {How to make games for visually impaired children},
+  booktitle = {Proceedings of the 2005 ACM SIGCHI International Conference on Advances
+	in computer entertainment technology},
+  year = {2005},
+  series = {ACE '05},
+  pages = {450--453},
+  address = {New York, NY, USA},
+  publisher = {ACM},
+  acmid = {1178578},
+  doi = {10.1145/1178477.1178578},
+  isbn = {1-59593-110-4},
+  keywords = {computer games, multi modality, multimedia, visually impaired},
+  location = {Valencia, Spain},
+  numpages = {4},
+  owner = {Lyra},
+  timestamp = {2013.10.05},
+  url = {http://doi.acm.org/10.1145/1178477.1178578}
+}
+
+@WEBPAGE{agrip,
+  author = {Atkinson, M. T. and Gucukoglu, S.},
+  title = {Download},
+  url = {\url{http://agrip.org.uk/download}},
+  lastchecked = {28.09.2013},
+  owner = {Lyra},
+  review = {Download Hompage of Audioquake},
+  timestamp = {2013.09.28}
+}
+
+@INPROCEEDINGS{atkinson2006,
+  author = {Atkinson, M. T. and Gucukoglu, S. and Machin, C. H. C. and Lawrence,
+	A. E.},
+  title = {Making the mainstream accessible: redefining the game},
+  booktitle = {Proceedings of the 2006 ACM SIGGRAPH symposium on Videogames},
+  year = {2006},
+  series = {Sandbox '06},
+  pages = {21--28},
+  address = {New York, NY, USA},
+  publisher = {ACM},
+  acmid = {1183321},
+  doi = {10.1145/1183316.1183321},
+  isbn = {1-59593-386-7},
+  keywords = {accessibility, audiogames, multimodal interfaces, usability},
+  location = {Boston, Massachusetts},
+  numpages = {8},
+  owner = {Lyra},
+  review = {Beschreibung der Entwicklung von AudioQuake
+	
+	
+	Ziele:
+	
+	
+	Zugang zu Mainstream-Spielen, den dazugehörigen Online-Communities
+	
+	und Entwicklerwerkzeugen zu gewähren.
+	
+	
+	Die Freiheit gewähren ein Spiel zu verändern, und die Infrastruktur
+	so zu gestalten,
+	
+	dass weitere Komponenten bei Bedarf hinzugefügt werden können
+	
+	
+	Wiederverwendung der Arbeit nicht nur im Feld der Computerspiele,
+	sondern
+	
+	auch in anderen Gebieten. Dafür wurde die Ausgabe so generisch wie
+	möglich
+	
+	gehalten und gut dokumentiert.
+	
+	
+	Aufgaben dabei:
+	
+	
+	Low-Level Game Accessibility 
+	
+	
+	Online Capability
+	
+	 mit Fairplay-System damit gleich berechtigt gespielt werden kann,
+	zur Zeit des Artikels
+	
+	 und meines Wissens auch heute noch nicht implementiert
+	
+	
+	Development Support 
+	
+	 Zugang zur Entwicklung für blinde Menschen schaffen
+	
+	
+	Implicit Accessibility
+	
+	 Verbesserter auditiver Zugang, durch natürlichere Konzept nach mehr
+	Forschung in
+	
+	 diesem Gebiet
+	
+	
+	Level Editing 
+	
+	 Erstellen eigener Level oder Inhalte auch seitens blinder Menschen,
+	die danach von
+	
+	 sehenden sowie blinden Menschen gespielt werden können
+	
+	
+	Alle Software für die Erreichung dieser Ziele soll frei verfügbar
+	sein und ist unter dem
+	
+	namen AGRIP vereint. Die Entwicklung stützt sich auf community Feedback.},
+  timestamp = {2013.07.25},
+  url = {\url{http://doi.acm.org/10.1145/1183316.1183321}}
+}
+
+@WEBPAGE{berger2013,
+  author = {Berger, F.},
+  title = {The Fabula Open Source Game Engine},
+  url = {\url{http://fabula-engine.org}},
+  lastchecked = {01.02.2013},
+  owner = {Lyra},
+  review = {Hompage der Fabula Engine von Florian Berger},
+  timestamp = {2013.02.01},
+  year = {2013}
+}
+
+@INCOLLECTION{berger2012,
+  author = {Berger, F. and M{\"u}ller, W.},
+  title = {Towards an Open Source Game Engine for Teaching and Research},
+  booktitle = {Transactions on Edutainment VIII},
+  publisher = {Springer Berlin Heidelberg},
+  year = {2012},
+  volume = {7220},
+  series = {Lecture Notes in Computer Science},
+  pages = {69-76},
+  month = {07},
+  __markedentry = {[Lyra:]},
+  abstract = {Abstract. When introducing students without in-depth programming experience
+	to the development of educational games, an off-the-shelf game engine
+	will not fit, especially when users are meant to directly interact
+	with the underlying framework. To accommodate this scenario and still
+	be able to provide state-of-the-art features, we are developing the
+	custom game engine “Fabula”. A software stack of Python, Pygame and
+	Twisted ensures an accessible, yet powerful application core, undemanding
+	cross-platform visuals and field-tested networking. Fabula's game
+	world abstraction aims to be intuitive to people who have not been
+	involved in game development before, while at the same time being
+	general enough to fit several genres. The engine's goal to help students
+	explore the creation of enjoyment, emotional responses and social
+	experiences in a game context, keeping the hassle with technical
+	details at a low level, will be evaluated using the Technology Acceptance
+	Model (TAM).},
+  doi = {10.1007/978-3-642-31439-1_7},
+  isbn = {978-3-642-31438-4},
+  keywords = {educational games; game engine; edutainment; cross-platform; game
+	development},
+  owner = {Lyra},
+  review = {Cites 2
+	
+	
+	Fabula Game World Abstraktion:
+	
+	
+	Room
+	
+	Kapselt einen räumlich abgeschlossenen Ort
+	
+	Datenstruktur: Graph mit diskreten Positionen (zweidimensionales Tile-Raster)
+	
+	Tiles können begehbar (FLOOR) oder unbegehbar sein (OBSTACLE)
+	
+	
+	Entity
+	
+	Kapselt einen virtuellen Charakter oder einen Gegenstand
+	
+	
+	Pro Client wird ein Charakter gesteuert, andere Charaktere werden
+	entweder vom Server oder von anderen Spielern auf entfernten Geräten
+	kontrolliert.
+	
+	Alle andere Entities sind Items.
+	
+	
+	Jede Entity befindet sich auf einem Tile im Room.
+	
+	
+	Mögliche Aktionen:
+	
+	Bewegung im Raum
+	
+	Ansehen und Manipulation von Items
+	
+	Items einsammeln (ins Inventar ablegen)
+	
+	Items auf tiles oder anderen Items ablegen, oder an NPCs geben
+	
+	Mit anderen Charakteren sprechen
+	
+	
+	Architektur und Komponenten Design:
+	
+	
+	Client Server kommunisieren über Events
+	
+	Mehrere Events werden zu Messages gebündelt
+	
+	
+	Alle möglichen Spieler Aktionen resultieren in ein Event, beispielsweise
+	TriesToMoveEvent, TriesToLookAtEvent, und sind abgeleitet von der
+	AttemptEvent Klasse
+	
+	
+	Der Server beantwortet die Events mit einer Instanz eines ConfirmEvents
+	(PicksUpEvent oder MovesToEvent)
+	
+	
+	Der Game State ist also auf dem Server und der Client muss diesen
+	Zustand kopieren und anzeigen
+	
+	
+	Es gibt außerdem Events zum spawnen und löschen von Entities, wechseln
+	von Tiles und Raumwechsel.
+	
+	
+	Symmetrisches Layout für Server und Client: Engine, Plugin und Interface
+	
+	
+	Das Interface kapselt die Netzwerk Übertragung über grab ans send
+	API
+	
+	(2 Varianten: TCP Netzwerk oder Client-Server auf der gleichen Maschiene
+	für Einzelspieler Modus)
+	
+	Der Server verwaltet mehrere Clients über einen MessageBuffer für
+	jeden Client. Und verarbeitet die Nachrichten reih um
+	
+	und sendet die Ergebnisse an alle Spieler des selben Raums.
+	
+	
+	Die Engine verwaltet den Game State, empfängt und sendet Messages
+	an das Interface und ruft das Plugin regelmäßig auf.
+	
+	
+	Das Plugin hat unterschiedliche Aufgaben in jedem Teil.
+	
+	
+	Das serverseitige Plugin implementiert die Spiellogik, jedes Aktion
+	des Spielers wird geprüft,
+	
+	und wenn es in Ordnung ist, an das Plugin weiter gereicht.
+	
+	Für jedes Spiel muss eine maßgeschneiderte Logik implementiert werden.
+	
+	Fabula beinhaltet einen intuitiven GUI Editor, der dem Benutzer das
+	Erstellen einer einfacher Bedingung-Reaktions-Logik ermöglicht.
+	
+	Wenn Spieler Aktionen ausgeführt werden, wird ein eine bereits passende
+	Reaktions message gesucht. Wenn keine gefunden wird,
+	
+	wird der Benutzer aufgefordert eine neue zu erstellen. Die resultierende
+	Game Logik wird in der Konfiguration-Datei gespeichert.
+	
+	
+	Das clientseitige Plugin implementiert die Benutzer-Schnittstelle,
+	das tatsächliche grafische (oder akustische) Rendern des Spield
+	
+	und die Interaktions Punkte mit dem Benutzer. Die Darstellung des
+	abstrakten Game States und wie die Sammlung von Input erfolgt,
+	
+	ist vollkommen frei.
+	
+	
+	Die Basis Bausteine Room, Entity, Engin und Plugin erben von einer
+	gemeinsamen Basis Klasse und haben daher die gleich API.
+	
+	
+	Zusätzlich stellt Fabula einen Asset manager bereit um Mediadateien
+	wie 2D-Grafiken, Audio vom lokalen Dateisystem oder über das
+	
+	Netzwerk zu holen und zwischenzuspeichern um sie für das User Interface
+	bereit zu stellen.},
+  timestamp = {2013.02.01},
+  url = {\url{http://dx.doi.org/10.1007/978-3-642-31439-1_7}}
+}
+
+@INPROCEEDINGS{brewster1993,
+  author = {Brewster, S. A. and Wright, P. C. and Edwards, A. D. N.},
+  title = {An evaluation of earcons for use in auditory human-computer interfaces},
+  booktitle = {Proceedings of the INTERACT'93 and CHI'93 conference on Human factors
+	in computing systems},
+  year = {1993},
+  series = {CHI '93},
+  pages = {222--227},
+  address = {New York, NY, USA},
+  publisher = {ACM},
+  abstract = {An evaluation of earcons was carried out to see whether they are an
+	effective means of communicating information in sound. An initial
+	experiment showed that earcons were better than unstructured bursts
+	of sound and that musical timbres were more effective than simple
+	tones. A second experiment was then carried out which improved upon
+	some of the weaknesses shown up in Experiment 1 to give a significant
+	improvement in recognition. From the results of these experiments
+	some guidelines were drawn up for use in the creation of earcons.
+	Earcons have been shown to be an effective method for communicating
+	information in a human-computer interface.},
+  acmid = {169179},
+  doi = {10.1145/169059.169179},
+  isbn = {0-89791-575-5},
+  keywords = {auditory interfaces, earcons, sonification},
+  location = {Amsterdam, The Netherlands},
+  numpages = {6},
+  owner = {Lyra},
+  review = {cites 250
+	
+	
+	Definition Earcons:
+	
+	
+	Earcons are abstract, synthetic tones that can be used in structured
+	combinations to create sound messages to represent parts of an interface.
+	
+	
+	Blattner et al. define earcons as “non-verbal audio messages that
+	are used in the computer/user interface to provide information to
+	the user about some computer object, operation or interaction”.
+	
+	
+	Earcons are composed of motives, which are short, rhythmic sequences
+	of pitches with variable intensity, timbre and register.
+	
+	
+	Testergebnisse
+	
+	
+	The work shown has demonstrated that earcons are better for presenting
+	information than unstructured bursts of sound.
+	
+	
+	Guidelines für earcons:
+	
+	
+	Timbre (Klangfarbe) - am besten unterschiedliche künstliche Musikinstrumente
+	mit mehreren Harmonien.
+	
+	
+	Pitch - nur als alleiniges Erkennungsmerkmal verwenden, wenn die Unterschiede
+	sehr groß sind
+	
+	
+	Register - nur als alleiniges Erkennungsmerkmal verwenden, wenn die
+	Unterschiede sehr groß sind (3 oder merh Oktaven)
+	
+	
+	Rhythmus - möglichst unterschiedlich (zB. unterschiedliche Notenanzahl)
+	
+	
+	Intensität - möglichst auf einem Level, nicht zu laut (nervt), nicht
+	zu leise (geht in der Hintergrundmusik unter)
+	
+	
+	Kombinationen - mehrere earcons in Kombination sollten mit einer 0.1
+	s langen Pause abgespielt werden},
+  timestamp = {2013.07.03},
+  url = {\url{http://doi.acm.org/10.1145/169059.169179}}
+}
+
+@INPROCEEDINGS{cheiran2011,
+  author = {Cheiran, J.F.P. and Nedel, L. and Pimenta, M.S.},
+  title = {Inclusive Games: A Multimodal Experience for Blind Players},
+  booktitle = {Games and Digital Entertainment (SBGAMES), 2011 Brazilian Symposium
+	on},
+  year = {2011},
+  pages = {164-172},
+  abstract = {Electronic games have an important role in the human development so
+	we can face the world of constantly changing technologies. Considering
+	that the most of games is grounded in the interaction through visual
+	elements and that the most of alternate games for blind is less attractive
+	to non-blind people, we have developed a prototype of a 3D environment
+	with dense sound experience and haptic feedback that would allow
+	to blind and non-blind users orientate and move through it. Designing
+	this environment like a game, we have employed blindfolded and non-blindfolded
+	users to evaluate the major interaction issues in order to refine
+	the software and make it mature to be used for the research with
+	blind subjects.},
+  doi = {10.1109/SBGAMES.2011.24},
+  issn = {2159-6654},
+  keywords = {computer games, handicapped aids, haptic interfaces, blind players,
+	electronic games, haptic feedback, inclusive games, multimodal experience,
+	nonblind people, visual elements Computers, Games, Haptic interfaces,
+	Keyboards, Prototypes, Testing, Visualization, audio user interfaces,
+	human-computer interaction, virtual reality},
+  owner = {Lyra},
+  timestamp = {2013.07.17}
+}
+
+@GAME{dtwzn2003,
+  author = {Dannecker, T. and Pasedag, M. and Stoll, C. and Sturm, H.},
+  title = {{Der Tag Wird Zur Nacht}},
+  year = {2003},
+  howpublished = {[Download]},
+  publisher = {Hochschule der Medien, Stuttgart},
+  type = {Action},
+  url = {\url{http://www.dertagwirdzurnacht.de/}},
+  language = {Deutsch},
+  owner = {Lyra},
+  review = {Ein Spiel von mehreren Studenten der Hochschule der Medien in Stuttgart.
+	
+	Es spielt in Pompeii zur Zeit des Ausbruch des Vesuvs. Ein Aschewolte
+	verdunkelt den Himmel und man muss ich aus der Stadtvilla, in der
+	man alleine ist, den Weg in Sicherheit die durch 9 Räume "tasten".
+	
+	Steuerung:
+	
+	<-: Linksdrehung
+	
+	->: Rechtsdrehung
+	
+	^,: Schritt nach vorne
+	
+	Enter: Interaktion
+	
+	
+	Über unterschiedliche Geräusche werden Hindernisse (Wände, Tiere,
+	Gegenstände) "beim Dagenlaufen" akustisch dargestellt.
+	
+	Teilsweise müssen Zielorte an Hand eines (kontinuirlichen) Geräusch
+	geortet werden.
+	
+	Schritte des Spieler sind auch zu hören.},
+  timestamp = {2013.06.10}
+}
+
+@INCOLLECTION{donikian2004,
+  author = {Donikian, S. and Portugal, J.N.},
+  title = {Writing interactive fiction scenarii with dramachina},
+  booktitle = {Technologies for Interactive Digital Storytelling and Entertainment},
+  publisher = {Springer Berlin Heidelberg},
+  year = {2004},
+  editor = {G\"obel, Stefan and Spierling, Ulrike and Hoffmann, Anja and Iurgel,
+	Ido and Schneider, Oliver and Dechau, Johanna and Feix, Axel},
+  volume = {3105},
+  series = {Lecture Notes in Computer Science},
+  pages = {101--112},
+  __markedentry = {[Lyra:1]},
+  abstract = {Abstract. This paper presents DraMachina, an authoring tool dedicated
+	to authors of interactive fictions. An interactive fiction is an
+	extension of classical narrative media as it supposes a direct implication
+	of spectators during the story evolution. Writing such a story is
+	much more complex than a classical one, and tools at the disposal
+	of writers remain very limited compared to the evolution of technology.
+	With DraMachina, we propose an authoring tool dedicated to the description
+	of narrative elements composing an interactive fiction. It also automatize
+	the exchange of information between writers and production teams.},
+  doi = {10.1007/978-3-540-27797-2_14},
+  isbn = {978-3-540-22283-5},
+  owner = {Lyra},
+  review = {Cites 31
+	
+	
+	Interaktive Fiktion, Vorstellung von DraMachina
+	
+	
+	Rolle des Betrachters -> Coautor im Rahmen der Bedinungen des Autors
+	
+	Unterschied zwischen Motiv und Ursache.
+	
+	
+	Struktur: 
+	
+	 Einleitende Beschreibung
+	
+	 Chrakterbeschreibung
+	
+	 Orte und ihre Beschaffenheit
+	
+	 Belebte und unbelebte Objekte
+	
+	 Zeit
+	
+	 Begrenzungen
+	
+	 Ausgangszustand / Situation
+	
+	 Endzustand / Situation
+	
+	
+	Vergleich zu Aristoteles Tragödienaufbau
+	
+	Vorstellung der Motive russicher Fabeln und Märchen nach Vladirmir
+	Propp
+	
+	
+	DraMacina - Autorensystem
+	
+	Bearbeitung basierend auf Text:
+	
+	 Story Writing
+	
+	 Chrackterbeschreibung
+	
+	 Lineare Dialoge
+	
+	 Dialoge mit Benutzerentscheidungen und Abzweigungen (Graphenbasiert)
+	
+	
+	Output
+	
+	 XML-Dateien, welche von der AVA Engine benutzt werden können},
+  timestamp = {2013.06.20},
+  url = {\url{http://dx.doi.org/10.1007/978-3-540-27797-2_14}}
+}
+
+@ARTICLE{gardenfors2003,
+  author = {G{\"a}rdenfors, D.},
+  title = {Designing sound-based computer games},
+  journal = {Digital Creativity},
+  year = {2003},
+  volume = {14},
+  pages = {111--114},
+  number = {2},
+  abstract = {Designing interactive entertainment for visually impaired users poses
+	several challenges. This article points out some key issues faced
+	when developing sound-based computer games. The three games described
+	here were developed for the Swedish Library of Talking Books and
+	Braille (TPB), to be published on the TPB Internet site (TPB 2002).
+	These games, Towers of Hanoi, Memory and Tag, can be played without
+	the aid of graphics, although they do also feature animations of
+	a style designed for partially sighted players. The games are fairly
+	simple Macromedia Flash™ applications, suitable for web publishing,
+	and while not so complex as some other titles, they still emphasise
+	some crucial design issues of creating sound-based interactive media.},
+  owner = {Lyra},
+  publisher = {Taylor \& Francis},
+  review = {Cites 21
+	
+	
+	3 Spiele beschrieben: Towers of Hanoi, Memory und Tag
+	
+	
+	Hauptsächlich ist das Design des Interface beschrieben und was dabei
+	beachtet werden muss.
+	
+	
+	Design Methods
+	
+	Auditory interfaces can contain speech, music or “sound effects” for
+	communication. (See Gaver [8] for an introduction to auditory interfaces.)
+	
+	
+	Recorded or synthesised speech is useful for conveying very precise
+	information. It is often necessary to rely on speech when conveying
+	game instructions. However, within a game, speech tends to grow tedious
+	if repeated too often. It is also generally too slow to communicate
+	events occurring in the high tempo that characterises the real-time
+	interactive environments of many types of games. Neither is speech
+	suitable if more than one message is conveyed simultaneously. In
+	many cases it is better to illustrate events by the use of recorded
+	sounds and music. So how does a designer of sound-based games communicate
+	the status, the progress and the events of a game with non-speech
+	sounds?
+	
+	
+	This way, sounds always appear in sequence, which relieves the player
+	of having to perceive too much information simultaneously. However,
+	this is not the only possible solution, as has been shown by Fredrik
+	Winberg and Sten Olof Hellström [9] in their auditory Towers of Hanoi
+	application where the overall image is conveyed continuously.
+	
+	
+	The key points when designing sound-based interactive media are how
+	to design sounds that can communicate the status and the events in
+	the game, and how these sounds should be arranged spatially and in
+	time.},
+  timestamp = {2013.06.20}
+}
+
+@INPROCEEDINGS{glinert2007,
+  author = {Glinert, E. and Wyse, L.},
+  title = {AudiOdyssey: an accessible video game for both sighted and non-sighted
+	gamers},
+  booktitle = {Proceedings of the 2007 conference on Future Play},
+  year = {2007},
+  pages = {251--252},
+  organization = {ACM},
+  abstract = {ABSTRACT
+	
+	Despite the growing number and demographics of video game players,
+	most games are still completely inaccessible to disabled populations.
+	To study the issue of gaming accessibility, we created AudiOdyssey,
+	a prototype video game designed to be usable by both sighted and
+	non-sighted audiences. Featuring multiple input control schemes,
+	rhythm based game play, and fully accessible menus and play levels,
+	the prototype allows all individuals to share a common gaming experience,
+	regardless of level of vision.},
+  owner = {Lyra},
+  review = {Cites 13
+	
+	
+	AudiOdyssey - Eines der wenigen multimodalen Spiele.
+	
+	Spiel dazu gespielt. Rhythmus basiertes "DJ-Spiel". Für blinde und
+	sehende Menschen zugänglich.
+	
+	
+	Allerdings dient der visuelle Kanal nur zur Gabe von Feedback und
+	hat auf die Steuerung keinen Einfluss.
+	
+	Steuerung neben der Tastatur auch über die Wii Mote möglich
+	
+	
+	Fehler bei der Entwicklung: () aus der Abschlussarbeit von Glinert
+	"The Human Controller: Usability and Accessibilty in Video Game Interfaces"
+	
+	
+	* Flash, für schnelle Implementierung in web Browsern, aber nicht
+	gut geeignet für mp3, Wechsel zu wav und erhöhter Speicherbedarf
+	(zu groß für Webanwendung)
+	
+	
+	* WiiMote zu unpräzise},
+  timestamp = {2013.06.03}
+}
+
+@INCOLLECTION{grammenos2006,
+  author = {Grammenos, D. and Savidis, A. and Georgalis, Y. and Stephanidis,
+	C.},
+  title = {Access Invaders: Developing a Universally Accessible Action Game},
+  booktitle = {Computers Helping People with Special Needs},
+  publisher = {Springer Berlin Heidelberg},
+  year = {2006},
+  editor = {Miesenberger, Klaus and Klaus, Joachim and Zagler, WolfgangL. and
+	Karshmer, ArthurI.},
+  volume = {4061},
+  series = {Lecture Notes in Computer Science},
+  pages = {388-395},
+  abstract = {This paper depicts the notion of Universally Accessible Games and
+	presents the development of a related action game entitled Access
+	Invaders. The design of the game’s user interface which accommodates
+	concurrently the needs of people with diverse abilities is described,
+	along with the approach followed to adapt the game logic and content
+	to achieve accessibility. In this context, the concept of Parallel
+	Game Universes is introduced and suggested as a solution for the
+	creation of multiplayer universally accessible action games.},
+  doi = {10.1007/11788713_58},
+  isbn = {978-3-540-36020-9},
+  owner = {Lyra},
+  review = {Cites 42
+	
+	
+	Das Paper beschäftigt sich mit dem weitaus größeren Kontext Spiele
+	für alle zugänglich zu machen,
+	
+	auch im Mehrspielermodus für Menschen mit ganz unterschiedlichen Fähigkeiten.
+	
+	
+	Im Prinzip geht das in die Richting Audio space invaders, mit dem
+	Ziel, Spiele zu erstellen,
+	
+	die von jedem spielbar sind und sich nur auf ein oder zwei Zielgruppen
+	beschränkt.},
+  timestamp = {2013.06.07},
+  url = {\url{http://dx.doi.org/10.1007/11788713_58}}
+}
+
+@ARTICLE{grammenos2009,
+  author = {Grammenos, D. and Savidis, A. and Stephanidis, C.},
+  title = {Designing universally accessible games},
+  journal = {Comput. Entertain.},
+  year = {2009},
+  volume = {7},
+  pages = {8:1--8:29},
+  number = {1},
+  month = feb,
+  abstract = {Today, computer games are one of the major sources of entertainment.
+	Computer games are usually far more demanding than typical interactive
+	applications in terms of motor and sensory skills needed for interaction
+	control, due to special-purpose input devices, complicated interaction
+	techniques, and the primary emphasis on visual control and attention.
+	This renders computer games inaccessible to a large percentage of
+	people with disabilities. This article introduces the concept of
+	universally accessible games, that is, games proactively designed
+	to optimally fit and adapt to individual gamer characteristics and
+	to be concurrently played among people with diverse abilities, without
+	requiring particular adjustments or modifications. The concept is
+	elaborated and tested through four case studies: a web-based chess
+	game (UA-Chess), an action game (Access Invaders), a universally
+	inaccessible game (Game Over!) used as an interactive educational
+	tool, and an improved version of Access Invaders (Terrestrial Invaders).
+	For all cases, key design and evaluation findings are discussed,
+	reporting consolidated know-how and experience. Finally, the research
+	challenge of creating multiplayer universally accessible games is
+	further elaborated, proposing the novel concept of Parallel Game
+	Universes as a potential solution.},
+  acmid = {1486516},
+  address = {New York, NY, USA},
+  articleno = {8},
+  doi = {10.1145/1486508.1486516},
+  issn = {1544-3574},
+  issue_date = {February 2009},
+  keywords = {Design for all, accessible games, unified design, universal access},
+  numpages = {29},
+  owner = {Lyra},
+  publisher = {ACM},
+  review = {Cites 25
+	
+	
+	Der Artikel geht in eine ähniche Richtung wie Yuan et al.'s Game accessibility:
+	a survey,
+	
+	bietet allerdings nicht einen so guten Überblick in spezielle Spiele
+	für beliebig beinträchtigte
+	
+	Spiele, sondern behandelt in erster Linie Spiele, die von allen beeinträchtigten
+	Menschen
+	
+	gespielt werden können. Zusätzlich wir ein universal UNzugängliches
+	Spiel analysiert.
+	
+	
+	Aussage zum Stand der Technik:
+	
+	Keine gemeinsamen Richtlinien für universal zugängliche Spiele wie
+	etwa im Web.
+	
+	Dafür zwei internationale Arbeitsgruppen mit Richtlinien:
+	
+	GA-SIG der IGDA White Paper, top ten list of items for game developers
+	
+	MediaLT "guidlines for the development of entertaining software for
+	people with multiple learning disabilities"
+	
+	
+	Zwei neue Kriteria für die Spieleentwicklung:
+	
+	
+	Games should be inherently accessible to all the potential user groups,
+	without
+	
+	the need for further adjustments, or third-party assistive software
+	applications.
+	
+	
+	The same game should be concurrently accessible and playable, cooperatively
+	
+	or competitively, to people with diverse abilities.
+	
+	
+	Grundsätzlich etwas anderer Ansatz, Spiele wirklich für alle zugänglich
+	zu machen, über
+	
+	Alternative Benutzerprofile (Entspricht dem Audio,Client wäre benötigt
+	aber in letzter Instanz
+	
+	auch eine Schnittstelle für kognitiv beeinträchtigte und hörgeschädigte
+	Personen)
+	
+	
+	Game Over!
+	
+	Ein Space Invader Spiel mit 21 Leveln, in jedem wird eine fundamentale
+	barrierefreie Regel gebrochen.
+	
+	
+	Anforderungen an das Spiel:
+	
+	Die Grundspielmechanik und das Spielziel sollen bekannt sein ( Verwendung
+	eines Klassikers).
+	
+	Gestaltungregeln werden klar und deutlich gebrochen.
+	
+	Nur eine Regel wird gleichzeitig gebrochen, um den Effekt zu verdeutlichen.
+	
+	Die Barrierfreiheits Regeln die gebrochen werden sollen aus einem
+	Hauptanwendungsfall kommen
+	
+	(blind people, those with deteriorated vision, motor-impaired and
+	deaf people, and also novice players)
+	
+	Anzeige von Tips zur Problemlösung für die gebrochenen Regeln
+	
+	Humor einbinden, um den Lernprozess angenehmer zu gestalten
+	
+	Das Spiel sollte auf so vielen Plattformen wie möglich laufen
+	
+	
+	
+	Konzept parallel game universes (PGUs)
+	
+	Für Mehrspieler jeweils Gegner, die an die Fähigkeiten des Spielers
+	angepasst sind und die nur dieser
+	
+	Spieler zerstören kann.
+	
+	Probleme wenn zwei nicht sehende Menschen miteinander spielen: Überlagerung
+	der Audio-Signale.},
+  timestamp = {2013.06.27},
+  url = {\url{http://doi.acm.org/10.1145/1486508.1486516}}
+}
+
+@INCOLLECTION{hartmann2005,
+  author = {Hartmann, K. and Hartmann, S. and Feustel, M.},
+  title = {Motif Definition and Classification to Structure Non-linear Plots
+	and to Control the Narrative Flow in Interactive Dramas},
+  booktitle = {Virtual Storytelling. Using Virtual Reality Technologies for Storytelling},
+  publisher = {Springer Berlin Heidelberg},
+  year = {2005},
+  editor = {Subsol, Gerard},
+  volume = {3805},
+  series = {Lecture Notes in Computer Science},
+  pages = {158--167},
+  __markedentry = {[Lyra:1]},
+  abstract = {This paper presents a visual editor which supports authors to define
+	the narrative macrostructure of non-linear interactive dramas. This
+	authoring tool was used to represent Propp’s narrative macrostructure
+	of Russian fairy tales in non-linear plot graphs. Moreover, Propp’s
+	thorough characterization of basic narrative constituents by explanations,
+	discussions and examples of their different realizations in his corpus
+	is utilized to construct an automatic classification model. A semi-automatic
+	classification supports (i) authors to associate new scenes with
+	basic narrative constituents and (ii) players to control the narrative
+	flow in the story engine. For the latter task, the selection of an
+	appropriate plot element and behavioral pattern within the dialog
+	model in response to player interactions is controlled by similarities
+	between stimuli and known realizations of basic narrative constituents
+	or behavioral patterns. This approach tackles the main challenge
+	of interactive drama —to balance interactivity and storyness.
+	
+	
+	Keywords:
+	
+	
+	Interactive Drama, Non-linear Plots, Authoring Tools, Propp Functions,
+	Motifs, Document Classification,WordNet, Narrative Control, ChatterBots.},
+  doi = {10.1007/11590361_18},
+  isbn = {978-3-540-30511-8},
+  keywords = {Interactive Drama; Non-linear Plots; Authoring Tools; Propp Functions;
+	Motifs; Document Classification; WordNet; Narrative Control; ChatterBots},
+  owner = {Lyra},
+  review = {Cites 20
+	
+	
+	Wieder ein Editor zur Erstellung interaktiven Dramas, auch an Propp
+	angelehnt.
+	
+	Grundlage für die Analyse und die Umsetzung des Dramas mit einer Game-Engine},
+  timestamp = {2013.06.03},
+  url = {\url{http://dx.doi.org/10.1007/11590361_18}}
+}
+
+@WEBPAGE{audiogames,
+  author = {Creative Heroes},
+  title = {AudioGames, your resource for audiogames, games for the blind, games
+	for the visually impaired!},
+  url = {\url{http://audiogames.net/}},
+  lastchecked = {22.07.2013},
+  owner = {Lyra},
+  review = {Eine Seite mit einer umfassenden Sammlung an Audiogames, sowie Community,
+	
+	mit zum Beispiel Forum zur Diskussion, Magazin und Reviews.},
+  timestamp = {2013.06.15}
+}
+
+@WEBPAGE{sdl2013,
+  author = {S. Lantinga},
+  title = {Simple DirectMedia Layer - Homepage},
+  url = {\url{http://www.libsdl.org/}},
+  lastchecked = {03.10.2013},
+  owner = {Lyra},
+  timestamp = {2013.10.08}
+}
+
+@WEBPAGE{pygamebug,
+  author = {L. Lindstrom and G. Lingl},
+  title = {[pygame] Bug in mixer module with python 3.1 + pygame 1.9.1 ?},
+  url = {\url{https://groups.google.com/forum/#!topic/pygame-mirror-on-google-groups/HSOlZXmGHcA}},
+  lastchecked = {05.10.2013},
+  owner = {Lyra},
+  timestamp = {2013.10.07}
+}
+
+@MISC{masuch2005,
+  author = {Masuch, M. and R{\"o}ber, N.},
+  title = {Playing Audio-only Games: A compendium of interacting with virtual,
+	auditory Worlds},
+  year = {2005},
+  abstract = {Talking about games refers in today’s world often to the play of audio-visual
+	computer games. Since their first introduction in the 1960s, computer
+	games have evolved in many ways and are today one of the fastest
+	growing industries. Besides the classic visual games, another niche
+	has emerged over the last decade: audio-only computer games. The
+	main difference to conventional games is that these games can only
+	be played and perceived through sound and acoustics. Although, initially
+	developed by and for the visually impaired community, these games
+	posses huge potentials for mobile (transportable) gaming and can
+	be enjoyed by all hearing. In this work we present an overview of
+	audio-only games, and discuss the methods and techniques to play
+	and design such auditory worlds. We further explore the evolved genres
+	and address the advantages, as well as the limitations of audio based
+	gaming. Our work is motivated by our own research in this area and
+	the development of a framework, which allows an easy design and setup
+	of audio-only computer games.},
+  booktitle = {DiGRA 2005: Changing Views: Worlds in Play, 2005 International Conference},
+  owner = {Lyra},
+  review = {Cites 31
+	
+	
+	Paper zu Audio Spielen im Allgemeinen, Vorteile der Nische auch für
+	sehende Spieler:
+	
+	
+	Eignet sich gut für mobile Geräte
+	
+	Weil kein Bildschirm benötigt wird, können im besten Fall der Raum
+	in 360° um den Spieler zum Spielen ausgenutzt werden
+	
+	Mehr Vorstellungskraft wird benötigt (und gefördert)
+	
+	
+	Auflistung an Beispielen verschiedener Spiele
+	
+	
+	Sonifikation
+	
+	Verwendung von nicht sprachlichen Geräuschen um abstrakte Daten darzustellen},
+  timestamp = {2013.06.04}
+}
+
+@INPROCEEDINGS{mccrindle2000,
+  author = {McCrindle, R. and Symons, D.},
+  title = {Audio space invaders},
+  booktitle = {Proceedings of the Third International Conference on Disability,
+	Virtual Reality and Associated Technologies},
+  year = {2000},
+  pages = {59--65},
+  organization = {Citeseer},
+  abstract = {Whilst advances are underway in various areas to ease and encourage
+	disabled uptake of new technology, very little emphasis to date has
+	been placed on making the games market accessible to all. The aims
+	of the described work have been twofold. Firstly, to prove that the
+	standard features of a traditional space invader game can be replicated
+	using a 3-D audio (ambisonic) environment. Secondly, through combining
+	audio and visual interfaces with force feedback joystick movement
+	that it is possible to produce a multi-modal game that can be played
+	by both sighted and non-sighted users, thereby enabling them to share
+	the same gaming experience. This paper describes the development
+	and features of the resultant Audio Space Invaders game.},
+  owner = {Lyra},
+  review = {Cites 37
+	
+	
+	Leider nicht zum Anspielen gefunden
+	
+	
+	Space Invaders Spiel, über 3D-Sound mit ein- und ausschaltbarem Grafischen
+	Userinterface
+	
+	-> also auch multimodal
+	
+	
+	Wichtige Testergebnisse:
+	
+	
+	• Sounds with a smooth varying pitch were very difficult to locate.
+	It gave the impression that these sounds were moving when they were
+	in fact not.
+	
+	• Sounds that changed could be located as long as the change was quite
+	harsh. A helicopter’s propellers or some other sort of machine were
+	easy to locate whereas a sound like siren was not.
+	
+	• With more than two sounds the quieter or less distinguishable sounds
+	became masked and were not easy to hear until objects making the
+	louder sounds were destroyed.
+	
+	• Two or more sounds which were the same or very similar were also
+	difficult to locate, although not impossible.
+	
+	• Too many sources of sound were found to be detrimental to the game.
+	Originally every time a players score increased or their life-span
+	decreased the information was communicated audibly to the player.
+	This proved to mask out the ship sounds and disadvantage the player.
+	This feature was therefore subsequently changed to the score being
+	read out on demand via a control key and only automatically when
+	a players life was becoming dangerously low.
+	
+	• There was a very steep initial learning curve particular for sighted
+	people trying the play the game on audio alone, as the task is quite
+	peculiar to a lot of sighted people who rely mainly on images to
+	locate items.
+	
+	• The game became rapidly more challenging as ships flew with circular
+	motions in addition to straight lines. Further challenges were provided,
+	by having ships flying in both directions over the user and approaching
+	from both sides simultaneously.
+	
+	• The game is playable using only two speakers although it is obviously
+	better with four speakers. If only two speakers are available it
+	is best to use headphones instead.
+	
+	• Changing the height of the object has proved very difficult to use
+	with a 4-speaker set-up. The difference in sound is very small and
+	so is currently not used. Further testing is required, possibly within
+	a CAVE environment, to make full use of this feature.
+	
+	• The positioning of the speakers was found to be essential for maximum
+	efficiency and enjoyment of the game. The speakers should be positioned
+	at approximately head height with the player an equal distance from
+	each speaker.},
+  timestamp = {2013.02.01}
+}
+
+@WEBPAGE{microsoft_narrator,
+  author = {Microsoft},
+  title = {Hear text read aloud with {N}arrator},
+  url = {\url{http://windows.microsoft.com/en-us/windows7/hear-text-read-aloud-with-narrator}},
+  lastchecked = {03.10.2013},
+  owner = {Lyra},
+  timestamp = {2013.10.07}
+}
+
+@WEBPAGE{microsoft_narrator_win8,
+  author = {Microsoft},
+  title = {Ausgeben von {Text} {\"u}ber die {S}prachausgabe},
+  url = {\url{http://windows.microsoft.com/de-at/windows-8/hear-text-read-aloud-with-narrator}},
+  lastchecked = {03.10.2013},
+  owner = {Lyra},
+  timestamp = {2013.10.07}
+}
+
+@INPROCEEDINGS{miller2007,
+  author = {Miller, D. and Parecki, A. and Douglas, S. A.},
+  title = {Finger dance: a sound game for blind people},
+  booktitle = {Proceedings of the 9th international ACM SIGACCESS conference on
+	Computers and accessibility},
+  year = {2007},
+  series = {Assets '07},
+  pages = {253--254},
+  address = {New York, NY, USA},
+  publisher = {ACM},
+  abstract = {The usual approach to developing video games for people with visual
+	impairment is sensory substitution. Elements of the visual display
+	are replaced with auditory and/or haptic displays. Our approach differs.
+	The purpose of the Finger Dance project is to research and develop
+	accessible solutions to games that are inherently audio: musical
+	rhythm-action games such as Dance Dance Revolution. However, these
+	games still rely on visual cues that instruct the user on how to
+	play along with musical rhythms. Finger Dance is an original audio-based
+	rhythm-action game we developed specifically for visually impaired
+	people. Working with both blind and sighted gamers using a human-centered
+	development approach, players are able to play the game on their
+	own and are enthusiastic about it. This paper discusses the game's
+	design, development process and user studies.},
+  acmid = {1296898},
+  doi = {10.1145/1296843.1296898},
+  isbn = {978-1-59593-573-1},
+  keywords = {accessibility, audio games, visual disabilities, visual impairment},
+  location = {Tempe, Arizona, USA},
+  numpages = {2},
+  owner = {Lyra},
+  review = {Cites 17
+	
+	
+	Spielbeschreibung:
+	
+	Der Spieler hört Musik, drückt im richtigen Takt die richtigen Tasten.
+	Audio basiertes Menu, Punktesystem und eine Testumgebung.
+	
+	
+	Dabei sind vier unterschiedliche Tasten Möglich:
+	
+	Hoher Ton, links
+	
+	Tiefer Ton, links
+	
+	Hoher Ton, rechts
+	
+	Tiefer Ton, rechts
+	
+	
+	Wird die Taste zur exakten Zeit gedrückt, ertönt ein Klatschen als
+	Feedback und es gibt Punkte. Für falsche Tasten werden Punkt abgezogen.
+	
+	
+	Probleme dabei:
+	
+	
+	Spiel zu schwierig für manche Testpersonen
+	
+	Spieler haben die Menu-Stimme nicht richtig verstanden 
+	
+	
+	Gut:
+	
+	Leicht verständlich
+	
+	Spaß am Spielen und Herausfordernd genug, um es erneut zu spielen},
+  timestamp = {2013.06.03},
+  url = {\url{http://doi.acm.org/10.1145/1296843.1296898}}
+}
+
+@INCOLLECTION{oviatt2007,
+  author = {Oviatt, S.},
+  title = {Multimodal Interfaces},
+  booktitle = {The Human-Computer Interaction Handbook: Fundamentals, Evolving Technologies
+	and Emerging Applications, Second Edition},
+  publisher = {Taylor \& Francis},
+  year = {2007},
+  editor = {Sears, A. and Jacko, J.A.},
+  series = {Human Factors and Ergonomics},
+  chapter = {21},
+  pages = {413--432},
+  __markedentry = {[Lyra:]},
+  isbn = {9781410615862},
+  owner = {Lyra},
+  timestamp = {2013.10.05},
+  url = {http://books.google.de/books?id=A8TPF\_O385AC}
+}
+
+@WEBPAGE{parent2013,
+  author = {P. Parente},
+  title = {pyttsx - Text-to-speech x-platform --- pyttsx 1.2 documentation},
+  url = {\url{http://pyttsx.readthedocs.org/en/latest/index.html}},
+  lastchecked = {03.10.2013},
+  owner = {Lyra},
+  timestamp = {2013.10.07}
+}
+
+@GAME{sarah2007,
+  author = {{PCS Games}},
+  title = {Sarah and the Castle of Witchcraft and Wizardry},
+  year = {2007},
+  howpublished = {[Download]},
+  type = {First-Person Action Arcade Game},
+  url = {\url{http://www.pcsgames.net/}},
+  edition = {Sarah Patch 4},
+  language = {Englisch},
+  __markedentry = {[Lyra:]},
+  owner = {Lyra},
+  review = {Ein Spiel angelehnt an die Harry Potter Bücher von J.K. Rowling
+	
+	
+	Story:
+	
+	
+	Sarah besucht Hogwarts in den Sommerferien und ist in der Schule gefangen.
+	
+	Auch wenn keine Lehrer oder Schüler anwesend sind, befinden sich im
+	Schloss
+	
+	einige aus der Serie bekannten Gestalten - sowohl freundliche als
+	auch böse.
+	
+	
+	Ziel ist es, aus Hogwarts zu entkommen.
+	
+	
+	Die Steuerung ist relativ komplex erfolgt über die Pfeiltasten in
+	Kombination mit shift und control und space,
+	
+	Pfeiltaste links ergibt zum Beispiel eine links Drehung,
+	
+	Pfeiltaste links + shift einen seitlichen Schritt nach links und
+	
+	Pfeiltaste links + control eine große Drehung nach links
+	
+	
+	Inventar über tab
+	
+	Money über x
+	
+	Vorrauschauen d
+	
+	Apparieren a
+	
+	
+	
+	Demo Version Gratis (das erste Level).
+	
+	Engine: GMA Game Engine},
+  timestamp = {2013.06.03}
+}
+
+@INPROCEEDINGS{rober2005,
+  author = {R{\"o}ber, N. and Masuch, M.},
+  title = {Leaving the screen: New perspectives in audio-only gaming},
+  booktitle = {11th Int. Conf. on Auditory Display (ICAD)},
+  year = {2005},
+  organization = {Citeseer},
+  abstract = {The design of audio-based computer games possess several challenges.
+	In this paper we discuss both, the technical perspectives in the
+	development, as well as the aesthetics in the design of audioonly
+	computer games. We do not restrict our target audience to the visually
+	impaired only, and assume that audiogames can be played and enjoyed
+	by everyone. We further think that audio-only computer games, and
+	audio based user interfaces in general, offer huge potentials in
+	the form of mobile devices that can be used everywhere and for nearly
+	every application, including gaming. For this work we played and
+	analyzed several existing audioonly computer games regarding their
+	structure, aim, storytelling, sonification and the possible interactions,
+	and derived some basic rules that are important for a successful
+	game design and development. We further added additional techniques,
+	which we believe are necessary to achieve a higher level of immersion
+	and which assist in the perception and play of such games. To evaluate
+	our concepts, we designed three simple action games and one story
+	based adventure, that we integrated into our audio framework.},
+  owner = {Lyra},
+  review = {Cites 22
+	
+	
+	Gute Einführung und Gedanken zum Design von Audiogames
+	
+	
+	Nearly all games feature a narrator that initially explains the game
+	and specifies the games goal and possibilities. Speech is better
+	suited for the transmission of large quantities of information, whereas
+	beacons and auditory textures perform better for simple and short
+	messages. Many games also use monologues to visualize the current
+	situation and to assist the player in difficult situations. Also
+	guides and other characters that provide information are frequently
+	employed.
+	
+	
+	Wichtige Passage zur Ermöglichung von Sound
+	
+	
+	As for the sound rendering, most audiogames assume very simple sound
+	hardware, and miss out the benefits offered by real 3D sound and
+	room acoustics. Instead, they often employ stereo panning, which
+	is capable of moving sound sources in one dimension only, along the
+	line between the left and right ear. Many programming tools, such
+	as OpenAL, EAX and AM:3D exist and allow an easy hard- and software
+	rendering of 3D sounds and environmental effects. In addition, most
+	sound hardware is able to render several 3D sound sources in realtime
+	and process the signal using additional on-board DSP chips. A good
+	introduction to sound rendering can be found in the book by Begault
+	[1] and with a special focus on games by Menshikov [14].
+	
+	
+	Vorstellung von vier unterschiedlichen Spielen
+	
+	
+	Audiofrogger (Frosch der eine mehrspurige Straße überqueren muss und
+	dabei hören muss, ob Fahrzeuge kommen)
+	
+	Mosquitos (Wiimote, Mücken anvisieren und schießen)
+	
+	MatrixShot (Sounds ausweichen)},
+  timestamp = {2013.06.03}
+}
+
+@INPROCEEDINGS{rober2004,
+  author = {R{\"o}ber, N. and Masuch, M.},
+  title = {Interacting With Sound: An Interaction Paradigm for Virtual Auditory
+	Worlds.},
+  booktitle = {ICAD},
+  year = {2004},
+  abstract = {The visual and the auditory field of perception respond on different
+	input signals from our environment. Thus, interacting with worlds
+	solely trough sound is a very challenging task. This paper discusses
+	methods and techniques for sonification and interaction in virtual
+	auditory worlds. In particular, it describes auditory elements such
+	as speech, sound and music and discusses their application in diverse
+	auditory situations, as well as interaction techniques for assisted
+	sonification. The work is motivated by the development of a framework
+	for the interactive exploration of auditory environments which will
+	be used to evaluate the later discussed techniques. The main focus
+	for the design of this framework is the use in narrative environments
+	for auditory games, but also for general purpose auditory user interfaces
+	and communication processes.},
+  owner = {Lyra},
+  review = {Cites 16
+	
+	
+	Interaktions Design mit Sound
+	
+	
+	Unterteilung in
+	
+	
+	Sprache
+	
+	(verbale Übertragung von Information durch die Benutzung von Wörtern)
+	
+	Gut für Informationsvermittlung, Beschreibung einer Szene
+	
+	
+	Musik
+	
+	(Aneinandereihung von Tönen zur einer harmonischen Komposition, erzeugt
+	Emotionen)
+	
+	Gut geeignet für die Erzeugung von Stimmungen, Atmosphäre
+	
+	
+	Natürliche und künstliche Geräusche
+	
+	(Audio Signale die ein physisches Objekt oder Vorgang darstellen)
+	
+	Gut als Beschreibung (natürliche Geräusche) oder Signale (künstliche
+	Geräusche)
+	
+	
+	Sonifikation nicht-gesprochene Geräusche, gut geignet für:
+	
+	Wo ist etwas, Was ist es und Was kann ich damit machen
+	
+	
+	Unterteilung von Objekten nach Interaktionsmöglichkeiten in
+	
+	Hindernisse (Kollision und Blockade)
+	
+	Portale (Verändern die Position im Raum)
+	
+	Interaktionselemente
+	
+	
+	Sonifikation reicht meistens nicht aus, um die Szene einer virtuellen
+	Welt zu beschreiben.
+	
+	
+	Audio Radar als Interaktionstechnik, alle Objekte im Bereich des Radars
+	müssen adequat antworten (über verbale Beschreibung oder Sonifikation)},
+  timestamp = {2013.07.03}
+}
+
+@WEBPAGE{reed2013,
+  author = {Reed, I.},
+  title = {BlindAudioGames.com Home Page},
+  url = {\url{http://blindaudiogames.com}},
+  lastchecked = {01.02.2013},
+  owner = {Lyra},
+  review = {Eine Internetseite von Ian Reed
+	
+	
+	Neben dem Spiel Tactical Battle wird auch eine Game Engine vorgestellt
+	mit der ein Adventure gemacht wurde},
+  timestamp = {2013.06.20}
+}
+
+@INPROCEEDINGS{roden2005,
+  author = {Roden, T. and Parberry, I.},
+  title = {Designing a narrative-based audio only 3D game engine},
+  booktitle = {Proceedings of the 2005 ACM SIGCHI International Conference on Advances
+	in computer entertainment technology},
+  year = {2005},
+  series = {ACE '05},
+  pages = {274--277},
+  address = {New York, NY, USA},
+  publisher = {ACM},
+  abstract = {Immersing players in believable and engaging virtual environments
+	is a common goal for many interactive computer games. While PC-based
+	audio only games set in virtual worlds have traditionally been developed
+	for blind players, new technology will soon create a market for audio
+	only games aimed at a mass audience. We propose a framework for authoring
+	interactive narrative-based audio only adventure games set in 3D
+	virtual environments. Our work builds on several years of research
+	into audio only applications for sight impaired users, augmented
+	reality systems and human-computer interaction studies. We argue
+	that a simple user interface enhances both immersion and entertainment
+	value, making audio only games practical for mobile computing. Novel
+	features of our system include real-time gameplay and support for
+	multiple players. We also describe a software architecture for creating
+	audio only games, the current implementation of which uses low-cost
+	existing PC-based hardware and software.},
+  acmid = {1178525},
+  doi = {10.1145/1178477.1178525},
+  isbn = {1-59593-110-4},
+  keywords = {audio, game engine, speech, virtual environment},
+  location = {Valencia, Spain},
+  numpages = {4},
+  owner = {Lyra},
+  review = {Cites 8
+	
+	
+	Anwendung von reinen Audiospielen für eine breite Masse anstatt nur
+	für sehgeschädigte Menschen
+	
+	Vorstellung eines Frameworks für erzählungsgestützte Audio-Abenteuer
+	in 3D Welten
+	
+	
+	The game should incorporate all three basic auditory elements: (1)
+	speech for communication and to transmit knowledge, (2) music to
+	express and/or trigger emotions, and (3) sound to depict objects
+	or processes [12].
+	
+	
+	Wichtiger Absatz zur Orientierung in reinen 3D-Welten. Zuviel Freiheiten
+	können Orientierungslosigkeit zur Folge haben und das kein mentales
+	
+	Modell der Welt erstellt werden kann.
+	
+	
+	We do not allow the player to explore the interior space represented
+	by a node since research has shown that too much freedom of navigation
+	can result in players becoming disoriented [5]. Also, players can
+	have difficulty locating where they are using only 3D audio [14].
+	We do not want players to feel like they are blind explorers in the
+	virtual world. Instead, we want players to have a clear mental model
+	of where they are at all times. Our primary goal is to immerse players
+	in the narrative.
+	
+	
+	Aufbau der virtuellen Welt mit Hilfe des Frameworks :
+	
+	
+	Graphen mit Knoten
+	
+	Nodes (einzigartiger Ort in der Welt, Kategorien: Drinnen, Draußen,
+	Unterirdisch)
+	
+	In Nodes können NPC und items enthalten sein
+	
+	
+	Erzähler ist verantwortlich die Präzens und das Erscheinungsbild von
+	Gegenständen zu beschreiben, wenn der Spiele das anfordert.
+	
+	
+	Räumliche Anordnung von Sounds:
+	
+	Erzähler immer vor dem Zuhörer
+	
+	Hintergrund Musik, stereo oder surround
+	
+	Links (60°): Zweiter Spieler (im Mehrspielermodus)
+	
+	Rechts(60°): NPCs oder Kaufleute
+	
+	
+	Erzähler: Synthetische Text-zu-Spreche Stimme, deutliche Unterscheidung
+	von den anderen aufgenommenen Stimmen.
+	
+	Erzähler muss in erster Linie Informationen und keine Emotionen vermitteln.
+	
+	
+	Steuerung über Spracherkennung oder Tastatur, bei Spracherkennung
+	muss diese durch Knopfdruck eingeleitet werden.
+	
+	
+	Navigation über Kompass (Himmelsrichtungen + hoch und runter)},
+  timestamp = {2013.06.12},
+  url = {\url{http://doi.acm.org/10.1145/1178477.1178525}}
+}
+
+@GAME{ruijter2011,
+  author = {de Ruijter, L. and de Ruijter, P. and Duvigneau, B. and Loots, D.},
+  title = {Topspeed 3},
+  year = {2011},
+  howpublished = {[Download]},
+  publisher = {Playing in the Dark},
+  type = {Racing Games},
+  url = {\url{http://www.playinginthedark.net/topspeed3_e.php}},
+  language = {Englisch},
+  owner = {Lyra},
+  timestamp = {2013.07.05}
+}
+
+@WEBPAGE{pygame2013,
+  author = {Shinners, P. and {Pygame Open Source Community}},
+  title = {Wiki - pygame - python game development},
+  url = {http://www.pygame.org/wiki/about},
+  lastchecked = {04.10.2013},
+  owner = {Lyra},
+  timestamp = {2013.10.04}
+}
+
+@GAME{hogwarts_live,
+  author = {Stern-Sapad, D. and Moline, N.},
+  title = {Hogwarts Live},
+  year = {2004},
+  howpublished = {[Web Browser]},
+  type = {Role Playing Games},
+  url = {\url{http://www.hogwartslive.com/}},
+  owner = {Lyra},
+  timestamp = {2013.07.02}
+}
+
+@MISC{targett2003,
+  author = {Targett, S. and Fernstr{\"o}m, M.},
+  title = {Audio games: Fun for all? all for fun},
+  year = {2003},
+  abstract = {In this paper we investigate if it is possible to create entertaining
+	computer games that use only non-speech aural feedback and if such
+	games could be used for skills acquisition or in therapeutic applications.
+	To answer these questions we developed two computer games, Os & Xs
+	(Tic Tac Toe) and Mastermind, representing all necessary information
+	through auditory display. User testing confirmed that the games were
+	playable and early indications are that the games can be entertaining,
+	particularly for the blind community. Testing also suggested that
+	playing audio games could assist in increasing both memory and ability
+	to concentrate, thus showing potential for both skills acquisition
+	and therapeutic applications.},
+  journal = {ICAD2003},
+  owner = {Lyra},
+  review = {Cites 37 Wichtige Erkenntniss zu Signaltönen.
+	
+	
+	Ein Paper, welches grundlegend untersucht, ob das Spielen reiner Audio
+	Spiele Spaß macht und ob es Fähigkeiten fördert, die auch abseits
+	des Spiels nützlich sein können. Dabei wird hier tatsächlich sprachliche
+	Ausgabe ausgeschlossen. 
+	
+	
+	Dafür wurden Tic Tac Toe und Mastermind umgesetzt.
+	
+	Dabei wurde jedes Feld mit Hilfe von Earcons umgesetzt. 
+	
+	Drei aufsteigende Töne für die erste Spalte, 3 gleiche Töne für die
+	mittlere Spalte und drei absteigende Töne für die dritte Spalte.
+	
+	Dabei hat die oberste Reihe eine hohe Frequenz, die Mittlere eine
+	mittlere Frequnz und die unterste eine tiefe Frequenz.
+	
+	
+	Ein X über zwei "swish sounds" dargestellt, ein O über ein O. Über
+	das Feld wird mit den Pfeiltasten navigiert, die Markierung erfolgt
+	über "enter".
+	
+	
+	Mastermind:
+	
+	
+	Drei Töne-folgen hier für Farben verwendet.
+	
+	Der Computer generiert eine zufällige dreistellige Reihe, der Spiel
+	rät, in dem er rät. Ein Versuch enthält dabei auch drei Felder. Die
+	Reihenfolge wird über die Übermittlungsfolge festgelegt, die Auswahl
+	der Farben erfolgt über die Pfeiltasten, das Bestätigen mit "enter".
+	Der Computer antwortet mit drei verschieden Tönen: Right Sound Right
+	Place, Right Sound Wrong Place, Wrong Sound.
+	
+	
+	Probleme: Earcons sind zu lang und überlagern sich.},
+  timestamp = {2013.06.13}
+}
+
+@INPROCEEDINGS{westin2004,
+  author = {Westin, T.},
+  title = {Game accessibility case study: Terraformers--a real-time 3D graphic
+	game},
+  booktitle = {Proceedings of the 5th International Conference on Disability, Virtual
+	Reality and Associated Technologies, ICDVRAT},
+  year = {2004},
+  pages = {95--100},
+  abstract = {Terraformers is the result of three years of practical research in
+	developing a real-time 3D graphic game accessible for blind and low
+	vision gamers as well as full sighted gamers. This presentation focus
+	on the sound interface and how it relates to the 3D graphic world,
+	and also include post mortem survey results from gamers and comments
+	to those.},
+  owner = {Lyra},
+  review = {Cites: 54
+	
+	
+	Paper funktioniert nur richtig mit der Demo Version von Terraformers
+	
+	
+	Interessante Features zur Navigation für blinde oder sehgeschädigte
+	Menschen:
+	
+	
+	Powersuit:
+	
+	A built-in voiced PDA is responsible for miscellaneous feedback from
+	these features.
+	
+	
+	Sound Compass:
+	
+	a 3D sound represents north, and a rough 8 direction spoken feedback
+	is available by pressing a key on the numerical keyboard (north,
+	northwest...).
+	
+	
+	Sonar:
+	
+	a 3D sound gives the gamer a rough perception of the distance to objects
+	in the direction the gamer is currently facing. By pressing a key
+	the gamer can also check what type of object it is (door, wall, robot...).
+	Enemies are automatically told by the PDA voice.
+	
+	
+	GPS:
+	
+	a global positioning system is used to get the exact positions of
+	objects in an area as well as the position of the avatar. A voiced
+	menu system provides an overview of nearby objects.
+	
+	
+	Direct orientation:
+	
+	
+	using the numeric keyboard the gamer can orient the avatar directly
+	in 8 directions (north, northeast...)
+	
+	
+	High Contrast Mode:
+	
+	
+	With this feature turned on, you get parts of the 3D graphics rendered
+	in black and white toon-style which enhance contrast on important
+	objects for low vision gamers.
+	
+	
+	No 3D Graphics Mode:
+	
+	The 3D graphic rendering can be completely turned off for blind gamers
+	who don’t have 3D graphic hardware installed. There is also a possibility
+	to set the 3D engine to not use 3D graphic hardware, i.e. it the
+	use the regular CPU only which is a way to workaround malfunctioning
+	graphic drivers in Windows (which some blind gamers don’t want to
+	bother about).
+	
+	
+	Backpack:
+	
+	objects are accessed using a voiced menu system with hierarchies.
+	Sound effects can also be attached to voices dynamically. Game objects:
+	all game objects have voiced feedback and 3D sound icons (and 3D
+	graphics!)
+	
+	
+	Environments:
+	
+	3D graphics, ambient sounds, footstep sounds on different ground materials},
+  timestamp = {2013.06.20}
+}
+
+@INPROCEEDINGS{yuan2008,
+  author = {Yuan, B. and Folmer, E.},
+  title = {Blind hero: enabling guitar hero for the visually impaired},
+  booktitle = {Proceedings of the 10th international ACM SIGACCESS conference on
+	Computers and accessibility},
+  year = {2008},
+  pages = {169--176},
+  organization = {ACM},
+  abstract = {Very few video games have been designed or adapted to allow people
+	with vision impairment to play. Music/rhythm games however are particularly
+	suitable for such people as they are perfectly capable of perceiving
+	audio signals. Guitar Hero is a popular rhythm game yet it is not
+	accessible to the visually impaired as it relies on visual stimuli.
+	This paper explores replacing visual stimuli with haptic stimuli
+	as a viable strategy to make games accessible. We developed a glove
+	that transforms visual information into haptic feedback using small
+	pager motors attached to the tip of each finger. This allows a blind
+	player to play Guitar Hero. Several tests have been conducted and
+	despite minor changes to the gameplay, visually impaired players
+	are able to play the game successfully and enjoy the challenge the
+	game provides. The results of the study also give valuable insights
+	on how to make mainstream games blind-accessible.},
+  owner = {Lyra},
+  review = {Cites 33
+	
+	
+	Begründung warum Spiele für Blinde mit Zahlen blinder oder sehgeschädigter
+	Menschen in den USA.
+	
+	Beschreibung der bisherigen Umsetzungen von Spielen -> visuelle Feedback
+	in akustisches oder haptisches umwandeln.
+	
+	
+	Grundsätzlich Ansatz, auditory instructions and non-speech sound commands
+	zur Steuerung.
+	
+	Besonders erwähnt: AudioQuake(2D Sound) und Terraformes(3D Sound)
+	als FPS
+	
+	
+	Begriff "earcon" -> "strukturierte Sounds"
+	
+	
+	Besonder Eignung von Rhythmus und Musikspiele wie Guitar hero ans
+	DDR (Umsetzung für Blinde "Finger Dance").
+	
+	
+	Problem bei der Umsetzung über akustische Methoden, da Musik schon
+	ein wichtiger Bestandteil des Spiels ist, kann der Audio-Kanal nicht
+	zur Steuerung verwendet werden. Daher Umsetzung mit spezieller Hardware:
+	Einem Daten Handschuh der für jeden Finger einen Motor besitzt um
+	ein haptisches Signal zu senden. Problem dabei: Unterschiedliche
+	Handgrößen und Kosten.
+	
+	
+	Analyse der Testdaten (sehenden und blinde Menschen, in der ersten
+	Gruppe Unterteilung in GuitarHeros Neulinge und Kenner).
+	
+	
+	**********Einschnitte in das Gameplay:
+	
+	
+	Guitar Hero hat im mittleren und schweren Bereich fünf Tasten, allerdings
+	hält der Daumen den Gitarrencontroller und kann nicht verwenden werden.
+	Daher eignet sich Blind Hero nur für Lieder mit vier unterschiedlichen
+	Tontasten.
+	
+	
+	Desweiteren gibt es in der visuellen Variante immer eine Aussicht,
+	welche Töne als nächstes gespielt werden. In der Variante mit dem
+	haptischen Handschuh kann das ohne Extramotoren nicht erfolgen. Die
+	Verwendung von mehreren Signalen würde die Lernkurve zu steil machen.
+	Vergleiche
+	
+	
+	Providing lookahead information through the use of extra pager motors
+	was a solution we considered but that would most likely not be an
+	enjoyable experience because of the steep learning curve. In this
+	case we decided to get rid of the lookahead information all together,
+	to make sure the game is easy to learn.
+	
+	
+	************************
+	
+	
+	Hinweis dazu, dass sehende und blinde Menschen einen unterschiedlich
+	ausgeprägten haptischen Sinn habe und von daher die Performance nicht
+	gut zu vergleichen ist - Vergleiche
+	
+	
+	The “Misconception”
+	
+	A common notion is that blind people might have better senses of hearing
+	and touch than sighted people because the loss of vision improves
+	their other senses. Some think it is a misconception, others don’t.
+	What does this study with Blind Hero contribute to this statement?
+	The performance comparison reveals that, when looking at the blind
+	group’s accuracy level and comparing it against average of group
+	1&3, blind people do have some level of advanced performance as shown
+	in Figure 7. One interesting comment from one of our blind participants
+	was that “Your brain does get too trained to react on things you
+	touch on a day-to-day bases”. Without being able to visualize, a
+	blind person learns his or her surroundings by touching objects actively,
+	and performs reading by touching the braille. Their brain has to
+	constantly build bridges from retrieving feeling signals to sending
+	a correct response signal to the right body part. From sensing motor
+	vibrations to taking immediate action on the correct button, blind
+	people practice this sort of behavior in their everyday lives. Sighted
+	people are trained to visualize-then-act in daily life, while feel-then-act
+	is not as common. Therefore, maybe it is the practice of feel-then-act
+	that makes visually impaired players perform better than sighted
+	groups. Nevertheless our study was relatively small with only 3 non-sighted
+	players. To verify that blind players have a greater sense of touch,
+	the experiment needs to be repeated on a larger scale to make these
+	claims generalizable.},
+  timestamp = {2013.02.01}
+}
+
+@ARTICLE{yuan2011,
+  author = {Yuan, B. and Folmer, E. and Harris, F.C.},
+  title = {Game accessibility: a survey},
+  journal = {Universal Access in the Information Society},
+  year = {2011},
+  volume = {10},
+  pages = {81--100},
+  number = {1},
+  abstract = {Over the last three decades, video games have evolved from a pastime
+	into a force of change that is transforming the way people perceive,
+	learn about, and interact with the world around them. In addition
+	to entertainment, games are increasingly used for other purposes
+	such as education or health. Despite this increased interest, a significant
+	number of people encounter barriers when playing games due to a disability.
+	Accessibility problems may include the following: (1) not being able
+	to receive feedback; (2) not being able to determine in-game responses;
+	(3) not being able to provide input using conventional input devices.
+	This paper surveys the current state-of-the-art in research and practice
+	in the accessibility of video games and points out relevant areas
+	for future research. A generalized game interaction model shows how
+	a disability affects ones ability to play games. Estimates are provided
+	on the total number of people in the United States whose ability
+	to play games is affected by a disability. A large number of accessible
+	games are surveyed for different types of impairments, across several
+	game genres, from which a number of high- and low-level accessibility
+	strategies are distilled for game developers to inform their design.},
+  owner = {Lyra},
+  publisher = {Springer Berlin Heidelberg},
+  review = {Cites 38
+	
+	
+	Umfassender Überblick Spiele zugänglich zu machen mit den Zielen:
+	
+	
+	Indentifizieren wie eine Behinderung die Fähigkeit ein Spiel zu spielen
+	beeinflusst
+	
+	Strategien indentifizieren, Spiele zugänglich zu machen
+	
+	Zukünftige Forschungsbereiche zu identifizieren
+	
+	
+	Unterscheidung zwischen Spielen und virtuelle Welten wie Second Life
+	
+	
+	4 Gruppen von Behinderungen (Einteilung nach WHO)
+	
+	Sehgeschädigte Menschen
+	
+	Hörgeschädigte Menschen
+	
+	Bewegungseinschränkung
+	
+	Kognitive Beeinträchtigung
+	
+	
+	Spiel Interaktionsmodel (Vergleiche klassischer Game Loop)
+	
+	
+	1. Stimuli erhalten (visuell, akustisch, haptisch)
+	
+	 Primäre Stimulie (für den Spielfluss unerlässlich)
+	
+	 Sekundäre Stimuli (wichtig für die Atmosphäre, aber nicht notwendig
+	für die Spielbarkeit)
+	
+	
+	2. Reaktionauswahl ermöglichen
+	
+	(Auswahl einer Aktion (Genreabhgängig))
+	
+	
+	3. Eingabe ermöglichen
+	
+	 Diskrete Eingabe (Tastatur, Knöpfe)
+	
+	 Analoge Eingabe (Maus, Joystick)->präzise motorische Fähigkeiten
+	erforderlich
+	
+	
+	Identifizierte Strategien für Alternative Eingabegeräte.
+	
+	Reduktion der Interaktion
+	
+	Automatisierung
+	
+	Scannen (Situationsbedingte Belegung von einer Schaltfläche, Abwägen
+	der Situation = Scanning)
+	
+	
+	Liste an Spielen für Blinde
+	
+	Benutzte Strategien: Akustische Hinweise, Sprachführung, earcons,
+	Sound Kompass, Sound Radar
+	
+	
+	- Replace visuals with audio.
+	
+	 - Speech can be provided either by a screen reader when text is available
+	or using self voicing.
+	
+	 - Audio cues use real world sounds such as the sound of wind or footsteps
+	to provide information or hints to the player.
+	
+	 - Sonification uses non-speech audio to convey information using
+	changes in pitch, amplitude or tempo [5].
+	
+	 A number of specific sonification techniques can be used:
+	
+	 - Auditory Icons: sound effects indicate different objects or actions.
+	
+	 - Ear Cons: one or more tones are used as a language to indicate
+	different objects or actions.
+	
+	 - Sonar: a sonar-like mechanism conveys spatial information on the
+	locations of objects.
+	
+	
+	- Replace visuals with haptic. When audio is dificult to provide such
+	as with music games, haptic feedback may be considered.
+	
+	
+	- Enhance visuals. Players with low vision can be supported by modifying
+	visual stimuli using high-contrast color schemes, 
+	
+	 color schemes for color blind players, scalable fonts, zoom options
+	or the ability to customize the color of enemy units.
+	
+	
+	Schöner Hinweis aus dem Abschnitt Richtung Game Engines 4.3 Directions
+	for Research:
+	
+	
+	Being able to reuse an existing game engine or modify an existing
+	game may significantly reduce the cost of developing an accessible
+	game. If other game genres would allow for such modifications, this
+	may open up the opportunity for third party developers or researchers
+	to develop accessible versions of games for such game genres. Consequently,
+	such accessible games may allow for the identification of new low-level
+	strategies, as well as serve as examples on how to make a particular
+	game genre accessible to game developers.},
+  timestamp = {2013.06.27}
+}
+
+@comment{jabref-entrytype: Game: req[author;title;year;howpublished] opt[publisher;type;url;edition;language]}
+
+@comment{jabref-entrytype: Webpage: req[author;title;url;lastchecked] opt[published]}
+
