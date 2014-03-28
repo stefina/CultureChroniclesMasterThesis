@@ -1,22 +1,24 @@
 %!TEX root = ../Masterarbeit.tex
 \chapter{Konzeption}
 \label{cha:konzeption}
-Im Folgenden wird das Konzept der Web-Applikation erarbeitet und vorgestellt. Dafür wird vorerst ein Fernkonzept und ein dazugehöriges Mockup erstellt, wobei das Fernkonzept über den gesamten wünschenswerten Umfang einer solchen Applikation verfügen soll.  Das bedeutet, dass die Applikation nicht auf mögliche Medieninhalte und -typen beschränkt werden soll, sondern den heute und in naher Zukunft möglichen Spielraum ausnutzen soll.
-Auf dieser Basis wird ein Mockup der im weiteren Verlauf bei ihrem Arbeitstitel \textbf{\arbeitstitel} benannten Web-Applikation entwickelt, welches die Anwendungsfälle und Darstellungsmöglichkeiten beinhaltet.
+Im Folgenden wird das Konzept der Web-Applikation erarbeitet und vorgestellt. Dafür wird zunächst ein Fernkonzept und ein dazugehöriges Mockup erstellt, wobei das Fernkonzept über den gesamten wünschenswerten Umfang einer solchen Applikation verfügen soll. Das bedeutet, dass die Applikation nicht auf mögliche Medieninhalte und -typen beschränkt werden soll, sondern den heute und in naher Zukunft möglichen Spielraum ausnutzen soll.
+
+Auf dieser Basis wird ein Mockup, welches die Anwendungsfälle und Darstellungsmöglichkeiten beinhaltet, entwickelt. Im weiteren Verlauf wird die Web-Applikation nach ihrem Arbeitstitel \textbf{\arbeitstitel} benannt.
 Anschließend wird das Fernkonzept auf ein im Rahmen dieser Masterarbeit realisierbaren Umfang reduziert und entsprechend eingegrenzt. Am zuvor erstellten Mockup sollten diesbezüglich nur wenige Änderungen \bzw Einschränkungen vorgenommen werden müssen.
 
 \section{Schematischer Aufbau} \todo{gib mir nen besseren namen!}
-Zunächst werden die Schlüsselaspekte, die in die Konzeption einfließen, erläutert. Die Abbildung \ref{fig:diagrammAllgemein} zeigt den schematischen Ablauf von \arbeitstitel. Aus den verschiedenen Input-Typen muss sich entweder ein Zeitraum ableiten lassen oder ein Datum extrahiert werden, von welchem sich wiederum ein Zeitraum ableiten lässt.
+Zunächst werden die Kernaspekte, die in die Konzeption einfließen, erläutert. Die Abbildung \ref{fig:diagrammAllgemein} zeigt den schematischen Ablauf von \arbeitstitel. In der linken Ellipse sind mögliche Eingabe-Typen aufgeführt. Abhängig von der Art des Inputs kann entweder ein Zeitraum oder ein Datum, von welchem sich wiederum ein Zeitraum ableiten lässt, extrahiert werden. Auf der rechten Seite ist der daraus resultierende Output exemplarisch dargestellt.
+
 \begin{figure}[htb]
 	\includegraphics[width=1.0\textwidth]{Diagramm_Allgemein.png}
-	\caption{Allgemeines Diagramm}
+	\caption{Schematischer Ablauf der Suche}
 	\label{fig:diagrammAllgemein}
 \end{figure}
 
 In Abbildung \ref{fig:diagrammVietnam} ist der schematische Ablauf mit der Beispiel-Eingabe \textbf{Vietnamkrieg} zu sehen. Aus der Eingabe leitet sich der Zeitraum 1955-1975 ab. Dieser Zeitraum wird daraufhin nach den populärsten Musik- und Film-Veröffentlichungen und wichtigen News-Artikeln durchsucht, um einen Querschnitt des Zeitraumes zu erstellen.
 \begin{figure}[htb]
 	\includegraphics[width=1.0\textwidth]{Diagramm_VietnamKrieg.png}
-	\caption{Vietnam Diagramm}
+	\caption{Schematischer Ablauf der Suche mit der Beispiel-Eingabe \glqq Vietnamkrieg\grqq}
 	\label{fig:diagrammVietnam}
 \end{figure}
 
@@ -27,7 +29,7 @@ In Abbildung \ref{fig:diagrammVietnam} ist der schematische Ablauf mit der Beisp
 Aus der vorangegangenen Analyse der vorhandenen Suchdienste geht hervor, dass eine umfassende Suche nach zeitspezifischen Inhalten bisher nicht besonders komfortabel ist, \bzw eine Suche oft nicht zuverlässig relevante Suchergebnisse liefert. Das liegt \va daran, dass die untersuchten Dienste, nicht darauf ausgelegt sind, zeitspezifisch zu suchen. Diese Möglichkeit soll die Web-Applikation, die im Rahmen dieser Arbeit entwickelt wird, bieten. Über welche Funktionalität sie im Konkreten verfügen soll, wird im Folgenden analysiert und anschließend in einer Feature-Liste dargelegt.
 
 \subsection{Eingabeformen}
-Ausgangspunkt für die Suche ist ihre Eingabeform. Der Nutzer soll hinsichtlich der Art seiner Eingabe möglichst frei sein können. Über die Text-Suche, wie sie in der vorangegangenen Analyse (siehe Kapitel \ref{cha:analyse}) durchgeführt wurde, gibt es noch weitere denkbare Möglichkeiten.
+Ausgangspunkt für die Suche ist ihre Eingabeform. Der Nutzer soll hinsichtlich der Art seiner Eingabe möglichst frei sein können. Über die Text-Suche, wie sie in der vorangegangenen Analyse (siehe Kapitel \ref{cha:analyse}) durchgeführt wurde, gibt es noch weitere denkbare Möglichkeiten, welche im Folgenden erläutert werden.
 
 \paragraph{Datum}
 Die Eingabe eines Datums ist die naheliegendste Suchform um zeitspezifisch nach Content, der sich auf den gewählten Zeitpunkt \bzw dessen umschließenden Zeitraum bezieht, zu suchen.
@@ -36,43 +38,43 @@ Die Eingabe eines Datums ist die naheliegendste Suchform um zeitspezifisch nach 
 Primär sind Terme wie \zB \glqq 12.04.1922\grqq \ oder \glqq 1937\grqq \ denkbar, aus denen sich entsprechend der umschließende Zeitraum ergibt. Darüber hinaus lassen sich viele Begriffe auch in Zeiträume oder Zeitpunkte aufschlüsseln, wie \zB die Begriffe \glqq Neunziger\grqq , \glqq Vietnamkrieg \grqq oder \glqq Deutscher Mauerfall\grqq . 
 
 \paragraph{Musik oder Film}
-Aus einer Musik- oder Film-Veröffentlichung kann ebenfalls ein Datum entnommen werden. Hier bietet sich beispielsweise das Veröffentlichungsdatum oder das Produktionsdatum an, während bei einer TV-Produktion die Erstausstrahlung und bei einem Kinofilm der Filmstart relevant ist. Darüber hinaus ist, soweit Informationen darüber vorhanden sind, die Popularität von Interesse. Dies trifft \zB zu, wenn ein Musikstück oder ein Film erst deutlich nach der Veröffentlichung an Popularität gewinnt, \bspw aufgrund eines damit zusammenhängenden Ereignisses.
+Aus einer Musik- oder Film-Veröffentlichung kann ebenfalls ein Datum entnommen werden. Hier bietet sich beispielsweise das Veröffentlichungsdatum oder das Produktionsdatum an, während bei einer TV-Produktion die Erstausstrahlung und bei einem Kinofilm der Filmstart relevant ist. Darüber hinaus ist, soweit Informationen darüber vorhanden sind, die Popularität des Filmes von Interesse. Dies trifft \zB zu, wenn ein Musikstück oder ein Film erst deutlich nach der Veröffentlichung an Popularität gewinnt, \bspw aufgrund eines damit zusammenhängenden Ereignisses.
 
 \paragraph{Bild oder Kunst}
-Im Falle von Bildern oder Kunstwerken ist die Zuhilfenahme des Aufnahmedatums oder die Fertigstellung eines Kunstwerkes denkbar. Viele Kunstwerke \oae \ der weit zurückliegenden Vergangenheit lassen sich auf keinen genauen Zeitpunkt zurückdatieren, oftmals existiert in diesen Fällen ein möglicher Zeitraum, in welchen es fertig gestellt wurde oder eine Epoche, der es zugeordnet wird.
+Im Falle von Bildern oder Kunstwerken ist die Zuhilfenahme des Aufnahmedatums oder die Fertigstellung eines Kunstwerkes denkbar. Viele Kunstwerke \oae Items der weit zurückliegenden Vergangenheit lassen sich auf keinen genauen Zeitpunkt zurückdatieren, oftmals existiert in diesen Fällen ein möglicher Zeitraum, in welchem ein Objekt fertiggestellt wurde oder eine Epoche, der es zugeordnet wird.
 
 \paragraph{Personen}
-Auch anhand einer Person kann ein Zeitraum ermittelt werden. Dies kann, je nach Interesse, das Geburts- oder Todes-Datum, der gesamte Lebenszeitraum oder auch ein Zeitraum sein, in dem diese Person von größerer Wichtigkeit war (Amtsperiode, Aktivitätszeitraum eines Musikers).
+Auch anhand eines Namens einer Person kann ein Zeitraum ermittelt werden. Dies kann, je nach Interesse, das Geburts- oder Todes-Datum, der gesamte Lebenszeitraum oder auch ein Zeitraum sein, in dem diese Person von größerer Popularität war (Amtsperiode, Aktivitätszeitraum eines Musikers).
 
 %----- SUBSECTION -----%
 \subsection{Content-Typen}
-Anhand eines Zeitpunktes oder -raumes lassen sich eine Vielzahl unterschiedlicher Inhaltstypen anzeigen. Da es das Ziel der Web-Applikation ist, ein möglichst umfassendes Bild eines Zeitraumes anhand verschiedener Medien zu präsentieren, werden im Folgenden denkbare Inhalts-Typen erläutert.
+Anhand eines Zeitpunktes oder -raumes lassen sich eine Vielzahl unterschiedlicher Inhaltstypen anzeigen. Da es das Ziel der Web-Applikation ist, ein möglichst umfassendes Bild eines Zeitraumes anhand verschiedener Medien zu präsentieren, werden im Folgenden denkbare Inhaltstypen erläutert.
 
 \paragraph{Politische und geschichtliche Ereignisse}
-Ein wichtiger Aspekt, der einen Zeitraum prägt, sind die darin auftretenden Ereignisse, die vom öffentlichen Interesse sind. Zum einen sind da politische Ereignisse wie \zB der Independence Day der USA, der Mauerfall, die Terroranschläge aber auch zeitprägende Begriffe wie die Goldenen Zwanziger, die Industrialisierung oder die Weltwirtschaftskrise. Ebenso gehören Natur-Ereignisse, als auch Medien-Ereignisse dazu. Hier kann als Beispiel die erste Landung eines Menschen auf dem Mond genannt werden. Ebenso interessant sind Informationen wie die Regierungsform oder die derzeitige Parlamentszusammensetzung.
+Ein wichtiger Aspekt, der einen Zeitraum prägt, sind die darin auftretenden Ereignisse, die vom öffentlichen Interesse sind. Zum einen sind politische Ereignisse wie \zB der \textit{Independence Day} der USA, der \textit{Mauerfall}, die Terroranschläge aber auch zeitprägende Begriffe wie die \textit{Goldenen Zwanziger}, die \textit{Industrialisierung} oder die \textit{Weltwirtschaftskrise} als Eingabe denkbar. Ebenso gehören Natur- und Medien-Ereignisse dazu. Hier kann als Beispiel die erste Landung eines Menschen auf dem Mond genannt werden. Ebenso interessant sind Informationen wie die Regierungsform oder die derzeitige Parlamentszusammensetzung.
 
 \paragraph{Demografische Daten}
-Demografische Daten geben ebenfalls Aufschluss über einen Zeitraum. Die Zusammensetzung der Bevölkerung, ihre Dichte oder \zB das durchschnittliche Alter der Menschen sind Aspekte, die einen Zeitraum mit ausmachen. Genauso können Arbeitslosenquoten einen Rückschluss auf die Zufriedenheit der Bürger zulassen. Darüber hinaus können Informationen über das vorherrschende Wetter von Interesse sein oder Informationen über die Dauer des Tageslichts an einem bestimmten Tag.
+Demografische Daten geben ebenfalls Aufschluss über einen Zeitraum. Die Zusammensetzung der Bevölkerung, ihre Dichte oder \zB das durchschnittliche Alter der Menschen sind Aspekte, die einen Zeitraum mit ausmachen. Genauso können Arbeitslosenquoten einen Rückschluss auf die Zufriedenheit der Bürger zulassen. Darüber hinaus können Informationen über das vorherrschende Wetter oder Informationen über die Dauer des Tageslichts an einem bestimmten Tag von Interesse sein.
 
 \paragraph{Musik}
 Musik repräsentiert einen großen Teil des kulturellen Aspekts eines Zeitraums. Musik aus einem bestimmten Zeitraum spiegelt nicht nur den Geschmack, sondern auch politische Neigungen wieder oder beschäftigt sich mit aktuellen Themen, denkt man an den Song \textbf{Only Time}, der im Zuge der Terroranschläge vom 11. September an großer Popularität gewann. Dazu macht Musik einen Teil des vorherrschenden Stils aus.
 
 \paragraph{Kunst}
-Verschiedenste Arten von Kunst haben schon die frühesten Epochen der Menschheit geprägt. Ähnlich wie die Musik spiegeln Kunstwerke ihrer Zeit nicht nur den Stil, sondern auch die aktuelle Situation, Wünsche, Träume und Bedürfnisse der Künstler und ihrer Zeitgenossen wieder.
+Verschiedenste Arten von Kunst haben schon die frühesten Epochen der Menschheit geprägt. Ähnlich wie die Musik spiegeln Kunstwerke ihrer Zeit nicht nur den Stil einer Epoche wieder. \glqq Die meisten Menschen sehen gern auf Bildern, was sie auch in der Wirklichkeit gerne ansehen würden. Das ist ganz natürlich.\grqq \ \citep[Vgl.][Seite 15]{gombrich} Damit verdeutlicht \citeauthor{gombrich} inwiefern Kunst als Spiegel \todo{Kunstzitate }
 
 \paragraph{Film}
-Film ist zwar im Gegensatz zu den Bildenden Künsten ein eher junges Medium, hat sich jedoch als wichtiges und populäres Medium etabliert. Die Popularität eines Films kann Rückschlüsse auf den Geschmack und Zeitgeist der Gesellschaft geben. Hinzu kann ein Film, der sich mit der Thematik aus der Vergangenheit beschäftigt im Nachhinein interessant oder gar wichtig sein, \bzw im Nachhinein an Wichtigkeit gewinnen. Darüber hinaus geben besonders neue Filmproduktionen ein Bild der Generationen wieder. So kann \zB der Film \textbf{Breakfast Club (1985)} einen Querschnitt der damaligen Jugend geben und der Film \textbf{Back to the Future (1985)} eine, wenn auch nicht ganz ernstgemeinte, Annahme der Zukunft widerspiegeln.
+Film ist zwar im Gegensatz zu den Bildenden Künsten ein eher junges Medium, hat sich jedoch als wichtiges und populäres Medium etabliert. Die Popularität eines Films kann Rückschlüsse auf den Geschmack und Zeitgeist der Gesellschaft geben. Hinzu kann ein Film, der sich mit der Thematik aus der Vergangenheit beschäftigt, im Nachhinein interessant oder gar wichtig sein, \bzw im Nachhinein an Wichtigkeit gewinnen. Darüber hinaus geben besonders neue Filmproduktionen ein Bild der Generationen wieder. So kann \zB der Film \textbf{Breakfast Club (1985)} einen Querschnitt der damaligen Jugend geben und der Film \textbf{Back to the Future (1985)} eine, wenn auch nicht ganz ernstgemeinte, Annahme der Zukunft widerspiegeln.
 
-Hinzu kommen Video-Reportagen und -Berichte, die einen Zeitraum näher betrachten und selbst ein Bild eines Zeitraumes oder Ereignisses darstellen. Sonstiges Video-Material, wie \zB Filmtrailer lassen sich auch in diese Kategorie zählen.
+Hinzu kommen Video-Reportagen und -Berichte, die einen Zeitraum näher betrachten und selbst ein Bild eines Zeitraumes oder Ereignisses darstellen. Sonstiges Video-Material, wie \zB Filmtrailer, lassen sich auch in diese Kategorie zählen.
 
 \paragraph{Erfindungen und technische Errungenschaften}
-Erfindungen haben bereits in der Vergangenheit großen Einfluss auf die Veränderung der Gesellschaft ausgeübt. Nicht nur die Erfindung des Buchdruckes, des Computers oder des Internets haben zu ihrer Zeit und darüber hinaus das Leben der Menschen verändert. Ebenso interessant können zeitnahe Reaktionen und Annahmen zu solchen Erfindungen sein, geben sie \uU Aufschluss über die Haltung der Menschen gegenüber der Fortschritte. So \zB die frühe Annahme, dass Geschwindigkeiten von über 30 km/h dem menschlichen Körper tödlich schadeten, wie auch der Spiegel die Aussage des Bayrischen Medizinal-Kollegium in \cite{spiegelDelirium} zitiert: \glqq Die schnelle Bewegung dieser neuen Lokomotive muß bei den Reisenden unfehlbar eine Gehirnkrankheit, eine besondere Art des gefährlichen Delirium furiosum erzeugen.\grqq
+Erfindungen, insbesondere technischen Ursprungs, haben bereits in der Vergangenheit großen Einfluss auf die Veränderung der Gesellschaft ausgeübt. Nicht nur die Erfindung des Buchdruckes, des Computers oder des Internets haben zu ihrer Zeit und darüber hinaus das Leben der Menschen verändert. Ebenso interessant können zeitnahe Reaktionen und Annahmen zu solchen Erfindungen sein, geben sie \uU Aufschluss über die Haltung der Menschen gegenüber der Fortschritte. So \zB die frühe Annahme, dass Geschwindigkeiten von über 30 km/h dem menschlichen Körper tödlich schadeten, wie auch der Spiegel die Aussage des Bayrischen Medizinal-Kollegium in \cite{spiegelDelirium} zitiert: \glqq Die schnelle Bewegung dieser neuen Lokomotive muß bei den Reisenden unfehlbar eine Gehirnkrankheit, eine besondere Art des gefährlichen Delirium furiosum erzeugen.\grqq
 
 \paragraph{Video-Spiele}
 Im fortgeschrittenen Zeitalter ist auch eine Darstellung von Video-Spielen, die zu der Zeit erschienen sind, Bestandteil einer umfassenden Suchanfrage. Sie geben ebenfalls Aufschluss über die für den Suchzeitraum aktuellen technischen Möglichkeiten.
 
 \paragraph{Bücher}
-Zwar sind Bücher ein hauptsächlich in analoger Form vorliegendes Medium, jedoch gibt es fast ohne Ausnahme mindestens die wichtigsten Meta-Daten über Bücher auch im Internet. Der Wert und die Bedeutung eines Buches für einen Zeitraum ist insbesondere im digitalen Zeitalter nicht zu vernachlässigen. Weitere Veröffentlichungen in analoger Form sind ebenfalls denkbar, wie \zB Comics.
+Zwar sind Bücher ein hauptsächlich in analoger Form vorliegendes Medium, jedoch gibt es fast ohne Ausnahme mindestens die wichtigsten Meta-Daten über Bücher auch im Internet. Der Wert und die Bedeutung eines Buches für einen Zeitraum ist insbesondere im digitalen Zeitalter nicht zu vernachlässigen. Weitere Veröffentlichungen in analoger Form sind ebenfalls für die Darstellung eines Zeitraumes denkbar, wie \zB Comics.
 
 \paragraph{Trends}
 Über die genannten Punkte hinaus gibt es viele weitere Trends, die ihr Zeitalter oder ihre Epoche prägen. Dazu zählen populäres Spielzeug, markantes Mobiliar oder etwa zeitprägende Tätigkeiten.
@@ -87,7 +89,7 @@ Eine Standard-Suche bezeichnet im Falle von \textbf{\arbeitstitel} eine Suche na
 
 %----- SUBSECTION -----%
 \subsection{Thematisches Suchen}
-Während die Suche nach einem bloßen Datum stringent alle auffindbaren Informationen, die in diesen Zeitraum fallen, anzeigt, muss es auch möglich sein, gezielt thematisch zu suchen. Zum Beispiel soll es die Möglichkeit geben, ausschließlich Informationen eines Zeitraumes, die sich auf das Thema Musik beziehen, anzuzeigen. Dabei sind keinesfalls lediglich Musikdateien gemeint, sondern auch \bspw Text- oder Videoquellen, die sich mit dem Thema Musik beschäftigen. Das Ergebnis wäre in diesem Falle ein Gesamtbild der derzeitigen Musikgeschichte zu bekommen. Jedoch sind die Ergebnisse einer solchen Suche stark abhängig davon, wie erfasst wird, ob ein Item dieses Thema behandelt und woran die Relevanz gemessen werden kann. Weitere mögliche Beispiele einer thematischen Suche sind \zB Filmgeschichte oder Kunstgeschichte. Zur wissenschaftlichen Recherche bietet sich \zB an, das Thema Politik auszuwählen.
+Während die Suche nach einem bloßen Datum stringent alle auffindbaren Informationen, die in den umschließenden Zeitraum fallen, anzeigt, muss es auch möglich sein, gezielt thematisch zu suchen. Zum Beispiel soll es die Möglichkeit geben, ausschließlich Informationen eines Zeitraumes, die sich auf das Thema Musik beziehen, anzuzeigen. Dabei sind keinesfalls lediglich Musikdateien gemeint, sondern auch \bspw Text- oder Videoquellen, die sich mit dem Thema Musik beschäftigen. Das Ergebnis wäre in diesem Falle ein Gesamtbild der derzeitigen Musikgeschichte. Die Ergebnisse einer solchen Suche sind stark abhängig davon, wie erfasst wird, ob ein Item dieses Thema behandelt und woran die Relevanz gemessen werden kann. Weitere mögliche Beispiele einer thematischen Suche sind \zB Filmgeschichte oder Kunstgeschichte. Zur wissenschaftlichen Recherche bietet sich \zB an, das Thema Politik auszuwählen.
 Beispiele sind zum einen Videomaterial einer politischen Rede, die in dem gewünschten Zeitraum stattgefunden hat, zum anderen ein Zeitungsartikel, der sich mit einem bestimmten Musiktitel auseinandersetzt. Diese Funktionalität setzt die Unterscheidung zwischen Content, der zu gegebener Zeit produziert wurde, und Content, der sich auf diese Zeit bezieht und das vorgegebene Thema behandelt, voraus. \todo{das ist noch nicht so sauber formuliert}
 
 %----- SUBSECTION -----%
@@ -98,7 +100,7 @@ Faktisch sind Medien, die erst in der Zukunft produziert werden, noch nicht exis
 %----- SUBSECTION -----%
 \subsection{Eingrenzen der Suche}
 Um den Nutzen der Web-Applikation möglichst vielseitig zu halten, kann bei der Suche die Art des Inhalts eingegrenzt werden. So kann die Wahl getroffen werden, welche Medientypen angezeigt werden sollen (Audio, Video, Text etc.). Auch ist eine Filterung der in Betracht gezogenen Dienste denkbar, sodass der Nutzer \bspw bestimmte APIs deaktivieren kann. Die Suche liefert im besten Fall ein großes Spektrum an Daten. Um ein genaueres Bild von einem Zeitraum zu bekommen, kann der User bereits beim Suchen spezifizieren, welche Inhalte ihm angezeigt werden sollen. 
-Zum einen kann die Suche nach Medientypen eingegrenzt werden. Hier empfiehlt sich eine Eingrenzung nach Medientypen und -arten. Steht bei der zeitspezifischen Suche \bspw eine wissenschaftliche Recherche im Vordergrund, empfiehlt es sich, die Suche auf Text- oder Tabellen-Items zu begrenzen. Will der Nutzer hauptsächlich den Unterhaltungsaspekt von \arbeitstitel \ nutzen, kann er die Suche auf Audio und Video begrenzen, wobei es sich bei den Medientypen \ggf anbietet, diese weiter eingrenzen zu können. Möchte sich der Nutzer beispielsweise nur einen Radiosender generieren lassen und wünscht keinen Video-Content, kann der Nutzer das Ergebnis weiter einschränken. Eine Aufschlüsselung der Medientypen und ihrer Subtypen ist in Tabelle \ref{tab:mediaTypes} zu sehen.
+Die Suche kann \ua nach Medientypen eingegrenzt werden. Hier empfiehlt sich eine Eingrenzung nach Medientypen und -arten. Steht bei der zeitspezifischen Suche \bspw eine wissenschaftliche Recherche im Vordergrund, empfiehlt es sich, die Suche auf Text- oder Tabellen-Items zu begrenzen. Will der Nutzer hauptsächlich den Unterhaltungsaspekt von \arbeitstitel \ nutzen, kann er die Suche auf Audio und Video begrenzen, wobei es sich bei den Medientypen \ggf anbietet, diese weiter eingrenzen zu können. Möchte sich der Nutzer beispielsweise nur einen Radiosender generieren lassen und wünscht keinen Video-Content, kann der Nutzer das Ergebnis weiter einschränken. Eine Aufschlüsselung der Medientypen und ihrer Subtypen ist in Tabelle \ref{tab:mediaTypes} zu sehen.
 
 
 \begin{table}[H]
@@ -117,15 +119,14 @@ Zum einen kann die Suche nach Medientypen eingegrenzt werden. Hier empfiehlt sic
 	\end{center}
 \end{table}
 
-Um über längere Zeit auch eine zuverlässige wissenschaftliche Recherche zu ermöglichen, kann es von Nutzen sein, bei der Suche bestimmte Dienste zu ex- \bzw inkludieren. Dies kann \va dann von Interesse sein, soll das Ergebnis möglichst unabhängig von den bestimmten APIs sein. Die Beschränkung der Suche nach Quellen, APIs und anderen Suchdiensten wird \va dann interessant, wenn es für einen Medientyp verschiedene Quellen gibt. Insbesondere wenn die Quellen verschiedene Genres abdecken oder auf bestimmte Bereiche spezialisiert sind. Das ist \zB im Kunstbereich der Fall, wie aus der vorangegangenen Analyse hervorgeht, dessen Online-Angebot meist auf die jeweilige Galerie begrenzt ist. Ein weiteres Beispiel für den Bereich Musik sind Musikdienste, die sich auf spezielle Musikrichtungen spezialisiert haben. Außerdem können die Ergebnisse von Interesse sein, wenn populäre Quellen, APIs und sonstige Suchdienste nicht mit einbezogen werden um zu vergleichen, wie groß dessen Einfluss ist.\todo{grottig geschrieben}
-
+Um über längere Zeit auch eine zuverlässige wissenschaftliche Recherche zu ermöglichen, kann es von Nutzen sein, bei der Suche bestimmte Dienste zu ex- \bzw inkludieren. Dies kann \va dann von Interesse sein, wenn das Ergebnis möglichst unabhängig von den bestimmten APIs sein soll. Die Beschränkung der Suche nach Quellen, APIs und anderen Suchdiensten wird \va dann interessant, wenn es für einen Medientyp verschiedene Quellen gibt. Insbesondere wenn die Quellen verschiedene Genres abdecken oder auf bestimmte Bereiche spezialisiert sind. Das ist \zB im Kunstbereich der Fall, wie aus der vorangegangenen Analyse hervorgeht, dessen Online-Angebot meist auf die jeweilige Galerie begrenzt ist. Ein weiteres Beispiel für den Bereich Musik sind Musikdienste, die sich auf spezielle Musikrichtungen spezialisiert haben. Außerdem können die Ergebnisse von Interesse sein, wenn populäre Quellen, APIs und sonstige Suchdienste nicht mit einbezogen werden um zu vergleichen, zu welchen Anteilen diese die Zusammensetzung des Suchergebnisses beeinflussen.
 
 \subsection{Filtern des Ergebnisses}
 Ein weiteres Feature ist die Filterung der Ergebnisse nach verschiedenen Kriterien. Dafür müssen die gesammelten Informationen jedoch Grundvorraussetzungen erfüllen, um diese Kriterien überhaupt bedienen zu können. Das Filtern nach Genre bietet sich \bspw bei Musik an, da diese Informationen größtenteils bereits in den untersuchten Datenbanken vorhanden sind. In diesem Fall kann \zB nach Musik-Genres wie Rock, Pop, Klassik oder Hip-Hop gefiltert werden. Ähnlich verhält sich das Filtern bei Filmen. Insbesondere, wenn der Nutzer die Suche im Vorfeld auf den Medientyp Video und die Sub-Kategorie Film reduziert hat, bietet sich an, diese Auswahl nachträglich nach Action, Drama oder \bspw Thriller zu filtern. 
 
-Dies ist für andere Medientypen entsprechend schwieriger umzusetzen, da es zum einen wiederum eigens betitelte Genres gibt und diese in den seltensten Fällen gepflegt sind und darüber hinaus maschinell auswertbar sind.
+Dies ist für andere Medientypen entsprechend schwieriger umzusetzen, da es eigens betitelte Genres gibt und diese in den seltensten Fällen gepflegt sind und darüber hinaus maschinell auswertbar sind.
 
-Der Grund, die Ergebnisse in zwei Schritten und in dieser Art zu filtern und zu verfeinern, liegt in der Art der Abfrage der Daten. Wird nach einem Zeitraum gesucht, können bestimmte Medientypen und \ggf bestimmte Quellen direkt ausgeschlossen werden. Daraus ergibt sich erst die Möglichkeit, inwiefern eine Filterung des Ergebnisses überhaupt möglich ist. In diesem Fall ist die Funktionalität davon abhängig, in welcher Form die Daten vorliegen. Wurden bei der Suche bereits Items gefunden, die \bspw über Informationen über Genre, Stil \oae verfügen, kann diese Möglichkeit erst angeboten werden. Ansonsten wäre es für den Nutzer frustrierend und auch kompliziert ein Suchergebnis zu filtern, wenn dieser letztendlich gar keine Auswirkung hat, weil dies technisch nicht möglich ist.
+Der Grund, die Ergebnisse in zwei Schritten und in dieser Art zu filtern und zu verfeinern, liegt in der Art der Abfrage der Daten. Wird nach einem Zeitraum gesucht, können bestimmte Medientypen und \ggf bestimmte Quellen direkt ausgeschlossen werden. Daraus ergibt sich erst die Möglichkeit, inwiefern eine Filterung des Ergebnisses überhaupt machbar ist. In diesem Fall ist die Funktionalität davon abhängig, in welcher Form die Daten vorliegen. Wurden bei der Suche bereits Items gefunden, die \bspw über Informationen wie Genre, Stil \oae verfügen, kann diese Möglichkeit erst angeboten werden. Ansonsten wäre es für den Nutzer frustrierend und auch kompliziert ein Suchergebnis zu filtern, wenn dieser letztendlich gar keinen Einfluss auf die Zusammensetzung des Ergebnisses ausüben kann, weil dies technisch nicht möglich ist.
 
 \paragraph{Ort}
 Eine Suchanfrage kann spezieller gestellt werden, in dem sie mit einer Ortsangabe erweitert wird. Das kann zum Beispiel mit der zusätzlichen Angabe eines Ortes geschehen. Hier würden \zB Musik-Charts des jeweiligen Landes durchsucht oder demografische Daten angezeigt.
@@ -144,16 +145,16 @@ Im Fokus der Applikation steht der Zeitpunkt, der dargestellt werden soll. Demen
 %----- SUBSECTION -----%
 \subsection{Sortieren}
 \paragraph{Relevanz}
-Ohne Spezifierung einer Sortierung werden gefundene Items nach Relevanz sortiert. Das bedeutet, dass von jeder Datenquelle das erste Ergebnis als erstes im Suchergebnis auftaucht. Die Reihenfolge der Datenquellen ist zufällig. Bei einer Einbindung passender Algorithmen, die das Messen der Relevanz eines Items, ermöglichen, ist auch eine zusätzliche Sortierung innerhalb der Web-Applikation denkbar. Dies setzt voraus, dass die Ergebnis-Items über genügend Informationen verfügen, die für das Messen der Relevanz nötig sind.
+Ohne Spezifierung einer Sortierung werden gefundene Items nach Relevanz sortiert. Das bedeutet, dass von jeder Datenquelle das erste Ergebnis als erstes im Suchergebnis auftaucht. Die Reihenfolge der Datenquellen ist zufällig. Bei einer Einbindung passender Algorithmen, die das Messen der Relevanz eines Items ermöglichen, ist auch eine zusätzliche Sortierung innerhalb der Web-Applikation denkbar. Dies setzt voraus, dass die Ergebnis-Items über genügend Informationen verfügen, die für das Messen der Relevanz nötig sind.
 
 \paragraph{Datum}
-Außerdem können die Ergebnis-Items chronologisch oder umgekehrt-chronologisch sortiert werden. Diese Möglichkeit entfällt jedoch, wenn die Such-Parameter dies ausschließen. Wenn \bspw nach Inhalten eines spezifischen Datums gesucht wird, ohne den umschließenden Zeitraum in Betracht zu ziehen, können die Items nicht sortiert werden.
+Die Ergebnis-Items können chronologisch oder umgekehrt-chronologisch sortiert werden. Diese Möglichkeit entfällt, wenn die Such-Parameter dies ausschließen. Wenn \bspw nach Inhalten eines spezifischen Datums gesucht wird, ohne den umschließenden Zeitraum in Betracht zu ziehen, können die Items nicht sortiert werden.
 
 \paragraph{Medientyp}
-Zusätzlich können die Inhalte nach Medientypen sortiert werden, sodass \bspw zuerst Audio-, dann Text- und dann Video-Inhalte angezeigt werden. Darüber hinaus ist eine Sortierung nach Medien-Subtypen oder Datenquellen denkbar, die der Nutzer \bspw durch \textbf{Drag and Drop} in der Sortierungs-Maske anordnen kann.
+Inhalte können nach Medientypen sortiert werden, sodass \bspw zuerst Audio-, dann Text- und dann Video-Inhalte angezeigt werden. Darüber hinaus ist eine Sortierung nach Medien-Subtypen oder Datenquellen denkbar, die der Nutzer \bspw durch \textbf{Drag and Drop} in der Sortierungs-Maske anordnen kann.
 
 \section{Use Cases}
-Zur Aufschlüsselung des Funktionsumfangs, wird im Folgenden eine Auswahl von Anwendungsfällen nach Fowler aufgelistet.
+Zur Aufschlüsselung des Funktionsumfangs, wird im Folgenden eine Auswahl von Anwendungsfällen aufgelistet.
 
 \paragraph{Suche nach Inhalten anhand eines Zeitpunktes} Suche nach Inhalten aus dem Jahre 1948.
 \begin{enumerate}[1.]
@@ -224,7 +225,7 @@ Inhaltstypen müssen für den Benutzer klar erkennbar sein, sodass Audio-Daten sch
 Die Web-Applikation zeigt zu Beginn lediglich ein Suchfeld mit der Möglichkeit die Suche zu begrenzen.
 
 \paragraph{Home - Disambiguation}
-In Abbildung \ref{fig:homeDisambiguation} werden passende Suchvorschläge am Beispiel der Eingabe des Terms \glqq 2001\grqq \ angezeigt. Dies verdeutlicht ebenso den Umgang mit Disambiguierungen. So wird dem Nutzer angezeigt, um welche Item-Typen gefunden wurden, Informationen über das Item selbst, wie \zB Titel oder Interpret, und letztendlich das Datum \bzw den Zeitraum, der durchsucht werden soll.
+In Abbildung \ref{fig:homeDisambiguation} werden passende Suchvorschläge am Beispiel der Eingabe des Terms \glqq 2001\grqq \ angezeigt. Dies verdeutlicht ebenso den Umgang mit Disambiguierungen. So wird dem Nutzer angezeigt, welche Item-Typen gefunden wurden, Informationen über das Item selbst, wie \zB Titel oder Interpret, und letztendlich das Datum \bzw den Zeitraum, der durchsucht werden soll.
 
 \begin{figure}[htb]
 	\begin{center}
@@ -273,7 +274,7 @@ Mit Klick auf das Menü-Icon werden Details zum ausgewählten Items, an dessen Dat
 \end{figure}
 
 \paragraph{Suchmenü - Filter}
-Unter dem Menü-Eintrag \textbf{Filter Result} sieht man die Möglichkeiten zur nachträglichen Filterung des Suchergebnisses. In diesem Fall werden als mögliche Genres \textbf{Art Pop}, \textbf{Pop}, \textbf{Rock} und \textbf{Baroque Pop} angeboten, da diese die Informationen durch den Online-Dienst erfasst werden können. Daneben kann der Zeitraum genauer spezifiziert werden.
+Unter dem Menü-Eintrag \textbf{Filter Result} sieht man die Möglichkeiten zur nachträglichen Filterung des Suchergebnisses. In diesem Fall werden als mögliche Genres \textbf{Art Pop}, \textbf{Pop}, \textbf{Rock} und \textbf{Baroque Pop} angeboten, da die Informationen durch den Online-Dienst erfasst werden können. Daneben kann der Zeitraum genauer spezifiziert werden.
 
 \begin{figure}[htb]
 	\begin{center}
@@ -300,29 +301,29 @@ Im Fokus der Applikation steht eine komfortable Suche, die dem Nutzer möglichst 
 Eine für diese Web-Applikation besondere Aufgabe ist es, die drei Kernfunktionen möglichst gleichzeitig gut erreichbar zu machen, ohne die Gesamterscheinung zu stören.
 
 \paragraph{Suchen}
-Für eine möglichst komfortable Suche, werden schon bei der Eingabe im Suchfeld Suchvorschläge gemacht. Dafür werden Such-Requests an die APIs der Suchdienste übermittelt, um mögliche Items vorzuschlagen.
+Für eine möglichst komfortable Suche werden schon bei der Eingabe im Suchfeld Suchvorschläge gemacht. Dafür werden Such-Requests an die APIs der Suchdienste übermittelt, um mögliche Items vorzuschlagen.
 
 \paragraph{Browsen}
-Initial werden die aggregierten Ergebnis-Items nur anhand eines Bildes, Covers \oae repräsentiert. Darüber hinaus kann sich der Nutzer weitere Details über das gefundene Item ansehen. Darüber hinaus kann die Quelle des Items eingesehen werden, indem der Source-Link des Inhaltes eingebunden und aufrufbar ist. Insbesondere Text-Inhalte, dessen Umfang sehr groß sein kann, können so auf der Quell-Webseite gelesen werden. Außerdem können bei Musiktiteln \bspw Chart-Informationen und andere Informationen angezeigt werden. 
+Initial werden die aggregierten Ergebnis-Items nur anhand eines Bildes, Covers \oae repräsentiert. Darüber hinaus kann sich der Nutzer weitere Details über das gefundene Item ansehen. Weiterhin kann die Quelle des Items eingesehen werden, indem der Source-Link des Inhaltes eingebunden und aufrufbar ist. Insbesondere Text-Inhalt, der über sehr großen Umfang verfügt, kann so auf der Quell-Webseite gelesen werden. Außerdem können bei Musiktiteln \bspw Chart-Informationen und andere Informationen angezeigt werden. 
 
-Außerdem kann der Nutzer ein ausgewähltes Item aus den Suchergebnissen für eine weitere Suche auswählen.
+Zudem kann der Nutzer ein ausgewähltes Item aus den Suchergebnissen für eine weitere Suche auswählen.
 
 \paragraph{Konsumieren}
-Unter den dargestellten Inhalten befinden sich auch abspielbare Inhalte. Diese soll der Nutzer sich möglichst gleichzeitig anschauen können.
+Unter den dargestellten Inhalten befinden sich auch abspielbare Inhalte. Diese soll der Nutzer sich möglichst gleichzeitig anschauen und anhören können.
 
 %----- SUBSECTION -----%
 \subsection{Design und Layout}
-Da die Web-Applikation sehr viele unterschiedliche Medienarten und -inhalte darstellen soll, ist ein übersichtliches und klares Design umso wichtiger, um es dem Nutzer zu ermöglichen, sich auf die Inhalte konzentrieren zu können. Darum ist es wichtig, dass das Design möglichst flexibel ist, unabhängig vom Inhalt. Folgende Aspekte sind beim Layout zu beachten:
+Da die Web-Applikation sehr viele unterschiedliche Medienarten und -inhalte darstellen soll, ist ein übersichtliches und klares Design erforderlich, um es dem Nutzer zu ermöglichen, sich auf die Inhalte konzentrieren zu können. Darum ist es wichtig, dass das Design möglichst flexibel ist, unabhängig vom Inhalt. Folgende Aspekte sind beim Layout zu beachten:
 
 \paragraph{Suche und Filter}
-In der Eingrenzung der Inhalte wird unterschieden, welche Eingrenzungen vor dem Beginn der Suche stattfinden, und welche lediglich dem Filtern des Ergebnisses dienen. Das sind zum einen die Faktoren, die die Suche ansich maßgeblich beeinflussen. Im Gegensatz dazu gibt es die Faktoren, die lediglich das vorhandene Ergebnis filtern.
+In der Eingrenzung der Inhalte wird unterschieden, welche Eingrenzungen vor dem Beginn der Suche stattfinden, und welche lediglich dem Filtern des Ergebnisses dienen. Das sind zum einen die Faktoren, die die Suche selbst maßgeblich beeinflussen. Zum anderen sind das Faktoren, die lediglich das vorhandene Ergebnis filtern.
 
 \paragraph{Musik- und Video-Player}
-Während alle Suchergebnisse in einer Art Raster einheitlich angezeigt werden, gibt es für Audio- und Video-Inhalte zusätzlich einen separaten Bereich, in dem diese nach Reihenfolge im Suchergebnis sortiert als Playlist bereit stehen. Das bedeutet, dass der Nutzer, während er im linken Bereich durch Inhalte verschiedener Medientypen scrollt, im rechten Bereich die automatisch erstellte Playliste bedienen kann und dementsprechend die Inhalte betrachten, \bzw anhören kann. Außerdem kann er einzelne Items der Playliste durch Drag \& Drop neu anordnen oder Items von der Playliste entfernen. Klickt er auf das Queue-Symbol eines Items, wird das gewählte Item an nächster Stelle in der Liste platziert und als nächstes abgespielt. Klickt man auf das Play-Symbol eines Items, wird dieses sofort abgespielt.
+Während alle Suchergebnisse in einer Art Raster einheitlich angezeigt werden, gibt es für Audio- und Video-Inhalte zusätzlich einen separaten Bereich, in dem diese nach Reihenfolge im Suchergebnis sortiert als Playlist bereit stehen. Das bedeutet, dass der Nutzer, während er im linken Bereich durch Inhalte verschiedener Medientypen scrollt, im rechten Bereich die automatisch erstellte Playliste angezeigt wird und dementsprechend die Inhalte betrachtet, \bzw angehört werden können. Außerdem können einzelne Items der Playliste durch Drag \& Drop neu angeordnet oder Items von der Playliste entfernt werden. Mit Klick auf das Queue-Symbol eines Items, wird das gewählte Item an nächster Stelle in der Liste platziert und als nächstes abgespielt. Wird auf das Play-Symbol eines Items geklickt, wird dieses sofort abgespielt.
 
 
 %===== SECTION =====%
 \section{Eingrenzung}
-Die Masse an unterschiedlichen Medien-Typen, -Quellen und -Arten, die in \arbeitstitel \ angezeigt werden können, lässt sich kaum erfassen. Je nach Belieben und sich neu eröffnenden Möglichkeiten kann sich sowohl das mögliche Angebot, als auch die Nachfrage nach bestimmten zeitspezifischen Content ändern. Zum einen sind ein Großteil der denkbaren Daten zwar im Internet verfügbar, jedoch fehlt es meist an komfortablen Möglichkeiten, diese insbesondere zeitspezifisch zu aggregieren.
+Die Masse an unterschiedlichen Medien-Typen, -Quellen und -Arten, die in \arbeitstitel \ angezeigt werden kann, lässt sich kaum erfassen. Je nach Belieben und sich neu eröffnenden Möglichkeiten kann sich sowohl das mögliche Angebot, als auch die Nachfrage nach bestimmten zeitspezifischen Content ändern. Ein Großteil der denkbaren Daten sind zwar im Internet verfügbar, jedoch fehlt es meist an komfortablen Möglichkeiten, diese insbesondere zeitspezifisch zu aggregieren.
 
-Im Rahmen dieser Masterarbeit wird daher ein Working Prototype als Proof of Concept implementiert werden. In dieser Hinsicht wird die Funktionalität von \arbeitstitel \ auf die Medientypen Musik und Film reduziert werden. Zum einen gibt es zum Thema Musik eine Vielzahl an zuverlässigen und offenen Quellen, die für unkommerzielle Zwecke zur freien Verwendung zur Verfügung stehen, außerdem ist die Art der vorliegenden Daten, insbesondere aufgrund des ID3-Standards, der Entwicklung zuträglich.
+Im Rahmen dieser Masterarbeit wird daher ein Working Prototype als Proof of Concept implementiert werden. In dieser Hinsicht wird die Funktionalität von \arbeitstitel \ auf die Medientypen Musik und Film reduziert werden. Zum Thema Musik gibt es eine Vielzahl an zuverlässigen und offenen Quellen, die für unkommerzielle Zwecke zur freien Verwendung zur Verfügung stehen, außerdem ist die Art der vorliegenden Daten, insbesondere aufgrund des ID3-Standards, der Entwicklung zuträglich.
