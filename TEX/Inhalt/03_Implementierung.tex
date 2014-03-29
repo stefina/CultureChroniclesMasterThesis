@@ -31,8 +31,7 @@ Im folgenden Abschnitt werden in Frage kommende Quellen und APIs und deren Vor- 
 \textbf{The Movie Database} ist eine offene Film- und TV-Datenbank, die ursprünglich aus Daten der \textbf{Open Media Database} \citep{omdb} entstanden ist und darüber hinaus auf nutzergenerierten Inhalten basiert \citep[Vgl.][]{tmbd}. Außerdem bietet \textbf{The Movie Database} eine unkommerziell verwendbare API für Entwickler, die sehr gut mit \textbf{apiary}\footnote{\textbf{apiary} ist ein Framework zur Beschreibung und Dokumentation von APIs. Es ist insbesondere dafür vorgesehen vor dem Prozess der eigentlichen Implementierung, die Funktionalität im Voraus zu definieren. \citep{apiary}} dokumentiert ist.
 
 \subsubsection{Rotten Tomatoes}
-\textbf{Rotten Tomatoes} \citep{rottenTomatoes} ist eine Sammlung von Filmkritiken und bietet in diesem Zuge auch detaillierte Informationen über Film- und TV-Produktionen \citep[Vgl.][]{rottenWiki}.\todo{das muss noch besser beschrieben werden, schließlich wird es am Ende auch benutzt.}
-
+\textbf{Rotten Tomatoes} \citep{rottenTomatoes} ist eine Sammlung von Filmkritiken und bietet in diesem Zuge auch detaillierte Informationen über Film- und TV-Produktionen \citep[Vgl.][]{rottenWiki}. Standardmäßig ist die Anzahl von Requests pro Sekunde und Tag limitiert. Zu beachten ist außerdem, dass die API lediglich für die Nutzung in den Vereinigten Staaten vorgesehen ist. \citep[Vgl.][Important Notes about API Usage]{rottenAPI} Zwar verwendet \textbf{Rotten Tomatoes} eine eigene Datenform, in der die Filme abgebildet sind, jedoch ist in einem Großteil der Datensätze im Feld \texttt{alternate\_ids} auch die \textbf{IMDb}-Id aufgeführt. Somit bietet die API auch die Möglichkeit, den Datensatz eines Filmes anhand der \textbf{IMDb}-Id zu liefern.
 
 \subsection{Sonstige}
 \subsubsection{Wolfram|Alpha}
@@ -68,10 +67,10 @@ Der große Nachteil von \textbf{Vimeo} \bzgl der Nutzung für \arbeitstitel \ ist 
 
 \subsection{Audio}
 \paragraph{Spotify}
-Über den kommerziellen Streaming-Dienst \textbf{Spotify} lässt sich über ein musikalisches Repertoire bekannter Plattenlabels auf einer Vielzahl von Desktop- und Mobil-Geräten zugreifen. \textbf{Spotify} stellt eine API bereit, über die sich die verfügbaren Musiktitel durchsuchen und einbetten lassen können. Aufgrund des Freemium-Konzepts ergibt sich der Nachteil, dass ein Nutzer von \arbeitstitel \ über einen \textbf{Spotify}-Account verfügen muss, möchte er unbegrenzt über die Web-Applikation Musik hören.
+Über den kommerziellen Streaming-Dienst \textbf{Spotify} \citep{spotify} lässt sich über ein musikalisches Repertoire bekannter Plattenlabels auf einer Vielzahl von Desktop- und Mobil-Geräten zugreifen. \textbf{Spotify} stellt eine API bereit, über die sich die verfügbaren Musiktitel durchsuchen und einbetten lassen können. Aufgrund des Freemium-Konzepts ergibt sich der Nachteil, dass ein Nutzer von \arbeitstitel \ über einen \textbf{Spotify}-Account verfügen muss, möchte er unbegrenzt über die Web-Applikation Musik hören. Spotify bietet unterschiedliche Möglichkeiten, auf sowohl Meta-Informationen von Musikveröffentlichungen und Künstlern (\textit{Metadata API}), als auch die Musik selbst zuzugreifen. Während die \textit{Apps API} and \textit{Views API} dafür vorgesehen sind, Applikationen für die Stand-Alone-Version von \textbf{Spotify} zu entwickeln, bedienen \textit{Libspotify SDK} und \textit{CocoaLibSpotify} den Zweck, Musik von Spotify in eigens entwickelten Applikationen zu streamen. \citep[Vgl.][]{spotifyDeveloper} Desweiteren wird sowohl über die Web-, als auch über die Stand-Alone-Applikation die Möglichkeit angeboten, Einbettungscode von einzelnen Songs, eines Albums oder Playlisten zu generieren. Das automatische Generieren des Embed-Codes wird derzeit über keine der Schnittstellen angeboten. Jedoch weist der einzubindende Code für den IFrame immer die gleiche Struktur auf. Daher bietet es sich an, lediglich die \textit{Metadata API} einzubinden, um die \textbf{Spotify}-Id eines Songs zu erhalten, und den IFrame nach der vorgegebenen Struktur, die im Listing \ref{lst:spotifyIFrame} zu sehen ist, innerhalb von \arbeitstitel \ zusammenzubauen.
 
-\todo{bissl details zur API, wie funzt das von ner suche eines titels zu nem embed-song im iframe}
-
+\medskip
+\lstinputlisting[language=HTML,caption={Spotify IFrame-Code},label={lst:spotifyIFrame}]{Inhalt/Code/spotifyIFrame.html}
 
 \section{Techniken}
 Zum Erfassen unterschiedlichster Daten im Internet gibt es verschiedene Möglichkeiten, wobei diese stark vom Angebot des Web und der einzelnen Anbieter abhängig sind. Im Folgenden werden mögliche Techniken, Daten unterschiedlicher Quellen zu erfassen, kurz vorgestellt und deren Vor- und Nachteile für die Entwicklung von \arbeitstitel \ herausgestellt. Auf dessen Grundlage wird entschieden, welche Datenquellen zu bevorzugen sind.
@@ -113,10 +112,7 @@ Auf Wikipedia existieren brauchbare Seiten, die jeweils die Musik- und Film-Char
 Das \textbf{Sweble Wikitext Components module} soll das Parsen von MediaWikis Wikitext ermöglichen und darüber hinaus eine Engine bieten, die versucht das Verhalten eines MediaWiki zu emulieren. \citep[Vgl.][]{sweble} \textbf{Sweble} ist Open Source verfügbar und addressiert die im folgenden Zitat beschriebene Problematik: 
 \begin{quotation}\glqq Content von Wikis wird durch spezialisierte Sprachen beschrieben, die allgemein als Wiki Markup Languages bezeichnet werden. Trotz ihres unschuldigen Namens, können diese Sprachen ziemlich komplex sein und über ein ebenso komplexes visuelles Layout, als auch über [vollständige; St.]  Programmiersprachen-Features verfügen, wie \zB Variablen, Schleifen, Funktionsaufrufe und Rekursion. \grqq \footnote{\citet[Vgl.][Introduction]{DohrnSweble} [eigene Übersetzung]. Originalwortlaut: \glqq The content of wikis is being described using specialized languages, commonly called wiki markup languages. Despite their innocent name, these languages can be fairly complex and include complex visual layout mechanisms as well as full-edged programming language features like variables, loops, function calls, and recursion.\grqq}\end{quotation}
 
-Dies verdeutlicht die Problematik, dass Wikipedia zwar über diverse für \arbeitstitel \ interessante Artikel verfügt, es jedoch schwer ist, diese Daten automatisch zu erfassen. Um den tatsächlichen Nutzen der \textbf{Sweble}-Software für \arbeitstitel \ zu analysieren, ist abgesehen worden, da dies den Zeitrahmen dieser Arbeit spränge.\todo{hui, was mach ich nur mit diesem satz -.-}
-
-%\citep{sweblePaper} 
-%\citep{DohrnSweble} 
+Dies verdeutlicht die Problematik, dass Wikipedia zwar über diverse für \arbeitstitel \ interessante Artikel verfügt, es jedoch schwer ist, diese Daten automatisch zu erfassen. Da eine aussagekräftige Analyse des tatsächlichen Nutzens der \textbf{Sweble}-Software für \arbeitstitel \ als sehr zeitaufwändig eingeschätzt wird, ist davon abgesehen worden, die Software genauer zu untersuchen.\todo{kann man den satz so lassen oder klingt das zu mimimi und passt nicht hierher?}
 
 
 \subsection{Mergen von Daten / Multiple Requests für einen Datensatz}
@@ -168,12 +164,12 @@ Eine besondere Behandlung wird für die Darstellung von Filmplakaten benötigt. Di
 
 
 
+\subsection{Umsetzung und verwendete Tools im Server}
+Die Funktionalität des Servers baut auf verschiedenen Tools und Frameworks auf, dessen Zusammenspiel im Folgenden kurz vorgestellt wird. Dabei ergibt sich die Struktur und der Ablauf der Requests größtenteils daraus, wie die unterschiedlichen Datenformen von den verwendeten APIs erfasst werden können. Daher wird im Folgenden zunächst auf die grobe Struktur und die interne Architektur von \arbeitstitel \ eingegangen, um darauffolgend anhand von Code-Beispielen der verwendeten Tools, deren Nutzen und desweiteren die genaue Funktionalität erläutern zu können.
 
 
 
-
-
-\subsection{Interner Aufbau und Ablauf von Requests}
+\subsubsection{Interner Aufbau und Ablauf von Requests}
 In Abbildung \ref{fig:requestDiagram} ist der grobe Ablauf von Nutzer-Eingabe bis zur Lieferung der resultierenden Medien-Items zu sehen. Bei der Eingabe eines Suchbegriffes werden zunächst mögliche Suchvorschläge gegeben.\footnote{Der schematische Ablauf der Sammlung der Suchvorschläge ist in Abbildung \ref{fig:suggestionsRequestDiagram} zu sehen und wird in Abschnitt \ref{subsec:suggestions} beschrieben} Anhand der Suchvorschläge kann der Nutzer sich ein Item aussuchen, dessen Zeitraum durchsucht werden soll. Anhand diesen Zeitraumes sendet \arbeitstitel \ Sucherequests an die verbundenen APIs und Quellen und gibt ein Set an Suchergebnissen (\texttt{MusicResults}) und abspielbaren Medieninhalten (\texttt{TrailerResults}) zurück.\footnote{Der schematische Ablauf der Sammlung von Suchergebnissen ist in Abbildung \ref{fig:searchResultsRequestDiagram} zu sehen und wird in Abschnitt \ref{subsec:results} genauer beschrieben.}
 
 \begin{figure}[htb]
@@ -184,7 +180,7 @@ In Abbildung \ref{fig:requestDiagram} ist der grobe Ablauf von Nutzer-Eingabe bi
 	\label{fig:requestDiagram}
 \end{figure}
 
-\subsection{Erfassen von Suchvorschlägen anhand eines Suchbegriffes}
+\subsubsection{Erfassen von Suchvorschlägen anhand eines Suchbegriffes}
 \label{subsec:suggestions}
 In Abbildung \ref{fig:suggestionsRequestDiagram} wird der interne Ablauf zur Erfassung der Suchvorschläge schematisch dargestellt. Bei Eingabe eines Suchbegriffs, wird bei den unterschiedlichen APIs und Quellen nach passenden Suchvorschlägen gesucht. Um Suchvorschläge im Bereich Film zu finden, werden passende Items von \textbf{Rotten Tomatoes} und \textbf{IMDb} gesammelt. 
 
@@ -199,7 +195,7 @@ Gleichzeitig findet die Suche nach Suchvorschlägen im Bereich Musik statt. Aufgr
 \end{figure}
 
 
-\subsection{Erfassen von Suchergebnissen anhand eines Zeitraumes}
+\subsubsection{Erfassen von Suchergebnissen anhand eines Zeitraumes}
 \label{subsec:results}
 In Abbildung \ref{fig:searchResultsRequestDiagram} ist der interne Ablauf der Erfassung von Suchergebnissen schematisch dargestellt. Ausgangspunkt der Grafik ist ein bereits ausgewählter Zeitraum (\texttt{SuggestionDate}). Anhand des Datums wird mittels Scrapen der passenden \textbf{IMDb}-Seite eine Liste von IMDb-IDs erfasst. Alle restlichen Daten können mit Angabe der IMDb-ID von den APIs \textbf{RottenTomatoes} und \textbf{TrailerAddict} nachgeladen werden. Die Ergebnisse resultieren im Falle der Abfrage bei \textbf{RottenTomatoes} in einem Set von Movie-Results, im Falle der Abfrage von \textbf{TrailerAddict} in einer Liste von Trailern.\footnote{Genauer besteht die Liste von Trailern aus einer Liste von Quellcode-Snippets, die die eingebetteten Trailer-Videos enthalten.}
 
@@ -211,23 +207,6 @@ In Abbildung \ref{fig:searchResultsRequestDiagram} ist der interne Ablauf der Er
 	\label{fig:searchResultsRequestDiagram}
 \end{figure}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\subsection{Umsetzung und verwendete Tools im Server}
-Die Funktionalität des Servers baut auf verschiedenen Tools und Frameworks auf, dessen Zusammenspiel im Folgenden kurz vorgestellt wird.
 
 \subsubsection{Interne Datenübertragung mittels MongoDB}
 Da die in \arbeitstitel \ angezeigten und verarbeiteten Daten dynamisch von unterschiedlichen Quellen geladen werden sollen, ist eine Datenhaltung im Prinzip nicht erforderlich. Jedoch werden die zur Laufzeit erfassten Daten zwischengespeichert und intern auf Objekte gemappt.
