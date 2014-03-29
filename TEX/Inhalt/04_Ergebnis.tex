@@ -5,7 +5,21 @@ Im Folgenden wird der Funktionsumfang und die Anwendung der Web-Applikation besc
 
 \section{Anwendung}
 \subsection{Eingeben eines Suchbegriffes}
-In Abbildung \ref{fig:screenHome} ist die Web-Applikation in ihrer Ausgangssituation zu sehen. Der Nutzer kann mit einem Klick auf die Selectbox (\glqq Choose a timeframe!\grqq) einen Suchbegriff eingeben. Um unnötige Requests zu vermeiden, wird erst bei Eingabe des dritten Zeichens eine Suche gestartet. In Abbildung \ref{fig:screenSuggestions} ist die Anzeige von Suchvorschlägen zu sehen. Anhand des Icons ist zu erkennen, von welcher Quelle der Suchvorschlag kommt. Soweit vorhanden, wird daneben ein Thumbnail des Filmplakats angezeigt, sollte keines gefunden worden, wird ein Platzhalter angezeigt. Außerdem werden Titel der vorgeschlagenen Items, sowie das jeweilige Erscheinungsjahr angezeigt. Das Jahr bezeichnet den Zeitraum, der durchsucht wird, wenn der Nutzer darauf klickt.
+In Abbildung \ref{fig:screenHome} ist die Web-Applikation in ihrer Ausgangssituation zu sehen. Der Nutzer kann mit einem Klick auf die Selectbox (\glqq Choose a timeframe!\grqq) einen Suchbegriff eingeben. Die Eingabemöglichkeiten, deren Quelle und der jeweils daraus resultierende Zeitpunkt, der für die Suche relevant ist, sind in der Tabelle \ref{tab:eingabeformen}
+
+\begin{table}
+    \begin{tabular}{|l|P{7cm}|l|}
+	\hline
+	Eingabe 			& Suchvorschlag & Zeitpunkt \\ \hline \hline
+	Filmtitel			& Filmtitel von \textbf{Rotten Tomatoes} und \textbf{IMDb} 	& Filmstart \\ \hline
+	Musiktitel 			& Musiktitel von \textbf{MusicBrainz}  						& Veröffentlichungsdatum \\  \hline
+	Interpret			& Musiktitel des Künstlers, die auf \textbf{MusicBrainz} zu finden sind  		& Veröffentlichungsdatum \\
+	\hline
+	\end{tabular}
+	\caption{Eingabeformen, mögliche Quellen und das jeweils aufgelöste Datum}\label{tab:eingabeformen}
+\end{table}
+
+Um unnötige Requests zu vermeiden, wird erst bei Eingabe des dritten Zeichens eine Suche gestartet. In Abbildung \ref{fig:screenSuggestions} ist die Anzeige von Suchvorschlägen zu sehen. Anhand des Icons ist zu erkennen, von welcher Quelle der Suchvorschlag kommt. Soweit vorhanden, wird daneben ein Thumbnail des Filmplakats angezeigt, sollte keines gefunden worden, wird ein Platzhalter angezeigt. Außerdem werden Titel der vorgeschlagenen Items, sowie das jeweilige Erscheinungsjahr angezeigt. Das Jahr bezeichnet den Zeitraum, der durchsucht wird, wenn der Nutzer darauf klickt.
 
 \begin{figure}[htb]
 	\begin{center}
@@ -57,9 +71,6 @@ Fährt man mit dem Mauszeiger über ein Item \zB ein Filmplakat, erscheinen drei I
 Nach dem Durchführen einer Suche, kann über das Menu-Icon, welches sich neben dem Suche-Eingabefeld befindet, das Menu aufgerufen werden. Wie in Abbildung \ref{fig:screenSearchDetail} zu sehen ist, werden unter \glqq Search Details\grqq \ das gesuchte Jahr, der Titel des gesuchten Items, sowie der Medien- und Medien-Subtyp angezeigt. Außerdem wird, soweit vorhanden, ein repräsentatives Bild angezeigt, in diesem Fall das Filmplakat von \glqq Ferris Bueller\grq s Day off\glqq . Über den Link der Quelle, in der Abbildung \glqq RottenTomatoes\grqq , kann auf die Webseite des jeweiligen Items auf der Dienstseite navigiert werden. Die Option \glqq Filter Result\grqq \ dient zu diesem Zeitpunkt lediglich als Platzhalter für die zukünftige Funktion des Filterns des Ergebnisses.
 
 
-\subsection{Eingabe-Möglichkeiten}
-Derzeit kann lediglich anhand eines Filmtitels ein Zeitraum ausgewählt werden. 
-
 \subsection{Funktionalität des Players}
 Derzeit wird der Player lediglich mit Film-Trailern befüllt. Die Funktionalität des Players konnte nicht implementiert werden, da die \textbf{TrailerAddict}-API lediglich das Einbetten ihrer Trailer vorsieht. Dementsprechend ist das Result, welches von dieser API zurückkommt, ein HTML-Snippet, das in einem IFrame in \arbeitstitel \ eingebettet wird. Eine externe Steuerung von IFrames, sodass die Player-Funktionalität, wie das Abspielen, Skippen oder Pausieren eines Trailers nicht über die Player-Buttons von \arbeitstitel \ nicht bewerkstelligt werden kann.
 
@@ -85,6 +96,9 @@ Durch das \textbf{Express}-Framework ist die implementierte Funktionalität ebenf
 		\item \textbf{returnValue}: \texttt{List<resultItem>}
 	\end{itemize}
 \end{itemize}
+
+
+% \input{Inhalt/Tabellen/CCAPI}
 
 
 

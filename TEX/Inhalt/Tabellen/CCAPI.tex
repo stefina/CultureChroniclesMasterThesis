@@ -1,0 +1,20 @@
+%!TEX root = ../../Masterarbeit.tex
+\begin{table}
+    \begin{tabular}{lllll}
+    Suggestion            & ~          & ~                                                                 & ~                                        & ~       \\ \hline
+    Suggestion Collection & ~          & ~                                                                 & ~                                        & ~       \\
+    ~                     & ~          & Liefert eine Liste von Suchvorschlägen anhand eines Suchbegriffes & ~                                        & ~       \\
+    ~                     & ~          & GET/                                                              & suggestions/\{searchterm\}               & ~       \\
+    ~                     & Parameters & ~                                                                 & ~                                        & ~       \\
+    ~                     & ~          & Name                                                              & Beschreibung                             & Details \\
+    ~                     & ~          & searchterm                                                        & Suchbegriff (Filmtitel, Musiktitel etc.) & String  \\
+    ~                     & ~          & ~                                                                 & ~                                        & ~       \\
+    ResultItem Collection & ~          & ~                                                                 & ~                                        & ~       \\
+    ~                     & ~          & Liefert eine Liste von Suchergebnissen anhand einer suggestionId  & ~                                        & ~       \\
+    ~                     & ~          & GET/                                                              & search/\{suggestionId\}                  & ~       \\
+    ~                     & Parameters & ~                                                                 & ~                                        & ~       \\
+    ~                     & ~          & Name                                                              & Beschreibung                             & Details \\
+    ~                     & ~          & suggestionId                                                      & Id                                       & String  \\
+    ~                     & ~          & ~                                                                 & ~                                        & ~       \\
+    \end{tabular}
+\end{table}
