@@ -1,9 +1,9 @@
 +++
-async
-beschreiben vom einfügen neuer Dienste:
+glossar
 ccsettings
-
 Abbildungsnummerierung
+
+"Typ und Schlüsselwort Diagramm"!?
 
 
 ---
@@ -12,9 +12,7 @@ Glossar vervollständigen und neu bauen
 
 Abstract, Einleitung, Fazit
 
-screenshots von culture chronicles:
-- initial state
-- suchergebnis
+
 
 todo auskommentieren
 zum drucken das highlighting ausstellen

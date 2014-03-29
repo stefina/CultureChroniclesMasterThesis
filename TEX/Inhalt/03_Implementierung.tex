@@ -122,23 +122,21 @@ Dies verdeutlicht die Problematik, dass Wikipedia zwar über diverse für \arbeits
 \subsection{Mergen von Daten / Multiple Requests für einen Datensatz}
 Die Verwendung von existierenden und frei verfügbaren APIs ist klar zu bevorzugen, da diese mit hoher Wahrscheinlichkeit konsistente Daten in einem großen Umfang liefern. Da die Form der Daten nicht zwangsweise auf die Ansprüche von \arbeitstitel \ zugeschnitten sind, kann es notwendig sein, für einzelne Daten eines Datensatzes verschiedene Services zu verwenden. So werden \zB für die Anzeige eines Songtitels in der Web-Applikation sowohl als Suchvorschlag als auch als Suchergebnis-Item zunächst alle benötigten Informationen von der \textbf{MusicBrainz}-API bezogen und die angezeigten Cover von der \textbf{CoverArt}-API einzeln nachgeladen.
 
-% nadja
-
 \subsection{Begrenzung von Requests pro Sekunde in den unterschiedlichen APIs}
 MusicBrainz limitiert, wie einige andere APIs auch, die Anzahl von Anfragen einer Ressource anhand von Kriterien des User-Agents und der IP-Addresse. Darüber behält sich \textbf{MusicBrainz} vor, bei einer generellen Überlastung des Servers eingehende Anfragen zu blockieren. Dieses Limit kann schnell überschritten werden, wenn einzelne Requests erfolgen, wie \bspw beim Nachladen einzelner Informationen pro Item. Aus diesem Grund muss dem Sammeln größerer Mengen an Items entweder mehr Zeit gegeben, oder generell die Anzahl an Items begrenzt werden. Der beste Kompromiss ist hier, immer ein Set von Medien-Items anzufragen, welches die Kapazität nicht überschreitet, und anschließend Sets jeweils einzeln nachzuladen.
 
 \section{Architektur der Web-Applikation}
-Die Web-Applikation wird serverseitig mittels Javascript umgesetzt. Die Software-Plattform Node.js \citep{nodejs} bietet ein einfaches Konzept zur Erstellung und Inbetriebnahme von skalierbaren Netzwerk-Applikationen. Im Bezug auf \arbeitstitel \ ist das event-driven Konzept von großem Vorteil, da die Kommunikation mit mehreren APIs um einiges beschleunigt werden kann, indem die API-Requests von der Asynchronität Gebrauch machen.
+Die Web-Applikation wird serverseitig mittels Javascript umgesetzt. Die Software-Plattform Node.js \citep{nodejs} bietet ein einfaches Konzept zur Erstellung und Inbetriebnahme von skalierbaren Netzwerk-Applikationen. Im Bezug auf \arbeitstitel \ ist das Konzept der Ereignisgesteuerten Architektur\footnote{Die Ereignisgesteuerte Architektur (engl. Event-Driven Concept) verfolgt den Ansatz, Funktionalität basierend auf Ereignissen auszuführen. Insbesondere ist für die Entwicklung von \arbeitstitel \ der Aspekt der parallelen Bearbeitung von Requests zu nennen.} von großem Vorteil, da die Kommunikation mit mehreren APIs um einiges beschleunigt werden kann, indem die API-Requests von der Asynchronität Gebrauch machen.
 
-Ein weiterer maßgeblicher Vorteil ist, dass für nahezu jede in dieser Arbeit betrachtete Schnittstelle auch ein Wrapper existiert, was die Einbindung der unterschiedlichen Quellen stark vereinfacht.
+Ein weiterer maßgeblicher Vorteil ist, dass für nahezu jede in dieser Arbeit untersuchte Schnittstelle auch ein Wrapper existiert, was die Einbindung der unterschiedlichen Quellen stark vereinfacht.
 
 Im Folgenden wird das Setup der Web-Applikation, sowie integrierte Module und deren Verwendung anhand von Code-Beispielen erläutert.
 
 \subsection{Express.js}
-Das Web-Application-Framework \textbf{Express.js} \citep{expressjs} wird verwendet, da es eine Palette von Funktionalität zur einfachen Implementierung von Web-Applikationen mit \textbf{Node.js} bietet und trotzdem flexibel und leichtgewichtig ist. Es ist als Schicht zwischen Funktionalität und Frontend zu verstehen und agiert als API \citep[Vgl.][]{expressjs}. Das ist speziell für \arbeitstitel \ von Vorteil, da dies das Bereitstellen einer API für die Funktionalität von \arbeitstitel \ bietet und damit das Entwickeln von weiteren Anwendungen vereinfacht wird.
+Das Web-Application-Framework \textbf{Express.js} \citep{expressjs} wird verwendet, da es eine Palette von Funktionen zur einfachen Implementierung von Web-Applikationen mit \textbf{Node.js} bietet und trotzdem flexibel und leichtgewichtig ist. Es ist als Schicht zwischen Funktionalität und Frontend zu verstehen und agiert als API \citep[Vgl.][]{expressjs}. Das ist speziell für \arbeitstitel \ von Vorteil, da dies das Bereitstellen einer API für die Funktionalität von \arbeitstitel \ bietet und damit das Entwickeln von weiteren Anwendungen vereinfacht wird.
 
 \subsubsection{Code-Generierung mit Yeoman}
-Das Gerüst der Web-Applikation wurde mittels \textbf{Yeoman} \citep{yeoman}, einem Scaffolding-Tool für Webapps, generiert. Der Workflow von Yeoman basiert auf den drei Tools \textbf{Yo}, \textbf{Grunt} \citep{grunt} und \textbf{Bower} \citep{bower}. Bower ist ein Package Manager für das Frontend, Grunt ein Task Runner, mit Hilfe dessen Automatisierungsprozesse und Build-Skripte ausgeführt werden können. Yo kann mittels verschiedener Generatoren und Konfigurationen den Boilerplate-Code einer Web-Applikation und ein passendes Grunt Skript generieren.
+Das Gerüst der Web-Applikation ist mittels \textbf{Yeoman} \citep{yeoman}, einem Scaffolding-Tool\footnote{Scaffolding bedeutet in diesem Kontext die automatische Generierung eines Web-Applikations-Gerüsts.} für Webapps, generiert worden. Der Workflow von Yeoman basiert auf den drei Tools \textbf{Yo}, \textbf{Grunt} \citep{grunt} und \textbf{Bower} \citep{bower}. Bower ist ein Package Manager für das Frontend, Grunt ein Task Runner, mit Hilfe dessen Automatisierungsprozesse und Build-Skripte ausgeführt werden können. Yo kann mittels verschiedener Generatoren und Konfigurationen den Boilerplate-Code\footnote{Boilerplate-Code bezeichnet Teile von Code, die an vielen Stellen mit gar keiner oder nahezu keiner Veränderung benötigt werden. \citep[Vgl.][]{wikiBoilerplate}} einer Web-Applikation und ein passendes Grunt Skript generieren.
 
 \arbeitstitel \ ist mithilfe des Yeoman-Generators \textbf{generator-express} \citep{yeoExpress} generiert worden. Die generierte Projektstruktur implementiert bereits das MVC-Framework, in dem Funktionalität, Darstellung und Objekte klar voneinander getrennt werden. Außerdem ist MongoDB als Default-Datenbank vorkonfiguriert.
 
@@ -146,109 +144,32 @@ Das Gerüst der Web-Applikation wurde mittels \textbf{Yeoman} \citep{yeoman}, ein
 Im Folgenden werden verwendete Libraries und deren Nutzen, sowie sonstige Besonderheiten der Implementierung des Frontends erläutert.
 
 \paragraph{Jade und Stylus}
-Im Frontend werden die Werkzeuge Jade und Stylus verwendet. Jade \citep{jade} ist eine Node Template Engine und vereinfacht das Schreiben von HTML-Code, indem es eine eigene Syntax implementiert. Über die vereinfachte Schreibweise hinaus implementiert sie auch Iterationen, Bedingungen und Filter. Außerdem können sogenannte Mixins implementiert und somit dessen Funktionalität wiederverwendet werden.
+Im Frontend werden die Werkzeuge Jade und Stylus verwendet. Jade \citep{jade} ist eine Node Template Engine und vereinfacht das Schreiben von HTML-Code, indem es eine eigene Syntax implementiert. Über die vereinfachte Schreibweise hinaus implementiert sie auch Iterationen, Bedingungen und Filter. Außerdem kann mithilfe sogenannter Mixins Funktionalität, die im Frontend benötigt wird, implementiert und somit an weiteren Stellen wiederverwendet werden.
 
-Stylus \citep{stylus} ist eine für Node entwickelte Sprache, deren Kompilat CSS ist. Die Syntax ist im Gegensatz zu CSS stark vereinfacht. Weiterhin bietet sie Funktionen, wie die Deklaration von Variablen, Funktionen und Mixins.
-
+Stylus \citep{stylus} ist eine für Node entwickelte Sprache, deren Kompilat CSS ist. Die Syntax ist im Gegensatz zu CSS stark vereinfacht, was sich \ua im Weglassen von Zeichen wie \zB Klammern niederschlägt. Weiterhin bietet sie Funktionen, wie die Deklaration von Variablen, Funktionen und Mixins.
 
 \paragraph{Select2}
-\textbf{Select2} \citep{select2} ist eine konfigurierbare Implementierung einer Selectbox. Sie bietet neben dem einfachen Suchen und einer Autosuggest-Funktion bereits Features wie das automatische Nachladen von Remote Datasets und unterstützt infinites Scrollen \citep[Vgl.][]{select2}. Da Select2 auf jQuery basiert, sind keine weiteren Includes erforderlich. Außerdem ist es ebenfalls über \textbf{Bower} erhältlich.
+\textbf{Select2} \citep{select2} ist eine konfigurierbare Implementierung einer Selectbox. Sie bietet neben dem einfachen Suchen und einer Autosuggest-Funktion bereits Features wie das automatische Nachladen von Remote Datasets und unterstützt infinites Scrollen \citep[Vgl.][]{select2}. Da Select2 auf jQuery basiert, sind keine weiteren Includes erforderlich. Außerdem ist es über \textbf{Bower} erhältlich.
 
 \paragraph{Font Awesome}
-Die Library \textbf{Font Awesome} \citep{fontAwesome} bietet ein Set von derzeit 369 Icons zur Verwendung an. Sie lässt sich mittels \textbf{Bower} installieren und kann nach dem Einbinden der CSS-Files durch die Verwendung der vorgegebenen CSS-Klassen verwendet werden. Dies bietet den Vorteil, dass die verwendeten Icons sowohl stilkonform, als auch von der anzeigbaren Größe veränderbar sind.
-
-funktionier größtenteils ohne Dartsellungsproble, da diese ...
+Die Library \textbf{Font Awesome} \citep{fontAwesome} bietet ein Set von derzeit 369 Icons an. Sie lässt sich mittels \textbf{Bower} installieren und kann nach dem Einbinden der CSS-Files durch die Angabe der vorgegebenen CSS-Klassen verwendet werden. Dies bietet den Vorteil, dass die angezeigten Icons sowohl stilkonform, als auch von der dargestellten Größe veränderbar sind.
 
 \paragraph{Darstellung von Filmplakaten in unterschiedlichen Formaten}
-Um das User Interface trotz verschiedener Medientypen und deren Repräsentierung möglichst aufgeräumt und übersichtlich zu halten, wurde die Darstellung der Medien-Items in Rasterform umgesetzt. Somit ist für jedes Item eine quadratische Anzeige vorgegeben. Dies funktioniert für Album-Cover größtenteils ohne Darstellungsprobleme, da diese fast ausnahmslos ebenfalls im quadratischen Format vorliegen. Hier können allerdings unschöne Darstellungsfehler auftreten, da die Album-Cover in unterschiedlichen Größen verfügbar sind. Diese lassen sich mit Angabe einer festen Höhe und Breite durch CSS verhindern. 
+Um das User Interface trotz verschiedener Medientypen und deren Repräsentierung möglichst aufgeräumt und übersichtlich zu halten, wird die Darstellung der Medien-Items in Rasterform umgesetzt. Somit ist für jedes Item eine quadratische Anzeige vorgegeben. Dies funktioniert für Album-Cover größtenteils ohne Darstellungsprobleme, da diese fast ausnahmslos ebenfalls im quadratischen Format vorliegen. Hier können allerdings unschöne Darstellungsfehler auftreten, da die Album-Cover in unterschiedlichen Größen verfügbar sind. Diese lassen sich mit Angabe einer festen Höhe und Breite durch CSS verhindern. 
 
-Eine besondere Behandlung wird für die Darstellung von Filmplakaten benötigt. Diese liegen zwar größtenteils im Hochformat vor, jedoch gibt es auch hier Ausnahmen. Das Problem kann einerseits damit gelöst werden, indem ein Teil des Plakats in originaler Auflösung dargestellt wird. Jedoch sind die dargestellten Bildausschnitte der Filmplakate dadurch nicht zuverlässig aussagekräftig. In der Web-Applikation wird das Plakat nun unabhängig von der Größe, der Auflösung und des Formats immer auf eine Breite und eine Höhe von jeweils 200px gestreckt, \bzw gestaucht.
-
-\subsection{Umsetzung und verwendete Tools im Server}
-Die Funktionalität des Servers baut auf verschiedenen Tools und Frameworks auf, dessen Zusammenspiel im Folgenden kurz vorgestellt wird.
-
-\subsubsection{Interne Datenübertragung mittels MongoDB}
-Da die in \arbeitstitel \ angezeigten und verarbeiteten Daten dynamisch von unterschiedlichen Quellen geladen werden sollen, ist eine Datenhaltung im Prinzip nicht erforderlich. Jedoch werden die zur Laufzeit erfassten Daten zwischengespeichert und intern auf Objekte gemappt.
-
-Zu diesem Zweck wird die dokumentenorientierte Datenbank \textbf{MongoDB} \citep{mongodb} verwendet. Im Gegensatz zu relationalen Datenbanken lässt sich mit der NoSQL-Strategie eine flexible Datenstruktur erstellen. Das macht im Falle von \arbeitstitel \ besonders Sinn, da sich Art und Umfang der Daten, die verarbeitet werden, sehr schnell ändern können. Außerdem vereinfacht dies auch die Erweiterbarkeit der Web-Applikation.
-
-\paragraph{mongoose}
-\textbf{mongoose} ist ein Objekt-Modellierungs-Tool für die Verwendung von MongoDB \citep{mongodb} unter Node.js. \citep[Vgl.][]{mongoose} Unter anderem bietet \textbf{mongoose} eine unkomplizierte, Schema-basierte Lösung zur Modellierung von Anwendungsdaten und verfügt über Business-Logik, Funktionen wie das Typisieren, Validieren und vereinfacht das Formulieren von Datenbank-Queries \uvm \citep[Vgl.][]{mongoose}
-
-\medskip
-\begin{lstlisting}[language=JavaScript,caption=Deklaration des ResultItem mit Mongoose,label={lst:mongoose}]
-var resultItemSchema = new Schema({
-	mediaType: {type: String, enum: ['audio', 'video', 'text', 'other']},
-	mediaSubtype: {type: String, enum: ['movie', 'music', 'time', 'other']},
-	date: Date,
-	title: String,
-	img_url: String,
-	id: String,
-	source: String,
-	url: String,
-	release_mbid: String
-});
-\end{lstlisting}
+Eine besondere Behandlung wird für die Darstellung von Filmplakaten benötigt. Diese liegen zwar größtenteils im Hochformat vor, jedoch gibt es auch hier Ausnahmen. Das Problem kann \zB damit gelöst werden, dass ein Teil des Plakats in originaler Auflösung dargestellt wird. Jedoch sind die dargestellten Bildausschnitte der Filmplakate dadurch nicht zuverlässig aussagekräftig. In der Web-Applikation wird das Plakat unabhängig von der Größe, der Auflösung und des Formats immer auf eine Breite und eine Höhe von jeweils 200px gestreckt, \bzw gestaucht.
 
 
-\paragraph{SuggestionItem}
-Bei Eingabe eines Suchbegriffes werden zunächst die aktivierten APIs durchsucht. Dabei werden gleichzeitig multiple Suchanfragen an externe Datenquellen geschickt, wobei für jede API oder Datenquelle unterschiedliche Besonderheiten zu beachten sind. Um zu gewährleisten, dass eine Suchanfrage sowohl über die Eingabe eines Titels, als auch über die Eingabe des Interprets zum passenden Ergebnis führt, werden zwei Suchanfragen gleichzeitig an die \textbf{MusicBrainz}-API geschickt. Dies liegt daran, dass die \textbf{MusicBrainz}-API die Angabe der Entität vorraussetzt, nach der gesucht werden soll. Das heißt, dass eine Eingabe von \bspw \glqq Prince\grqq \ sowohl zu Songs des Interpreten \glqq Prince\grqq , als auch zu Songs, in denen das Wort \glqq Prince \grqq \ vorkommt.
-\ref{fig:suggestionItem}
-
-\begin{figure}[htb]
-	\begin{center}
-		\includegraphics[width=1\textwidth]{Klassendiagramm.pdf}
-		\caption{Objekt-Diagramm des Suggestion-Objektes}
-	\end{center}
-	\label{fig:suggestionItem}
-\end{figure}
 
 
-\subsubsection{Erfassen von Medien-Items von externen Quellen}
-Das Erfassen von Daten wird durch das Zusammenspiel mehrere Module bewerkstelligt. Dies sind über die API-Wrapper hinaus die Module \textbf{async}, \textbf{node-rest-client}, \textbf{cheerio} und \textbf{request}.
-Im Folgenden werden der Funktionsumfang und die Restriktionen der verwendeten API-Wrapper erläutert. Daraufhin wird erklärt, inwiefern die zusätzlichen Module zur Komplettierung der Implementierung nötig sind.
-
-\paragraph{NodeBrainz}
-Das Node-Modul \textbf{NodeBrainz} ist ein schlanker Wrapper, der vollen Zugang zur MusicBrainz API (Version 2) bietet. \citep[Vgl.][]{nodebrainz} Dadurch wird eine komfortable Verwendung der \texttt{search}-Entität ermöglicht. Die Suche von Interpreten und Songtiteln wird mithilfe des \textbf{NodeBrainz}-Moduls bewerkstelligt.
-
-\paragraph{Cover Art for Node}
-Die CoverArt-API ist eine separate API von \textbf{MusicBrainz}, die das Nachschlagen von CoverArt anhand einer MusicBrainz-\texttt{release}-ID ermöglicht. Das Node-Modul \textbf{Cover Art for Node} implementiert diese Funktionalität und bietet zum einem die Möglichkeit Cover-Art in binärer Form zurück zu liefern, zum anderen ist es möglich die gelieferten Bild-URLs zu Cover-Art in unterschiedlichen Größen zu erfassen. \citep{coverart}
 
 
-\paragraph{node-imdb-api}
-Da \textbf{IMDb} über keine offizelle API verfügt, nutzt \citeauthor{nodeImdbApi} mehrere inoffizelle APIs, die Teile ihrer Daten aus den nächtlich erscheinenden Daten der \textbf{IMDb} aggregieren. Da keine dieser APIs vollständig ist, vereint \textbf{node-imdb-api} mehrere dieser RESTful APIs der inoffizellen Seiten. \citep[Vgl.][]{nodeImdbApi}
-
-\paragraph{node-rest-client}
-Für Requests an die Schnittstelle \textbf{TrailerAddict} wird das Node-Modul \textbf{node-rest-client} verwendet. \citep{nodeRestClient} Es vereinfacht Requests an REST-APIs und liefert JavaScript-Objekte zurück, dessen Verarbeitung dann selbst übernommen werden muss. Dies erfordert zwar mehr Aufwand, einen Request durchzuführen, als einen API-Wrapper zu verwenden, da die Results eines Requests jedoch auch im Falle der Verwendung eines API-Wrappers erst auf die intern verwendeten Objekte gemappt werden müssen, hält sich der Mehraufwand in Grenzen. Im Listing \ref{lst:nodeRestClient} ist der Aufruf der TrailerAddict-API anhand einer IMDb-ID zu sehen.
-
-\medskip
-\lstinputlisting[language=JavaScript,caption={Node-Rest-Client Beispiel},label={lst:nodeRestClient}]{Inhalt/Code/nodeRestClient.js}
-
-\paragraph{Request}
-Das Modul \textbf{Request} bewerkstelligt HTTP-Anfragen \citep{request} und dient in der Web-Applikation dem Erfassen des Quelltextes von \textbf{IMDb}, um die populärsten Filme eines spezifischen Jahres zu erfragen. Im Listing \ref{lst:request} ist zu sehen, wie der Quelltext der gegebenen IMDb-URL geladen wird.
-
-\medskip
-\lstinputlisting[language=JavaScript,caption={Request Beispiel},label={lst:request}]{Inhalt/Code/request.js}
-
-\paragraph{cheerio}
-Mithilfe des Node-Moduls \textbf{Cheerio} \citep{cheerio} lassen sich Informationen von Websites mithilfe von CSS-Selektoren, wie sie in der Syntax von jQuery bekannt sind, erfassen. Die Verwendung dieser Bibliothek erleichtert das Scrapen \ua von \textbf{IMDb}. Im Listing \ref{lst:cheerio} ist zu sehen, wie die IMDb-IDs aus dem, durch das Scrapen erhaltenen Quelltext, erfasst werden. 
-
-\medskip
-\lstinputlisting[language=JavaScript,caption={Cheerio Beispiel},label={lst:cheerio}]{Inhalt/Code/cheerio.js}
-
-\paragraph{async}
-Das \textbf{async}-Modul \citep{async} erlaubt eine bessere Kontrolle über asynchron ausgeführte Funktionalität. Da \arbeitstitel \ an vielen Stellen mit mehreren APIs kommunizieren muss, ist die Asynchronität zwar generell ein Vorteil, jedoch werden auch Anfragen benötigt, die von mehreren asynchronen Requests abhängig sind. D.h., dass einige Requests von teilweise mehreren, vorangegangenen Requests abhängig sind. Mit async lassen sich Callbacks in vordefinierter Reihenfolge durchführen. Auch eine Serie von ein und dem selben Callback auf Werten aus einer Liste ist möglich, genauso lassen sich mehrere Requests gleichzeitig abarbeiten, bis dann der finale Callback ausgeführt werden kann, wenn alle Vorbedingungen erfüllt worden sind.
-
-Im Listing \ref{lst:async} ist zu sehen, wie das \texttt{async}-Modul zur parallelen Ausführung von Funktionen beiträgt. Die Funktionen \texttt{get""Music""Suggestions""By""Searchterm} und \texttt{get""Movie""Suggestions""By""Searchterm} werden parallel ausgeführt. Sobald beide Funktionen abgeschlossen sind und die jeweiligen Callback-Funktionen ausgeführt werden, wird das in Zeile \ref{lst:asyncCallback} implementierte Callback ausgeführt. Über \texttt{results} kann auf die Ergebnisse der parallel ausgeführten Funktionen zugegriffen werden.
-
-\medskip
-\lstinputlisting[language=JavaScript,float,caption={Async Beispiel},label={lst:async}]{Inhalt/Code/async.js}
-
-Außerdem wird die von \textbf{async} bereitgestellte Funktion \texttt{each} verwendet. Auf diesem Wege kann für jedes Item eines Result-Sets, das von einer API bezogen wurde, ein Request ausgeführt werden, um \zB Cover-Art nachzuladen. Diese Funktion wird zum Abfragen der Film-Trailer verwendet, indem anhand eines Sets von \textbf{IMDb}-IDs für jede ein Trailer gesucht wird. Dies ist \ua im Listing \ref{lst:interaction} in Zeile \ref{lst:asyncEach} zu sehen.
 
 
-\medskip
-\lstinputlisting[language=JavaScript,float,caption={Request, Cheerio und Async in Action},label={lst:interaction}]{Inhalt/Code/requestCheerioAsync.js}
+
+
+
+
 
 
 
@@ -291,6 +212,112 @@ In Abbildung \ref{fig:searchResultsRequestDiagram} ist der interne Ablauf der Er
 \end{figure}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Umsetzung und verwendete Tools im Server}
+Die Funktionalität des Servers baut auf verschiedenen Tools und Frameworks auf, dessen Zusammenspiel im Folgenden kurz vorgestellt wird.
+
+\subsubsection{Interne Datenübertragung mittels MongoDB}
+Da die in \arbeitstitel \ angezeigten und verarbeiteten Daten dynamisch von unterschiedlichen Quellen geladen werden sollen, ist eine Datenhaltung im Prinzip nicht erforderlich. Jedoch werden die zur Laufzeit erfassten Daten zwischengespeichert und intern auf Objekte gemappt.
+
+Zu diesem Zweck wird die dokumentenorientierte Datenbank \textbf{MongoDB} \citep{mongodb} verwendet. Im Gegensatz zu relationalen Datenbanken lässt sich mit der NoSQL-Strategie eine flexible Datenstruktur erstellen. Das macht im Falle von \arbeitstitel \ besonders Sinn, da sich Art und Umfang der Daten, die verarbeitet werden, sehr schnell ändern können. Außerdem vereinfacht dies auch die Erweiterbarkeit der Web-Applikation.
+
+\paragraph{mongoose}
+\textbf{mongoose} ist ein Objekt-Modellierungs-Tool für die Verwendung von MongoDB \citep{mongodb} unter Node.js. \citep[Vgl.][]{mongoose} Unter anderem bietet \textbf{mongoose} eine unkomplizierte, Schema-basierte Lösung zur Modellierung von Anwendungsdaten und verfügt über Business-Logik, Funktionen wie das Typisieren, Validieren und vereinfacht das Formulieren von Datenbank-Queries \uvm \citep[Vgl.][]{mongoose}
+
+\medskip
+\begin{lstlisting}[language=JavaScript,caption=Deklaration des ResultItem mit Mongoose,label={lst:mongoose}]
+var resultItemSchema = new Schema({
+	mediaType: {type: String, enum: ['audio', 'video', 'text', 'other']},
+	mediaSubtype: {type: String, enum: ['movie', 'music', 'time', 'other']},
+	date: Date,
+	title: String,
+	img_url: String,
+	id: String,
+	source: String,
+	url: String,
+	release_mbid: String
+});
+\end{lstlisting}
+
+
+\paragraph{SuggestionItem}
+Bei Eingabe eines Suchbegriffes werden zunächst die aktivierten APIs durchsucht. Dabei werden gleichzeitig multiple Suchanfragen an externe Datenquellen geschickt, wobei für jede API oder Datenquelle unterschiedliche Besonderheiten zu beachten sind. Um zu gewährleisten, dass eine Suchanfrage sowohl über die Eingabe eines Titels, als auch über die Eingabe des Interprets zum passenden Ergebnis führt, werden zwei Suchanfragen gleichzeitig an die \textbf{MusicBrainz}-API geschickt. Dies liegt daran, dass die \textbf{MusicBrainz}-API die Angabe der Entität vorraussetzt, nach der gesucht werden soll. Das heißt, dass eine Eingabe von \bspw \glqq Prince\grqq \ sowohl zu Songs des Interpreten \glqq Prince\grqq , als auch zu Songs, in denen das Wort \glqq Prince \grqq \ vorkommt.
+\ref{fig:suggestionItem}
+
+\begin{figure}[htb]
+	\begin{center}
+		\includegraphics[width=1\textwidth]{Klassendiagramm.pdf}
+		\caption{Objekt-Diagramm des Suggestion-Objektes}
+	\end{center}
+	\label{fig:suggestionItem}
+\end{figure}
+
+
+\subsubsection{Erfassen von Medien-Items von externen Quellen}
+Das Erfassen von Daten wird durch das Zusammenspiel mehrerer Module bewerkstelligt. Dies sind über die API-Wrapper hinaus die Module \textbf{async}, \textbf{node-rest-client}, \textbf{cheerio} und \textbf{request}.
+Im Folgenden werden der Funktionsumfang und die Restriktionen der verwendeten API-Wrapper erläutert. Daraufhin wird erklärt, inwiefern die zusätzlichen Module zur Komplettierung der Implementierung nötig sind.
+
+\paragraph{NodeBrainz}
+Das Node-Modul \textbf{NodeBrainz} ist ein schlanker Wrapper, der vollen Zugang zur MusicBrainz API (Version 2) bietet. \citep[Vgl.][]{nodebrainz} Dadurch wird eine komfortable Verwendung der \texttt{search}-Entität ermöglicht. Die Suche von Interpreten und Songtiteln wird mithilfe des \textbf{NodeBrainz}-Moduls bewerkstelligt.
+
+\paragraph{Cover Art for Node}
+Die CoverArt-API ist eine separate API von \textbf{MusicBrainz}, die das Nachschlagen von CoverArt anhand einer MusicBrainz-\texttt{release}-ID ermöglicht. Das Node-Modul \textbf{Cover Art for Node} implementiert diese Funktionalität und bietet zum einem die Möglichkeit Cover-Art in binärer Form zurück zu liefern, zum anderen ist es möglich die gelieferten Bild-URLs zu Cover-Art in unterschiedlichen Größen zu erfassen. \citep{coverart}
+
+
+\paragraph{node-imdb-api}
+Da \textbf{IMDb} über keine offizelle API verfügt, nutzt \citeauthor{nodeImdbApi} mehrere inoffizelle APIs, die Teile ihrer Daten aus den nächtlich erscheinenden Daten der \textbf{IMDb} aggregieren. Da keine dieser APIs vollständig ist, vereint \textbf{node-imdb-api} mehrere dieser RESTful APIs der inoffizellen Seiten. \citep[Vgl.][]{nodeImdbApi}
+
+\paragraph{node-rest-client}
+Für Requests an die Schnittstelle \textbf{TrailerAddict} wird das Node-Modul \textbf{node-rest-client} verwendet. \citep{nodeRestClient} Es vereinfacht Requests an REST-APIs und liefert JavaScript-Objekte zurück, dessen Verarbeitung dann selbst übernommen werden muss. Es erfordert zwar mehr Aufwand, einen Request durchzuführen, als einen API-Wrapper zu verwenden, da die Results eines Requests jedoch auch im Falle der Verwendung eines API-Wrappers erst auf die intern verwendeten Objekte gemappt werden müssen, ist der Mehraufwand vertretbar. Im Listing \ref{lst:nodeRestClient} ist der Aufruf der TrailerAddict-API anhand einer IMDb-ID zu sehen.
+
+\medskip
+\lstinputlisting[language=JavaScript,caption={Node-Rest-Client Beispiel},label={lst:nodeRestClient}]{Inhalt/Code/nodeRestClient.js}
+
+\paragraph{Request}
+Das Modul \textbf{Request} bewerkstelligt HTTP-Anfragen \citep{request} und dient in der Web-Applikation dem Erfassen des Quelltextes von \textbf{IMDb}, um die populärsten Filme eines spezifischen Jahres zu erfragen. Im Listing \ref{lst:request} ist zu sehen, wie der Quelltext der gegebenen IMDb-URL geladen wird.
+
+\medskip
+\lstinputlisting[language=JavaScript,caption={Request Beispiel},label={lst:request}]{Inhalt/Code/request.js}
+
+\paragraph{cheerio}
+Mithilfe des Node-Moduls \textbf{Cheerio} \citep{cheerio} lassen sich Informationen von Websites mittels CSS-Selektoren, wie sie in der Syntax von jQuery bekannt sind, erfassen. Die Verwendung dieser Bibliothek erleichtert das Web-Scraping \ua von \textbf{IMDb}. Im Listing \ref{lst:cheerio} ist zu sehen, wie die IMDb-IDs aus dem, durch das Scrapen erhaltenen Quelltext, erfasst werden. 
+
+\medskip
+\lstinputlisting[language=JavaScript,caption={Cheerio Beispiel},label={lst:cheerio}]{Inhalt/Code/cheerio.js}
+
+\paragraph{async}
+Das \textbf{async}-Modul \citep{async} erlaubt eine bessere Kontrolle über asynchron ausgeführte Funktionalität. Da \arbeitstitel \ an vielen Stellen mit mehreren APIs kommunizieren muss, ist die Asynchronität zwar generell ein Vorteil, jedoch werden auch Anfragen benötigt, die von mehreren asynchronen Requests abhängig sind. D.h., dass einige Requests von teilweise mehreren, vorangegangenen Requests abhängig sind. Mit async lassen sich Callbacks\footnote{Ein Callback ist eine ausführbare \glqq Funktion, die einer anderen Funktion als Parameter übergeben und von dieser unter gewissen Bedingungen wird.\grqq \citep[Vgl.][]{wikiCallback}} in vordefinierter Reihenfolge durchführen. Auch das Ausführen einer Serie von ein und dem selben Callback, um Werte einer Liste zu bearbeiten, ist möglich. Genauso lassen sich mehrere Requests gleichzeitig abarbeiten, bis dann der finale Callback ausgeführt werden kann, wenn alle Vorbedingungen erfüllt worden sind.
+
+Im Listing \ref{lst:async} ist zu sehen, wie das \texttt{async}-Modul zur parallelen Ausführung von Funktionen beiträgt. Die Funktionen \texttt{get""Music""Suggestions""By""Searchterm} und \texttt{get""Movie""Suggestions""By""Searchterm} werden parallel ausgeführt. Sobald beide Funktionen abgeschlossen sind und die jeweiligen Callback-Funktionen ausgeführt werden, wird das in Zeile \ref{lst:asyncCallback} implementierte Callback ausgeführt. Über \texttt{results} kann auf die Ergebnisse der parallel ausgeführten Funktionen zugegriffen werden.
+
+\medskip
+\lstinputlisting[language=JavaScript,float,caption={Async Beispiel},label={lst:async}]{Inhalt/Code/async.js}
+
+Außerdem wird die von \textbf{async} bereitgestellte Funktion \texttt{each} verwendet. Auf diesem Wege kann für jedes Item eines Result-Sets, das von einer API bezogen wurde, ein Request ausgeführt werden, um \zB Cover-Art nachzuladen. Diese Funktion wird zum Abfragen der Film-Trailer verwendet, indem anhand eines Sets von \textbf{IMDb}-IDs für jeden gefundenen Film ein Trailer gesucht wird. Dies ist \ua im Listing \ref{lst:interaction} in Zeile \ref{lst:asyncEach} zu sehen.
+
+
+\medskip
+\lstinputlisting[language=JavaScript,float,caption={Request, Cheerio und Async in Action},label={lst:interaction}]{Inhalt/Code/requestCheerioAsync.js}
+
+
+% ====
+
+% HERE
+
+% ====
 
 \subsection{Einbinden weiterer Medientypen und Dienste}
 Die Architektur des Servers ist zur einfachen Einbindung zusätzlicher Medientypen und Datenquellen vorgesehen. Dafür ist zum einen zwischen dem Einbinden eines neuen Medientyps und einer neuen Datenquelle zu unterscheiden. Desweiteren ist es möglich eine Datenquelle lediglich für das Liefern von Suchvorschlägen, zum Liefern von Suchergebnissen oder beidem einzubinden. Dafür sind intern die Datenbank-Objekte \texttt{Suggestion} und \texttt{ResultItem} essentiell.
