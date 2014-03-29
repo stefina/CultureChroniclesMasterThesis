@@ -25,8 +25,8 @@ Um unnötige Requests zu vermeiden, wird erst bei Eingabe des dritten Zeichens ei
 	\begin{center}
 		\shadowimage[width=14cm]{screenHome.png}
 		\caption{Screenshot des Homescreens}
+		\label{fig:screenHome}
 	\end{center}
-	\label{fig:screenHome}
 \end{figure}
 
 
@@ -34,16 +34,16 @@ Um unnötige Requests zu vermeiden, wird erst bei Eingabe des dritten Zeichens ei
 	\begin{center}
 		\shadowimage[width=14cm]{screenSuggestionsGood.png}
 		\caption{Screenshot der Anzeige der Suchvorschläge}
+		\label{fig:screenSuggestions}
 	\end{center}
-	\label{fig:screenSuggestions}
 \end{figure}
 
 \begin{figure}[htb]
 	\begin{center}
 		\shadowimage[width=14cm]{screenSuggestionFerris.png}
 		\caption{Screenshot der Anzeige der Detailansicht der Suchanfrage}
+		\label{fig:screenSearchDetail}
 	\end{center}
-	\label{fig:screenSearchDetail}
 \end{figure}
 
 
@@ -63,8 +63,8 @@ Fährt man mit dem Mauszeiger über ein Item \zB ein Filmplakat, erscheinen drei I
 	\begin{center}
 		\shadowimage[width=14cm]{screenSearchResults1990.png}
 		\caption{Screenshot der Anzeige der Suchergebnisse des Jahres 1990}
+		\label{fig:screenSearchResults}
 	\end{center}
-	\label{fig:screenSearchResults}
 \end{figure}
 
 \subsection{Anzeige der Suchdetails}
@@ -95,14 +95,4 @@ Durch das \textbf{Express}-Framework ist die implementierte Funktionalität ebenf
 		\item \textbf{params}: \texttt{String:suggestionId}
 		\item \textbf{returnValue}: \texttt{List<resultItem>}
 	\end{itemize}
-\end{itemize}
-
-
-% \input{Inhalt/Tabellen/CCAPI}
-
-
-
-mimimi
-\begin{itemize}
-    \item select2 schickt erst Requests ab der Eingabe des dritten Zeichens. Daher ist eine Suche nach \bspw Stephen King\grq s \glqq Es\grqq \ derzeit nicht möglich. Da auch die API von \textbf{Rotten Tomatoes} die Anzahl von Requests pro Sekunde begrenzt, werden im Zweifelsfall keine Ergebnisse gefunden, wenn der Suchvorschlag unmittelbar danach ausgewählt wird.
 \end{itemize}

@@ -1,24 +1,18 @@
 +++
 glossar
-ccsettings
-Abbildungsnummerierung
+
+API-Beschreibung
+Ergebnis und Fazit
+
+grafiken verbessern und grafiken beschreiben
 
 "Typ und Schlüsselwort Diagramm"!?
 
 
 ---
-grafiken verbessern und grafiken beschreiben
-Glossar vervollständigen und neu bauen
-
-Abstract, Einleitung, Fazit
 
 
 
 todo auskommentieren
 zum drucken das highlighting ausstellen
 eigennamen \textsc{} ?
-
-
-
-PROGRAMMIERUNG:
-hover mit informationen des films
