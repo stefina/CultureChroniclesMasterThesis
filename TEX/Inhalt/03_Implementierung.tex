@@ -70,7 +70,7 @@ Der große Nachteil von \textbf{Vimeo} \bzgl der Nutzung für \arbeitstitel \ ist 
 Über den kommerziellen Streaming-Dienst \textbf{Spotify} \citep{spotify} lässt sich über ein musikalisches Repertoire bekannter Plattenlabels auf einer Vielzahl von Desktop- und Mobil-Geräten zugreifen. \textbf{Spotify} stellt eine API bereit, über die sich die verfügbaren Musiktitel durchsuchen und einbetten lassen können. Aufgrund des Freemium-Konzepts ergibt sich der Nachteil, dass ein Nutzer von \arbeitstitel \ über einen \textbf{Spotify}-Account verfügen muss, möchte er unbegrenzt über die Web-Applikation Musik hören. Spotify bietet unterschiedliche Möglichkeiten, auf sowohl Meta-Informationen von Musikveröffentlichungen und Künstlern (\textit{Metadata API}), als auch die Musik selbst zuzugreifen. Während die \textit{Apps API} and \textit{Views API} dafür vorgesehen sind, Applikationen für die Stand-Alone-Version von \textbf{Spotify} zu entwickeln, bedienen \textit{Libspotify SDK} und \textit{CocoaLibSpotify} den Zweck, Musik von Spotify in eigens entwickelten Applikationen zu streamen. \citep[Vgl.][]{spotifyDeveloper} Desweiteren wird sowohl über die Web-, als auch über die Stand-Alone-Applikation die Möglichkeit angeboten, Einbettungscode von einzelnen Songs, eines Albums oder Playlisten zu generieren. Das automatische Generieren des Embed-Codes wird derzeit über keine der Schnittstellen angeboten. Jedoch weist der einzubindende Code für den IFrame immer die gleiche Struktur auf. Daher bietet es sich an, lediglich die \textit{Metadata API} einzubinden, um die \textbf{Spotify}-Id eines Songs zu erhalten, und den IFrame nach der vorgegebenen Struktur, die im Listing \ref{lst:spotifyIFrame} zu sehen ist, innerhalb von \arbeitstitel \ zusammenzubauen.
 
 \medskip
-\lstinputlisting[language=HTML,caption={Spotify IFrame-Code},label={lst:spotifyIFrame}]{Inhalt/Code/spotifyIFrame.html}
+\lstinputlisting[language=HTML,float,caption={IFrame-Code, der zum Einbetten eines Songs von Spotify erforderlich ist. Die auszutauschende Track-Id ist blau hervorgehoben.},label={lst:spotifyIFrame}]{Inhalt/Code/spotifyIFrame.html}
 
 \section{Techniken}
 Zum Erfassen unterschiedlichster Daten im Internet gibt es verschiedene Möglichkeiten, wobei diese stark vom Angebot des Web und der einzelnen Anbieter abhängig sind. Im Folgenden werden mögliche Techniken, Daten unterschiedlicher Quellen zu erfassen, kurz vorgestellt und deren Vor- und Nachteile für die Entwicklung von \arbeitstitel \ herausgestellt. Auf dessen Grundlage wird entschieden, welche Datenquellen zu bevorzugen sind.
@@ -109,10 +109,10 @@ Auf Wikipedia existieren brauchbare Seiten, die jeweils die Musik- und Film-Char
 
 
 \subsection{Sweble Wikitext Component}
-Das \textbf{Sweble Wikitext Components module} soll das Parsen von MediaWikis Wikitext ermöglichen und darüber hinaus eine Engine bieten, die versucht das Verhalten eines MediaWiki zu emulieren. \citep[Vgl.][]{sweble} \textbf{Sweble} ist Open Source verfügbar und addressiert die im folgenden Zitat beschriebene Problematik: 
+Das \textbf{Sweble Wikitext Components module} soll das Parsen von MediaWikis Wikitext ermöglichen und darüber hinaus eine Engine bieten, die versucht, das Verhalten eines MediaWiki zu emulieren. \citep[Vgl.][]{sweble} \textbf{Sweble} ist Open Source verfügbar und addressiert die im folgenden Zitat beschriebene Problematik: 
 \begin{quotation}\glqq Content von Wikis wird durch spezialisierte Sprachen beschrieben, die allgemein als Wiki Markup Languages bezeichnet werden. Trotz ihres unschuldigen Namens, können diese Sprachen ziemlich komplex sein und über ein ebenso komplexes visuelles Layout, als auch über [vollständige; St.]  Programmiersprachen-Features verfügen, wie \zB Variablen, Schleifen, Funktionsaufrufe und Rekursion. \grqq \footnote{\citet[Vgl.][Introduction]{DohrnSweble} [eigene Übersetzung]. Originalwortlaut: \glqq The content of wikis is being described using specialized languages, commonly called wiki markup languages. Despite their innocent name, these languages can be fairly complex and include complex visual layout mechanisms as well as full-edged programming language features like variables, loops, function calls, and recursion.\grqq}\end{quotation}
 
-Dies verdeutlicht die Problematik, dass Wikipedia zwar über diverse für \arbeitstitel \ interessante Artikel verfügt, es jedoch schwer ist, diese Daten automatisch zu erfassen. Da eine aussagekräftige Analyse des tatsächlichen Nutzens der \textbf{Sweble}-Software für \arbeitstitel \ als sehr zeitaufwändig eingeschätzt wird, ist davon abgesehen worden, die Software genauer zu untersuchen.\todo{kann man den satz so lassen oder klingt das zu mimimi und passt nicht hierher?}
+Dies verdeutlicht die Problematik, dass Wikipedia zwar über diverse für \arbeitstitel \ interessante Artikel verfügt, es jedoch schwer ist, diese Daten automatisch zu erfassen. Da eine aussagekräftige Analyse des tatsächlichen Nutzens der \textbf{Sweble}-Software für \arbeitstitel \ als sehr zeitaufwändig eingeschätzt wird, ist davon abgesehen worden, die Software genauer zu untersuchen.
 
 
 \subsection{Mergen von Daten / Multiple Requests für einen Datensatz}
@@ -233,7 +233,7 @@ var resultItemSchema = new Schema({
 
 
 \paragraph{SuggestionItem}
-Bei Eingabe eines Suchbegriffes werden zunächst die aktivierten APIs durchsucht. Dabei werden gleichzeitig multiple Suchanfragen an externe Datenquellen geschickt, wobei für jede API oder Datenquelle unterschiedliche Besonderheiten zu beachten sind. Um zu gewährleisten, dass eine Suchanfrage sowohl über die Eingabe eines Titels, als auch über die Eingabe des Interprets zum passenden Ergebnis führt, werden zwei Suchanfragen gleichzeitig an die \textbf{MusicBrainz}-API geschickt. Dies liegt daran, dass die \textbf{MusicBrainz}-API die Angabe der Entität vorraussetzt, nach der gesucht werden soll. Das heißt, dass eine Eingabe von \bspw \glqq Prince\grqq \ sowohl zu Songs des Interpreten \glqq Prince\grqq , als auch zu Songs, in denen das Wort \glqq Prince \grqq \ vorkommt.
+Bei Eingabe eines Suchbegriffes werden zunächst die aktivierten APIs durchsucht. Dabei werden gleichzeitig multiple Suchanfragen an externe Datenquellen geschickt, wobei für jede API oder Datenquelle unterschiedliche Besonderheiten zu beachten sind. Um zu gewährleisten, dass eine Suchanfrage sowohl über die Eingabe eines Titels, als auch über die Eingabe des Interprets zum passenden Ergebnis führt, werden zwei Suchanfragen gleichzeitig an die \textbf{MusicBrainz}-API geschickt. Dies liegt daran, dass die \textbf{MusicBrainz}-API die Angabe der Entität vorraussetzt, nach der gesucht werden soll. Das heißt, dass eine Eingabe von \bspw \glqq Prince\grqq \ sowohl zu Songs des Interpreten \glqq Prince\grqq , als auch zu Songs, in denen das Wort \glqq Prince \grqq \ vorkommt, führt.
 \ref{fig:suggestionItem}
 
 \begin{figure}[htb]
@@ -263,19 +263,19 @@ Da \textbf{IMDb} über keine offizelle API verfügt, nutzt \citeauthor{nodeImdbApi
 Für Requests an die Schnittstelle \textbf{TrailerAddict} wird das Node-Modul \textbf{node-rest-client} verwendet. \citep{nodeRestClient} Es vereinfacht Requests an REST-APIs und liefert JavaScript-Objekte zurück, dessen Verarbeitung dann selbst übernommen werden muss. Es erfordert zwar mehr Aufwand, einen Request durchzuführen, als einen API-Wrapper zu verwenden, da die Results eines Requests jedoch auch im Falle der Verwendung eines API-Wrappers erst auf die intern verwendeten Objekte gemappt werden müssen, ist der Mehraufwand vertretbar. Im Listing \ref{lst:nodeRestClient} ist der Aufruf der TrailerAddict-API anhand einer IMDb-ID zu sehen.
 
 \medskip
-\lstinputlisting[language=JavaScript,caption={Node-Rest-Client Beispiel},label={lst:nodeRestClient}]{Inhalt/Code/nodeRestClient.js}
+\lstinputlisting[float,language=JavaScript,caption={Node-Rest-Client Beispiel},label={lst:nodeRestClient}]{Inhalt/Code/nodeRestClient.js}
 
 \paragraph{Request}
 Das Modul \textbf{Request} bewerkstelligt HTTP-Anfragen \citep{request} und dient in der Web-Applikation dem Erfassen des Quelltextes von \textbf{IMDb}, um die populärsten Filme eines spezifischen Jahres zu erfragen. Im Listing \ref{lst:request} ist zu sehen, wie der Quelltext der gegebenen IMDb-URL geladen wird.
 
 \medskip
-\lstinputlisting[language=JavaScript,caption={Request Beispiel},label={lst:request}]{Inhalt/Code/request.js}
+\lstinputlisting[float,language=JavaScript,caption={Request Beispiel},label={lst:request}]{Inhalt/Code/request.js}
 
 \paragraph{cheerio}
 Mithilfe des Node-Moduls \textbf{Cheerio} \citep{cheerio} lassen sich Informationen von Websites mittels CSS-Selektoren, wie sie in der Syntax von jQuery bekannt sind, erfassen. Die Verwendung dieser Bibliothek erleichtert das Web-Scraping \ua von \textbf{IMDb}. Im Listing \ref{lst:cheerio} ist zu sehen, wie die IMDb-IDs aus dem, durch das Scrapen erhaltenen Quelltext, erfasst werden. 
 
 \medskip
-\lstinputlisting[language=JavaScript,caption={Cheerio Beispiel},label={lst:cheerio}]{Inhalt/Code/cheerio.js}
+\lstinputlisting[float,language=JavaScript,caption={Cheerio Beispiel},label={lst:cheerio}]{Inhalt/Code/cheerio.js}
 
 \paragraph{async}
 Das \textbf{async}-Modul \citep{async} erlaubt eine bessere Kontrolle über asynchron ausgeführte Funktionalität. Da \arbeitstitel \ an vielen Stellen mit mehreren APIs kommunizieren muss, ist die Asynchronität zwar generell ein Vorteil, jedoch werden auch Anfragen benötigt, die von mehreren asynchronen Requests abhängig sind. D.h., dass einige Requests von teilweise mehreren, vorangegangenen Requests abhängig sind. Mit async lassen sich Callbacks\footnote{Ein Callback ist eine ausführbare \glqq Funktion, die einer anderen Funktion als Parameter übergeben und von dieser unter gewissen Bedingungen wird.\grqq \citep[Vgl.][]{wikiCallback}} in vordefinierter Reihenfolge durchführen. Auch das Ausführen einer Serie von ein und dem selben Callback, um Werte einer Liste zu bearbeiten, ist möglich. Genauso lassen sich mehrere Requests gleichzeitig abarbeiten, bis dann der finale Callback ausgeführt werden kann, wenn alle Vorbedingungen erfüllt worden sind.
