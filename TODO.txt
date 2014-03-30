@@ -1,9 +1,6 @@
 +++
 glossar
 
-API-Beschreibung
-Ergebnis und Fazit
-
 "Typ und Schlüsselwort Diagramm"!?
 
 (grafiken)

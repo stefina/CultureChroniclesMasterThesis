@@ -75,13 +75,13 @@ Nach dem Durchführen einer Suche, kann über das Menu-Icon, welches sich neben de
 Derzeit wird der Player lediglich mit Film-Trailern befüllt. Die Funktionalität des Players konnte nicht implementiert werden, da die \textbf{TrailerAddict}-API lediglich das Einbetten ihrer Trailer vorsieht. Dementsprechend ist das Result, welches von dieser API zurückkommt, ein HTML-Snippet, das in einem IFrame in \arbeitstitel \ eingebettet wird. Eine externe Steuerung der Funktionalität innerhalb der IFrames ist technisch nicht möglich, sodass die Player-Funktionalität, wie das Abspielen, Skippen oder Pausieren eines Trailers über die Player-Buttons von \arbeitstitel \ nicht bewerkstelligt werden kann.
 
 \section{\arbeitstitel -API}
-Durch das \textbf{Express}-Framework ist die implementierte Funktionalität ebenfalls als RESTful-API verwendbar. Zu einer Einbindung der API werden die Routen \lstinline{/suggestions} und \lstinline{/search} bereitgestellt. In den Abbildungen \ref{fig:suggestionAPI} und \ref{fig:resultItemAPI} sind die Dokumentationen der beiden Funktionen zu sehen.\footnote{Bei den Abbildungen \ref{fig:suggestionAPI} und \ref{fig:resultItemAPI} handelt es sich jeweils um Screenshots der mit dem Apiary Framework \citep{apiary} erstellten \arbeitstitel -Dokumentation.}
+Durch das \textbf{Express}-Framework ist die implementierte Funktionalität ebenfalls als RESTful-API verwendbar. Zu einer Einbindung der API werden die Routen \lstinline{/suggestions} und \lstinline{/search} bereitgestellt. In den Abbildungen \ref{fig:suggestionAPI} und \ref{fig:resultItemAPI} sind die Dokumentationen der beiden Funktionen zu sehen.\footnote{Bei den Abbildungen \ref{fig:suggestionAPI} und \ref{fig:resultItemAPI} handelt es sich jeweils um Screenshots der mit dem Apiary Framework \citep{apiary} erstellten \arbeitstitel -Dokumentation, welche unter \url{http://docs.culturechronicles.apiary.io/} zu finden ist.}
 
 
 
 \begin{figure}[htb]
 	\begin{center}
-		\includegraphics[width=1\textwidth]{suggestionAPI.png}
+		\includegraphics[width=1\textwidth]{Suggestion.pdf}
 		\caption{API-Entität Suggestion}
 		\label{fig:suggestionAPI}
 	\end{center}
@@ -89,7 +89,7 @@ Durch das \textbf{Express}-Framework ist die implementierte Funktionalität ebenf
 
 \begin{figure}[htb]
 	\begin{center}
-		\includegraphics[width=1\textwidth]{resultItemAPI.png}
+		\includegraphics[width=1\textwidth]{ResultItem.pdf}
 		\caption{API-Entität ResultItem}
 		\label{fig:resultItemAPI}
 	\end{center}
