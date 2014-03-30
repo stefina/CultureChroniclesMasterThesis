@@ -1,14 +1,9 @@
 +++
 glossar
 
-"Typ und Schlüsselwort Diagramm"!?
-
-(grafiken)
-
 Song raussuchen! :)
 
-zitate vor den punkt
-
+async cheerio in action umbenennen
 
 ---
 

@@ -7,14 +7,14 @@ request('http://www.imdb.com/search/title?release_date=' + searchterm + ',' + se
 
 	async.eachLimit($('table.results tr td span.wlb_wrapper'), 1, function( item, callback) {
 		
-		// fetch List of IMDbId from IMDb-Source-Code
+		// fetch List of IMDb-ID from IMDb-Source-Code
 
 	}, function(err, result){
 		var trailerList = new Array();
 
 		async.each(itemList, function(id, callback){ (*@\label{lst:asyncEach}@*)
 
-			// fetch additional Movie-Information from other Sources by IMDbId
+			// fetch additional Movie-Information from other Sources by IMDb-ID
 			client.get('http://api.traileraddict.com/?imdb='  + id +  '&count=1&width=680', function(data, response){
 
 				// scrape TrailerAddict-Result with Cheerio to get the IFrame
