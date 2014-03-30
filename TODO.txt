@@ -4,9 +4,11 @@ glossar
 API-Beschreibung
 Ergebnis und Fazit
 
-grafiken verbessern und grafiken beschreiben
-
 "Typ und Schlüsselwort Diagramm"!?
+
+(grafiken)
+
+Song raussuchen! :)
 
 
 ---
