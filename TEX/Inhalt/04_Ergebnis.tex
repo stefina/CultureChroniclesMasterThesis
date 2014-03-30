@@ -74,25 +74,39 @@ Nach dem Durchführen einer Suche, kann über das Menu-Icon, welches sich neben de
 \subsection{Funktionalität des Players}
 Derzeit wird der Player lediglich mit Film-Trailern befüllt. Die Funktionalität des Players konnte nicht implementiert werden, da die \textbf{TrailerAddict}-API lediglich das Einbetten ihrer Trailer vorsieht. Dementsprechend ist das Result, welches von dieser API zurückkommt, ein HTML-Snippet, das in einem IFrame in \arbeitstitel \ eingebettet wird. Eine externe Steuerung von IFrames, sodass die Player-Funktionalität, wie das Abspielen, Skippen oder Pausieren eines Trailers nicht über die Player-Buttons von \arbeitstitel \ nicht bewerkstelligt werden kann.
 
-\subsection{Responsive} \todo{naja, so halbwegs, mal sehen, wenn mir nix besseres einfällt}
-\subsection{Ereignisgesteuerte Architektur}
-
-
 \section{\arbeitstitel -API}
-Durch das \textbf{Express}-Framework ist die implementierte Funktionalität ebenfalls als RESTful-API verwendbar. Zu einer Einbindung der API werden die Routen \lstinline{/suggestions} und \lstinline{/search} bereitgestellt. 
+Durch das \textbf{Express}-Framework ist die implementierte Funktionalität ebenfalls als RESTful-API verwendbar. Zu einer Einbindung der API werden die Routen \lstinline{/suggestions} und \lstinline{/search} bereitgestellt. In den Abbildungen \ref{fig:suggestionAPI} und \ref{fig:resultItemAPI} sind die Dokumentationen der beiden Funktionen zu sehen.\footnote{Bei den Abbildungen \ref{fig:suggestionAPI} und \ref{fig:resultItemAPI} handelt es sich jeweils um Screenshots der mit dem Apiary Framework \citep{apiary} erstellten \arbeitstitel -Dokumentation.}
 
-\todo{schöner formatieren}
-\begin{itemize}
-	\item \lstinline{GET /suggestions}
-	\begin{itemize}
-		\item Liefert eine Liste an Suchvorschlägen anhand eines Suchbegriffes
-		\item \textbf{params}: \texttt{String:searchterm}
-		\item \textbf{returnValue}: \texttt{List<suggestion>}
-	\end{itemize}
-	\item \lstinline{GET /search}
-	\begin{itemize}
-		\item Liefert eine Liste an Suchergebnissen anhand eines Suchbegriffes
-		\item \textbf{params}: \texttt{String:suggestionId}
-		\item \textbf{returnValue}: \texttt{List<resultItem>}
-	\end{itemize}
-\end{itemize}
+
+
+\begin{figure}[htb]
+	\begin{center}
+		\includegraphics[width=1\textwidth]{suggestionAPI.png}
+		\caption{API-Entität Suggestion}
+		\label{fig:suggestionAPI}
+	\end{center}
+\end{figure}
+
+\begin{figure}[htb]
+	\begin{center}
+		\includegraphics[width=1\textwidth]{resultItemAPI.png}
+		\caption{API-Entität ResultItem}
+		\label{fig:resultItemAPI}
+	\end{center}
+\end{figure}
+
+% \todo{schöner formatieren}
+% \begin{itemize}
+% 	\item \lstinline{GET /suggestions}
+% 	\begin{itemize}
+% 		\item Liefert eine Liste an Suchvorschlägen anhand eines Suchbegriffes
+% 		\item \textbf{params}: \texttt{String:searchterm}
+% 		\item \textbf{returnValue}: \texttt{List<suggestion>}
+% 	\end{itemize}
+% 	\item \lstinline{GET /search}
+% 	\begin{itemize}
+% 		\item Liefert eine Liste an Suchergebnissen anhand eines Suchbegriffes
+% 		\item \textbf{params}: \texttt{String:suggestionId}
+% 		\item \textbf{returnValue}: \texttt{List<resultItem>}
+% 	\end{itemize}
+% \end{itemize}
