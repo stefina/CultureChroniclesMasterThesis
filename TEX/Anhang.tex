@@ -5,15 +5,50 @@
 \section{Inhalt der beigelegten CD}
 
 \begin{itemize}
-	\item Grafiken
+	\item Bilder
 		\begin{itemize}
 			\item Diagramm\_Allgemein.png
 			\item Diagramm\_VietnamKrieg.png
+			\item ResultItem\_API-Beschreibung.pdf
 			\item Retrieving.pdf
 			\item RetrievingSearchresultsAndPlaylist.pdf
 			\item RetrievingSuggestions.pdf
+			\item Suggestion\_API-Beschreibung.pdf
+			\item Mockup
+			\begin{itemize}
+				\item u\_1972\_home\_disambiguation\_cropped.png
+				\item u\_1972\_home\_limit.png
+				\item u\_1972\_search\_menu\_details.png
+				\item u\_1972\_search\_menu\_filter.png
+				\item u\_1972\_search\_result\_cover\_addToPlaylist.png
+				\item u\_1972\_search\_result\_cover\_info.png
+				\item u\_1972\_search\_result\_cover\_sourcelink.png
+				\item u\_1972\_search\_result.png
+				\item Mockup\_CultureChronicles.pdf
+			\end{itemize}
+			\item Screenshots des Prototyps
+			\begin{itemize}
+				\item screenHome.png
+				\item screenSearchResults1990.png
+				\item screenSuggestionFerris.png
+				\item screenSuggestions.png
+				\item screenSuggestionsGood.png
+			\end{itemize}
 		\end{itemize}
+	\item demo.mov
 	\item Masterarbeit.pdf
+	\item Mockup
+		\begin{itemize}
+			\item u\_1972\_home\_disambiguation.bmml
+			\item u\_1972\_home\_limit.bmml
+			\item u\_1972\_home.bmml
+			\item u\_1972\_search\_menu\_details.bmml
+			\item u\_1972\_search\_menu\_filter.bmml
+			\item u\_1972\_search\_result\_cover\_addToPlaylist.bmml
+			\item u\_1972\_search\_result\_cover\_info.bmml
+			\item u\_1972\_search\_result\_cover\_sourcelink.bmml
+			\item u\_1972\_search\_result.bmml
+		\end{itemize}
 	\item Software
 		\begin{itemize}
 			\item Node
@@ -30,39 +65,7 @@
 	\item SourceCode
 \end{itemize}
 
-\chapter{Analyse der Suchdienste}
-\label{app:matrix}
-Auf den folgenden Seiten ist die tabellarische Übersicht der untersuchten Suchdienste in den Bereichen Musik, Film und Ereignissen zu sehen.
-\begin{enumerate}
-	\item Film
-	\begin{itemize}
-		\item google.de
-		\item en.wikipedia.org
-		\item Amazon.com
-		\item IMDb.com
-		\item IMDb.com - Advanced Search
-	\end{itemize}
-	\item Musik
-	\begin{itemize}
-		\item google.de
-		\item en.wikipedia.org
-		\item Amazon.com
-		\item lastfm.de
-		\item Spotify App
-		\item rateyourmusic.com
-	\end{itemize}
-	\item Ereignisse
-	\begin{itemize}
-		\item google.de
-		\item en.wikipedia.org
-		\item historyorb.com
-		\item wolframalpha.com
-	\end{itemize}
-\end{enumerate}
 
-\include{Inhalt/Tabellen/Film}
-\include{Inhalt/Tabellen/Musik}
-\include{Inhalt/Tabellen/Ereignisse}
 
 \chapter{Setup der Web-Applikation}
 \label{app:setup}
@@ -122,4 +125,41 @@ Auf den folgenden Seiten ist die tabellarische Übersicht der untersuchten Suchdi
 
 
 \section{Vorraussetzungen und lokale Installation}
-Zum lokalen Aufsetzen der Web-Applikation muss Node.js sowie MongoDB installiert sein.\footnote{Die genauen Versionen sind der Tabelle \ref{tab:hardSoftware} zu entnehmen und werden hier nicht erneut aufgeführt.} Über die Konsole(Windows) oder im Terminal(Mac OS X) in den Ordner \glqq CultureChronicles\grqq \ navigieren und \lstinline$npm install$ ausführen um alle benötigten Module zu installieren. Zur Ausführung von \arbeitstitel \ muss MongoDB laufen.\footnote{Auf Mac OS X wird MongoDB über den Befehl \lstinline$mongod$ im Terminal gestartet.} Nun kann die Web-Applikation mit dem Befehl \lstinline$grunt$ gestartet werden und ist über \url{localhost:3000/} zu erreichen.
+Zum lokalen Aufsetzen der Web-Applikation muss Node.js sowie MongoDB installiert sein.\footnote{Die genauen Versionen sind der Tabelle \ref{tab:hardSoftware} zu entnehmen und werden hier nicht erneut aufgeführt.} Über die Konsole(Windows) oder im Terminal(Mac OS X) in den Ordner \glqq CultureChronicles\grqq \ navigieren und \lstinline$npm install$ sowie \lstinline$bower install$ ausführen, um alle benötigten Module zu installieren. 
+
+Zur Ausführung von \arbeitstitel \ muss MongoDB laufen.\footnote{Auf Mac OS X wird MongoDB über den Befehl \lstinline$mongod$ im Terminal gestartet.} Nun kann die Web-Applikation mit dem Befehl \lstinline$grunt$ gestartet werden und ist über \url{localhost:3000/} zu erreichen.
+
+
+\chapter{Analyse der Suchdienste}
+\label{app:matrix}
+Auf den folgenden Seiten ist die tabellarische Übersicht der untersuchten Suchdienste in den Bereichen Musik, Film und Ereignissen zu sehen.
+\begin{enumerate}
+	\item Film
+	\begin{itemize}
+		\item google.de
+		\item en.wikipedia.org
+		\item Amazon.com
+		\item IMDb.com
+		\item IMDb.com - Advanced Search
+	\end{itemize}
+	\item Musik
+	\begin{itemize}
+		\item google.de
+		\item en.wikipedia.org
+		\item Amazon.com
+		\item lastfm.de
+		\item Spotify App
+		\item rateyourmusic.com
+	\end{itemize}
+	\item Ereignisse
+	\begin{itemize}
+		\item google.de
+		\item en.wikipedia.org
+		\item historyorb.com
+		\item wolframalpha.com
+	\end{itemize}
+\end{enumerate}
+
+\include{Inhalt/Tabellen/Film}
+\include{Inhalt/Tabellen/Musik}
+\include{Inhalt/Tabellen/Ereignisse}

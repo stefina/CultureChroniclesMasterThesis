@@ -1,0 +1,146 @@
+<mockup version="1.0" skin="wireframe" fontFace="Balsamiq Sans" measuredW="812" measuredH="550" mockupW="793" mockupH="533">
+  <controls>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Icon" x="25" y="23" w="-1" h="-1" measuredW="48" measuredH="48" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>40463</color>
+        <icon>SmallClockIcon%7Clarge</icon>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::SearchBox" x="135" y="35" w="356" h="-1" measuredW="120" measuredH="26" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>u_1972_search_result%26bm%3Bu_1972_search_result.bmml%26bm%3Bu_1972_search_result.bmml%26bm%3Bu_1972_search_result.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22116%2C18%2C472%2C44%22%20href%3D%22u_1972_search_result.bmml%22%20alt%3D%22u_1972_search_result%22%20id%3D%222%22/%3E</map>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::MediaControls" x="508" y="29" w="-1" h="-1" measuredW="110" measuredH="36" zOrder="3" locked="false" isInGroup="-1"/>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::Label" x="626" y="37" w="-1" h="-1" measuredW="10" measuredH="21" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16777215</color>
+        <text>...</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::VRule" x="499" y="17" w="-1" h="61" measuredW="10" measuredH="100" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>15658734</color>
+        <stroke>solid</stroke>
+      </controlProperties>
+    </control>
+    <control controlID="60" controlTypeID="com.balsamiq.mockups::Canvas" x="19" y="20" w="793" h="58" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>square</borderStyle>
+        <color>3355443</color>
+      </controlProperties>
+    </control>
+    <control controlID="62" controlTypeID="com.balsamiq.mockups::HRule" x="19" y="72" w="793" h="-1" measuredW="100" measuredH="10" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>15658734</color>
+        <stroke>solid</stroke>
+      </controlProperties>
+    </control>
+    <control controlID="63" controlTypeID="com.balsamiq.mockups::Canvas" x="19" y="78" w="793" h="472" measuredW="100" measuredH="70" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>0</borderColor>
+        <borderStyle>square</borderStyle>
+        <color>15658734</color>
+      </controlProperties>
+    </control>
+    <control controlID="64" controlTypeID="com.balsamiq.mockups::VRule" x="500" y="78" w="-1" h="472" measuredW="10" measuredH="100" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>3355443</color>
+        <stroke>solid</stroke>
+      </controlProperties>
+    </control>
+    <control controlID="65" controlTypeID="com.balsamiq.mockups::Icon" x="88" y="31" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>15658734</color>
+        <href>u_1972_search_result%26bm%3Bu_1972_search_result.bmml%26bm%3Bu_1972_search_result.bmml%26bm%3Bu_1972_search_result.bmml</href>
+        <icon>BulletsIcon%7Cmedium</icon>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2269%2C14%2C101%2C46%22%20href%3D%22u_1972_search_result.bmml%22%20alt%3D%22u_1972_search_result%22%20id%3D%2265%22/%3E</map>
+      </controlProperties>
+    </control>
+    <control controlID="66" controlTypeID="com.balsamiq.mockups::RoundButton" x="45" y="78" w="460" h="350" measuredW="32" measuredH="32" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16777215</color>
+        <shape>rectangle</shape>
+      </controlProperties>
+    </control>
+    <control controlID="68" controlTypeID="com.balsamiq.mockups::Label" x="87" y="84" w="111" h="-1" measuredW="96" measuredH="24" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <size>16</size>
+        <text>Limit%20Search</text>
+      </controlProperties>
+    </control>
+    <control controlID="69" controlTypeID="com.balsamiq.mockups::Icon" x="53" y="83" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>GtIcon%7Csmall</icon>
+        <rotation>270</rotation>
+      </controlProperties>
+    </control>
+    <control controlID="72" controlTypeID="com.balsamiq.mockups::CheckBoxGroup" x="88" y="130" w="156" h="89" measuredW="112" measuredH="83" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>10066329</color>
+        <text>%5Bx%5D%20Musik%0A%5Bx%5D%20Podcast%0A%5Bx%5D%20Radio-Sendung%0A%5Bx%5D%20H%F6rspiel</text>
+      </controlProperties>
+    </control>
+    <control controlID="78" controlTypeID="com.balsamiq.mockups::CheckBoxGroup" x="88" y="110" w="156" h="16" measuredW="54" measuredH="17" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <text>%5Bx%5D%20Audio</text>
+        <underline>true</underline>
+      </controlProperties>
+    </control>
+    <control controlID="79" controlTypeID="com.balsamiq.mockups::CheckBoxGroup" x="288" y="127" w="156" h="89" measuredW="94" measuredH="83" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <text>%5Bx%5D%20Film%0A%5B%5D%20Reportage%0A%5B%5D%20TV-Sendung%0A%5Bx%5D%20Trailer</text>
+      </controlProperties>
+    </control>
+    <control controlID="80" controlTypeID="com.balsamiq.mockups::CheckBoxGroup" x="288" y="107" w="156" h="16" measuredW="55" measuredH="17" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <text>%5B%5D%20Video</text>
+        <underline>true</underline>
+      </controlProperties>
+    </control>
+    <control controlID="81" controlTypeID="com.balsamiq.mockups::CheckBoxGroup" x="288" y="246" w="156" h="89" measuredW="99" measuredH="105" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <text>%5Bx%5D%20News-Artikel%20%0A%5B%5D%20Bericht%20%0A%5B%5D%20Buch%20%0A%5B%5D%20Definition%20%0A%5B%5D%20Prosa/Lyrik</text>
+      </controlProperties>
+    </control>
+    <control controlID="82" controlTypeID="com.balsamiq.mockups::CheckBoxGroup" x="288" y="226" w="156" h="16" measuredW="47" measuredH="17" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <text>%5B%5D%20Text</text>
+        <underline>true</underline>
+      </controlProperties>
+    </control>
+    <control controlID="83" controlTypeID="com.balsamiq.mockups::CheckBoxGroup" x="88" y="251" w="156" h="69" measuredW="83" measuredH="61" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <text>%5B%5D%20Fotografie%20%0A%5B%5D%20Gem%E4lde%0A%5B%5D%20Zeichnung</text>
+      </controlProperties>
+    </control>
+    <control controlID="84" controlTypeID="com.balsamiq.mockups::CheckBoxGroup" x="88" y="230" w="156" h="17" measuredW="44" measuredH="17" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <text>%5B%5D%20Bild</text>
+        <underline>true</underline>
+      </controlProperties>
+    </control>
+    <control controlID="85" controlTypeID="com.balsamiq.mockups::CheckBoxGroup" x="88" y="350" w="156" h="69" measuredW="103" measuredH="61" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>0</color>
+        <text>%5B%5D%20Tabelle%20%0A%5B%5D%20Diagramm%0A%5B%5D%20Visualisierung</text>
+      </controlProperties>
+    </control>
+    <control controlID="86" controlTypeID="com.balsamiq.mockups::CheckBoxGroup" x="88" y="329" w="156" h="17" measuredW="58" measuredH="17" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <text>%5B%5D%20Grafik</text>
+        <underline>true</underline>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

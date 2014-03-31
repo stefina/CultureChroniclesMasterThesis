@@ -3,7 +3,6 @@ glossar
 
 Song raussuchen! :)
 
-async cheerio in action umbenennen
 
 ---
 

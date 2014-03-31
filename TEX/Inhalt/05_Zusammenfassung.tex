@@ -10,23 +10,16 @@ Das Erfassen von Medien-Inhalten ist nicht nur von externen APIs abhängig, sonde
 
 Da eine Release-Group lediglich eine Sammlung von einzelnen Releases ist, verfügt sie naturgemäß weder über ein Cover noch ein Veröffentlichungsdatum. Dafür muss erst ein Release der Release-Group gewählt werden, anhand dessen das Veröffentlichungsdatum erfasst werden kann. Mit der ID des zuvor gewählten Releases kann wiederum ein Request eines Album Covers an die \textbf{Cover Art API} von \textbf{MusicBrainz} durchgeführt werden.
 
-Allein für die Abfrage von Suchvorschlägen von Musik-Veröffentlichungen sind diverse Requests an unterschiedliche APIs, \bzw deren Entitäten, nötig. Darüber hinaus begrenzt \textbf{MusicBrainz} die Anzahl an möglichen Requests pro Sekunde auf eine Zahl, die für das Finden mehrerer Ergebnisse für \arbeitstitel \ zu gering ist. Diese Hindernisse lassen sich allerdings auf unterschiedliche Art und Weise umgehen. Zum einen kann auf die Anzeige eines Album-Covers verzichtet werden. Desweiteren kann die Art der Suchanfrage insofern angepasst werden, sodass innerhalb der Web-Applikation verhindert werden würde, dass zu viele Requests gleichzeitig stattfinden, indem diese zeitlich versetzt durchgeführt werden. Dies kann jedoch lediglich als Kompromiss dienen, da darunter nicht nur die Perfomanz leidet, sondern bei einer Verwendung durch mehrere Nutzer die Antwortzeiten der Anfrage unvertretbar ansteigen. Eine bessere Lösung ist es, kleinere Mengen an Medien-Items zu erfassen und weitere bei Bedarf nachzuladen. Zudem können zusätzliche Informationen, die nur zur Anzeige dienen und nicht dem Erfassen des Zeitraumes, nachträglich geladen werden.
+Allein für die Abfrage von Suchvorschlägen von Musik-Veröffentlichungen sind diverse Requests an unterschiedliche APIs, \bzw deren Entitäten, nötig. Darüber hinaus begrenzt \textbf{MusicBrainz} die Anzahl an möglichen Requests pro Sekunde auf eine Zahl, die für das Finden mehrerer Ergebnisse für \arbeitstitel \ zu gering ist. Diese Hindernisse lassen sich allerdings auf unterschiedliche Art und Weise umgehen. Zum einen kann auf die Anzeige eines Album-Covers verzichtet werden. Desweiteren kann die Art der Suchanfrage insofern angepasst werden, sodass innerhalb der Web-Applikation verhindert werden würde, dass zu viele Requests gleichzeitig stattfinden, indem diese zeitlich versetzt durchgeführt werden. Dies kann jedoch lediglich als Kompromiss dienen, da darunter nicht nur die Performanz leidet, sondern bei einer Verwendung durch mehrere Nutzer die Antwortzeiten der Anfrage unvertretbar ansteigen. Eine bessere Lösung ist es, kleinere Mengen an Medien-Items zu erfassen und weitere bei Bedarf nachzuladen. Zudem können zusätzliche Informationen, die nur zur Anzeige dienen und nicht dem Erfassen des Zeitraumes, nachträglich geladen werden.
 
 \section{Weiterentwicklung}
-Der im Rahmen dieser Master-Arbeit zu implementierende Funktionsumfang der Web-Applikation wurde auf die Möglichkeiten, die das Internet heute bietet, angepasst. Jedoch bringen auch die offiziell verwendbaren APIs eigene Herausforderungen mit sich. Keine der untersuchten APIs bietet eine Suche von Daten-Items anhand eines Zeitpunktes oder Zeitraumes. Dies gilt insbesondere für das Erlangen von Informationen über Charts. Im Laufe der Implemtierung sind diverse APIs und Techniken untersucht und in der Praxis getestet worden. Die Ergebnisse der Tests lassen vermuten, dass eine Einbindung der Medienart Musik sowohl in den Suchvorschlägen, als auch den Suchergebnissen und im Player, mit den vorher erläuterten Anpassungen, ohne weitere nennenswerte Probleme erfolgen kann.
+\paragraph{Weiterentwicklung der Web-Applikation}
+Der im Rahmen dieser Master-Arbeit zu implementierende Funktionsumfang der Web-Applikation wurde auf die Möglichkeiten, die das Internet heute bietet, angepasst. Jedoch bringen auch die offiziell verwendbaren APIs eigene Herausforderungen mit sich. Keine der untersuchten APIs bietet eine Suche von Daten-Items anhand eines Zeitpunktes oder Zeitraumes. Dies gilt insbesondere für Informationen über Charts. Im Laufe der Implementierung sind diverse APIs und Techniken untersucht und in der Praxis getestet worden. Die Ergebnisse der Tests lassen vermuten, dass eine Einbindung der Medienart Musik sowohl in den Suchvorschlägen, als auch den Suchergebnissen und im Player, mit den vorher erläuterten Anpassungen, ohne weitere nennenswerte Probleme erfolgen kann.
 
-Zur zweckgemäßen Implementierung des Players muss eines bessere Lösung zur Einbindung abspielbarer Inhalte gefunden werden. Zwar lassen sich Inhalte wie Film-Trailer von \textbf{TrailerAddict} oder Musiktitel über die Einbettungs-Funktion von \textbf{Spotify} bereits einbinden, jedoch kann durch das Verwenden von IFrames die Funktionalität eines Players nicht gewährleistet werden.
+Zur zweckgemäßen Implementierung des Players muss eine bessere Lösung zur Einbindung abspielbarer Inhalte gefunden werden. Zwar lassen sich Inhalte wie Film-Trailer von \textbf{TrailerAddict} oder Musiktitel über die Einbettungs-Funktion von \textbf{Spotify} bereits einbinden, jedoch kann durch das Verwenden von IFrames die Funktionalität eines Players nicht gewährleistet werden.
 
-Einen großen Mehrwert kann vorraussichtlich das Projekt Wikidata liefern, 
-
-
-Für die Zukunft ist eine Weiterentwicklung der Web-Applikation denkbar ist eine Einbindung der API, die das Projekt Wikidata   ist Da eine zuverlässige und umfassende Funktionalität ist also 
-
-%\todo{Für die zukünftige Weiterentwicklung ist zu sagen, dass mit Projekten wie Wikidata Semantik und wikidata? oder besser ins fazit?}
-
-%\todo{dies gilt nur für die zeitspezifische suche. will man noch fette algorithmen schreiben, um erstmal zu schauen, welches datum für einen inhalt relevant ist, bzw, welche inhalte man nun sucht, ist, ist auch das einbinden dementsprechend schwieriger}
-
-
+\paragraph{Zukünftige Entwicklung im Bereich der zeitspezifischen Recherche}
+Die Funktionalität der zeitspezifischen Recherche selbst ist von einer Vielzahl von Faktoren abhängig. Derzeit befinden sich jedoch diverse Projekte in der Entwicklung, die der zukünftigen Entwicklung zuträglich sein können. Zu nennen ist zum einen das Projekt Wolfram|Alpha, da es bereits eine semantische Interpretation vieler Arten von Suchanfragen beherrscht. Zum anderen hat sich das Projekt Wikidata zum Ziel gesetzt, Informationen der Wikipedia semantisch aufzubereiten und für sowohl Mensch, als auch Maschine zur Verfügung zu stellen. Die Entwicklung beider Projekte kann in Zukunft als wichtiger Baustein, der Suche nach Informationen anhand eines Zeitraumes, von großem Nutzen sein.
 
 \section{Fazit und kritische Bewertung} % Fazit
 Ziel dieser Masterarbeit war es, ein umfassendes Konzept einer Web-Applikation zu entwickeln, die das Anzeigen von Inhalten anhand eines gewählten Zeitraumes ermöglicht. Zum einen, um eine Aufarbeitung eines vergangenen Zeitraumes aus nostalgischen Gründen, zum anderen, um die Funktionalität zur zeitspezifischen Recherche zu bieten.
@@ -37,14 +30,4 @@ Es wurde diskutiert, anhand welcher Kriterien bestimmt werden kann für welchen Z
 
 Anhand des Prototypen konnte gezeigt werden, dass es zumindest in den Bereichen Film und Musik möglich ist, eine zeitbezogene Suche zu implementieren. Für diese Art von Medien existiert eine Vielzahl zuverlässiger Quellen, die diese Daten in geeigneter Form liefern. Zu den oben beschriebenen Problemen ergaben sich dabei jedoch weitere Herausforderungen, welche durch entsprechende Maßnahmen umgangen wurden. Die Machbarkeit des Konzeptes konnte dennoch gezeigt werden, indem \bspw inoffizielle Quellen genutzt worden sind und Techniken verwendet wurden, auf die im Regelfall zu verzichten wäre.
 
-Abschließend lässt sich sagen, dass das Thema der Aggregation spezifischer Kulturgüter eines wählbaren Zeitpunktes von nicht zu verachtender Relevanz ist. Eine Suche, wie sie im Rahmen dieser Arbeit konzipiert wurde, existiert derzeit nicht, obwohl sie von wissenschaftlicher Bedeutung wäre. Die Möglichkeit einen eigens gewählten Zeitraum kulturhistorisch zu durchsuchen
-
-
-Eine Suche die nicht nur auf einen Medientyp beschränkt ist, verschafft die Möglichkeit einen Zeitraum kulturhistorisch zu beleuchten.
-
-von verschiedener kultureller 
-
-Wechselwirkung
-Epoche Zeitraumes kulturhistorische Bedeutung Zeitgeschichte Kulturgut
-
-Insbesondere in Bezug auf die zeitspezifische Recherche kann eine solche Funktionalität bei der Untersuchung eines bestimmten Zeitraumes von großem Nutzen sein. 
+Abschließend lässt sich sagen, dass das Thema der Aggregation spezifischer Kulturgüter eines wählbaren Zeitpunktes von nicht zu verachtender Relevanz ist. Eine Suche, wie sie im Rahmen dieser Arbeit konzipiert wurde, existiert derzeit nicht, obwohl sie von wissenschaftlicher Bedeutung wäre. Das Durchsuchen gewählten Zeitraumes nach Inhalten unterschiedlichem Medientyps, schafft die Möglichkeit einen Zeitraum kulturhistorisch umfassend beleuchten zu können.
